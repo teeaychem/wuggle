@@ -15,6 +15,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    var fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
+//    fetchRequest.fetchLimit = 1
+    
+    do {
+      let result = try context.fetch(fetchRequest)
+      
+      if result.count > 0 {
+        
+        print(result.count)
+        let node  = result.last as! TrieNode
+        print("children: ", node.getChildVals())
+        print(node.goToRoot()?.getChildVals())
+        
+      } else {
+        let newTrie = TrieNode(context: context)
+        newTrie.completeTrieFromFile(fName: "wordlistQu", context: context)
+      }
+    } catch {
+      print("Error")
+      
+    }
+    
+    
+    
     return true
   }
 

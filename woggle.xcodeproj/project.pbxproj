@@ -17,6 +17,13 @@
 		57EF4B532A4664F3008C57FF /* woggleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B522A4664F3008C57FF /* woggleTests.swift */; };
 		57EF4B5D2A4664F3008C57FF /* woggleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B5C2A4664F3008C57FF /* woggleUITests.swift */; };
 		57EF4B5F2A4664F3008C57FF /* woggleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B5E2A4664F3008C57FF /* woggleUITestsLaunchTests.swift */; };
+		57EF4B6C2A466528008C57FF /* CardStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B6B2A466528008C57FF /* CardStackViewController.swift */; };
+		57EF4B6E2A4665D8008C57FF /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B6D2A4665D8008C57FF /* CardView.swift */; };
+		57EF4B702A46670D008C57FF /* MiscUIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B6F2A46670D008C57FF /* MiscUIFunctions.swift */; };
+		57EF4B732A466B8D008C57FF /* wordlistQu.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57EF4B722A466B8D008C57FF /* wordlistQu.txt */; };
+		57EF4B762A466BAE008C57FF /* TrieExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B752A466BAE008C57FF /* TrieExtension.swift */; };
+		57EF4B782A466BFA008C57FF /* BoardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B772A466BFA008C57FF /* BoardExtension.swift */; };
+		57EF4B7A2A466F47008C57FF /* MiscFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B792A466F47008C57FF /* MiscFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +58,13 @@
 		57EF4B582A4664F3008C57FF /* woggleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = woggleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		57EF4B5C2A4664F3008C57FF /* woggleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = woggleUITests.swift; sourceTree = "<group>"; };
 		57EF4B5E2A4664F3008C57FF /* woggleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = woggleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		57EF4B6B2A466528008C57FF /* CardStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackViewController.swift; sourceTree = "<group>"; };
+		57EF4B6D2A4665D8008C57FF /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		57EF4B6F2A46670D008C57FF /* MiscUIFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscUIFunctions.swift; sourceTree = "<group>"; };
+		57EF4B722A466B8D008C57FF /* wordlistQu.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wordlistQu.txt; sourceTree = "<group>"; };
+		57EF4B752A466BAE008C57FF /* TrieExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrieExtension.swift; sourceTree = "<group>"; };
+		57EF4B772A466BFA008C57FF /* BoardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardExtension.swift; sourceTree = "<group>"; };
+		57EF4B792A466F47008C57FF /* MiscFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiscFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +115,12 @@
 		57EF4B372A4664F2008C57FF /* woggle */ = {
 			isa = PBXGroup;
 			children = (
+				57EF4B792A466F47008C57FF /* MiscFunctions.swift */,
+				57EF4B742A466BA4008C57FF /* Extensions */,
+				57EF4B712A466B7B008C57FF /* Resources */,
+				57EF4B6B2A466528008C57FF /* CardStackViewController.swift */,
+				57EF4B6D2A4665D8008C57FF /* CardView.swift */,
+				57EF4B6F2A46670D008C57FF /* MiscUIFunctions.swift */,
 				57EF4B382A4664F2008C57FF /* AppDelegate.swift */,
 				57EF4B3A2A4664F2008C57FF /* SceneDelegate.swift */,
 				57EF4B3C2A4664F2008C57FF /* ViewController.swift */,
@@ -128,6 +148,23 @@
 				57EF4B5E2A4664F3008C57FF /* woggleUITestsLaunchTests.swift */,
 			);
 			path = woggleUITests;
+			sourceTree = "<group>";
+		};
+		57EF4B712A466B7B008C57FF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				57EF4B722A466B8D008C57FF /* wordlistQu.txt */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		57EF4B742A466BA4008C57FF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				57EF4B752A466BAE008C57FF /* TrieExtension.swift */,
+				57EF4B772A466BFA008C57FF /* BoardExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +273,7 @@
 			files = (
 				57EF4B482A4664F3008C57FF /* LaunchScreen.storyboard in Resources */,
 				57EF4B452A4664F3008C57FF /* Assets.xcassets in Resources */,
+				57EF4B732A466B8D008C57FF /* wordlistQu.txt in Resources */,
 				57EF4B402A4664F2008C57FF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,10 +299,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57EF4B782A466BFA008C57FF /* BoardExtension.swift in Sources */,
+				57EF4B702A46670D008C57FF /* MiscUIFunctions.swift in Sources */,
+				57EF4B6C2A466528008C57FF /* CardStackViewController.swift in Sources */,
 				57EF4B432A4664F2008C57FF /* woggle.xcdatamodeld in Sources */,
 				57EF4B3D2A4664F2008C57FF /* ViewController.swift in Sources */,
 				57EF4B392A4664F2008C57FF /* AppDelegate.swift in Sources */,
+				57EF4B6E2A4665D8008C57FF /* CardView.swift in Sources */,
 				57EF4B3B2A4664F2008C57FF /* SceneDelegate.swift in Sources */,
+				57EF4B762A466BAE008C57FF /* TrieExtension.swift in Sources */,
+				57EF4B7A2A466F47008C57FF /* MiscFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

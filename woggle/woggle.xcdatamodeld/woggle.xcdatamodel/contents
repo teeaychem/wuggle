@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Board" representedClassName="Board" syncable="YES" codeGenerationType="class">
+        <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="foundWords" toMany="YES" deletionRule="Nullify" destinationEntity="Word"/>
+        <relationship name="settings" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="board" inverseEntity="Settings"/>
+        <relationship name="tiles" toMany="YES" deletionRule="Nullify" destinationEntity="Tile" inverseName="board" inverseEntity="Tile"/>
+    </entity>
+    <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
+        <attribute name="dimension" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lexicon" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tileSqrt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="timeRemaining" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
+    </entity>
+    <entity name="Tile" representedClassName="Tile" syncable="YES" codeGenerationType="class">
+        <attribute name="col" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="row" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="value" attributeType="String" defaultValueString=""/>
+        <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="tiles" inverseEntity="Board"/>
+    </entity>
+    <entity name="TrieNode" representedClassName="TrieNode" syncable="YES" codeGenerationType="class">
+        <attribute name="safe" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="value" attributeType="String" defaultValueString=""/>
+        <attribute name="word" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrieNode" inverseName="parent" inverseEntity="TrieNode"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrieNode" inverseName="children" inverseEntity="TrieNode"/>
+    </entity>
+    <entity name="Word" representedClassName="Word" syncable="YES" codeGenerationType="class">
+        <attribute name="value" attributeType="String" defaultValueString=""/>
+    </entity>
 </model>
