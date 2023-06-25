@@ -19,7 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let w = (scene as? UIWindowScene) else { return }
     
     let window = UIWindow(windowScene: w)
-    window.rootViewController = CardStackViewController()
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let testSettings = Settings(context: context)
+    
+    window.rootViewController = CardStackViewController(gameConfig: testSettings)
     self.window = window
     window.makeKeyAndVisible()
     print("Window created")

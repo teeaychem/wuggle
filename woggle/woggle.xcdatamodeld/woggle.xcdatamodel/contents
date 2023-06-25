@@ -4,14 +4,13 @@
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="foundWords" toMany="YES" deletionRule="Nullify" destinationEntity="Word"/>
         <relationship name="settings" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="board" inverseEntity="Settings"/>
-        <relationship name="tiles" toMany="YES" deletionRule="Nullify" destinationEntity="Tile" inverseName="board" inverseEntity="Tile"/>
+        <relationship name="tiles" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Tile" inverseName="board" inverseEntity="Tile"/>
     </entity>
     <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
-        <attribute name="dimension" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lexicon" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="tileSqrt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="timeRemaining" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="tileSqrt" attributeType="Integer 16" defaultValueString="4" usesScalarValueType="YES"/>
+        <attribute name="time" attributeType="Double" defaultValueString="3" usesScalarValueType="YES"/>
+        <attribute name="timeRemaining" attributeType="Double" defaultValueString="3" usesScalarValueType="YES"/>
         <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
     </entity>
     <entity name="Tile" representedClassName="Tile" syncable="YES" codeGenerationType="class">

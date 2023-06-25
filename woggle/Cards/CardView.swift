@@ -9,10 +9,9 @@ import UIKit
 
 class CardView: UIView {
   
-  let cardName: String
   let cardWidth: CGFloat
   let cardHeight: CGFloat
-  let cardColour: CGColor
+  var cardColour: CGColor
   
 //  let statusBar: StatusBarUIView
   
@@ -20,8 +19,7 @@ class CardView: UIView {
   var displayViews = [UIView]()
   
   
-  init(cardName n: String, cardWidth width: CGFloat, cardColour color: CGColor) {
-    cardName = n
+  init(cardWidth width: CGFloat, cardColour color: CGColor) {
     cardWidth = width
     cardHeight = width*1.4
     cardColour = color

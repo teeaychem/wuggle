@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
+		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
+		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
+		57EB7A492A478BF500BCA44B /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A482A478BF500BCA44B /* CardViewController.swift */; };
+		57EB7A4B2A478CF000BCA44B /* GameCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A4A2A478CF000BCA44B /* GameCardViewController.swift */; };
+		57EB7A4D2A47950500BCA44B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A4C2A47950500BCA44B /* UIViewControllerExtension.swift */; };
+		57EB7A4F2A479C2D00BCA44B /* CardViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A4E2A479C2D00BCA44B /* CardViewData.swift */; };
+		57EB7A512A47A65000BCA44B /* SettingsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A502A47A65000BCA44B /* SettingsExtension.swift */; };
+		57EB7A542A47A7FC00BCA44B /* tileText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A532A47A7FC00BCA44B /* tileText.swift */; };
+		57EB7A562A47A83900BCA44B /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A552A47A83900BCA44B /* TileView.swift */; };
+		57EB7A582A47A99D00BCA44B /* UIRelated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A572A47A99D00BCA44B /* UIRelated.swift */; };
+		57EB7A622A47ACAE00BCA44B /* K2D-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57EB7A5E2A47ACAE00BCA44B /* K2D-ExtraBold.ttf */; };
+		57EB7A632A47ACAE00BCA44B /* K2D-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57EB7A5F2A47ACAE00BCA44B /* K2D-Regular.ttf */; };
+		57EB7A642A47ACAE00BCA44B /* K2D-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57EB7A602A47ACAE00BCA44B /* K2D-Italic.ttf */; };
+		57EB7A652A47ACAE00BCA44B /* K2D-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57EB7A612A47ACAE00BCA44B /* K2D-Medium.ttf */; };
 		57EF4B392A4664F2008C57FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B382A4664F2008C57FF /* AppDelegate.swift */; };
 		57EF4B3B2A4664F2008C57FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B3A2A4664F2008C57FF /* SceneDelegate.swift */; };
 		57EF4B3D2A4664F2008C57FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B3C2A4664F2008C57FF /* ViewController.swift */; };
@@ -44,6 +59,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
+		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
+		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
+		57EB7A482A478BF500BCA44B /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		57EB7A4A2A478CF000BCA44B /* GameCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardViewController.swift; sourceTree = "<group>"; };
+		57EB7A4C2A47950500BCA44B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		57EB7A4E2A479C2D00BCA44B /* CardViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewData.swift; sourceTree = "<group>"; };
+		57EB7A502A47A65000BCA44B /* SettingsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExtension.swift; sourceTree = "<group>"; };
+		57EB7A532A47A7FC00BCA44B /* tileText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tileText.swift; sourceTree = "<group>"; };
+		57EB7A552A47A83900BCA44B /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		57EB7A572A47A99D00BCA44B /* UIRelated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRelated.swift; sourceTree = "<group>"; };
+		57EB7A5E2A47ACAE00BCA44B /* K2D-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "K2D-ExtraBold.ttf"; sourceTree = "<group>"; };
+		57EB7A5F2A47ACAE00BCA44B /* K2D-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "K2D-Regular.ttf"; sourceTree = "<group>"; };
+		57EB7A602A47ACAE00BCA44B /* K2D-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "K2D-Italic.ttf"; sourceTree = "<group>"; };
+		57EB7A612A47ACAE00BCA44B /* K2D-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "K2D-Medium.ttf"; sourceTree = "<group>"; };
 		57EF4B352A4664F2008C57FF /* woggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = woggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57EF4B382A4664F2008C57FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57EF4B3A2A4664F2008C57FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +122,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57EB7A3F2A47817C00BCA44B /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				57EB7A482A478BF500BCA44B /* CardViewController.swift */,
+				57EB7A4A2A478CF000BCA44B /* GameCardViewController.swift */,
+				57EB7A4E2A479C2D00BCA44B /* CardViewData.swift */,
+				57EF4B6D2A4665D8008C57FF /* CardView.swift */,
+				57EB7A462A4787CF00BCA44B /* GameCardView.swift */,
+				57EB7A402A47818600BCA44B /* GameCard */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		57EB7A402A47818600BCA44B /* GameCard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GameCard;
+			sourceTree = "<group>";
+		};
+		57EB7A412A47820900BCA44B /* Gameboard */ = {
+			isa = PBXGroup;
+			children = (
+				57EB7A422A47827F00BCA44B /* GameboardViewController.swift */,
+				57EB7A442A47856D00BCA44B /* GameboardView.swift */,
+				57EB7A552A47A83900BCA44B /* TileView.swift */,
+			);
+			path = Gameboard;
+			sourceTree = "<group>";
+		};
+		57EB7A522A47A7F000BCA44B /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				57EB7A572A47A99D00BCA44B /* UIRelated.swift */,
+				57EF4B6F2A46670D008C57FF /* MiscUIFunctions.swift */,
+				57EB7A532A47A7FC00BCA44B /* tileText.swift */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		57EB7A5D2A47ACA200BCA44B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				57EB7A5E2A47ACAE00BCA44B /* K2D-ExtraBold.ttf */,
+				57EB7A602A47ACAE00BCA44B /* K2D-Italic.ttf */,
+				57EB7A612A47ACAE00BCA44B /* K2D-Medium.ttf */,
+				57EB7A5F2A47ACAE00BCA44B /* K2D-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		57EF4B2C2A4664F2008C57FF = {
 			isa = PBXGroup;
 			children = (
@@ -115,12 +196,13 @@
 		57EF4B372A4664F2008C57FF /* woggle */ = {
 			isa = PBXGroup;
 			children = (
+				57EB7A522A47A7F000BCA44B /* Misc */,
+				57EB7A412A47820900BCA44B /* Gameboard */,
+				57EB7A3F2A47817C00BCA44B /* Cards */,
 				57EF4B792A466F47008C57FF /* MiscFunctions.swift */,
 				57EF4B742A466BA4008C57FF /* Extensions */,
 				57EF4B712A466B7B008C57FF /* Resources */,
 				57EF4B6B2A466528008C57FF /* CardStackViewController.swift */,
-				57EF4B6D2A4665D8008C57FF /* CardView.swift */,
-				57EF4B6F2A46670D008C57FF /* MiscUIFunctions.swift */,
 				57EF4B382A4664F2008C57FF /* AppDelegate.swift */,
 				57EF4B3A2A4664F2008C57FF /* SceneDelegate.swift */,
 				57EF4B3C2A4664F2008C57FF /* ViewController.swift */,
@@ -153,6 +235,7 @@
 		57EF4B712A466B7B008C57FF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				57EB7A5D2A47ACA200BCA44B /* Fonts */,
 				57EF4B722A466B8D008C57FF /* wordlistQu.txt */,
 			);
 			path = Resources;
@@ -161,7 +244,9 @@
 		57EF4B742A466BA4008C57FF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				57EB7A4C2A47950500BCA44B /* UIViewControllerExtension.swift */,
 				57EF4B752A466BAE008C57FF /* TrieExtension.swift */,
+				57EB7A502A47A65000BCA44B /* SettingsExtension.swift */,
 				57EF4B772A466BFA008C57FF /* BoardExtension.swift */,
 			);
 			path = Extensions;
@@ -271,10 +356,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57EB7A622A47ACAE00BCA44B /* K2D-ExtraBold.ttf in Resources */,
+				57EB7A652A47ACAE00BCA44B /* K2D-Medium.ttf in Resources */,
+				57EB7A642A47ACAE00BCA44B /* K2D-Italic.ttf in Resources */,
 				57EF4B482A4664F3008C57FF /* LaunchScreen.storyboard in Resources */,
 				57EF4B452A4664F3008C57FF /* Assets.xcassets in Resources */,
 				57EF4B732A466B8D008C57FF /* wordlistQu.txt in Resources */,
 				57EF4B402A4664F2008C57FF /* Main.storyboard in Resources */,
+				57EB7A632A47ACAE00BCA44B /* K2D-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,14 +389,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				57EF4B782A466BFA008C57FF /* BoardExtension.swift in Sources */,
+				57EB7A542A47A7FC00BCA44B /* tileText.swift in Sources */,
+				57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */,
+				57EB7A4F2A479C2D00BCA44B /* CardViewData.swift in Sources */,
+				57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */,
+				57EB7A512A47A65000BCA44B /* SettingsExtension.swift in Sources */,
 				57EF4B702A46670D008C57FF /* MiscUIFunctions.swift in Sources */,
+				57EB7A4D2A47950500BCA44B /* UIViewControllerExtension.swift in Sources */,
+				57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */,
 				57EF4B6C2A466528008C57FF /* CardStackViewController.swift in Sources */,
 				57EF4B432A4664F2008C57FF /* woggle.xcdatamodeld in Sources */,
 				57EF4B3D2A4664F2008C57FF /* ViewController.swift in Sources */,
+				57EB7A492A478BF500BCA44B /* CardViewController.swift in Sources */,
+				57EB7A4B2A478CF000BCA44B /* GameCardViewController.swift in Sources */,
 				57EF4B392A4664F2008C57FF /* AppDelegate.swift in Sources */,
 				57EF4B6E2A4665D8008C57FF /* CardView.swift in Sources */,
 				57EF4B3B2A4664F2008C57FF /* SceneDelegate.swift in Sources */,
 				57EF4B762A466BAE008C57FF /* TrieExtension.swift in Sources */,
+				57EB7A562A47A83900BCA44B /* TileView.swift in Sources */,
+				57EB7A582A47A99D00BCA44B /* UIRelated.swift in Sources */,
 				57EF4B7A2A466F47008C57FF /* MiscFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
