@@ -63,19 +63,19 @@ extension Settings {
 //          print(tile.value)
 //        }
         
-        var wordList = [String]()
+        var wordSet = Set<String>()
         var wordString = ""
         for tile in allTiles {
-          exploreTileWithList(tile: tile, availableTiles: &allTiles, trieNode: &node, wordString: &wordString, wordList: &wordList)
+          exploreTileWithList(tile: tile, availableTiles: &allTiles, trieNode: &node, wordString: &wordString, wordSet: &wordSet)
         }
-        print(wordList)
+        print(wordSet)
       }
     } catch {
       print("no found trie via settings")
     }
   }
   
-  func exploreTileWithList(tile: Tile, availableTiles: inout Set<Tile>, trieNode: inout TrieNode, wordString: inout String, wordList: inout [String]) {
+  func exploreTileWithList(tile: Tile, availableTiles: inout Set<Tile>, trieNode: inout TrieNode, wordString: inout String, wordSet: inout Set<String>) {
     // A function to explore a tile when finding words.
     // It's assumed the trieNode corresponds with the used tiles.
     // Starting from root, so always looking a trieNode ahead
@@ -95,16 +95,15 @@ extension Settings {
       
       // If this is a word, update the word list.
       if trieNode.isWord {
-        wordList.append(wordString)
+        wordSet.insert(wordString)
       }
       
+      // Restrict tiles to search.
+      let tilesToSearch = availableTiles.intersection(getSurroundingTilesInclusive(tile: tile))
       
-      // TODO: Need to restrict available tiles. At the moment, the choice is from any unused tile.
-      for choiceTile in availableTiles {
-        exploreTileWithList(tile: choiceTile, availableTiles: &availableTiles, trieNode: &trieNode, wordString: &wordString, wordList: &wordList)
+      for choiceTile in tilesToSearch {
+        exploreTileWithList(tile: choiceTile, availableTiles: &availableTiles, trieNode: &trieNode, wordString: &wordString, wordSet: &wordSet)
       }
-      
-      // TODO: Get possible tiles, and explore on these
       
       // We're done exploring, so make the tile available again
       availableTiles.insert(tile)
@@ -115,13 +114,13 @@ extension Settings {
     }
   }
   
-  func getSurroundingTilesInclusive(tile: inout Tile) -> [Tile] {
+  func getSurroundingTilesInclusive(tile: Tile) -> Set<Tile> {
     // Get all the tiles surrounding a given tile, including the given tile
     
     let areaPredicate = NSPredicate(format: "(row BETWEEN %@) && (col BETWEEN %@)", [(tile.row - 1), (tile.row + 1)], [(tile.col - 1), (tile.col + 1)])
-    var sTiles = [Tile]()
+    var sTiles = Set<Tile>()
     for t in self.board!.tiles!.filtered(using: areaPredicate) {
-      sTiles.append(t as! Tile)
+      sTiles.insert(t as! Tile)
     }
     
     return sTiles
