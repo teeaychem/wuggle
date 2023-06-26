@@ -9,7 +9,7 @@ import UIKit
 
 class CardViewController: UIViewController {
   
-  unowned var viewData: CardViewData
+  let viewData: CardViewData
   let card: CardView
   
   unowned var settings: Settings
@@ -27,6 +27,11 @@ class CardViewController: UIViewController {
     view.frame.size.height = vD.height
     
     specificSetup()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    view.frame.size = CGSize(width: viewData.width, height: viewData.height)
   }
   
   override func viewDidLoad() {

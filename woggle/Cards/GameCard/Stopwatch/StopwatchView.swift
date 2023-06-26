@@ -27,7 +27,7 @@ class StopwatchView: UIView {
     layer.addSublayer(faceLayer)
     detailFaceLayer(fLayer: faceLayer)
     
-    self.backgroundColor = UIColor.blue
+    self.backgroundColor = UIColor.darkGray
   }
   
   required init?(coder: NSCoder) {

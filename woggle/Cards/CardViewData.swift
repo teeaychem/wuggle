@@ -12,6 +12,7 @@ class CardViewData {
   let name: String
   let width: CGFloat
   let height: CGFloat
+  let statusBarHeight: CGFloat
   var colour: CGColor
   
   init(name: String, width: CGFloat, colour: CGColor) {
@@ -19,5 +20,6 @@ class CardViewData {
     self.width = width
     self.height = width * 1.4
     self.colour = colour
+    self.statusBarHeight = height * 0.07
   }
 }

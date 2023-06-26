@@ -52,8 +52,6 @@ class GameboardViewController: UIViewController {
     super.viewDidLoad()
     // Add the view as a subview
     self.view.addSubview(gameboardView)
-    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
-    gameboardView.addGestureRecognizer(panGestureRecognizer)
   }
   
   override func viewDidLayoutSubviews() {
@@ -82,7 +80,5 @@ class GameboardViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
-  @objc func didPan(_ sender: UIPanGestureRecognizer) {
-    print(sender.location(in: view))
-  }
+
 }
