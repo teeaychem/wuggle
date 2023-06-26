@@ -10,6 +10,7 @@
 import UIKit
 
 class CardStackViewController: UIViewController {
+  // Controls the main UI
   
   private let width: CGFloat
   private let cardIndent: CGFloat
@@ -17,11 +18,11 @@ class CardStackViewController: UIViewController {
   private var cardViews: [CardView] = []
   private var cardOrigin: CGFloat = 0.0
   
-  unowned var gameConfig: Settings
+  unowned var settings: Settings
   
-  init(gameConfig config: Settings) {
+  init(settings s: Settings) {
     
-    gameConfig = config
+    settings = s
     
     width = min(((UIScreen.main.bounds.size.height)/1.4/1.16)*0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
@@ -31,7 +32,7 @@ class CardStackViewController: UIViewController {
     super.init(nibName: nil, bundle: nil)
     
     let testViewData = CardViewData(name: "test", width: width, colour: UIColor.red.cgColor)
-    let testCardController = GameCardViewController(viewData: testViewData, settings: gameConfig)
+    let testCardController = GameCardViewController(viewData: testViewData, settings: s)
         
     print("moving on")
     

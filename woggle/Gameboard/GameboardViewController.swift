@@ -23,10 +23,10 @@ class GameboardViewController: UIViewController {
   let gameboardView: GameboardView
   var tiles: [TileView] = []
   
-  init(boardSize bS: CGFloat, settings s: Settings) {
+  init(boardSize bS: CGFloat, gameBoard: Board) {
     
     boardSize = bS
-    let tileSqrtFloat = CGFloat(s.tileSqrt)
+    let tileSqrtFloat = CGFloat(gameBoard.tiles!.count).squareRoot()
     
     let unpaddedSize = boardSize / tileSqrtFloat
     
@@ -41,13 +41,13 @@ class GameboardViewController: UIViewController {
     
     print("Adding game board")
     self.view.addSubview(gameboardView)
-    createAllTileViews(settings: s)
+    createAllTileViews(board: gameBoard)
     displayTileViews()
     
   }
   
-  func createAllTileViews(settings s: Settings) {
-    for tile in s.board!.tiles! {
+  func createAllTileViews(board: Board) {
+    for tile in board.tiles! {
       let newTile = createTileView(tile: tile as! Tile)
       tiles.append(newTile)
       gameboardView.addSubview(newTile)
