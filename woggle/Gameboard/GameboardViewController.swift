@@ -21,36 +21,53 @@ class GameboardViewController: UIViewController {
   let tileWidth: CGFloat
   let tilePadding: CGFloat
   let gameboardView: GameboardView
-  var tiles: [TileView] = []
   
   init(boardSize bS: CGFloat, gameBoard: Board) {
     
+    // Constants for placing elements
     boardSize = bS
-    let tileSqrtFloat = CGFloat(gameBoard.tiles!.count).squareRoot()
     
+    let tileSqrtFloat = CGFloat(gameBoard.tiles!.count).squareRoot()
     let unpaddedSize = boardSize / tileSqrtFloat
     
     tileWidth = unpaddedSize * 0.95
     tilePadding = (boardSize - (tileWidth * tileSqrtFloat)) / (tileSqrtFloat + 1)
     
+    // Setup the view
     gameboardView = GameboardView(boardSize: bS)
-    gameboardView.backgroundColor = UIColor.green
+    gameboardView.backgroundColor = UIColor.darkGray
     gameboardView.layer.cornerRadius = getCornerRadius(width: boardSize)
     
     super.init(nibName: nil, bundle: nil)
     
-    print("Adding game board")
-    self.view.addSubview(gameboardView)
+    // Create the tiles
     createAllTileViews(board: gameBoard)
-    displayTileViews()
-    
+  }
+  
+  override func loadView() {
+    super.loadView()
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // Add the view as a subview
+    self.view.addSubview(gameboardView)
+    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
+    gameboardView.addGestureRecognizer(panGestureRecognizer)
+  }
+  
+  override func viewDidLayoutSubviews() {
+    // Before this is called the frame of the view has not been set.
+    // So, this seems to be the appropriate place to fix things.
+    // https://stackoverflow.com/questions/40737164/whats-exactly-viewdidlayoutsubviews
+    super.viewDidLayoutSubviews()
+    view.frame.size = CGSize(width: boardSize, height: boardSize)
   }
   
   func createAllTileViews(board: Board) {
     for tile in board.tiles! {
       let newTile = createTileView(tile: tile as! Tile)
-      tiles.append(newTile)
-      gameboardView.addSubview(newTile)
+      gameboardView.addTileSubview(tileView: newTile)
     }
   }
   
@@ -61,22 +78,11 @@ class GameboardViewController: UIViewController {
     return TileView(position: tPosition, size: tileWidth, boardSize: boardSize, text: tile.value ?? "Qr")
   }
   
-  func displayTileViews() {
-    for tile in tiles {
-      tile.appear(animated: true)
-    }
-  }
-  
-  func hideTileViews() {
-    for tile in tiles {
-      tile.disappear(animated: true)
-    }
-  }
-  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  
-  
+  @objc func didPan(_ sender: UIPanGestureRecognizer) {
+    print(sender.location(in: view))
+  }
 }

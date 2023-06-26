@@ -22,44 +22,40 @@ class GameCardViewController: CardViewController {
   
   override init(viewData vD: CardViewData, settings s: Settings) {
     
-    // TODO: XXXX
+    // First, get a board to work with from settings.
     currentGameInstace = s.getOrMakeCurrentGame()
-    currentGameInstace!.populateBoard()
-    print(currentGameInstace?.board)
     
+    // Constants to create and position views
     let gameBoardSizePercent = 0.95
     let gameBoardSize = vD.width * gameBoardSizePercent
     let boardPadding = vD.width * ((1 - gameBoardSizePercent)/2)
     let stopwatchSize = vD.height - ((3 * boardPadding) + gameBoardSize)
     
-    
+    // Fix controllers for the current views
     boardViewController = GameboardViewController(boardSize: gameBoardSize, gameBoard: currentGameInstace!.board!)
     stopwatchViewController = StopwatchViewController(size: stopwatchSize)
     
     super.init(viewData: vD, settings: s)
     
-    self.embed(boardViewController, inView: self.view)
-    self.embed(stopwatchViewController, inView: self.view)
-    
-    // The view controller manages the view, but it's still up to us to place the view.
-    // Position is relative to the CardView.
-    
+    // Embed controllers with views
+
+
+    // Position views
     boardViewController.view.frame.origin = CGPoint(x: boardPadding, y: vD.height - (gameBoardSize + boardPadding))
     // TODO: Shrink this for status bar
     stopwatchViewController.view.frame.origin = CGPoint(x: boardPadding, y: boardPadding)
     
-    
+    // TODO: Set the initial board view
+    boardViewController.gameboardView.displayTileViews()
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.embed(boardViewController, inView: self.view)
+//    self.embed(stopwatchViewController, inView: self.view)
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-  
-  
-
-  
-  override func specificSetup() {
-    print("okay")
-//    let board = GameboardView(boardSize: )
   }
 }

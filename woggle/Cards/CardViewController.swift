@@ -23,12 +23,18 @@ class CardViewController: UIViewController {
     card = CardView(cardWidth: viewData.width, cardColour: viewData.colour)
     
     super.init(nibName: nil, bundle: nil)
+    view.frame.size.width = vD.width
+    view.frame.size.height = vD.height
     
-    print("trying")
-//    view.addSubview(card)
-//    view.addSubview(card)
-    view.addSubview(card)
     specificSetup()
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    // So, subviews need to be added after viewDidLoad.
+    // If this doesn't happen, then gestures are broken.
+    view.addSubview(card)
   }
   
   

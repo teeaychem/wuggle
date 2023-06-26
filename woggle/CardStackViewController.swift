@@ -31,17 +31,16 @@ class CardStackViewController: UIViewController {
     
     super.init(nibName: nil, bundle: nil)
     
-    let testViewData = CardViewData(name: "test", width: width, colour: UIColor.red.cgColor)
+    let testViewData = CardViewData(name: "test", width: width, colour: UIColor.blue.cgColor)
     let testCardController = GameCardViewController(viewData: testViewData, settings: s)
-        
-    print("moving on")
     
     let cardSpace = (view.bounds.size.height - ((width * 1.4) * 1.16)) / 2
     let cardOrigin = cardSpace + (width*1.4) * 0.16
     
     self.embed(testCardController, inView: self.view)
 //    testCardController.view.frame.origin = CGPoint(x: 20, y: 20)
-  
+    
+    print("stackView", view)
   }
   
   required init?(coder: NSCoder) {

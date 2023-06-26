@@ -18,10 +18,12 @@ class StopwatchViewController: UIViewController {
     watchView = StopwatchView(size: s)
     
     super.init(nibName: nil, bundle: nil)
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
     self.view.addSubview(watchView)
-    
-    
   }
   
   required init?(coder: NSCoder) {

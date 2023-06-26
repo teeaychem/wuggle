@@ -32,7 +32,6 @@ class CardView: UIView {
     
 //    addSubview(statusBar)
   }
-
   
   required init(coder: NSCoder) {
     fatalError("NSCoding not supported")

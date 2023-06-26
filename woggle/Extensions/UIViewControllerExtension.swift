@@ -12,7 +12,7 @@ extension UIViewController {
   
   // So, what happes here is that we state the controller is going to be added to this controller.
   // Then, set the view to be the same.
-  // Add the controller view as a subview
+  // Add the bounds of the view are limited to the frame of the view controller
   // Add the controller
   // State the move is completed.
     func embed(_ viewController:UIViewController, inView view:UIView){
