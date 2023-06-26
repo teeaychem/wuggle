@@ -2,9 +2,9 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Board" representedClassName="Board" syncable="YES" codeGenerationType="class">
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="foundWords" toMany="YES" deletionRule="Nullify" destinationEntity="Word"/>
+        <relationship name="foundWords" toMany="YES" deletionRule="Nullify" destinationEntity="Word" inverseName="inBoard" inverseEntity="Word"/>
         <relationship name="settings" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="board" inverseEntity="Settings"/>
-        <relationship name="tiles" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Tile" inverseName="board" inverseEntity="Tile"/>
+        <relationship name="tiles" toMany="YES" deletionRule="Nullify" destinationEntity="Tile" inverseName="board" inverseEntity="Tile"/>
     </entity>
     <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
         <attribute name="lexicon" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -12,6 +12,12 @@
         <attribute name="time" attributeType="Double" defaultValueString="3" usesScalarValueType="YES"/>
         <attribute name="timeRemaining" attributeType="Double" defaultValueString="3" usesScalarValueType="YES"/>
         <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
+        <relationship name="stats" maxCount="1" deletionRule="Nullify" destinationEntity="StatsCollection" inverseName="settings" inverseEntity="StatsCollection"/>
+    </entity>
+    <entity name="StatsCollection" representedClassName="StatsCollection" syncable="YES" codeGenerationType="class">
+        <attribute name="longestWord" attributeType="String" defaultValueString=""/>
+        <relationship name="longestWordBoard" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board"/>
+        <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="stats" inverseEntity="Settings"/>
     </entity>
     <entity name="Tile" representedClassName="Tile" syncable="YES" codeGenerationType="class">
         <attribute name="col" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -20,13 +26,15 @@
         <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="tiles" inverseEntity="Board"/>
     </entity>
     <entity name="TrieNode" representedClassName="TrieNode" syncable="YES" codeGenerationType="class">
+        <attribute name="isWord" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="safe" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="value" attributeType="String" defaultValueString=""/>
-        <attribute name="word" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrieNode" inverseName="parent" inverseEntity="TrieNode"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrieNode" inverseName="children" inverseEntity="TrieNode"/>
     </entity>
     <entity name="Word" representedClassName="Word" syncable="YES" codeGenerationType="class">
+        <attribute name="found" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="value" attributeType="String" defaultValueString=""/>
+        <relationship name="inBoard" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="foundWords" inverseEntity="Board"/>
     </entity>
 </model>

@@ -21,8 +21,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: w)
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let testSettings = Settings(context: context)
+    var testSettings = Settings(context: context)
+    print("default time remianing", testSettings.timeRemaining)
+    testSettings.stats = StatsCollection(context: context)
+    testSettings.stats!.longestWord = "Found"
+    testSettings.stats!.longestWordBoard = testSettings.board
+//    print(testSettings.stats!.longestWordBoard)
+    testSettings.populateBoard()
+//    print(testSettings.stats!.longestWordBoard)
+    print(testSettings.board!.tiles!)
+    print("new", testSettings)
+    testSettings.findAllWords()
     
+    
+
     window.rootViewController = CardStackViewController(gameConfig: testSettings)
     self.window = window
     window.makeKeyAndVisible()

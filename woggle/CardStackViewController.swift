@@ -22,8 +22,6 @@ class CardStackViewController: UIViewController {
   init(gameConfig config: Settings) {
     
     gameConfig = config
-    config.makeBoard()
-    print(gameConfig)
     
     width = min(((UIScreen.main.bounds.size.height)/1.4/1.16)*0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
@@ -37,10 +35,11 @@ class CardStackViewController: UIViewController {
         
     print("moving on")
     
-    let cardSpace = (view.bounds.size.height - ((width*1.4)*1.16))/2
-    let cardOrigin = cardSpace + (width*1.4)*0.16
+    let cardSpace = (view.bounds.size.height - ((width * 1.4) * 1.16)) / 2
+    let cardOrigin = cardSpace + (width*1.4) * 0.16
     
     self.embed(testCardController, inView: self.view)
+//    testCardController.view.frame.origin = CGPoint(x: 20, y: 20)
   
   }
   

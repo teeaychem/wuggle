@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
 //    fetchRequest.fetchLimit = 1
     
     do {

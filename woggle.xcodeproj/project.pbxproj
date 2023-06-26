@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57506C1F2A48D80500367AE9 /* StopwatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506C1E2A48D80500367AE9 /* StopwatchViewController.swift */; };
+		57506C212A48D82900367AE9 /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506C202A48D82900367AE9 /* StopwatchView.swift */; };
 		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
 		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
 		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
@@ -59,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		57506C1E2A48D80500367AE9 /* StopwatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewController.swift; sourceTree = "<group>"; };
+		57506C202A48D82900367AE9 /* StopwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
 		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
 		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
 		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
@@ -122,14 +126,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57506C1D2A48D7F100367AE9 /* Stopwatch */ = {
+			isa = PBXGroup;
+			children = (
+				57506C1E2A48D80500367AE9 /* StopwatchViewController.swift */,
+				57506C202A48D82900367AE9 /* StopwatchView.swift */,
+			);
+			path = Stopwatch;
+			sourceTree = "<group>";
+		};
 		57EB7A3F2A47817C00BCA44B /* Cards */ = {
 			isa = PBXGroup;
 			children = (
 				57EB7A482A478BF500BCA44B /* CardViewController.swift */,
-				57EB7A4A2A478CF000BCA44B /* GameCardViewController.swift */,
 				57EB7A4E2A479C2D00BCA44B /* CardViewData.swift */,
 				57EF4B6D2A4665D8008C57FF /* CardView.swift */,
-				57EB7A462A4787CF00BCA44B /* GameCardView.swift */,
 				57EB7A402A47818600BCA44B /* GameCard */,
 			);
 			path = Cards;
@@ -138,6 +149,9 @@
 		57EB7A402A47818600BCA44B /* GameCard */ = {
 			isa = PBXGroup;
 			children = (
+				57EB7A4A2A478CF000BCA44B /* GameCardViewController.swift */,
+				57EB7A462A4787CF00BCA44B /* GameCardView.swift */,
+				57506C1D2A48D7F100367AE9 /* Stopwatch */,
 			);
 			path = GameCard;
 			sourceTree = "<group>";
@@ -398,6 +412,8 @@
 				57EB7A4D2A47950500BCA44B /* UIViewControllerExtension.swift in Sources */,
 				57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */,
 				57EF4B6C2A466528008C57FF /* CardStackViewController.swift in Sources */,
+				57506C1F2A48D80500367AE9 /* StopwatchViewController.swift in Sources */,
+				57506C212A48D82900367AE9 /* StopwatchView.swift in Sources */,
 				57EF4B432A4664F2008C57FF /* woggle.xcdatamodeld in Sources */,
 				57EF4B3D2A4664F2008C57FF /* ViewController.swift in Sources */,
 				57EB7A492A478BF500BCA44B /* CardViewController.swift in Sources */,

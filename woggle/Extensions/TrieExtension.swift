@@ -36,7 +36,6 @@ extension TrieNode  {
         break
       }
     }
-    
     return child
   }
   
@@ -80,7 +79,8 @@ extension TrieNode  {
     for char in lword {
       node = node.moveToChild(value: String(char), context: context)!
     }
-    node.word = true
+    node.isWord = true
+//    print(node.isWord)
   }
   
   func memoryContainsWord(word: String, lexicon: Int) -> Bool {
