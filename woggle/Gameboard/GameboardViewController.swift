@@ -13,6 +13,10 @@
 // If interactive, then hidden by default, and interaction extensions are available.
 // if not, then simply display the board.
 
+// Tiles are stored in coredata with Int16 x and y positions.
+// To help pass this information around, this pair is combined to an Int16 by (x * 10) + y.
+// This is easy to encode and decode.
+
 import UIKit
 
 class GameboardViewController: UIViewController {
@@ -63,29 +67,56 @@ class GameboardViewController: UIViewController {
     view.frame.size = CGSize(width: boardSize, height: boardSize)
   }
   
+  func tileLocationCombine(x: Int16, y: Int16) -> Int16 {
+    return x * 10 + y
+  }
+  
+  func tileLocationSplit(combined: Int16) -> (Int16, Int16) {
+    return combined.quotientAndRemainder(dividingBy: 10)
+  }
+  
+  
   func createAllTileViews(board: Board) {
     for tile in board.tiles! {
-      let newTile = createTileView(tile: tile as! Tile)
-      gameboardView.addTileSubview(tileView: newTile)
+      let tileTrueForm = tile as! Tile
+      let newTile = createTileView(tile: tileTrueForm)
+      let tileKey = tileLocationCombine(x: tileTrueForm.col, y: tileTrueForm.row)
+      gameboardView.addTileSubview(tileKey: tileKey, tileView: newTile)
     }
   }
   
   func createTileView(tile: Tile) -> TileView {
-    let xPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.row)
-    let yPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.col)
+    let xPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.col - 1)
+    let yPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.row - 1)
     let tPosition = CGPoint(x: xPosition, y: yPosition)
     return TileView(position: tPosition, size: tileWidth, boardSize: boardSize, text: tile.value ?? "Qr")
   }
+  
+  func selectTile(tileIndex: Int16) {
+    gameboardView.tiles[tileIndex]?.tileSelected()
+  }
+
+  func deselectTile(tileIndex: Int16) {
+    gameboardView.tiles[tileIndex]?.tileDeselected()
+  }
+  
+  func getTileValue(tileIndex: Int16) -> String {
+    return gameboardView.tiles[tileIndex]?.text ?? ""
+    
+  }
+
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func basicTilePositionFromCGPoint(point: CGPoint) -> CGPoint? {
+  func basicTilePositionFromCGPoint(point: CGPoint) -> Int16? {
     // Transforms a position point to a tile point.
     // Optional, as two checks:
     // 1. Going going outside the board.
     // 2. Indeterminate points between two tiles.
+    
+    // I feel this can be improved, but there's no significant CPU usage.
     
     let xPercent = point.x/boardSize
     let yPercent = point.y/boardSize
@@ -105,9 +136,9 @@ class GameboardViewController: UIViewController {
       return nil
     }
     
-    return CGPoint(x: xVal.rounded(FloatingPointRoundingRule.down), y: yVal.rounded(FloatingPointRoundingRule.down))
+    return Int16(xVal + 1) * 10 + Int16(yVal + 1)
     
-    
+//    return CGPoint(x: xVal.rounded(FloatingPointRoundingRule.down), y: yVal.rounded(FloatingPointRoundingRule.down))
   }
   
 
