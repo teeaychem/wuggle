@@ -70,7 +70,7 @@ extension TrieNode  {
     // Safely add a word.
     // Got to root, then use moveToChild, which creates child if needed.
     guard !word.isEmpty else { return }
-    let lword = word.lowercased()
+    let lword = word.uppercased().replacingOccurrences(of: "!", with: "Qu")
     
     var node = self
     if self.parent != nil {
