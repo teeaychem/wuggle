@@ -27,7 +27,7 @@ extension TrieNode  {
     // Return child of current node with specified value.
     // Else, return nil
     
-    var child:TrieNode?
+    var child: TrieNode?
     
     let children = self.children?.allObjects as! [TrieNode]
     for c in children {
@@ -70,7 +70,7 @@ extension TrieNode  {
     // Safely add a word.
     // Got to root, then use moveToChild, which creates child if needed.
     guard !word.isEmpty else { return }
-    let lword = word.uppercased().replacingOccurrences(of: "!", with: "Qu")
+    let lword = word.uppercased()
     
     var node = self
     if self.parent != nil {
@@ -87,8 +87,14 @@ extension TrieNode  {
     return false
   }
   
-  func memoryGoTo(word: String) -> TrieNode? {
-    return nil
+  func traceString(word: String) -> TrieNode? {
+    var currentNode: TrieNode?
+    currentNode = self
+    for char in word {
+      currentNode = currentNode?.getChild(val: String(char)) ?? nil
+    }
+    
+    return currentNode
   }
   
   func getChildren() -> Set<TrieNode> {
