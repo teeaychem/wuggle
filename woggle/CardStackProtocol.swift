@@ -8,6 +8,14 @@
 import Foundation
 
 protocol CardStackDelegate: AnyObject {
-  func processUpdate()
+  // CardViewControllers have a cardStackDelegate.
+  // This allows each individual card to make a request to the cardStack controller.
+  // And, then the cardStackController processes the request.
+  
+  // Used to request some UI update, such as updating the longest word or most points.
+  func processUIUpdate()
+  
+  // Allow cards to request current settings.
+  // Cards should not store settings in order to ensure a unique settings file is in use at any given time.
   func provideCurrentSettings() -> Settings
 }

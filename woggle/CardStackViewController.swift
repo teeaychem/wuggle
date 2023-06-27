@@ -18,6 +18,7 @@ class CardStackViewController: UIViewController {
   private var cardViews: [CardView] = []
   private var cardOrigin: CGFloat = 0.0
   
+  // TODO: Think about whether to accept settings as an argument, or load/create with this controller.
   unowned var settings: Settings
   
   init(settings s: Settings) {
@@ -34,13 +35,9 @@ class CardStackViewController: UIViewController {
     let testViewData = CardViewData(name: "test", width: width, colour: UIColor.gray.cgColor)
     let testCardController = GameCardViewController(viewData: testViewData, settings: s)
     
-    let cardSpace = (view.bounds.size.height - ((width * 1.4) * 1.16)) / 2
-    let cardOrigin = cardSpace + (width*1.4) * 0.16
-    
     self.embed(testCardController, inView: self.view)
     testCardController.view.frame.origin = CGPoint(x: 0, y: 50)
-    
-    print("stackView", view)
+    testCardController.delegate = self
   }
   
   required init?(coder: NSCoder) {
@@ -50,7 +47,7 @@ class CardStackViewController: UIViewController {
 
 extension CardStackViewController: CardStackDelegate {
   
-  func processUpdate() {
+  func processUIUpdate() {
     print("Asked to process update")
   }
   

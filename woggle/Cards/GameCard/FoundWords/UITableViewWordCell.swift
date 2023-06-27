@@ -15,7 +15,7 @@ class UITableViewWordCell : UITableViewCell {
   private var WordTextLabel = UILabel()
   private var PointsLabel = UILabel()
   
-  init(style s : UITableViewCell.CellStyle, reuseIdentifier r: String?, word w: Word, width gw: CGFloat, height h: CGFloat, shadeWords sh: Bool) {
+  init(style s : UITableViewCell.CellStyle, reuseIdentifier r: String?, word w: GameWord, width gw: CGFloat, height h: CGFloat, shadeWords sh: Bool) {
     wordText = w.value!.capitalized
     width = gw
     

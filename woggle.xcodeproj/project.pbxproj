@@ -13,7 +13,7 @@
 		5782956E2A4A03E60038B48F /* SettingsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782956D2A4A03E60038B48F /* SettingsExtension.swift */; };
 		57BADD842A4A45F3009074DF /* FoundWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD832A4A45F3009074DF /* FoundWordView.swift */; };
 		57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */; };
-		57BADD882A4A4E55009074DF /* WordExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD872A4A4E55009074DF /* WordExtension.swift */; };
+		57BADD882A4A4E55009074DF /* GameWordExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD872A4A4E55009074DF /* GameWordExtension.swift */; };
 		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
 		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
 		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
@@ -71,7 +71,7 @@
 		5782956D2A4A03E60038B48F /* SettingsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExtension.swift; sourceTree = "<group>"; };
 		57BADD832A4A45F3009074DF /* FoundWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundWordView.swift; sourceTree = "<group>"; };
 		57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewWordCell.swift; sourceTree = "<group>"; };
-		57BADD872A4A4E55009074DF /* WordExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordExtension.swift; sourceTree = "<group>"; };
+		57BADD872A4A4E55009074DF /* GameWordExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWordExtension.swift; sourceTree = "<group>"; };
 		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
 		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
 		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
@@ -281,7 +281,7 @@
 				57EF4B752A466BAE008C57FF /* TrieExtension.swift */,
 				57EB7A502A47A65000BCA44B /* GameInstanceExtension.swift */,
 				5782956D2A4A03E60038B48F /* SettingsExtension.swift */,
-				57BADD872A4A4E55009074DF /* WordExtension.swift */,
+				57BADD872A4A4E55009074DF /* GameWordExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -440,7 +440,7 @@
 				57EB7A492A478BF500BCA44B /* CardViewController.swift in Sources */,
 				57EB7A4B2A478CF000BCA44B /* GameCardViewController.swift in Sources */,
 				5782956E2A4A03E60038B48F /* SettingsExtension.swift in Sources */,
-				57BADD882A4A4E55009074DF /* WordExtension.swift in Sources */,
+				57BADD882A4A4E55009074DF /* GameWordExtension.swift in Sources */,
 				57EF4B392A4664F2008C57FF /* AppDelegate.swift in Sources */,
 				57EF4B6E2A4665D8008C57FF /* CardView.swift in Sources */,
 				57EF4B3B2A4664F2008C57FF /* SceneDelegate.swift in Sources */,

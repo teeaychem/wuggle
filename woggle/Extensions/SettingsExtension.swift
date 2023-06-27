@@ -10,6 +10,10 @@ import CoreData
 
 extension Settings {
   
+  func returnContext() -> NSManagedObjectContext {
+    return self.managedObjectContext!
+  }
+  
   func getOrMakeCurrentGame() -> GameInstance {
     if (self.currentGame == nil) {
       self.currentGame = GameInstance(context: self.managedObjectContext!)

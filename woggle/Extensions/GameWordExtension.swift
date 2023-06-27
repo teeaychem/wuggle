@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Word {
+extension GameWord {
   
   func getPoints() -> Int16 {
     guard (self.value != nil) else {return 0}

@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Board" representedClassName="Board" syncable="YES" codeGenerationType="class">
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="foundWords" toMany="YES" deletionRule="Nullify" destinationEntity="Word" inverseName="inBoard" inverseEntity="Word"/>
+        <relationship name="foundWords" toMany="YES" deletionRule="Nullify" destinationEntity="GameWord" inverseName="inBoard" inverseEntity="GameWord"/>
         <relationship name="settings" maxCount="1" deletionRule="Nullify" destinationEntity="GameInstance" inverseName="board" inverseEntity="GameInstance"/>
         <relationship name="tiles" toMany="YES" deletionRule="Nullify" destinationEntity="Tile" inverseName="board" inverseEntity="Tile"/>
     </entity>
@@ -10,6 +10,11 @@
         <attribute name="timeRemaining" attributeType="Double" defaultValueString="3" usesScalarValueType="YES"/>
         <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="currentGame" inverseEntity="Settings"/>
+    </entity>
+    <entity name="GameWord" representedClassName="GameWord" syncable="YES" codeGenerationType="class">
+        <attribute name="found" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="value" attributeType="String" defaultValueString=""/>
+        <relationship name="inBoard" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="foundWords" inverseEntity="Board"/>
     </entity>
     <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
         <attribute name="lexicon" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -36,10 +41,5 @@
         <attribute name="value" attributeType="String" defaultValueString=""/>
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrieNode" inverseName="parent" inverseEntity="TrieNode"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrieNode" inverseName="children" inverseEntity="TrieNode"/>
-    </entity>
-    <entity name="Word" representedClassName="Word" syncable="YES" codeGenerationType="class">
-        <attribute name="found" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="value" attributeType="String" defaultValueString=""/>
-        <relationship name="inBoard" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="foundWords" inverseEntity="Board"/>
     </entity>
 </model>

@@ -63,7 +63,7 @@ class GameCardViewController: CardViewController {
     // MARK: Testing things.
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let testWord = Word(context: context)
+    let testWord = GameWord(context: context)
     testWord.value = "Test"
     
     foundWordsView.updateAndScroll(word: testWord)
@@ -95,6 +95,12 @@ class GameCardViewController: CardViewController {
     let rowAccess = ((toTilePair.0 - 2) < fromTilePair.0) && (fromTilePair.0 < (toTilePair.0 + 2))
     let colAccess = ((toTilePair.1 - 2) < fromTilePair.1) && (fromTilePair.1 < (toTilePair.1 + 2))
     return rowAccess && colAccess
+  }
+  
+  func processWord(word w: String) {
+    let wordObject = GameWord(context: delegate!.provideCurrentSettings().returnContext())
+    wordObject.value = w
+    foundWordsView.updateAndScroll(word: wordObject)
   }
   
   @objc func didPan(_ sender: UIPanGestureRecognizer) {
@@ -142,10 +148,11 @@ class GameCardViewController: CardViewController {
       
     case .ended, .cancelled:
       // Check to see if current trie node is a word.
-      let endTrie = rootTrie.traceString(word: stringFromSelectedTiles())
+      let wordAttempt = stringFromSelectedTiles()
+      let endTrie = rootTrie.traceString(word: wordAttempt)
       if (endTrie != nil) {
         if (endTrie!.isWord) {
-          // TODO: Process word
+          processWord(word: wordAttempt)
         }
       }
       

@@ -9,7 +9,7 @@ import UIKit
 
 class FoundWordView: UITableView {
   
-  var wordList =  [Word]()
+  var wordList =  [GameWord]()
   
   private let listDimensions: CGSize
   private let fontSize: CGFloat
@@ -64,25 +64,34 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
     cell.backgroundColor = UIColor.clear
   }
   
+  private func gameWordHasValue(word w: GameWord, value v: String) -> Bool {
+    if w.value == v {
+      return true
+    }
+    return false
+  }
   
-  public func updateAndScroll(word: Word) {
+  
+  public func updateAndScroll(word: GameWord) {
     var wordIndex: Int
     
-    if wordList.contains(word) {
-      wordIndex = wordList.firstIndex(of: word)!
+    let first = wordList.first(where: { $0.value == word.value})
+    
+    if (first != nil) {
+      wordIndex = wordList.firstIndex(of: first!)!
     } else {
       wordIndex = wordList.count
       wordList.append(word)
       reloadData()
     }
-    scrollToRow(at: [0, wordIndex], at: .bottom, animated: true)
+      scrollToRow(at: [0, wordIndex], at: .bottom, animated: true)
   }
   
   
-  public func listUpdateAndScroll(updateList: [Word]) {
+  public func listUpdateAndScroll(updateList: [GameWord]) {
     for word in updateList { wordList.append(word) }
     reloadData()
-    if (wordList.count > 0) { scrollToRow(at: [0, wordList.count - 1], at: .bottom, animated: false) } // Count is total, etc.
+    if (wordList.count > 0) { scrollToRow(at: [0, wordList.count - 1], at: .middle, animated: true) } // Count is total, etc.
   }
   
   
