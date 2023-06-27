@@ -75,11 +75,40 @@ class GameCardViewController: CardViewController {
   
   @objc func didPan(_ sender: UIPanGestureRecognizer) {
     
-    let xP = (sender.location(in: view).x)
-    let xY = sender.location(in: view).y
+    var selectedTiles = [CGPoint]()
+    
+    switch sender.state {
+    case .began:
+      // On start, set up trieRoot.
+      // And, if in a tile, set initial tile.
+      print("once?")
+      
+    case .changed:
+      // Check to see if tile, and update if new tile
+      // On new tile, move to trie node if possible.
+      // If previous tile, then move back trie node.
+      print("changed")
+      
+    case .ended:
+      // Check to see if current trie node is a word.
+      print("ended")
+      
+    case .cancelled:
+      // Not sure when this activates.
+      print("cancelled")
+      
+    default:
+      break
+    }
+    
+    // Note, we're adding the observer at the card view, but we want coordinates relative to the gameboard.
+    print(boardViewController.basicTilePositionFromCGPoint(point: sender.location(in: boardViewController.gameboardView)))
+    
+    let xP = (sender.location(in: boardViewController.gameboardView).x)
+    let xY = (sender.location(in: boardViewController.gameboardView).y)
     
     
-    print(sender.location(in: view))
-    print(xP, xY)
+//    print(sender.location(in: view))
+//    print(xP, xY)
   }
 }

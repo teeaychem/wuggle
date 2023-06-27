@@ -20,6 +20,7 @@ class GameboardViewController: UIViewController {
   let boardSize: CGFloat
   let tileWidth: CGFloat
   let tilePadding: CGFloat
+  let tileSqrtFloat: CGFloat
   let gameboardView: GameboardView
   
   init(boardSize bS: CGFloat, gameBoard: Board) {
@@ -27,7 +28,7 @@ class GameboardViewController: UIViewController {
     // Constants for placing elements
     boardSize = bS
     
-    let tileSqrtFloat = CGFloat(gameBoard.tiles!.count).squareRoot()
+    tileSqrtFloat = CGFloat(gameBoard.tiles!.count).squareRoot()
     let unpaddedSize = boardSize / tileSqrtFloat
     
     tileWidth = unpaddedSize * 0.95
@@ -78,6 +79,35 @@ class GameboardViewController: UIViewController {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  func basicTilePositionFromCGPoint(point: CGPoint) -> CGPoint? {
+    // Transforms a position point to a tile point.
+    // Optional, as two checks:
+    // 1. Going going outside the board.
+    // 2. Indeterminate points between two tiles.
+    
+    let xPercent = point.x/boardSize
+    let yPercent = point.y/boardSize
+    
+    guard (0 < xPercent && xPercent < 1 && 0 < yPercent && yPercent < 1) else {
+      // Guard against going outside the board
+      return nil
+    }
+    
+    let xVal = xPercent * tileSqrtFloat
+    let yVal = yPercent * tileSqrtFloat
+    let xRemainder = xVal.truncatingRemainder(dividingBy: 1)
+    let yRemainder = yVal.truncatingRemainder(dividingBy: 1)
+    
+    guard (0.1 < xRemainder && xRemainder < 0.9 && 0.1 < yRemainder && yRemainder < 0.9) else {
+      // Guard against indeterminate points
+      return nil
+    }
+    
+    return CGPoint(x: xVal.rounded(FloatingPointRoundingRule.down), y: yVal.rounded(FloatingPointRoundingRule.down))
+    
+    
   }
   
 
