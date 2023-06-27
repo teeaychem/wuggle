@@ -33,23 +33,20 @@ class GameCardViewController: CardViewController {
     currentGameInstace = s.getOrMakeCurrentGame()
     
     // Constants to create and position views
-    let gameBoardSizePercent = 0.95
-    let gameBoardSize = vD.width * gameBoardSizePercent
-    let boardPadding = vD.width * ((1 - gameBoardSizePercent)/2)
-    let stopwatchSize = vD.height - ((3 * boardPadding) + gameBoardSize + vD.statusBarHeight)
+    // TODO: Collect together reused terms
     
     // Fix controllers for the current views
-    boardViewController = GameboardViewController(boardSize: gameBoardSize, gameBoard: currentGameInstace!.board!)
-    stopwatchViewController = StopwatchViewController(size: stopwatchSize)
-    foundWordsView = FoundWordView(listDimensions: CGSize(width: (vD.width - ((3 * boardPadding) + stopwatchSize)), height: stopwatchSize))
+    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), gameBoard: currentGameInstace!.board!)
+    stopwatchViewController = StopwatchViewController(size: vD.stopWatchSize(), viewData: vD)
+    foundWordsView = FoundWordView(listDimensions: CGSize(width: (vD.width - ((3 * vD.gameBoardPadding()) + vD.stopWatchSize())), height: vD.stopWatchSize()))
+    foundWordsView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
     
     super.init(viewData: vD, settings: s)
 
     // Position views
-    boardViewController.view.frame.origin = CGPoint(x: boardPadding, y: vD.height - (gameBoardSize + boardPadding))
-    // TODO: Shrink this for status bar
-    stopwatchViewController.view.frame.origin = CGPoint(x: boardPadding, y: boardPadding + vD.statusBarHeight)
-    foundWordsView.frame.origin = CGPoint(x: ((2 * boardPadding) + stopwatchSize), y: (boardPadding + vD.statusBarHeight))
+    boardViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.height - (vD.gameBoardSize() + vD.gameBoardPadding()))
+    stopwatchViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.gameBoardPadding() + vD.statusBarHeight)
+    foundWordsView.frame.origin = CGPoint(x: ((2 * vD.gameBoardPadding()) + vD.stopWatchSize()), y: (vD.gameBoardPadding() + vD.statusBarHeight))
     
     // TODO: Set the initial board view
     boardViewController.gameboardView.displayTileViews()
@@ -60,13 +57,6 @@ class GameCardViewController: CardViewController {
     self.embed(stopwatchViewController, inView: self.view)
     self.view.addSubview(foundWordsView)
     
-    // MARK: Testing things.
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let testWord = GameWord(context: context)
-    testWord.value = "Test"
-    
-    foundWordsView.updateAndScroll(word: testWord)
     // TODO: board needs to be last in order for touch to work.
     self.embed(boardViewController, inView: self.view)
     

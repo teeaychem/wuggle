@@ -84,14 +84,13 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
       wordList.append(word)
       reloadData()
     }
-      scrollToRow(at: [0, wordIndex], at: .bottom, animated: true)
+      scrollToRow(at: [0, wordIndex], at: .middle, animated: true)
   }
-  
   
   public func listUpdateAndScroll(updateList: [GameWord]) {
     for word in updateList { wordList.append(word) }
     reloadData()
-    if (wordList.count > 0) { scrollToRow(at: [0, wordList.count - 1], at: .middle, animated: true) } // Count is total, etc.
+    if (wordList.count > 0) { scrollToRow(at: [0, wordList.count - 1], at: .bottom, animated: false) } // Count is total, etc.
   }
   
   
