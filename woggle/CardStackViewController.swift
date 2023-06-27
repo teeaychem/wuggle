@@ -46,9 +46,15 @@ class CardStackViewController: UIViewController {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-    
+}
+
+extension CardStackViewController: CardStackDelegate {
   
+  func processUpdate() {
+    print("Asked to process update")
+  }
   
-  
-  
+  func provideCurrentSettings() -> Settings {
+    return settings
+  }
 }

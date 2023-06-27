@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		570A572D2A4B83BA006129FD /* CardStackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570A572C2A4B83BA006129FD /* CardStackProtocol.swift */; };
 		57506C1F2A48D80500367AE9 /* StopwatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506C1E2A48D80500367AE9 /* StopwatchViewController.swift */; };
 		57506C212A48D82900367AE9 /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506C202A48D82900367AE9 /* StopwatchView.swift */; };
 		5782956E2A4A03E60038B48F /* SettingsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782956D2A4A03E60038B48F /* SettingsExtension.swift */; };
@@ -64,6 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		570A572C2A4B83BA006129FD /* CardStackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackProtocol.swift; sourceTree = "<group>"; };
 		57506C1E2A48D80500367AE9 /* StopwatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewController.swift; sourceTree = "<group>"; };
 		57506C202A48D82900367AE9 /* StopwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
 		5782956D2A4A03E60038B48F /* SettingsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExtension.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				57EF4B742A466BA4008C57FF /* Extensions */,
 				57EF4B712A466B7B008C57FF /* Resources */,
 				57EF4B6B2A466528008C57FF /* CardStackViewController.swift */,
+				570A572C2A4B83BA006129FD /* CardStackProtocol.swift */,
 				57EF4B382A4664F2008C57FF /* AppDelegate.swift */,
 				57EF4B3A2A4664F2008C57FF /* SceneDelegate.swift */,
 				57EF4B3C2A4664F2008C57FF /* ViewController.swift */,
@@ -431,6 +434,7 @@
 				57EF4B6C2A466528008C57FF /* CardStackViewController.swift in Sources */,
 				57506C1F2A48D80500367AE9 /* StopwatchViewController.swift in Sources */,
 				57506C212A48D82900367AE9 /* StopwatchView.swift in Sources */,
+				570A572D2A4B83BA006129FD /* CardStackProtocol.swift in Sources */,
 				57EF4B432A4664F2008C57FF /* woggle.xcdatamodeld in Sources */,
 				57EF4B3D2A4664F2008C57FF /* ViewController.swift in Sources */,
 				57EB7A492A478BF500BCA44B /* CardViewController.swift in Sources */,

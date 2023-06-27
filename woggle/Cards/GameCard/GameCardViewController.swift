@@ -139,14 +139,13 @@ class GameCardViewController: CardViewController {
       // Check to see if tile, and update if new tile
       // On new tile, move to trie node if possible.
       // If previous tile, then move back trie node.
-      print("changed")
       
     case .ended, .cancelled:
       // Check to see if current trie node is a word.
       let endTrie = rootTrie.traceString(word: stringFromSelectedTiles())
       if (endTrie != nil) {
         if (endTrie!.isWord) {
-          print("word!")
+          // TODO: Process word
         }
       }
       
@@ -156,18 +155,9 @@ class GameCardViewController: CardViewController {
       }
       // Clean selected tiles memory.
       selectedTiles.removeAll()
-      print("ended")
             
     default:
       break
     }
-    
-    // Note, we're adding the observer at the card view, but we want coordinates relative to the gameboard.
-    
-    print(selectedTiles)
-    
-    
-//    print(sender.location(in: view))
-//    print(xP, xY)
   }
 }

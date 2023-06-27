@@ -9,6 +9,8 @@ import UIKit
 
 class CardViewController: UIViewController {
   
+  weak var delegate: CardStackDelegate?
+  
   let viewData: CardViewData
   let card: CardView
   
