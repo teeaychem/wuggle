@@ -21,7 +21,7 @@ import UIKit
 
 
 class GameboardViewController: UIViewController {
-
+  
   let boardSize: CGFloat
   let gameboardView: GameboardView
   
@@ -93,6 +93,7 @@ class GameboardViewController: UIViewController {
       let newTile = createTileView(tile: tileTrueForm)
       let tileKey = tileLocationCombine(x: tileTrueForm.col, y: tileTrueForm.row)
       gameboardView.addTileSubview(tileKey: tileKey, tileView: newTile)
+      newTile.displayTile()
     }
   }
   
@@ -123,11 +124,6 @@ class GameboardViewController: UIViewController {
   }
 
 
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  
   func basicTilePositionFromCGPoint(point: CGPoint) -> Int16? {
     // Transforms a position point to a tile point.
     // Optional, as two checks:
@@ -156,4 +152,18 @@ class GameboardViewController: UIViewController {
   }
   
 
+  func addGestureRecognizer(recogniser: UIGestureRecognizer) {
+    gameboardView.addGestureRecognizer(recogniser)
+  }
+  
+  
+  func removeGestureRecognizer(recogniser: UIGestureRecognizer) {
+    gameboardView.removeGestureRecognizer(recogniser)
+    
+  }
+  
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 }

@@ -10,7 +10,7 @@ import UIKit
 class StopwatchViewController: UIViewController {
   
   private let size: CGFloat
-  private let watchView: StopwatchView
+  let watchView: StopwatchView
   private let secondsIncrement: Double
   
   init(viewData vD: CardViewData, gameInstance gI: GameInstance) {
@@ -37,11 +37,21 @@ class StopwatchViewController: UIViewController {
   
   func addSeconds() {
     watchView.addSeconds()
-    watchView.incrementSeconds(updateAngleIncrement: (0.75))
+  }
+  
+  
+  func addRestartArrow() {
+    print("arrow")
+    watchView.addRestartArrows()
   }
   
   func incrementHand(percent: Double) {
     watchView.incrementSeconds(updateAngleIncrement: percent)
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    view.frame.size = CGSize(width: size, height: size)
   }
 
   

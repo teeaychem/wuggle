@@ -18,6 +18,9 @@ class GameCardViewController: CardViewController {
 
   let boardViewController: GameboardViewController
   let stopwatchViewController: StopwatchViewController
+  
+  var boardPanGR: UIPanGestureRecognizer?
+  
   let foundWordsView: FoundWordView
   var currentGameInstace: GameInstance?
   
@@ -26,6 +29,8 @@ class GameCardViewController: CardViewController {
   let timeUsedPerStep: Double
   var timeUsedPercent: Double
   var stopWatchIncrementPercent: Double
+  
+  var gameInProgess = false
   
   let tileSqrtFloat: CGFloat
   
@@ -43,8 +48,9 @@ class GameCardViewController: CardViewController {
     // Constants to create and position views
     // TODO: Collect together reused terms
     
-    // Fix controllers for the current views
+    // Fix controllers  for the current views
     boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), tileSqrtFloat: tileSqrtFloat)
+    
     
     stopwatchViewController = StopwatchViewController(viewData: vD, gameInstance: currentGameInstace!)
     
@@ -55,7 +61,6 @@ class GameCardViewController: CardViewController {
     stopWatchIncrementPercent = ((2 * Double.pi) / (currentGameInstace!.settings!.time * 60)) * gameTimeInterval
     timeUsedPerStep = (currentGameInstace!.settings!.time / 60) * gameTimeInterval
     timeUsedPercent = currentGameInstace!.timeUsedPercent
-    
     
     super.init(viewData: vD, delegate: d)
     
@@ -68,26 +73,31 @@ class GameCardViewController: CardViewController {
     
     // TODO: At the end of the init I want to get things up.
     boardViewController.createAllTileViews(board: currentGameInstace!.board!)
-    boardViewController.gameboardView.displayTileViews()
     
-    gameTimer = Timer.scheduledTimer(timeInterval: gameTimeInterval, target: self, selector: #selector(Counting), userInfo: nil, repeats: true)
+    // Finally, add gesture recognisers
+    boardPanGR = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
+    boardPanGR!.maximumNumberOfTouches = 1
+    
+    
   }
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.embed(stopwatchViewController, inView: self.view)
+    
     self.view.addSubview(foundWordsView)
     
     // TODO: board needs to be last in order for touch to work.
     self.embed(boardViewController, inView: self.view)
     boardViewController.addGameboardView()
+    self.embed(stopwatchViewController, inView: self.view)
     
     // TODO: Only add this when a game is in progress.
-    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
-    panGestureRecognizer.maximumNumberOfTouches = 1
-    boardViewController.gameboardView.addGestureRecognizer(panGestureRecognizer)
+    
+    let watchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnTime(_:)))
+    stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer)
     stopwatchViewController.addSeconds()
+    stopwatchViewController.addRestartArrow()
   }
   
   
@@ -121,9 +131,35 @@ class GameCardViewController: CardViewController {
     wordObject.value = w
     foundWordsView.updateAndScroll(word: wordObject)
   }
-  
-  
 
+}
+
+
+// MARK: Functions for starting, pausing, and ending a game
+extension GameCardViewController {
+  
+  
+  func startGame() {
+    boardViewController.gameboardView.displayTileViews()
+    gameTimer = Timer.scheduledTimer(timeInterval: gameTimeInterval, target: self, selector: #selector(Counting), userInfo: nil, repeats: true)
+    boardViewController.addGestureRecognizer(recogniser: boardPanGR!)
+    gameInProgess = true
+  }
+  
+  
+  func pauseGame() {
+    gameTimer?.invalidate()
+    boardViewController.gameboardView.hideTileViews()
+    boardViewController.removeGestureRecognizer(recogniser: boardPanGR!)
+    gameInProgess = false
+  }
+  
+  
+  func endGame() {
+    gameTimer?.invalidate()
+  }
+
+  
 }
 
 
@@ -194,9 +230,18 @@ extension GameCardViewController {
     }
   }
   
+  
   @objc func didTapOnTime(_ sender: UIPanGestureRecognizer) {
-    //
-    
+    if (timeUsedPercent > 100) {
+      // Game is over
+      endGame()
+    } else {
+      if (gameInProgess) {
+        pauseGame()
+      } else {
+        startGame()
+      }
+    }
   }
   
 }
@@ -205,10 +250,10 @@ extension GameCardViewController {
 extension GameCardViewController {
   
   @objc func Counting() {
-    stopwatchViewController.incrementHand(percent: stopWatchIncrementPercent)
     timeUsedPercent = timeUsedPercent + (timeUsedPerStep)
-    print(timeUsedPercent)
-    //    print("truc", gameModel.timeRemaining.truncatingRemainder(dividingBy: 1))
+    stopwatchViewController.incrementHand(percent: stopWatchIncrementPercent)
+
+    if (timeUsedPercent > 100) { endGame() }
   }
   
 }

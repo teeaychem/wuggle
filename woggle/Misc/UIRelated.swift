@@ -38,7 +38,7 @@ let settingsTextSelectedColour = UIColor.lightGray
 
 let tileAnimDuration = 0.5
 
-let defaultAnimationDuration = 1.0
+let defaultAnimationDuration = 10.0
 
 
 let gCardFontSize = CGFloat(12)

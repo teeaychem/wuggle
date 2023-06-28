@@ -113,7 +113,14 @@ class TileView: UIView {
   }
   
   
-  func appear(animated: Bool) {
+  func displayTile() {
+    let borderWidth = size * 0.02
+    layer.borderWidth = borderWidth
+    layer.backgroundColor = tileBackgroundColour.cgColor
+  }
+  
+  
+  func displayLetter(animated: Bool) {
     
     for lay in letterLayers {
       lay.removeAllAnimations()
@@ -122,17 +129,17 @@ class TileView: UIView {
     let borderWidth = size*0.02
     
     if animated {
-      let bgcl = CABasicAnimation(keyPath: "backgroundColor")
-      bgcl.fromValue = UIColor.clear.cgColor
-      bgcl.toValue = tileBackgroundColour.cgColor
-      
-      CATransaction.begin()
-      CATransaction.setAnimationDuration(tileAnimDuration)
-      layer.backgroundColor = tileBackgroundColour.cgColor
-      layer.borderWidth = borderWidth
-      CATransaction.commit()
-      
-      layer.add(bgcl, forKey: bgcl.keyPath)
+//      let bgcl = CABasicAnimation(keyPath: "backgroundColor")
+//      bgcl.fromValue = UIColor.clear.cgColor
+//      bgcl.toValue = tileBackgroundColour.cgColor
+//
+//      CATransaction.begin()
+//      CATransaction.setAnimationDuration(tileAnimDuration)
+//      layer.backgroundColor = tileBackgroundColour.cgColor
+//      layer.borderWidth = borderWidth
+//      CATransaction.commit()
+//
+//      layer.add(bgcl, forKey: bgcl.keyPath)
       
       for lay in letterLayers {
         animateStringLayerAppear(layer: lay)
@@ -140,8 +147,8 @@ class TileView: UIView {
       }
     } else {
       
-      layer.backgroundColor = tileBackgroundColour.cgColor
-      layer.borderWidth = borderWidth
+//      layer.backgroundColor = tileBackgroundColour.cgColor
+//      layer.borderWidth = borderWidth
       
       for lay in letterLayers {
         lay.opacity = 1
@@ -161,25 +168,25 @@ class TileView: UIView {
     
     if animated {
       
-      let col = CABasicAnimation(keyPath: "backgroundColor")
-      col.fromValue = tileBackgroundColour.cgColor
-      col.toValue = UIColor.clear.cgColor
-      
-      CATransaction.begin()
-      CATransaction.setAnimationDuration(tileAnimDuration)
-      layer.backgroundColor = UIColor.clear.cgColor
-      layer.borderWidth = 0
-      CATransaction.commit()
-      
-      layer.add(col, forKey: col.keyPath)
+//      let col = CABasicAnimation(keyPath: "backgroundColor")
+//      col.fromValue = tileBackgroundColour.cgColor
+//      col.toValue = UIColor.clear.cgColor
+//
+//      CATransaction.begin()
+//      CATransaction.setAnimationDuration(tileAnimDuration)
+//      layer.backgroundColor = UIColor.clear.cgColor
+//      layer.borderWidth = 0
+//      CATransaction.commit()
+//
+//      layer.add(col, forKey: col.keyPath)
       
       for lay in letterLayers {
         animateStringLayerDisappear(layer: lay)
       }
     } else {
       
-      layer.backgroundColor = UIColor.clear.cgColor
-      layer.borderWidth = 0
+//      layer.backgroundColor = UIColor.clear.cgColor
+//      layer.borderWidth = 0
       
       for lay in letterLayers {
         lay.opacity = 0

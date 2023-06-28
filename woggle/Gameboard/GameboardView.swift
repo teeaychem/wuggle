@@ -34,7 +34,7 @@ class GameboardView: UIView {
   
   func displayTileViews() {
     for tile in tiles.values {
-      tile.appear(animated: true)
+      tile.displayLetter(animated: true)
     }
   }
   
