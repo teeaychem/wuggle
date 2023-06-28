@@ -22,35 +22,40 @@ class GameCardViewController: CardViewController {
   var currentGameInstace: GameInstance?
   
   var selectedTiles = [Int16]()
-  var rootTrie: TrieNode
+  var rootTrie: TrieNode?
   
-  override init(viewData vD: CardViewData, settings s: Settings) {
-    
-    // set current true node as root
-    rootTrie = s.getTrieRoot()
-    
-    // First, get a board to work with from settings.
-    currentGameInstace = s.getOrMakeCurrentGame()
+  override init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
     
     // Constants to create and position views
     // TODO: Collect together reused terms
     
     // Fix controllers for the current views
-    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), gameBoard: currentGameInstace!.board!)
+    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize())
     stopwatchViewController = StopwatchViewController(size: vD.stopWatchSize(), viewData: vD)
     foundWordsView = FoundWordView(listDimensions: CGSize(width: (vD.width - ((3 * vD.gameBoardPadding()) + vD.stopWatchSize())), height: vD.stopWatchSize()))
     foundWordsView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
     
-    super.init(viewData: vD, settings: s)
-
+    super.init(viewData: vD, delegate: d)
+    
+    // set current true node as root
+    rootTrie = delegate!.provideCurrentSettings().getTrieRoot()
+    // Get a board to work with from settings.
+    currentGameInstace = delegate!.provideCurrentSettings().getOrMakeCurrentGame()
+    
     // Position views
     boardViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.height - (vD.gameBoardSize() + vD.gameBoardPadding()))
     stopwatchViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.gameBoardPadding() + vD.statusBarHeight)
     foundWordsView.frame.origin = CGPoint(x: ((2 * vD.gameBoardPadding()) + vD.stopWatchSize()), y: (vD.gameBoardPadding() + vD.statusBarHeight))
     
-    // TODO: Set the initial board view
+    // TODO: At the end of the init I want to get things up.
+    // So, this is either a saved game or a new game.
+    // In either case, I want to set the variables and create the tiles.
+    // Then, only display things when a game starts.
+    boardViewController.setVariables(board: currentGameInstace!.board!)
+    boardViewController.createAllTileViews(board: currentGameInstace!.board!)
     boardViewController.gameboardView.displayTileViews()
   }
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -59,15 +64,18 @@ class GameCardViewController: CardViewController {
     
     // TODO: board needs to be last in order for touch to work.
     self.embed(boardViewController, inView: self.view)
+    boardViewController.addGameboardView()
     
-    
+    // TODO: Only add this when a game is in progress.
     let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
     boardViewController.gameboardView.addGestureRecognizer(panGestureRecognizer)
   }
   
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
   
   func stringFromSelectedTiles() -> String {
     var builtString = ""
@@ -78,6 +86,7 @@ class GameCardViewController: CardViewController {
     return builtString.replacingOccurrences(of: "Qu", with: "!")
   }
   
+  
   func isAccessibleTile(fromIndex: Int16, toIndex: Int16) -> Bool {
     // Check to see is tile is accessible.
     let fromTilePair = boardViewController.tileLocationSplit(combined: fromIndex)
@@ -87,11 +96,13 @@ class GameCardViewController: CardViewController {
     return rowAccess && colAccess
   }
   
+  
   func processWord(word w: String) {
     let wordObject = GameWord(context: delegate!.provideCurrentSettings().returnContext())
     wordObject.value = w
     foundWordsView.updateAndScroll(word: wordObject)
   }
+  
   
   @objc func didPan(_ sender: UIPanGestureRecognizer) {
     
@@ -104,6 +115,7 @@ class GameCardViewController: CardViewController {
       if (tilePosition != nil) {
         boardViewController.selectTile(tileIndex: tilePosition!)
         selectedTiles.append(tilePosition!)
+        UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
       }
       
     case .changed:
@@ -124,22 +136,21 @@ class GameCardViewController: CardViewController {
                 // And it's the most recent, so backtrack.
                 boardViewController.deselectTile(tileIndex: selectedTiles.last!)
                 selectedTiles.remove(at: selectedTiles.count - 1)
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
               }
             } else {
               selectedTiles.append(tilePosition!)
               boardViewController.selectTile(tileIndex: tilePosition!)
+              UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
             }
           }
         }
       }
-      // Check to see if tile, and update if new tile
-      // On new tile, move to trie node if possible.
-      // If previous tile, then move back trie node.
       
     case .ended, .cancelled:
       // Check to see if current trie node is a word.
       let wordAttempt = stringFromSelectedTiles()
-      let endTrie = rootTrie.traceString(word: wordAttempt)
+      let endTrie = rootTrie!.traceString(word: wordAttempt)
       if (endTrie != nil) {
         if (endTrie!.isWord) {
           processWord(word: wordAttempt)

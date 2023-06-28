@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class CardViewData {
   
   let name: String
@@ -14,6 +15,7 @@ class CardViewData {
   let height: CGFloat
   let statusBarHeight: CGFloat
   var colour: CGColor
+  
   
   init(name: String, width: CGFloat, colour: CGColor) {
     self.name = name
@@ -23,16 +25,18 @@ class CardViewData {
     self.statusBarHeight = height * 0.07
   }
   
+  
   func gameBoardSize() -> CGFloat {
     return width * 0.95
   }
+  
   
   func gameBoardPadding() -> CGFloat {
     return (width - gameBoardSize()) * 0.5
   }
   
+  
   func stopWatchSize() -> CGFloat {
     height - ((3 * gameBoardPadding()) + gameBoardSize() + statusBarHeight)
   }
-  
 }

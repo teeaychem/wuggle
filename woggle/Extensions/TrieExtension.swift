@@ -5,9 +5,7 @@
 //  Created by sparkes on 2023/06/22.
 //
 
-import Foundation
 import CoreData
-import UIKit
 
 
 extension TrieNode  {
@@ -22,6 +20,7 @@ extension TrieNode  {
     
     return vals
     }
+  
   
   func getChild(val: String) -> TrieNode? {
     // Return child of current node with specified value.
@@ -39,9 +38,11 @@ extension TrieNode  {
     return child
   }
   
+  
   func getParent() -> TrieNode? {
     return self.parent
   }
+  
   
   func moveToChild(value: String, context: NSManagedObjectContext) -> TrieNode? {
     // Either getChild is present, or create a child.
@@ -56,6 +57,7 @@ extension TrieNode  {
     
   }
   
+  
   func goToRoot() -> TrieNode? {
     // Root has no parent, so keep moving back.
     // If loop is introduced, this breaks.
@@ -65,6 +67,7 @@ extension TrieNode  {
     }
     return currentNode
   }
+  
   
   func addWord(word: String, context: NSManagedObjectContext) {
     // Safely add a word.
@@ -80,12 +83,13 @@ extension TrieNode  {
       node = node.moveToChild(value: String(char), context: context)!
     }
     node.isWord = true
-//    print(node.isWord)
   }
+  
   
   func memoryContainsWord(word: String, lexicon: Int) -> Bool {
     return false
   }
+  
   
   func traceString(word: String) -> TrieNode? {
     var currentNode: TrieNode?
@@ -97,14 +101,17 @@ extension TrieNode  {
     return currentNode
   }
   
+  
   func getChildren() -> Set<TrieNode> {
     let s = Set<TrieNode>()
     return s
   }
   
+  
   func getValue() -> String {
     return self.value!
   }
+  
   
   func completeTrieFromFile(fName: String, context: NSManagedObjectContext) {
     
@@ -126,9 +133,6 @@ extension TrieNode  {
     } catch {
       print("fail")
     }
-    
-    let generator = UIImpactFeedbackGenerator(style: .heavy)
-    generator.impactOccurred()
     print("trie built using insert")
   }
   

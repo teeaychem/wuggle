@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class TileView: UIView {
   
   let text: String
@@ -15,6 +16,7 @@ class TileView: UIView {
   var angle = CGFloat(0)
   let size: CGFloat
   let tileFrame: CGRect
+  
   
   init(position p: CGPoint, size s: CGFloat, boardSize bS: CGFloat, text t: String) {
 
@@ -62,9 +64,11 @@ class TileView: UIView {
     }
   }
   
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
   
   func rotateToOrientation(orientation: String) {
     
@@ -192,6 +196,7 @@ class TileView: UIView {
     }
       layer.borderColor = tileSelectedColour.cgColor
   }
+  
   
   func tileDeselected() {
     for layer in letterLayers {

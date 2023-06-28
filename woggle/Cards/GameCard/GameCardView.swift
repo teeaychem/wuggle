@@ -9,8 +9,6 @@ import UIKit
 
 class GameCardView: CardView {
   
-  var boardController: GameboardViewController?
-  
   func addBoard() {
     print("add board")
 //    boardController = GameboardViewController(boardSize: cardWidth, settings: gameConfig)

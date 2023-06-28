@@ -19,45 +19,53 @@
 
 import UIKit
 
+
 class GameboardViewController: UIViewController {
 
   let boardSize: CGFloat
-  let tileWidth: CGFloat
-  let tilePadding: CGFloat
-  let tileSqrtFloat: CGFloat
   let gameboardView: GameboardView
   
-  init(boardSize bS: CGFloat, gameBoard: Board) {
+  var tileWidth = CGFloat(0)
+  var tilePadding = CGFloat(0)
+  var tileSqrtFloat = CGFloat(0)
+  
+  init(boardSize bS: CGFloat) {
     
     // Constants for placing elements
     boardSize = bS
-    
-    tileSqrtFloat = CGFloat(gameBoard.tiles!.count).squareRoot()
-    let unpaddedSize = boardSize / tileSqrtFloat
-    
-    tileWidth = unpaddedSize * 0.95
-    tilePadding = (boardSize - (tileWidth * tileSqrtFloat)) / (tileSqrtFloat + 1)
-    
+
     // Setup the view
     gameboardView = GameboardView(boardSize: bS)
     gameboardView.backgroundColor = UIColor.darkGray
     gameboardView.layer.cornerRadius = getCornerRadius(width: boardSize)
     
     super.init(nibName: nil, bundle: nil)
-    
-    // Create the tiles
-    createAllTileViews(board: gameBoard)
   }
+  
   
   override func loadView() {
     super.loadView()
   }
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Add the view as a subview
+    
+  }
+  
+  
+  func setVariables(board: Board) {
+    tileSqrtFloat = CGFloat(board.tiles!.count).squareRoot()
+    tileWidth = (boardSize / tileSqrtFloat) * 0.95
+    tilePadding = (boardSize - (tileWidth * tileSqrtFloat)) / (tileSqrtFloat + 1)
+  }
+  
+  
+  func addGameboardView() {
     self.view.addSubview(gameboardView)
   }
+  
   
   override func viewDidLayoutSubviews() {
     // Before this is called the frame of the view has not been set.
@@ -67,9 +75,11 @@ class GameboardViewController: UIViewController {
     view.frame.size = CGSize(width: boardSize, height: boardSize)
   }
   
+  
   func tileLocationCombine(x: Int16, y: Int16) -> Int16 {
     return x * 10 + y
   }
+  
   
   func tileLocationSplit(combined: Int16) -> (Int16, Int16) {
     return combined.quotientAndRemainder(dividingBy: 10)
@@ -77,6 +87,7 @@ class GameboardViewController: UIViewController {
   
   
   func createAllTileViews(board: Board) {
+    
     for tile in board.tiles! {
       let tileTrueForm = tile as! Tile
       let newTile = createTileView(tile: tileTrueForm)
@@ -85,38 +96,41 @@ class GameboardViewController: UIViewController {
     }
   }
   
+  
   func createTileView(tile: Tile) -> TileView {
+    // Subract 1 as Tile starts count from 1, not 0.
     let xPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.col - 1)
     let yPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.row - 1)
     let tPosition = CGPoint(x: xPosition, y: yPosition)
     return TileView(position: tPosition, size: tileWidth, boardSize: boardSize, text: tile.value ?? "Qr")
   }
   
+  
   func selectTile(tileIndex: Int16) {
     gameboardView.tiles[tileIndex]?.tileSelected()
   }
 
+  
   func deselectTile(tileIndex: Int16) {
     gameboardView.tiles[tileIndex]?.tileDeselected()
   }
   
+  
   func getTileValue(tileIndex: Int16) -> String {
     return gameboardView.tiles[tileIndex]?.text ?? ""
-    
   }
 
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
   
   func basicTilePositionFromCGPoint(point: CGPoint) -> Int16? {
     // Transforms a position point to a tile point.
     // Optional, as two checks:
     // 1. Going going outside the board.
     // 2. Indeterminate points between two tiles.
-    
-    // I feel this can be improved, but there's no significant CPU usage.
     
     let xPercent = point.x/boardSize
     let yPercent = point.y/boardSize
@@ -137,8 +151,6 @@ class GameboardViewController: UIViewController {
     }
     
     return Int16(xVal + 1) * 10 + Int16(yVal + 1)
-    
-//    return CGPoint(x: xVal.rounded(FloatingPointRoundingRule.down), y: yVal.rounded(FloatingPointRoundingRule.down))
   }
   
 

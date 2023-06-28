@@ -33,11 +33,11 @@ class CardStackViewController: UIViewController {
     super.init(nibName: nil, bundle: nil)
     
     let testViewData = CardViewData(name: "test", width: width, colour: UIColor.gray.cgColor)
-    let testCardController = GameCardViewController(viewData: testViewData, settings: s)
+    let testCardController = GameCardViewController(viewData: testViewData, delegate: self)
     
     self.embed(testCardController, inView: self.view)
     testCardController.view.frame.origin = CGPoint(x: 0, y: 50)
-    testCardController.delegate = self
+    
   }
   
   required init?(coder: NSCoder) {

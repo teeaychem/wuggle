@@ -8,6 +8,7 @@
 import UIKit
 import CoreText
 
+
 func getStringLayers(text: String, font: UIFont) -> [CAShapeLayer] {
   
   var uniChars = [UniChar](text.utf16)
@@ -36,6 +37,7 @@ func getStringLayers(text: String, font: UIFont) -> [CAShapeLayer] {
   return textLayer
 }
 
+
 func animateStringLayerAppear(layer: CAShapeLayer) {
   
   let end = CABasicAnimation(keyPath: "strokeEnd")
@@ -63,6 +65,7 @@ func animateStringLayerAppear(layer: CAShapeLayer) {
 
   CATransaction.commit()
 }
+
 
 func animateStringLayerDisappear(layer: CAShapeLayer) {
   

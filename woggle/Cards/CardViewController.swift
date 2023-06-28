@@ -14,15 +14,14 @@ class CardViewController: UIViewController {
   let viewData: CardViewData
   let card: CardView
   
-  unowned var settings: Settings
-  
   // displayViews collects the views which should only be shown when the card is displayed.
   var displayViews = [UIView]()
   
-  init(viewData vD: CardViewData, settings s: Settings) {
+  
+  init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
     viewData = vD
-    settings = s
     card = CardView(cardWidth: viewData.width, cardColour: viewData.colour)
+    delegate = d
     
     super.init(nibName: nil, bundle: nil)
     view.frame.size.width = vD.width
@@ -31,10 +30,12 @@ class CardViewController: UIViewController {
     specificSetup()
   }
   
+  
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     view.frame.size = CGSize(width: viewData.width, height: viewData.height)
   }
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
