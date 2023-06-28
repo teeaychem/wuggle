@@ -65,6 +65,7 @@ class GameCardViewController: CardViewController {
     
     // TODO: Only add this when a game is in progress.
     let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
+    panGestureRecognizer.maximumNumberOfTouches = 1
     boardViewController.gameboardView.addGestureRecognizer(panGestureRecognizer)
   }
   
@@ -101,7 +102,16 @@ class GameCardViewController: CardViewController {
   }
   
   
+
+}
+
+
+// MARK: GestureRecognisers
+extension GameCardViewController {
+  
   @objc func didPan(_ sender: UIPanGestureRecognizer) {
+    // TODO: Maybe update this with a custom recogniser.
+    // Basically, extend pan to include initial touch.
     
     let tilePosition = boardViewController.basicTilePositionFromCGPoint(point: sender.location(in: boardViewController.gameboardView))
     
@@ -133,12 +143,11 @@ class GameCardViewController: CardViewController {
                 // And it's the most recent, so backtrack.
                 boardViewController.deselectTile(tileIndex: selectedTiles.last!)
                 selectedTiles.remove(at: selectedTiles.count - 1)
-                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
               }
             } else {
+              // Otherwise, select the tile.
               selectedTiles.append(tilePosition!)
               boardViewController.selectTile(tileIndex: tilePosition!)
-              UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
             }
           }
         }
@@ -148,10 +157,8 @@ class GameCardViewController: CardViewController {
       // Check to see if current trie node is a word.
       let wordAttempt = stringFromSelectedTiles()
       let endTrie = rootTrie!.traceString(word: wordAttempt)
-      if (endTrie != nil) {
-        if (endTrie!.isWord) {
-          processWord(word: wordAttempt)
-        }
+      if (endTrie != nil && endTrie!.isWord) {
+        processWord(word: wordAttempt)
       }
       
       // Clean up the view by deselecting tiles.
@@ -165,4 +172,7 @@ class GameCardViewController: CardViewController {
       break
     }
   }
+  
+  
+  
 }
