@@ -35,7 +35,7 @@ class GameCardViewController: CardViewController {
     
     // Fix controllers for the current views
     boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), gameBoard: currentGameInstace!.board!)
-    stopwatchViewController = StopwatchViewController(size: vD.stopWatchSize(), viewData: vD)
+    stopwatchViewController = StopwatchViewController(viewData: vD, gameInstance: currentGameInstace!)
     foundWordsView = FoundWordView(listDimensions: CGSize(width: (vD.width - ((3 * vD.gameBoardPadding()) + vD.stopWatchSize())), height: vD.stopWatchSize()))
     foundWordsView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
     
@@ -64,9 +64,10 @@ class GameCardViewController: CardViewController {
     boardViewController.addGameboardView()
     
     // TODO: Only add this when a game is in progress.
-    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
+    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
     panGestureRecognizer.maximumNumberOfTouches = 1
     boardViewController.gameboardView.addGestureRecognizer(panGestureRecognizer)
+    stopwatchViewController.addSeconds()
   }
   
   
@@ -109,7 +110,7 @@ class GameCardViewController: CardViewController {
 // MARK: GestureRecognisers
 extension GameCardViewController {
   
-  @objc func didPan(_ sender: UIPanGestureRecognizer) {
+  @objc func didPanOnBoard(_ sender: UIPanGestureRecognizer) {
     // TODO: Maybe update this with a custom recogniser.
     // Basically, extend pan to include initial touch.
     
@@ -173,6 +174,9 @@ extension GameCardViewController {
     }
   }
   
-  
+  @objc func didTapOnTime(_ sender: UIPanGestureRecognizer) {
+    //
+    
+  }
   
 }
