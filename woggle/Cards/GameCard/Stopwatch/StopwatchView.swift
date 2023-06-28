@@ -78,10 +78,9 @@ class StopwatchView: UIView {
     drawSeconds(angle: secondsAngle)
   }
   
-  func incrementSeconds(updateIncrementPercent: Double) {
-    secondsAngle = (secondsAngle + (updateIncrementPercent * 2 * Double.pi)) //.truncatingRemainder(dividingBy: 2 * Double.pi)
+  func incrementSeconds(updateAngleIncrement: Double) {
+    secondsAngle = (secondsAngle + updateAngleIncrement) //.truncatingRemainder(dividingBy: 2 * Double.pi)
     // There's no need to truncate.
-    print(secondsAngle)
     drawSeconds(angle: secondsAngle)
   }
 }

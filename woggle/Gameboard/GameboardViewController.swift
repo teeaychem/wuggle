@@ -25,15 +25,19 @@ class GameboardViewController: UIViewController {
   let boardSize: CGFloat
   let gameboardView: GameboardView
   
+  // TODO: I don't think there's any need to store these.
+  // The only time these should be used are when making tiles.
+  // And, as I only really care about adding all tiles at once,
+  // these values can be calculated when inserting the tiles.
   let tileWidth: CGFloat
   let tilePadding: CGFloat
   let tileSqrtFloat: CGFloat
   
-  init(boardSize bS: CGFloat, gameBoard: Board) {
+  init(boardSize bS: CGFloat, tileSqrtFloat tSqrtF: CGFloat) {
     
     // Constants for placing elements
     boardSize = bS
-    tileSqrtFloat = CGFloat(gameBoard.tiles!.count).squareRoot()
+    tileSqrtFloat = tSqrtF
     tileWidth = (boardSize / tileSqrtFloat) * 0.95
     tilePadding = (boardSize - (tileWidth * tileSqrtFloat)) / (tileSqrtFloat + 1)
 

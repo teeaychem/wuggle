@@ -21,6 +21,14 @@ class GameCardViewController: CardViewController {
   let foundWordsView: FoundWordView
   var currentGameInstace: GameInstance?
   
+  var gameTimer: Timer?
+  let gameTimeInterval = 0.05
+  let timeUsedPerStep: Double
+  var timeUsedPercent: Double
+  var stopWatchIncrementPercent: Double
+  
+  let tileSqrtFloat: CGFloat
+  
   var selectedTiles = [Int16]()
   var rootTrie: TrieNode?
   
@@ -30,14 +38,24 @@ class GameCardViewController: CardViewController {
     rootTrie = d.provideCurrentSettings().getTrieRoot()
     currentGameInstace = d.provideCurrentSettings().getOrMakeCurrentGame()
     
+    tileSqrtFloat = CGFloat(currentGameInstace!.settings!.tileSqrt)
+    
     // Constants to create and position views
     // TODO: Collect together reused terms
     
     // Fix controllers for the current views
-    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), gameBoard: currentGameInstace!.board!)
+    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), tileSqrtFloat: tileSqrtFloat)
+    
     stopwatchViewController = StopwatchViewController(viewData: vD, gameInstance: currentGameInstace!)
+    
     foundWordsView = FoundWordView(listDimensions: CGSize(width: (vD.width - ((3 * vD.gameBoardPadding()) + vD.stopWatchSize())), height: vD.stopWatchSize()))
     foundWordsView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
+    
+    // Figure out angle per second, and then adjust to updates per second.
+    stopWatchIncrementPercent = ((2 * Double.pi) / (currentGameInstace!.settings!.time * 60)) * gameTimeInterval
+    timeUsedPerStep = (currentGameInstace!.settings!.time / 60) * gameTimeInterval
+    timeUsedPercent = currentGameInstace!.timeUsedPercent
+    
     
     super.init(viewData: vD, delegate: d)
     
@@ -51,6 +69,8 @@ class GameCardViewController: CardViewController {
     // TODO: At the end of the init I want to get things up.
     boardViewController.createAllTileViews(board: currentGameInstace!.board!)
     boardViewController.gameboardView.displayTileViews()
+    
+    gameTimer = Timer.scheduledTimer(timeInterval: gameTimeInterval, target: self, selector: #selector(Counting), userInfo: nil, repeats: true)
   }
   
   
@@ -177,6 +197,18 @@ extension GameCardViewController {
   @objc func didTapOnTime(_ sender: UIPanGestureRecognizer) {
     //
     
+  }
+  
+}
+
+// MARK: Timer functions.
+extension GameCardViewController {
+  
+  @objc func Counting() {
+    stopwatchViewController.incrementHand(percent: stopWatchIncrementPercent)
+    timeUsedPercent = timeUsedPercent + (timeUsedPerStep)
+    print(timeUsedPercent)
+    //    print("truc", gameModel.timeRemaining.truncatingRemainder(dividingBy: 1))
   }
   
 }

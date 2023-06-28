@@ -38,7 +38,7 @@ extension GameInstance {
     // In the case of inf time, self.time > 0 is never satisfied.
     
     if self.settings!.time > 0 {
-      self.timeRemaining = max(0, self.timeRemaining - dVal)
+      self.timeUsedPercent = max(0, self.timeUsedPercent - dVal)
     }
   }
   
