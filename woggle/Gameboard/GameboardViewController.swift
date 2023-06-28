@@ -25,14 +25,17 @@ class GameboardViewController: UIViewController {
   let boardSize: CGFloat
   let gameboardView: GameboardView
   
-  var tileWidth = CGFloat(0)
-  var tilePadding = CGFloat(0)
-  var tileSqrtFloat = CGFloat(0)
+  let tileWidth: CGFloat
+  let tilePadding: CGFloat
+  let tileSqrtFloat: CGFloat
   
-  init(boardSize bS: CGFloat) {
+  init(boardSize bS: CGFloat, gameBoard: Board) {
     
     // Constants for placing elements
     boardSize = bS
+    tileSqrtFloat = CGFloat(gameBoard.tiles!.count).squareRoot()
+    tileWidth = (boardSize / tileSqrtFloat) * 0.95
+    tilePadding = (boardSize - (tileWidth * tileSqrtFloat)) / (tileSqrtFloat + 1)
 
     // Setup the view
     gameboardView = GameboardView(boardSize: bS)
@@ -52,13 +55,6 @@ class GameboardViewController: UIViewController {
     super.viewDidLoad()
     // Add the view as a subview
     
-  }
-  
-  
-  func setVariables(board: Board) {
-    tileSqrtFloat = CGFloat(board.tiles!.count).squareRoot()
-    tileWidth = (boardSize / tileSqrtFloat) * 0.95
-    tilePadding = (boardSize - (tileWidth * tileSqrtFloat)) / (tileSqrtFloat + 1)
   }
   
   

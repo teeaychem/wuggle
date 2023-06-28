@@ -26,21 +26,22 @@ class GameCardViewController: CardViewController {
   
   override init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
     
+    // Use delegate to pull some general infomration.
+    rootTrie = d.provideCurrentSettings().getTrieRoot()
+    currentGameInstace = d.provideCurrentSettings().getOrMakeCurrentGame()
+    
     // Constants to create and position views
     // TODO: Collect together reused terms
     
     // Fix controllers for the current views
-    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize())
+    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), gameBoard: currentGameInstace!.board!)
     stopwatchViewController = StopwatchViewController(size: vD.stopWatchSize(), viewData: vD)
     foundWordsView = FoundWordView(listDimensions: CGSize(width: (vD.width - ((3 * vD.gameBoardPadding()) + vD.stopWatchSize())), height: vD.stopWatchSize()))
     foundWordsView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
     
     super.init(viewData: vD, delegate: d)
     
-    // set current true node as root
-    rootTrie = delegate!.provideCurrentSettings().getTrieRoot()
-    // Get a board to work with from settings.
-    currentGameInstace = delegate!.provideCurrentSettings().getOrMakeCurrentGame()
+    
     
     // Position views
     boardViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.height - (vD.gameBoardSize() + vD.gameBoardPadding()))
@@ -48,10 +49,6 @@ class GameCardViewController: CardViewController {
     foundWordsView.frame.origin = CGPoint(x: ((2 * vD.gameBoardPadding()) + vD.stopWatchSize()), y: (vD.gameBoardPadding() + vD.statusBarHeight))
     
     // TODO: At the end of the init I want to get things up.
-    // So, this is either a saved game or a new game.
-    // In either case, I want to set the variables and create the tiles.
-    // Then, only display things when a game starts.
-    boardViewController.setVariables(board: currentGameInstace!.board!)
     boardViewController.createAllTileViews(board: currentGameInstace!.board!)
     boardViewController.gameboardView.displayTileViews()
   }
