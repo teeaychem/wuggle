@@ -69,16 +69,21 @@ class PlayButtonsView: UIView {
     // A line goes to the desired point, minus the desired corner radius.
     // To get the corner we then place a circle by adjusting the current point to accomodate the radius.
     
-    let stopIcon = UIBezierPath()
-    stopIcon.move(to: CGPoint(x: iconIndent + iconCornerRadius, y: iconIndent))
-    stopIcon.addLine(to: CGPoint(x: forView.frame.width - (iconIndent + iconCornerRadius), y: (iconIndent)))
-    stopIcon.addArc(withCenter: CGPoint(x: forView.frame.width - (iconIndent + iconCornerRadius), y: iconIndent + iconCornerRadius), radius: iconCornerRadius, startAngle: Double.pi * 1.5, endAngle: 0, clockwise: true)
-    stopIcon.addLine(to: CGPoint(x: forView.frame.width - (iconIndent), y: stopView.frame.height - (iconIndent + iconCornerRadius)))
-    stopIcon.addArc(withCenter: CGPoint(x: forView.frame.width - (iconIndent + iconCornerRadius), y: stopView.frame.height - (iconIndent + iconCornerRadius)), radius: iconCornerRadius, startAngle: 0, endAngle: Double.pi * 0.5, clockwise: true)
-    stopIcon.addLine(to: CGPoint(x: iconIndent + iconCornerRadius, y: forView.frame.height - iconIndent))
-    stopIcon.addArc(withCenter: CGPoint(x: (iconIndent + iconCornerRadius), y: stopView.frame.height - (iconIndent + iconCornerRadius)), radius: iconCornerRadius, startAngle: Double.pi * 0.5, endAngle: Double.pi, clockwise: true)
-    stopIcon.addLine(to: CGPoint(x: iconIndent, y: iconIndent + iconCornerRadius))
-    stopIcon.addArc(withCenter: CGPoint(x: (iconIndent + iconCornerRadius), y: (iconIndent + iconCornerRadius)), radius: iconCornerRadius, startAngle: Double.pi, endAngle: Double.pi * 1.5, clockwise: true)
+    // Oops, it's already available as an construction.
+    // I wonder if it works the same way…
+    
+//    let stopIcon = UIBezierPath()
+//    stopIcon.move(to: CGPoint(x: iconIndent + iconCornerRadius, y: iconIndent))
+//    stopIcon.addLine(to: CGPoint(x: forView.frame.width - (iconIndent + iconCornerRadius), y: (iconIndent)))
+//    stopIcon.addArc(withCenter: CGPoint(x: forView.frame.width - (iconIndent + iconCornerRadius), y: iconIndent + iconCornerRadius), radius: iconCornerRadius, startAngle: Double.pi * 1.5, endAngle: 0, clockwise: true)
+//    stopIcon.addLine(to: CGPoint(x: forView.frame.width - (iconIndent), y: stopView.frame.height - (iconIndent + iconCornerRadius)))
+//    stopIcon.addArc(withCenter: CGPoint(x: forView.frame.width - (iconIndent + iconCornerRadius), y: stopView.frame.height - (iconIndent + iconCornerRadius)), radius: iconCornerRadius, startAngle: 0, endAngle: Double.pi * 0.5, clockwise: true)
+//    stopIcon.addLine(to: CGPoint(x: iconIndent + iconCornerRadius, y: forView.frame.height - iconIndent))
+//    stopIcon.addArc(withCenter: CGPoint(x: (iconIndent + iconCornerRadius), y: stopView.frame.height - (iconIndent + iconCornerRadius)), radius: iconCornerRadius, startAngle: Double.pi * 0.5, endAngle: Double.pi, clockwise: true)
+//    stopIcon.addLine(to: CGPoint(x: iconIndent, y: iconIndent + iconCornerRadius))
+//    stopIcon.addArc(withCenter: CGPoint(x: (iconIndent + iconCornerRadius), y: (iconIndent + iconCornerRadius)), radius: iconCornerRadius, startAngle: Double.pi, endAngle: Double.pi * 1.5, clockwise: true)
+    
+    let stopIcon = UIBezierPath(roundedRect: CGRect(x: iconIndent, y: iconIndent, width: forView.frame.width - (2 * iconIndent), height: forView.frame.height - (2 * iconIndent)), cornerRadius: iconCornerRadius)
 
     stopIcon.close()
     
@@ -113,6 +118,8 @@ class PlayButtonsView: UIView {
     // Initial angle is pi.
     // Drawing an equalateral triangle, so each arc will be 2pi/3
     // Then, the next point is (r cos(angle), r sin(angle) offset by target point and radius.
+    
+    // But there's no constuction for triangles…
   
     let playIcon = UIBezierPath()
     playIcon.move(to: CGPoint(x: iconIndent, y: iconIndent + iconCornerRadius))

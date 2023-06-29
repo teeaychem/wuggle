@@ -28,6 +28,13 @@ class StopwatchViewController: UIViewController {
     self.view.addSubview(watchView)
   }
   
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    view.frame.size = watchView.frame.size
+    
+  }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

@@ -12,20 +12,20 @@ class StopwatchView: UIView {
   private let faceLayer = CAShapeLayer()
   private let secondsLayer = CAShapeLayer()
   
-  private let centerCFLoat: CGFloat
+  private let centerFLoat: CGFloat
   private let lineWidth: CGFloat
   private let watchRadius: CGFloat
   
   private let secondsLength: CGFloat
   
-  private var secondsAngle = 1.5 * Double.pi
+  private var secondsAngle = Double.pi
   
   init(size s: CGFloat) {
     
     lineWidth = s * 0.05
-    centerCFLoat = s * 0.5
+    centerFLoat = s * 0.5
     watchRadius = s * 0.4
-    secondsLength = (watchRadius * 0.9) - (2 * lineWidth)
+    secondsLength = (watchRadius * 0.9) - (lineWidth)
     
     super.init(frame: CGRect(x: 0, y: 0, width: s, height: s))
     
@@ -49,8 +49,8 @@ class StopwatchView: UIView {
   
   func incrementSeconds(updateAngleIncrement: Double) {
     secondsAngle = (secondsAngle - updateAngleIncrement) //.truncatingRemainder(dividingBy: 2 * Double.pi)
-    // There's no need to truncate.
-    drawSeconds(angle: secondsAngle)
+//    // There's no need to truncate.
+    secondsLayer.transform = CATransform3DMakeRotation(secondsAngle, 0.0, 0.0, 1.0)
   }
 }
 
@@ -62,7 +62,7 @@ extension StopwatchView {
   func detailFaceLayer(fLayer: CAShapeLayer) {
     
     let facePath = UIBezierPath(
-      arcCenter: CGPoint(x: centerCFLoat, y: centerCFLoat),
+      arcCenter: CGPoint(x: centerFLoat, y: centerFLoat),
       radius: CGFloat(watchRadius - (lineWidth * 0.5)),
       startAngle: CGFloat(-(Double.pi / 2)),
       endAngle: CGFloat(3 * (Double.pi / 2)),
@@ -78,15 +78,17 @@ extension StopwatchView {
   
   
   func drawSeconds(angle: Double) {
-    let secondsHand = UIBezierPath()
-    secondsHand.move(to: CGPoint(x: centerCFLoat, y: centerCFLoat))
-    secondsHand.addLine(to: CGPoint(x: centerCFLoat + (secondsLength * CGFloat(cos(angle))),
-                                    y: centerCFLoat + (secondsLength * CGFloat(sin(angle)))
-    ))
+    let secondsHand = UIBezierPath(roundedRect: CGRect(x: -0.5 * lineWidth, y: 0, width: lineWidth, height: secondsLength), cornerRadius: lineWidth * 0.5)
+    secondsLayer.position = CGPoint(x: centerFLoat, y: centerFLoat)
+    secondsLayer.transform = CATransform3DMakeRotation(secondsAngle, 0.0, 0.0, 1.0)
+
     secondsLayer.lineCap = .round
     secondsLayer.path = secondsHand.cgPath
-    secondsLayer.strokeColor = interactiveStrokeColour.cgColor
-    secondsLayer.lineWidth = lineWidth
+    secondsLayer.fillColor = UIColor.darkGray.cgColor
+    secondsLayer.strokeColor = UIColor.black.cgColor
+    secondsLayer.lineWidth = 1
+    
+//    secondsLayer.transform = CATransform3DMakeRotation(Double.pi, 0.0, 0.0, 1.0)
     
     faceLayer.addSublayer(secondsLayer)
   }
@@ -101,6 +103,6 @@ extension StopwatchView {
 
 
 //MARK: Misc helper functions
-extension StopwatchView {  
+extension StopwatchView {
   
 }
