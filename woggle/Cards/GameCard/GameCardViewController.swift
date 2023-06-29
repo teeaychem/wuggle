@@ -18,6 +18,7 @@ class GameCardViewController: CardViewController {
 
   let boardViewController: GameboardViewController
   let stopwatchViewController: StopwatchViewController
+  let playButtonsViewController: PlayButtonsViewController
   
   var boardPanGR: UIPanGestureRecognizer?
   
@@ -51,10 +52,11 @@ class GameCardViewController: CardViewController {
     // Fix controllers  for the current views
     boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), tileSqrtFloat: tileSqrtFloat)
     
+    stopwatchViewController = StopwatchViewController(viewData: vD)
     
-    stopwatchViewController = StopwatchViewController(viewData: vD, gameInstance: currentGameInstace!)
+    playButtonsViewController = PlayButtonsViewController(viewData: vD)
     
-    foundWordsView = FoundWordView(listDimensions: CGSize(width: (vD.width - ((3 * vD.gameBoardPadding()) + vD.stopWatchSize())), height: vD.stopWatchSize()))
+    foundWordsView = FoundWordView(listDimensions: CGSize(width: (vD.width - ((4 * vD.gameBoardPadding()) + (1.5 * vD.stopWatchSize()))), height: vD.stopWatchSize()))
     foundWordsView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
     
     // Figure out angle per second, and then adjust to updates per second.
@@ -69,7 +71,8 @@ class GameCardViewController: CardViewController {
     // Position views
     boardViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.height - (vD.gameBoardSize() + vD.gameBoardPadding()))
     stopwatchViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.gameBoardPadding() + vD.statusBarHeight)
-    foundWordsView.frame.origin = CGPoint(x: ((2 * vD.gameBoardPadding()) + vD.stopWatchSize()), y: (vD.gameBoardPadding() + vD.statusBarHeight))
+    playButtonsViewController.view.frame.origin = CGPoint(x: (2 * vD.gameBoardPadding() + vD.stopWatchSize()), y: (vD.gameBoardPadding() + vD.statusBarHeight))
+    foundWordsView.frame.origin = CGPoint(x: ((3 * vD.gameBoardPadding()) + (1.5 * vD.stopWatchSize())), y: (vD.gameBoardPadding() + vD.statusBarHeight))
     
     // TODO: At the end of the init I want to get things up.
     boardViewController.createAllTileViews(board: currentGameInstace!.board!)
@@ -91,6 +94,7 @@ class GameCardViewController: CardViewController {
     self.embed(boardViewController, inView: self.view)
     boardViewController.addGameboardView()
     self.embed(stopwatchViewController, inView: self.view)
+    self.embed(playButtonsViewController, inView: self.view)
     
     // TODO: Only add this when a game is in progress.
     

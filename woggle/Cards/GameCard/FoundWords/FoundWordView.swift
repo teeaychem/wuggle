@@ -17,7 +17,7 @@ class FoundWordView: UITableView {
   init(listDimensions lD: CGSize) {
     
     listDimensions = lD
-    fontSize = lD.width * 0.075
+    fontSize = lD.height * 0.15
     
     super.init(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: listDimensions), style: .plain)
     

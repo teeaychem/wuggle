@@ -140,9 +140,6 @@ extension StopwatchView {
     
     faceLayer.addSublayer(restartArrowOneLayer)
     faceLayer.addSublayer(restartArrowTwoLayer)
-//
-//    layer.sublayers?.insert(restartArrowOneLayer, at: 0)
-//    layer.sublayers?.insert(restartArrowTwoLayer, at: 0)
   }
   
 }
