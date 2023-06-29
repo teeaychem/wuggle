@@ -100,7 +100,7 @@ class GameCardViewController: CardViewController {
     
     let watchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnTime(_:)))
     stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer)
-    stopwatchViewController.addSeconds()
+    stopwatchViewController.paintSeconds()
   }
   
   

@@ -10,12 +10,14 @@ import UIKit
 class StopwatchViewController: UIViewController {
   
   private let size: CGFloat
+  private let viewData: CardViewData
   let watchView: StopwatchView
   
   init(viewData vD: CardViewData) {
     
+    viewData = vD
     size = vD.stopWatchSize()
-    watchView = StopwatchView(size: size)
+    watchView = StopwatchView(viewData: vD)
     
     watchView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
     
@@ -26,6 +28,7 @@ class StopwatchViewController: UIViewController {
     super.viewDidLoad()
     
     self.view.addSubview(watchView)
+    paintStatic()
   }
   
   
@@ -40,7 +43,13 @@ class StopwatchViewController: UIViewController {
   }
   
   
-  func addSeconds() {
+  func paintStatic() {
+    watchView.paintWatchBackground()
+    watchView.detailFaceLayer()
+  }
+  
+  
+  func paintSeconds() {
     watchView.addSeconds()
   }
   

@@ -9,28 +9,31 @@ import UIKit
 
 class StopwatchView: UIView {
   
-  private let faceLayer = CAShapeLayer()
+//  private let faceLayer = CAShapeLayer()
   private let secondsLayer = CAShapeLayer()
   
+  private let watchSize: CGFloat
+  private let indent: CGFloat
   private let centerFLoat: CGFloat
   private let lineWidth: CGFloat
   private let watchRadius: CGFloat
+  private let cornerRadius: CGFloat
   
   private let secondsLength: CGFloat
   
   private var secondsAngle = Double.pi
   
-  init(size s: CGFloat) {
+  init(viewData vD: CardViewData) {
     
-    lineWidth = s * 0.05
-    centerFLoat = s * 0.5
-    watchRadius = s * 0.4
+    watchSize = vD.stopWatchSize()
+    indent = vD.tilePadding()
+    lineWidth = watchSize * 0.05
+    centerFLoat = watchSize  * 0.5
+    watchRadius = watchSize * 0.4
     secondsLength = (watchRadius * 0.9) - (lineWidth)
+    cornerRadius = getCornerRadius(width: vD.gameBoardSize())
     
-    super.init(frame: CGRect(x: 0, y: 0, width: s, height: s))
-    
-    layer.addSublayer(faceLayer)
-    detailFaceLayer(fLayer: faceLayer)
+    super.init(frame: CGRect(x: 0, y: 0, width: watchSize, height: watchSize))
     
     self.backgroundColor = UIColor.darkGray
   }
@@ -39,13 +42,12 @@ class StopwatchView: UIView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  
 
   
   func addSeconds() {
     drawSeconds(angle: secondsAngle)
   }
+
   
   func incrementSeconds(updateAngleIncrement: Double) {
     secondsAngle = (secondsAngle - updateAngleIncrement) //.truncatingRemainder(dividingBy: 2 * Double.pi)
@@ -59,21 +61,53 @@ class StopwatchView: UIView {
 extension StopwatchView {
   
   
-  func detailFaceLayer(fLayer: CAShapeLayer) {
+  func paintWatchBackground() {
+    let backgroundWidth = watchSize - (2 * indent)
     
-    let facePath = UIBezierPath(
+    let highLightLayer = CAShapeLayer()
+    highLightLayer.frame = CGRect(origin: CGPoint(x: indent, y: indent), size: CGSize(width: backgroundWidth, height: backgroundWidth))
+    highLightLayer.backgroundColor = UIColor.lightGray.cgColor
+
+    highLightLayer.cornerRadius = cornerRadius
+    highLightLayer.borderColor = UIColor.black.cgColor
+    highLightLayer.borderWidth = 1
+    
+    layer.addSublayer(highLightLayer)
+  }
+  
+  
+  func detailFaceLayer() {
+    
+    let outerFaceLayer = CAShapeLayer()
+    
+    let outerFacePath = UIBezierPath(
       arcCenter: CGPoint(x: centerFLoat, y: centerFLoat),
       radius: CGFloat(watchRadius - (lineWidth * 0.5)),
       startAngle: CGFloat(-(Double.pi / 2)),
       endAngle: CGFloat(3 * (Double.pi / 2)),
       clockwise: true)
     
-    fLayer.path = facePath.cgPath
-    fLayer.fillColor = UIColor.clear.cgColor
-    fLayer.strokeColor = interactiveStrokeColour.cgColor
-    fLayer.lineWidth = lineWidth
-    fLayer.lineDashPattern = [NSNumber(value: (Double.pi * 2 * Double(watchRadius)/6)), NSNumber(value: Double(lineWidth)*2)]
-    fLayer.lineCap = .round
+    outerFaceLayer.path = outerFacePath.cgPath
+    outerFaceLayer.fillColor = UIColor.gray.cgColor
+    outerFaceLayer.strokeColor = UIColor.black.cgColor
+    outerFaceLayer.lineWidth = 1
+    
+    let innerFacePath = UIBezierPath(
+      arcCenter: CGPoint(x: centerFLoat, y: centerFLoat),
+      radius: CGFloat(watchRadius - (lineWidth)),
+      startAngle: CGFloat(-(Double.pi / 2)),
+      endAngle: CGFloat(3 * (Double.pi / 2)),
+      clockwise: true)
+    
+    let innerFaceLayer = CAShapeLayer()
+    
+    innerFaceLayer.path = innerFacePath.cgPath
+    innerFaceLayer.fillColor = UIColor.lightGray.cgColor
+    innerFaceLayer.strokeColor = UIColor.black.cgColor
+    innerFaceLayer.lineWidth = 1
+    
+    layer.addSublayer(outerFaceLayer)
+    layer.addSublayer(innerFaceLayer)
   }
   
   
@@ -84,13 +118,13 @@ extension StopwatchView {
 
     secondsLayer.lineCap = .round
     secondsLayer.path = secondsHand.cgPath
-    secondsLayer.fillColor = UIColor.darkGray.cgColor
+    secondsLayer.fillColor = UIColor.gray.cgColor
     secondsLayer.strokeColor = UIColor.black.cgColor
     secondsLayer.lineWidth = 1
     
 //    secondsLayer.transform = CATransform3DMakeRotation(Double.pi, 0.0, 0.0, 1.0)
     
-    faceLayer.addSublayer(secondsLayer)
+    layer.addSublayer(secondsLayer)
   }
   
 }
