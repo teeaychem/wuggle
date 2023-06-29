@@ -22,7 +22,7 @@ class GameCardViewController: CardViewController {
   
   var boardPanGR: UIPanGestureRecognizer?
   
-  let foundWordsView: FoundWordView
+  let foundWordsViewController: FoundWordsViewController
   var currentGameInstace: GameInstance?
   
   var gameTimer: Timer?
@@ -55,9 +55,7 @@ class GameCardViewController: CardViewController {
     stopwatchViewController = StopwatchViewController(viewData: vD)
     
     playButtonsViewController = PlayButtonsViewController(viewData: vD)
-    
-    foundWordsView = FoundWordView(listDimensions: CGSize(width: (vD.width - ((4 * vD.gameBoardPadding()) + (1.5 * vD.stopWatchSize()))), height: vD.stopWatchSize()))
-    foundWordsView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
+    foundWordsViewController = FoundWordsViewController(viewData: vD)
     
     // Figure out angle per second, and then adjust to updates per second.
     stopWatchIncrementPercent = ((2 * Double.pi) / (currentGameInstace!.settings!.time * 60)) * gameTimeInterval
@@ -72,7 +70,7 @@ class GameCardViewController: CardViewController {
     boardViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.height - (vD.gameBoardSize() + vD.gameBoardPadding()))
     stopwatchViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.gameBoardPadding() + vD.statusBarHeight)
     playButtonsViewController.view.frame.origin = CGPoint(x: (2 * vD.gameBoardPadding() + vD.stopWatchSize()), y: (vD.gameBoardPadding() + vD.statusBarHeight))
-    foundWordsView.frame.origin = CGPoint(x: ((3 * vD.gameBoardPadding()) + (1.5 * vD.stopWatchSize())), y: (vD.gameBoardPadding() + vD.statusBarHeight))
+    foundWordsViewController.view.frame.origin = CGPoint(x: ((3 * vD.gameBoardPadding()) + (1.5 * vD.stopWatchSize())), y: (vD.gameBoardPadding() + vD.statusBarHeight))
     
     // TODO: At the end of the init I want to get things up.
     boardViewController.createAllTileViews(board: currentGameInstace!.board!)
@@ -88,13 +86,12 @@ class GameCardViewController: CardViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.view.addSubview(foundWordsView)
-    
     // TODO: board needs to be last in order for touch to work.
     self.embed(boardViewController, inView: self.view)
     boardViewController.addGameboardView()
     self.embed(stopwatchViewController, inView: self.view)
     self.embed(playButtonsViewController, inView: self.view)
+    self.embed(foundWordsViewController, inView: self.view)
     
     // TODO: Only add this when a game is in progress.
     
@@ -132,7 +129,7 @@ class GameCardViewController: CardViewController {
   func processWord(word w: String) {
     let wordObject = GameWord(context: delegate!.provideCurrentSettings().returnContext())
     wordObject.value = w
-    foundWordsView.updateAndScroll(word: wordObject)
+    foundWordsViewController.update(word: wordObject)
   }
 
 }

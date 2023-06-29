@@ -21,12 +21,10 @@ class FoundWordView: UITableView {
     
     super.init(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: listDimensions), style: .plain)
     
-    self.backgroundColor = UIColor.darkGray
     separatorStyle = .none
     dataSource = self
     delegate = self
     rowHeight = UIFont(name: textFontName, size: fontSize)!.lineHeight
-    
   }
   
   required init?(coder: NSCoder) {

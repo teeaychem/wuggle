@@ -15,8 +15,8 @@ let gameCardColour = UIColor.black
 let settingsCardColour = UIColor.darkGray
 let statsCardColour = UIColor.gray
 
-let regularText = UIColor.black
-let reguardTextShaded = UIColor.darkGray
+let regularText = UIColor.darkGray
+let reguardTextShaded = UIColor.black
 
 let gameCardIndent = UIColor.darkGray
 let gameCardOutdent = UIColor.lightGray

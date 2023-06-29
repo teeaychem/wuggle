@@ -76,13 +76,13 @@ extension StopwatchView {
   }
   
   
-  func detailFaceLayer() {
+  func paintFaceLayer() {
     
     let outerFaceLayer = CAShapeLayer()
     
     let outerFacePath = UIBezierPath(
       arcCenter: CGPoint(x: centerFLoat, y: centerFLoat),
-      radius: CGFloat(watchRadius - (lineWidth * 0.5)),
+      radius: watchRadius,
       startAngle: CGFloat(-(Double.pi / 2)),
       endAngle: CGFloat(3 * (Double.pi / 2)),
       clockwise: true)
@@ -94,7 +94,7 @@ extension StopwatchView {
     
     let innerFacePath = UIBezierPath(
       arcCenter: CGPoint(x: centerFLoat, y: centerFLoat),
-      radius: CGFloat(watchRadius - (lineWidth)),
+      radius: watchRadius - lineWidth,
       startAngle: CGFloat(-(Double.pi / 2)),
       endAngle: CGFloat(3 * (Double.pi / 2)),
       clockwise: true)

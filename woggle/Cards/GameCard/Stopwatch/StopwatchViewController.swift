@@ -45,7 +45,7 @@ class StopwatchViewController: UIViewController {
   
   func paintStatic() {
     watchView.paintWatchBackground()
-    watchView.detailFaceLayer()
+    watchView.paintFaceLayer()
   }
   
   
