@@ -33,13 +33,16 @@ class GameboardViewController: UIViewController {
   let tilePadding: CGFloat
   let tileSqrtFloat: CGFloat
   
-  init(boardSize bS: CGFloat, tileSqrtFloat tSqrtF: CGFloat) {
+  init(boardSize bS: CGFloat, tileSqrtFloat tSqrtF: CGFloat, tilePadding tP: CGFloat) {
     
     // Constants for placing elements
     boardSize = bS
     tileSqrtFloat = tSqrtF
-    tileWidth = (boardSize / tileSqrtFloat) * 0.95
-    tilePadding = (boardSize - (tileWidth * tileSqrtFloat)) / (tileSqrtFloat + 1)
+    tilePadding = boardSize * 0.01
+    tileWidth = (boardSize - (tilePadding * (tileSqrtFloat + 1))) / tileSqrtFloat
+    
+//    (boardSize / tileSqrtFloat) * 0.95
+
 
     // Setup the view
     gameboardView = GameboardView(boardSize: bS)

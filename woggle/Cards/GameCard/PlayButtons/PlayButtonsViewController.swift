@@ -9,14 +9,13 @@ import UIKit
 
 class PlayButtonsViewController: UIViewController {
   
-  private let size: CGSize
   private let playButtonsView: PlayButtonsView
-  
+
   
   init(viewData vD: CardViewData) {
     
-    size = CGSize(width: vD.stopWatchSize() * 0.5, height: vD.stopWatchSize())
-    playButtonsView = PlayButtonsView(size: size)
+
+    playButtonsView = PlayButtonsView(viewData: vD)
    
     super.init(nibName: nil, bundle: nil)
     
@@ -30,13 +29,14 @@ class PlayButtonsViewController: UIViewController {
   
   override func viewDidLoad() {
     self.view.addSubview(playButtonsView)
-    playButtonsView.AddStopIcon()
+    playButtonsView.addStopIcon()
+    playButtonsView.addPlayIcon()
   }
   
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    view.frame.size = size
+    view.frame.size = playButtonsView.frame.size
     view.backgroundColor = UIColor.darkGray
   }
   

@@ -38,11 +38,6 @@ class StopwatchViewController: UIViewController {
   }
   
   
-  func addRestartArrow() {
-    print("arrow")
-    watchView.addRestartArrows()
-  }
-  
   func incrementHand(percent: Double) {
     watchView.incrementSeconds(updateAngleIncrement: percent)
   }

@@ -39,4 +39,12 @@ class CardViewData {
   func stopWatchSize() -> CGFloat {
     height - ((3 * gameBoardPadding()) + gameBoardSize() + statusBarHeight)
   }
+  
+  func playPauseStopSize() -> CGSize {
+    CGSize(width: stopWatchSize() * 0.5, height: stopWatchSize())
+  }
+  
+  func tilePadding() -> CGFloat {
+    gameBoardSize() * 0.01
+  }
 }

@@ -11,8 +11,6 @@ class StopwatchView: UIView {
   
   private let faceLayer = CAShapeLayer()
   private let secondsLayer = CAShapeLayer()
-  private let restartArrowOneLayer = CAShapeLayer()
-  private let restartArrowTwoLayer = CAShapeLayer()
   
   private let centerCFLoat: CGFloat
   private let lineWidth: CGFloat
@@ -93,159 +91,16 @@ extension StopwatchView {
     faceLayer.addSublayer(secondsLayer)
   }
   
-  
-  func addRestartArrows() {
-    
-    if layer.sublayers?.count ?? 0 > 0 {
-      for lay in layer.sublayers! {
-        lay.removeAllAnimations()
-      }
-    }
-    
-    let arrowColour = UIColor.lightGray.cgColor
-    
-    restartArrowOneLayer.path =  resetArrowPath(yPos: centerCFLoat).cgPath
-    restartArrowOneLayer.fillColor = UIColor.clear.cgColor
-    restartArrowOneLayer.strokeColor = arrowColour
-    restartArrowOneLayer.lineWidth = lineWidth
-    
-    let restartTwoArrow = resetArrowPath(yPos: centerCFLoat)
-
-    restartTwoArrow.apply(CGAffineTransform(translationX: centerCFLoat, y: centerCFLoat).inverted())
-    restartTwoArrow.apply(CGAffineTransform(rotationAngle: CGFloat(Double.pi)))
-    restartTwoArrow.apply(CGAffineTransform(translationX: centerCFLoat, y: centerCFLoat))
-
-    restartArrowTwoLayer.fillColor = UIColor.clear.cgColor
-    restartArrowTwoLayer.strokeColor = arrowColour
-    restartArrowTwoLayer.lineWidth = lineWidth
-
-    restartArrowTwoLayer.path =  restartTwoArrow.cgPath
-//
-    let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
-    strokeAnimation.fromValue = 0.0
-    strokeAnimation.toValue = 1.0
-    strokeAnimation.duration = defaultAnimationDuration
-    strokeAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0, 0, 0.5, 1)
-//
-    let colourAnimation = CABasicAnimation(keyPath: "opacity")
-    colourAnimation.fromValue = 0.5
-    colourAnimation.toValue = 1
-    colourAnimation.duration = defaultAnimationDuration
-    colourAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.5, 0, 0.5, 1)
-//
-    restartArrowOneLayer.add(strokeAnimation, forKey: strokeAnimation.keyPath)
-    restartArrowOneLayer.add(colourAnimation, forKey: colourAnimation.keyPath)
-    restartArrowTwoLayer.add(strokeAnimation, forKey: strokeAnimation.keyPath)
-    restartArrowTwoLayer.add(colourAnimation, forKey: colourAnimation.keyPath)
-    
-    faceLayer.addSublayer(restartArrowOneLayer)
-    faceLayer.addSublayer(restartArrowTwoLayer)
-  }
-  
 }
 
 
 //MARK: Functions to create layers
 extension StopwatchView {
   
-  
-  private func resetArrowPath(yPos: CGFloat) -> UIBezierPath {
-    // This is complex, as we want the arrow end to be curved in a natural way.
-    
-    let restartInset = lineWidth * 3
-    let resetRadius = watchRadius - restartInset
-    let resetEndAngle = CGFloat.pi * 0.8
-    
-    let miniRadius = restartInset
-    
-    let circleTwoPoint = CGPoint(x: centerCFLoat + ((watchRadius - restartInset) * CGFloat(cos(resetEndAngle))),
-                                 y: yPos + ((watchRadius - restartInset) * CGFloat(sin(resetEndAngle))))
-    
-    let intersectionPoints = getIntersection(circleOne: CGPoint(x: centerCFLoat, y: centerCFLoat), radiusOne: resetRadius, circleTwo: circleTwoPoint, radiusTwo: miniRadius)
-    
-    let test = intersectionPoints[0]
-    
-    let intersectionAngle = atan2(test.y - circleTwoPoint.y, test.x - circleTwoPoint.x)
-    
-    
-    let arrowCord = 2 * lineWidth
-    let arrowStartAngle = intersectionAngle - CGFloat.pi/8 // + CGFloat.pi/8
-    let arrowEndAngle = intersectionAngle + CGFloat.pi/8
-    
-    let arrowMeetPoint = CGPoint(x: centerCFLoat + ((watchRadius - restartInset) * CGFloat(cos(resetEndAngle))),
-                                 y: yPos + ((watchRadius - restartInset) * CGFloat(sin(resetEndAngle))))
-    
-    let arrowFirstPoint = CGPoint(x: arrowMeetPoint.x + arrowCord * CGFloat(cos(arrowStartAngle)),
-                                  y: arrowMeetPoint.y + arrowCord * CGFloat(sin(arrowStartAngle)))
-    
-    let arrowSecondPoint = CGPoint(x: arrowMeetPoint.x + arrowCord * CGFloat(cos(arrowEndAngle)),
-                                   y: arrowMeetPoint.y + arrowCord * CGFloat(sin(arrowEndAngle)))
-    
-    let arrowBasePoint = CGPoint(x: centerCFLoat + ((watchRadius - restartInset) * CGFloat(cos(resetEndAngle))),
-                                 y: yPos + ((watchRadius - restartInset) * CGFloat(sin(resetEndAngle))))
-    
-    
-    let restartLine = UIBezierPath(
-      arcCenter: CGPoint(x: centerCFLoat, y: yPos),
-      radius: CGFloat(watchRadius - restartInset),
-      startAngle: CGFloat(0),
-      endAngle:CGFloat(resetEndAngle),
-      clockwise: true)
-    
-    let restartArrow = UIBezierPath()
-    
-    restartArrow.move(to: arrowFirstPoint )
-    restartArrow.addLine(to: arrowMeetPoint)
-    restartArrow.addLine(to: arrowSecondPoint)
-    restartArrow.addArc(withCenter: arrowBasePoint, radius: arrowCord, startAngle: arrowEndAngle, endAngle: arrowStartAngle, clockwise: false)
-    restartArrow.close()
-    
-    restartLine.append(restartArrow)
-    
-    return restartLine
-  }
-  
 }
 
 
 //MARK: Misc helper functions
-extension StopwatchView {
-  
-  
-  func getIntersection(circleOne cO: CGPoint, radiusOne rO: CGFloat, circleTwo cT: CGPoint, radiusTwo rT: CGFloat) -> [CGPoint] {
-    // Help from https://math.stackexchange.com/questions/256100/how-can-i-find-the-points-at-which-two-circles-intersect
-    // and
-    // https://gist.github.com/jupdike/bfe5eb23d1c395d8a0a1a4ddd94882ac
-    
-    
-    let d = sqrt(pow(cO.x - cT.x, 2) + pow(cO.y - cT.y, 2))
-    
-    if d > rO + rT || d < abs(rT - rO) || (d == 0 && rO == rT) {
-      return []
-    } else {
-      
-      let d2 = pow(d,2)
-      let d4 = pow(d,4)
-      
-      let a = (pow(rO,2) - pow(rT,2)) / (2*d2)
-      let r1r2 = (pow(rO,2) - pow(rT,2))
-      let c = sqrt((2*(pow(rO,2) + pow(rT,2))) / d2) - ((pow(r1r2,2) / d4) - 1)
-      
-      let fx = (cO.x + cT.x) / 2 + a * (cT.x - cO.x)
-      let gx = c * (cT.y - cO.y) / 2
-      
-      let ix1 = fx + gx
-      let ix2 = fx - gx
-      
-      let fy = (cO.y + cT.y) / 2 + a * (cT.y - cO.y)
-      let gy = c * (cO.x - cT.x) / 2
-      
-      let iy1 = fy + gy
-      let iy2 = fy - gy
-      
-      return [CGPoint(x: ix1, y: iy1), CGPoint(x: ix2, y: iy2)]
-    }
-  }
-  
+extension StopwatchView {  
   
 }

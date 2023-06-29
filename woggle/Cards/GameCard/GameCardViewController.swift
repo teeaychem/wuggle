@@ -50,7 +50,7 @@ class GameCardViewController: CardViewController {
     // TODO: Collect together reused terms
     
     // Fix controllers  for the current views
-    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), tileSqrtFloat: tileSqrtFloat)
+    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), tileSqrtFloat: tileSqrtFloat, tilePadding: vD.tilePadding())
     
     stopwatchViewController = StopwatchViewController(viewData: vD)
     
@@ -101,7 +101,6 @@ class GameCardViewController: CardViewController {
     let watchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnTime(_:)))
     stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer)
     stopwatchViewController.addSeconds()
-    stopwatchViewController.addRestartArrow()
   }
   
   
