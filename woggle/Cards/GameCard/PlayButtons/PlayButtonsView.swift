@@ -105,12 +105,18 @@ class PlayButtonsView: UIView {
   
   
   func addPlayIcon() {
-    playPauseLayer = makePlayButton(forView: playPauseView)
+    playPauseLayer = makePlayIcon(forView: playPauseView)
     playPauseView.layer.addSublayer(playPauseLayer)
   }
   
   
-  func makePlayButton(forView: UIView) -> CAShapeLayer {
+  func addPauseIcon() {
+    playPauseLayer = makePauseIcon(forView: playPauseView)
+    playPauseView.layer.addSublayer(playPauseLayer)
+  }
+  
+  
+  func makePlayIcon(forView: UIView) -> CAShapeLayer {
     
     let playIconLayer = CAShapeLayer()
   
@@ -142,10 +148,33 @@ class PlayButtonsView: UIView {
     playIconLayer.lineCap = .round
     playIconLayer.strokeColor = interactiveStrokeColour.cgColor
     playIconLayer.lineWidth = 1
-    playIconLayer.cornerRadius = 10
     playIconLayer.fillColor = UIColor.gray.cgColor
     
     return playIconLayer
+  }
+  
+  
+  func makePauseIcon(forView: UIView) -> CAShapeLayer {
+    
+    let pauseIconLayer = CAShapeLayer()
+    
+    let pauseIconPath = CGMutablePath()
+    let pauseSegmentWidth = (forView.frame.width - (3 * iconIndent)) / 2
+    
+    let pauseIconLeft = UIBezierPath(roundedRect: CGRect(x: iconIndent, y: iconIndent, width: pauseSegmentWidth, height: forView.frame.height - (2 * iconIndent)), cornerRadius: iconCornerRadius)
+    let pauseIconRight = UIBezierPath(roundedRect: CGRect(x: forView.frame.width - (iconIndent + pauseSegmentWidth), y: iconIndent, width: pauseSegmentWidth, height: forView.frame.height - (2 * iconIndent)), cornerRadius: iconCornerRadius)
+
+    
+    pauseIconPath.addPath(pauseIconLeft.cgPath)
+    pauseIconPath.addPath(pauseIconRight.cgPath)
+    
+    pauseIconLayer.path = pauseIconPath
+    pauseIconLayer.lineCap = .round
+    pauseIconLayer.strokeColor = interactiveStrokeColour.cgColor
+    pauseIconLayer.lineWidth = 1
+    pauseIconLayer.fillColor = UIColor.gray.cgColor
+    
+    return pauseIconLayer
   }
   
 }

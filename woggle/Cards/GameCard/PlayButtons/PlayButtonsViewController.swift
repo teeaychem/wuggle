@@ -30,7 +30,8 @@ class PlayButtonsViewController: UIViewController {
   override func viewDidLoad() {
     self.view.addSubview(playButtonsView)
     playButtonsView.addStopIcon()
-    playButtonsView.addPlayIcon()
+//    playButtonsView.addPlayIcon()
+    playButtonsView.addPauseIcon()
   }
   
   
