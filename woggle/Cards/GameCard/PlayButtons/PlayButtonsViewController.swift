@@ -31,7 +31,8 @@ class PlayButtonsViewController: UIViewController {
     self.view.addSubview(playButtonsView)
     playButtonsView.addStopIcon()
 //    playButtonsView.addPlayIcon()
-    playButtonsView.addPauseIcon()
+//    playButtonsView.addPauseIcon()
+    playButtonsView.addNewGameIcon()
   }
   
   
