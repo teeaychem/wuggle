@@ -20,6 +20,7 @@ class GameCardViewController: CardViewController {
   let stopwatchViewController: StopwatchViewController
   let playButtonsViewController: PlayButtonsViewController
   let foundWordsViewController: FoundWordsViewController
+  var finalWordsViewController: FinalFoundWordsViewController?
   
   var watchGestureRecognizer: UITapGestureRecognizer?
   var boardPanGR: UIPanGestureRecognizer?
@@ -66,6 +67,7 @@ class GameCardViewController: CardViewController {
     
     setVaribalesFromCurrentGameInstance()
     playButtonsViewController.paintPlayIcon()
+    playButtonsViewController.paintStopIcon()
     
     // Position views
     boardViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.height - (vD.gameBoardSize() + vD.gameBoardPadding()))
@@ -200,6 +202,9 @@ extension GameCardViewController {
     stopwatchViewController.view.removeGestureRecognizer(watchGestureRecognizer!)
     gameInProgess = false
     timeUsedPercent = 1
+    finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
+    self.embed(finalWordsViewController!, inView: self.view)
+
   }
 }
 

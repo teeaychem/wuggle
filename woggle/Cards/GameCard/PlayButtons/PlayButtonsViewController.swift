@@ -29,10 +29,6 @@ class PlayButtonsViewController: UIViewController {
   
   override func viewDidLoad() {
     self.view.addSubview(playButtonsView)
-    playButtonsView.addStopIcon()
-//    playButtonsView.addPlayIcon()
-//    playButtonsView.addPauseIcon()
-//    playButtonsView.addNewGameIcon()
   }
   
   
@@ -73,9 +69,6 @@ class PlayButtonsViewController: UIViewController {
   
   
   func animateHighlight() {
-
-//    view.layer.borderColor = UIColor.white.cgColor
-//    view.layer.borderWidth = 4
     
     let borderPath = UIBezierPath()
     borderPath.move(to: CGPoint(x: view.layer.frame.width * 0.5,  y: 0))

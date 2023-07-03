@@ -16,8 +16,6 @@ class GameboardView: UIView {
   init(boardSize bS: CGFloat) {
     
     super.init(frame: CGRect(x: 0, y: 0, width: bS, height: bS))
-    self.translatesAutoresizingMaskIntoConstraints = false
-    layer.backgroundColor = UIColor.red.cgColor
   }
   
   

@@ -47,7 +47,6 @@ class GameboardViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Add the view as a subview
-    
   }
   
   

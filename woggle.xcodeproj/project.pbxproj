@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		570A572D2A4B83BA006129FD /* CardStackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570A572C2A4B83BA006129FD /* CardStackProtocol.swift */; };
 		5735DD3F2A4E4B560071B29B /* FoundWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735DD3E2A4E4B560071B29B /* FoundWordsViewController.swift */; };
+		5741FA292A53782E00B4164D /* FinalFoundWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5741FA282A53782E00B4164D /* FinalFoundWords.swift */; };
 		57455B412A4CFF8C0019FFB5 /* PlayButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57455B402A4CFF8C0019FFB5 /* PlayButtonsViewController.swift */; };
 		57455B432A4CFFA40019FFB5 /* PlayButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57455B422A4CFFA40019FFB5 /* PlayButtonsView.swift */; };
 		57506C1F2A48D80500367AE9 /* StopwatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506C1E2A48D80500367AE9 /* StopwatchViewController.swift */; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		570A572C2A4B83BA006129FD /* CardStackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackProtocol.swift; sourceTree = "<group>"; };
 		5735DD3E2A4E4B560071B29B /* FoundWordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundWordsViewController.swift; sourceTree = "<group>"; };
+		5741FA282A53782E00B4164D /* FinalFoundWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalFoundWords.swift; sourceTree = "<group>"; };
 		57455B402A4CFF8C0019FFB5 /* PlayButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonsViewController.swift; sourceTree = "<group>"; };
 		57455B422A4CFFA40019FFB5 /* PlayButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonsView.swift; sourceTree = "<group>"; };
 		57506C1E2A48D80500367AE9 /* StopwatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		57BADD822A4A4578009074DF /* FoundWords */ = {
 			isa = PBXGroup;
 			children = (
+				5741FA282A53782E00B4164D /* FinalFoundWords.swift */,
 				5735DD3E2A4E4B560071B29B /* FoundWordsViewController.swift */,
 				57BADD832A4A45F3009074DF /* FoundWordView.swift */,
 				57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */,
@@ -445,6 +448,7 @@
 				5735DD3F2A4E4B560071B29B /* FoundWordsViewController.swift in Sources */,
 				57455B432A4CFFA40019FFB5 /* PlayButtonsView.swift in Sources */,
 				57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */,
+				5741FA292A53782E00B4164D /* FinalFoundWords.swift in Sources */,
 				57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */,
 				57EB7A512A47A65000BCA44B /* GameInstanceExtension.swift in Sources */,
 				57EF4B702A46670D008C57FF /* MiscUIFunctions.swift in Sources */,
