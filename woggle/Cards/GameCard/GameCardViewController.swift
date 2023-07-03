@@ -143,6 +143,7 @@ extension GameCardViewController {
     boardViewController.gameboardView.displayTileViews()
     gameTimer = Timer.scheduledTimer(timeInterval: gameTimeInterval, target: self, selector: #selector(Counting), userInfo: nil, repeats: true)
     boardViewController.addGestureRecognizer(recogniser: boardPanGR!)
+    playButtonsViewController.paintPauseIcon()
     gameInProgess = true
   }
   
@@ -150,6 +151,7 @@ extension GameCardViewController {
   func pauseGame() {
     gameTimer?.invalidate()
     boardViewController.gameboardView.hideTileViews()
+    playButtonsViewController.paintPlayIcon()
     boardViewController.removeGestureRecognizer(recogniser: boardPanGR!)
     gameInProgess = false
   }

@@ -32,7 +32,7 @@ class PlayButtonsViewController: UIViewController {
     playButtonsView.addStopIcon()
 //    playButtonsView.addPlayIcon()
 //    playButtonsView.addPauseIcon()
-    playButtonsView.addNewGameIcon()
+//    playButtonsView.addNewGameIcon()
   }
   
   
@@ -40,6 +40,18 @@ class PlayButtonsViewController: UIViewController {
     super.viewDidLayoutSubviews()
     view.frame.size = playButtonsView.frame.size
     view.backgroundColor = UIColor.darkGray
+  }
+  
+  
+  func paintPlayIcon() {
+    playButtonsView.removePlayPauseIcon()
+    playButtonsView.addPlayIcon()
+  }
+  
+  
+  func paintPauseIcon() {
+    playButtonsView.removePlayPauseIcon()
+    playButtonsView.addPauseIcon()
   }
   
   

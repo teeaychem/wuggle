@@ -64,6 +64,17 @@ class PlayButtonsView: UIView {
   }
   
   
+  func removeStopIcon() {
+    stopView.layer.sublayers?.removeAll()
+  }
+  
+  
+  func removePlayPauseIcon() {
+    playPauseView.layer.sublayers?.removeAll()
+    print("removed")
+  }
+  
+  
   func makeStopIcon(forView: UIView) -> CAShapeLayer {
     
     let stopIconLayer = CAShapeLayer()
@@ -146,13 +157,7 @@ class PlayButtonsView: UIView {
     let angleIncrement = (2/3) * Double.pi
     
     playIcon.addArc(withCenter: CGPoint(x: (iconIndent + iconCornerRadius), y: (iconIndent + iconCornerRadius)), radius: iconCornerRadius, startAngle: Double.pi, endAngle: Double.pi + angleIncrement, clockwise: true)
-    let xVal = forView.frame.width - iconIndent - (iconCornerRadius * cos(Double.pi + angleIncrement))
-    let yVal = (forView.frame.height * 0.5) - (iconIndent - iconCornerRadius) - (iconCornerRadius * sin(Double.pi + angleIncrement))
-    playIcon.addLine(to: CGPoint(x: xVal, y: yVal))
-    playIcon.addArc(withCenter: CGPoint(x: xVal, y: yVal + iconCornerRadius), radius: iconCornerRadius, startAngle: Double.pi + angleIncrement, endAngle: Double.pi - angleIncrement, clockwise: true)
-    let xVal2 = iconIndent + iconCornerRadius + (iconCornerRadius * cos(Double.pi - angleIncrement))
-    let yVal2 = (forView.frame.height) - (iconIndent + iconCornerRadius) + (iconCornerRadius * sin(Double.pi - angleIncrement))
-    playIcon.addLine(to: CGPoint(x: xVal2, y: yVal2))
+    playIcon.addArc(withCenter: CGPoint(x: forView.frame.width - (iconIndent + iconCornerRadius), y: forView.frame.height * 0.5), radius: iconCornerRadius, startAngle: Double.pi + angleIncrement, endAngle: Double.pi - angleIncrement, clockwise: true)
     playIcon.addArc(withCenter: CGPoint(x: iconIndent + iconCornerRadius, y: forView.frame.height - (iconIndent + iconCornerRadius)), radius: iconCornerRadius, startAngle: Double.pi - angleIncrement, endAngle: Double.pi, clockwise: true)
     playIcon.close()
     
@@ -218,10 +223,6 @@ class PlayButtonsView: UIView {
     newGameIconLayer.fillColor = UIColor.gray.cgColor
     
     return newGameIconLayer
-    
-    
-    
-    
   }
   
 }
