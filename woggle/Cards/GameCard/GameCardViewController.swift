@@ -19,22 +19,29 @@ class GameCardViewController: CardViewController {
   let boardViewController: GameboardViewController
   let stopwatchViewController: StopwatchViewController
   let playButtonsViewController: PlayButtonsViewController
-  
-  var boardPanGR: UIPanGestureRecognizer?
-  
   let foundWordsViewController: FoundWordsViewController
+  
+  var watchGestureRecognizer: UITapGestureRecognizer?
+  var boardPanGR: UIPanGestureRecognizer?
+  var playPauseGR: UITapGestureRecognizer?
+  var stopGR: UILongPressGestureRecognizer?
+
   var currentGameInstace: GameInstance?
   
-  var gameTimer: Timer?
+  var displayLinkOne: CADisplayLink?
+  var displayLinkTwo: CADisplayLink?
+  var displayLinkOneTimeElapsed = Double(0)
+  var displayLinkTwoTimeElapsed = Double(0)
   let gameTimeInterval = 0.05
-  let timeUsedPerStep: Double
-  var timeUsedPercent: Double
-  var stopWatchIncrementPercent: Double
+  
+  // MARK: Variables which depend on gameInstance.
+  // Initialised to 0, and then updated with setVaribalesFromCurrentGameInstance
+//  var timeUsedPerStep = Double(0)
+  var timeUsedPercent = Double(0)
+//  var stopWatchIncrementPercent = Double(0)
   
   var gameInProgess = false
-  
-  let tileSqrtFloat: CGFloat
-  
+    
   var selectedTiles = [Int16]()
   var rootTrie: TrieNode?
   
@@ -44,27 +51,21 @@ class GameCardViewController: CardViewController {
     rootTrie = d.provideCurrentSettings().getTrieRoot()
     currentGameInstace = d.provideCurrentSettings().getOrMakeCurrentGame()
     
-    tileSqrtFloat = CGFloat(currentGameInstace!.settings!.tileSqrt)
-    
     // Constants to create and position views
     // TODO: Collect together reused terms
     
     // Fix controllers  for the current views
-    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), tileSqrtFloat: tileSqrtFloat, tilePadding: vD.tilePadding())
+    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), tileSqrtFloat: CGFloat(currentGameInstace!.settings!.tileSqrt), tilePadding: vD.tilePadding())
     
     stopwatchViewController = StopwatchViewController(viewData: vD)
     
     playButtonsViewController = PlayButtonsViewController(viewData: vD)
     foundWordsViewController = FoundWordsViewController(viewData: vD)
     
-    // Figure out angle per second, and then adjust to updates per second.
-    stopWatchIncrementPercent = ((2 * Double.pi) / (currentGameInstace!.settings!.time * 60)) * gameTimeInterval
-    timeUsedPerStep = (currentGameInstace!.settings!.time / 60) * gameTimeInterval
-    timeUsedPercent = currentGameInstace!.timeUsedPercent
-    
     super.init(viewData: vD, delegate: d)
     
-    
+    setVaribalesFromCurrentGameInstance()
+    playButtonsViewController.paintPlayIcon()
     
     // Position views
     boardViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.height - (vD.gameBoardSize() + vD.gameBoardPadding()))
@@ -75,11 +76,14 @@ class GameCardViewController: CardViewController {
     // TODO: At the end of the init I want to get things up.
     boardViewController.createAllTileViews(board: currentGameInstace!.board!)
     
-    // Finally, add gesture recognisers
+    // Add gesture recognisers
     boardPanGR = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
     boardPanGR!.maximumNumberOfTouches = 1
-    
-    
+    playPauseGR = UITapGestureRecognizer(target: self, action: #selector(didTapOnPlayPause(_:)))
+    stopGR = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressStop(_:)))
+    playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
+    playButtonsViewController.stopAddGesture(gesture: stopGR!)
+    stopGR?.minimumPressDuration = 0.1
   }
   
   
@@ -95,8 +99,8 @@ class GameCardViewController: CardViewController {
     
     // TODO: Only add this when a game is in progress.
     
-    let watchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnTime(_:)))
-    stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer)
+    watchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnTime(_:)))
+    stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
     stopwatchViewController.paintSeconds()
   }
   
@@ -104,6 +108,16 @@ class GameCardViewController: CardViewController {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  
+  func setVaribalesFromCurrentGameInstance() {
+    guard currentGameInstace != nil else { print("No game instance"); return }
+    
+//    timeUsedPerStep = (currentGameInstace!.settings!.time / 60) * gameTimeInterval
+    timeUsedPercent = currentGameInstace!.timeUsedPercent
+//    stopWatchIncrementPercent = ((2 * Double.pi) / (currentGameInstace!.settings!.time * 60)) * gameTimeInterval
+  }
+  
   
   
   func stringFromSelectedTiles() -> String {
@@ -139,17 +153,38 @@ class GameCardViewController: CardViewController {
 extension GameCardViewController {
   
   
-  func startGame() {
+  func newGameMain() {
+    print("new game main")
+    // Remove all the tiles from the previous game.
+    boardViewController.removeAllTimeViews()
+    // Get a new game.
+    currentGameInstace = delegate?.provideCurrentSettings().setAndGetNewGame()
+    // Make sure variables are good.
+    setVaribalesFromCurrentGameInstance()
+    // Make new tiles.
+    boardViewController.createAllTileViews(board: currentGameInstace!.board!)
+    // Fix stopwatch
+    stopwatchViewController.resetHand()
+    stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
+    // Fix the icons.
+    playButtonsViewController.paintStopIcon()
+    playButtonsViewController.stopAddGesture(gesture: stopGR!)
+    playButtonsViewController.paintPlayIcon()
+  }
+  
+  
+  func resumeGameMain() {
     boardViewController.gameboardView.displayTileViews()
-    gameTimer = Timer.scheduledTimer(timeInterval: gameTimeInterval, target: self, selector: #selector(Counting), userInfo: nil, repeats: true)
+    displayLinkOne = CADisplayLink(target: self, selector: #selector(Counting))
+    displayLinkOne!.add(to: .current, forMode: .common)
     boardViewController.addGestureRecognizer(recogniser: boardPanGR!)
     playButtonsViewController.paintPauseIcon()
     gameInProgess = true
   }
   
   
-  func pauseGame() {
-    gameTimer?.invalidate()
+  func pauseGameMain() {
+    displayLinkOne?.invalidate()
     boardViewController.gameboardView.hideTileViews()
     playButtonsViewController.paintPlayIcon()
     boardViewController.removeGestureRecognizer(recogniser: boardPanGR!)
@@ -157,11 +192,15 @@ extension GameCardViewController {
   }
   
   
-  func endGame() {
-    gameTimer?.invalidate()
+  func endGameMain() {
+    displayLinkOne?.invalidate()
+    playButtonsViewController.hideStopIcon()
+    playButtonsViewController.paintNewGameIcon()
+    boardViewController.removeGestureRecognizer(recogniser: boardPanGR!)
+    stopwatchViewController.view.removeGestureRecognizer(watchGestureRecognizer!)
+    gameInProgess = false
+    timeUsedPercent = 1
   }
-
-  
 }
 
 
@@ -172,7 +211,7 @@ extension GameCardViewController {
     // TODO: Maybe update this with a custom recogniser.
     // Basically, extend pan to include initial touch.
     
-    let tilePosition = boardViewController.basicTilePositionFromCGPoint(point: sender.location(in: boardViewController.gameboardView))
+    let tilePosition = boardViewController.basicTilePositionFromCGPoint(point: sender.location(in: boardViewController.gameboardView), tileSqrtFloat: CGFloat((delegate?.provideCurrentSettings().tileSqrt)!))
     
     switch sender.state {
     case .began:
@@ -233,29 +272,80 @@ extension GameCardViewController {
   }
   
   
-  @objc func didTapOnTime(_ sender: UIPanGestureRecognizer) {
-    if (timeUsedPercent > 100) {
+  @objc func didTapOnTime(_ sender: UITapGestureRecognizer) {
+    if (timeUsedPercent > 1) {
       // Game is over
-      endGame()
+      endGameMain()
     } else {
       if (gameInProgess) {
-        pauseGame()
+        pauseGameMain()
       } else {
-        startGame()
+        resumeGameMain()
       }
     }
   }
   
+  
+  @objc func didTapOnPlayPause(_ sender: UITapGestureRecognizer) {
+    if gameInProgess {
+      pauseGameMain()
+    } else {
+      if (timeUsedPercent < 1) {
+        resumeGameMain()
+      } else {
+        newGameMain()
+      }
+    }
+  }
+  
+  
+  @objc func longPressingStop() {
+    displayLinkTwoTimeElapsed += displayLinkTwo!.targetTimestamp - displayLinkTwo!.timestamp
+  }
+  
+  
+  @objc func didLongPressStop(_ sender: UILongPressGestureRecognizer) {
+    
+    switch sender.state {
+     
+    case .began:
+      displayLinkTwo = CADisplayLink(target: self, selector: #selector(longPressingStop))
+      displayLinkTwo!.add(to: .current, forMode: .common)
+      playButtonsViewController.animateHighlight()
+      
+    case .changed:
+      break
+      
+    case .ended, .cancelled:
+      displayLinkTwo?.invalidate()
+      playButtonsViewController.removeHighlight()
+      if (displayLinkTwoTimeElapsed > 0.5) {
+        endGameMain()
+        playButtonsViewController.stopRemoveGesture(gesture: stopGR!)
+      }
+      displayLinkTwoTimeElapsed = 0
+      
+    default:
+      break
+    }
+  }
 }
 
 // MARK: Timer functions.
 extension GameCardViewController {
   
   @objc func Counting() {
-    timeUsedPercent = timeUsedPercent + (timeUsedPerStep)
-    stopwatchViewController.incrementHand(percent: stopWatchIncrementPercent)
+    // As the timer for counting is tied to the refresh rate, updating the stopwatch is
+    // done by calculating how much time has passed.
+    let estimate = (displayLinkOne!.targetTimestamp - displayLinkOne!.timestamp)
+    let usedPercent = estimate/(delegate!.provideCurrentSettings().time * 60)
+    displayLinkOneTimeElapsed += estimate
+    timeUsedPercent += usedPercent
+    stopwatchViewController.incrementHand(percent: usedPercent)
 
-    if (timeUsedPercent > 100) { endGame() }
+    if (timeUsedPercent > 1) {
+      endGameMain()
+    }
   }
   
 }

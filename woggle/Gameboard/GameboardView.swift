@@ -32,6 +32,15 @@ class GameboardView: UIView {
   }
   
   
+  func removeAllTileViews() {
+    for tile in tiles.values {
+      tile.disappear(animated: false)
+      tile.removeFromSuperview()
+    }
+    tiles.removeAll()
+  }
+  
+  
   func displayTileViews() {
     for tile in tiles.values {
       tile.displayLetter(animated: true)

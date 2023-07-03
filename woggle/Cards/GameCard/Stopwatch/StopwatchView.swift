@@ -47,6 +47,12 @@ class StopwatchView: UIView {
   func addSeconds() {
     drawSeconds(angle: secondsAngle)
   }
+  
+  
+  func resetSeconds() {
+    secondsLayer.transform = CATransform3DMakeRotation(Double.pi, 0.0, 0.0, 1.0)
+  }
+  
 
   
   func incrementSeconds(updateAngleIncrement: Double) {
@@ -121,8 +127,6 @@ extension StopwatchView {
     secondsLayer.fillColor = UIColor.gray.cgColor
     secondsLayer.strokeColor = UIColor.black.cgColor
     secondsLayer.lineWidth = 1
-    
-//    secondsLayer.transform = CATransform3DMakeRotation(Double.pi, 0.0, 0.0, 1.0)
     
     layer.addSublayer(secondsLayer)
   }

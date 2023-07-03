@@ -14,6 +14,21 @@ extension Settings {
     return self.managedObjectContext!
   }
   
+  
+  
+  func getCurrentGame() -> GameInstance? {
+    return self.currentGame
+  }
+  
+  
+  func setAndGetNewGame() -> GameInstance {
+    self.currentGame = GameInstance(context: self.managedObjectContext!)
+    self.currentGame!.populateBoard()
+    return self.currentGame!
+  }
+  
+  
+  
   func getOrMakeCurrentGame() -> GameInstance {
     if (self.currentGame == nil) {
       self.currentGame = GameInstance(context: self.managedObjectContext!)

@@ -65,6 +65,11 @@ class TileView: UIView {
   }
   
   
+  deinit {
+    print("tile gone")
+  }
+  
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

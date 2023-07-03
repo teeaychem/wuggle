@@ -25,24 +25,10 @@ class GameboardViewController: UIViewController {
   let boardSize: CGFloat
   let gameboardView: GameboardView
   
-  // TODO: I don't think there's any need to store these.
-  // The only time these should be used are when making tiles.
-  // And, as I only really care about adding all tiles at once,
-  // these values can be calculated when inserting the tiles.
-  let tileWidth: CGFloat
-  let tilePadding: CGFloat
-  let tileSqrtFloat: CGFloat
-  
   init(boardSize bS: CGFloat, tileSqrtFloat tSqrtF: CGFloat, tilePadding tP: CGFloat) {
     
     // Constants for placing elements
     boardSize = bS
-    tileSqrtFloat = tSqrtF
-    tilePadding = boardSize * 0.01
-    tileWidth = (boardSize - (tilePadding * (tileSqrtFloat + 1))) / tileSqrtFloat
-    
-//    (boardSize / tileSqrtFloat) * 0.95
-
 
     // Setup the view
     gameboardView = GameboardView(boardSize: bS)
@@ -91,9 +77,15 @@ class GameboardViewController: UIViewController {
   
   func createAllTileViews(board: Board) {
     
+    removeAllTimeViews()
+    
+    let tileSqrtFloat = sqrt(Double(board.tiles!.count))
+    let tilePadding = boardSize * 0.01
+    let tileWidth = (boardSize - (tilePadding * (tileSqrtFloat + 1))) / tileSqrtFloat
+    
     for tile in board.tiles! {
       let tileTrueForm = tile as! Tile
-      let newTile = createTileView(tile: tileTrueForm)
+      let newTile = createTileView(tile: tileTrueForm, tileWidth: tileWidth, tilePadding: tilePadding)
       let tileKey = tileLocationCombine(x: tileTrueForm.col, y: tileTrueForm.row)
       gameboardView.addTileSubview(tileKey: tileKey, tileView: newTile)
       newTile.displayTile()
@@ -101,7 +93,12 @@ class GameboardViewController: UIViewController {
   }
   
   
-  func createTileView(tile: Tile) -> TileView {
+  func removeAllTimeViews() {
+    gameboardView.removeAllTileViews()
+  }
+  
+  
+  func createTileView(tile: Tile, tileWidth: CGFloat, tilePadding: CGFloat) -> TileView {
     // Subract 1 as Tile starts count from 1, not 0.
     let xPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.col - 1)
     let yPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.row - 1)
@@ -127,7 +124,7 @@ class GameboardViewController: UIViewController {
   }
 
 
-  func basicTilePositionFromCGPoint(point: CGPoint) -> Int16? {
+  func basicTilePositionFromCGPoint(point: CGPoint, tileSqrtFloat: CGFloat) -> Int16? {
     // Transforms a position point to a tile point.
     // Optional, as two checks:
     // 1. Going going outside the board.

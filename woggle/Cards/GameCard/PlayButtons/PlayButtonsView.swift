@@ -16,18 +16,18 @@ import UIKit
 class PlayButtonsView: UIView {
   
   // Some size/position constants
-  let buttonSize: CGSize
-  let xPadding: CGFloat
-  let subButtonWidth: CGFloat
-  let yPadding: CGFloat
-  let iconIndent: CGFloat
+  private let buttonSize: CGSize
+  private let xPadding: CGFloat
+  private let subButtonWidth: CGFloat
+  private let yPadding: CGFloat
+  private let iconIndent: CGFloat
   
   // Two subviews for playPause/Stop buttons
   let playPauseView: UIView
-  var playPauseLayer = CAShapeLayer()
+  private var playPauseLayer = CAShapeLayer()
   
   let stopView: UIView
-  var stopLayer = CAShapeLayer()
+  private var stopLayer = CAShapeLayer()
   
   init(viewData vD: CardViewData) {
     
@@ -71,7 +71,6 @@ class PlayButtonsView: UIView {
   
   func removePlayPauseIcon() {
     playPauseView.layer.sublayers?.removeAll()
-    print("removed")
   }
   
   
@@ -214,7 +213,6 @@ class PlayButtonsView: UIView {
     newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.5), y: forView.frame.height - iconArcIndent), radius: iconCornerRadius, startAngle: 0, endAngle: Double.pi, clockwise: true)
     newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.5 - iconCornerRadius * 2), y: (forView.frame.height * 0.5) + iconCornerRadius * 2), radius: iconCornerRadius, startAngle: 0, endAngle: Double.pi * -0.5, clockwise: false)
     newGameIcon.close()
-    
     
     newGameIconLayer.path = newGameIcon.cgPath
     newGameIconLayer.lineCap = .round
