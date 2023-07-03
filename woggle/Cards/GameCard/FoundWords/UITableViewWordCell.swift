@@ -10,21 +10,11 @@ import UIKit
 
 class UITableViewWordCell : UITableViewCell {
   
-  private let wordText: String
-  private let width : CGFloat
-  private var WordTextLabel = UILabel()
-  private var PointsLabel = UILabel()
-  
   init(style s : UITableViewCell.CellStyle, reuseIdentifier r: String?, word w: GameWord, width gw: CGFloat, height h: CGFloat, shadeWords sh: Bool) {
-    wordText = w.value!.capitalized
-    width = gw
     
     super.init(style: s, reuseIdentifier: r)
     
     backgroundColor = UIColor.clear
-    
-    let labelFontSize =  h*0.8
-    let fontYOffset = h - labelFontSize/2 - (h - labelFontSize)/2
     
     var wordTextAttributes: [NSAttributedString.Key : Any]
     
@@ -33,32 +23,29 @@ class UITableViewWordCell : UITableViewCell {
         NSAttributedString.Key.strokeColor : reguardTextShaded,
         NSAttributedString.Key.foregroundColor : reguardTextShaded,
         NSAttributedString.Key.strokeWidth : -1,
-        NSAttributedString.Key.font : UIFont(name: textFontName, size: labelFontSize)!
+        NSAttributedString.Key.font : UIFont(name: textFontName, size: h)!
         ] as [NSAttributedString.Key : Any]
     } else {
       wordTextAttributes = [
         NSAttributedString.Key.strokeColor : regularText,
         NSAttributedString.Key.foregroundColor : regularText,
         NSAttributedString.Key.strokeWidth : -1,
-        NSAttributedString.Key.font : UIFont(name: textFontName, size: labelFontSize)!
+        NSAttributedString.Key.font : UIFont(name: textFontName, size: h)!
         ] as [NSAttributedString.Key : Any]
     }
     
-    WordTextLabel = UILabel(frame: bounds)
-    let NSwordText = NSMutableAttributedString(string:  wordText, attributes: wordTextAttributes)
+    let WordTextLabel = UILabel(frame: CGRect(origin: CGPoint(x: gw * 0.05, y: 0), size: CGSize(width: gw * 0.8, height: h)))
+    let NSwordText = NSMutableAttributedString(string: w.value!.capitalized, attributes: wordTextAttributes)
     WordTextLabel.attributedText = NSwordText
     
-    WordTextLabel.layer.position.y = fontYOffset
-    WordTextLabel.layer.position.x = layer.position.x + width * 0.05
-    addSubview(WordTextLabel)
-    
-    PointsLabel = UILabel(frame: bounds)
     let NSLabelText = NSMutableAttributedString(string: String(w.getPoints()), attributes: wordTextAttributes)
-    PointsLabel.attributedText = NSLabelText
-    let pointsLabelWidth = NSLabelText.boundingRect(with: CGSize(width: gw, height: frame.height), options: .usesLineFragmentOrigin, context: nil).width
+    let PointsLabel = UILabel(frame: CGRect(origin: CGPoint(x: gw - (gw * 0.15), y: 0)  , size: CGSize(width: gw * 0.10, height: h)))
     
-    PointsLabel.layer.position.y = fontYOffset
-    PointsLabel.layer.position.x = layer.position.x + (width - (pointsLabelWidth + width * 0.10))
+    PointsLabel.attributedText = NSLabelText
+    // Sees to align nicely.
+    PointsLabel.textAlignment = .center
+    
+    addSubview(WordTextLabel)
     addSubview(PointsLabel)
   }
   

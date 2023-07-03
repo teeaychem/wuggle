@@ -5,6 +5,12 @@
 //  Created by sparkes on 2023/06/28.
 //
 
+// TODO: A few things to implement.
+// 1. For the newGameIcon, this should be animated in some way to draw attention when available.
+// 2. All icons should have animations for initial paint.
+// 3. Rework the iconIndent constant. Icons are drawn relative to a view, so ideally the indent is fixed relative to the view.
+// 4. Along these lines, 
+
 import UIKit
 
 class PlayButtonsView: UIView {

@@ -37,7 +37,6 @@ class CardStackViewController: UIViewController {
     
     self.embed(testCardController, inView: self.view)
     testCardController.view.frame.origin = CGPoint(x: 0, y: 50)
-    
   }
   
   required init?(coder: NSCoder) {

@@ -48,14 +48,10 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
     let cellIdentifier = word.value!
     let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
     ?? UITableViewWordCell(style: .default, reuseIdentifier: cellIdentifier, word: word, width: listDimensions.width, height: rowHeight, shadeWords: false)
+    // To disable highlighting cell when tapped.
+    cell.selectionStyle = .none
     return cell
   }
-  
-  
-  // This fades a row if it's been selected. Should figure out how to disable this.
-//  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    tableView.deselectRow(at: indexPath, animated: true)
-//  }
   
   // Later, I should add some kind of gradient, and this is one way to do it.
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -83,6 +79,7 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
       reloadData()
     }
       scrollToRow(at: [0, wordIndex], at: .middle, animated: true)
+    // TODO: Add some visial flair, at the moment it's not clear what this is doing.
   }
   
   public func listUpdateAndScroll(updateList: [GameWord]) {
