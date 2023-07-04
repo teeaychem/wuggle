@@ -23,7 +23,7 @@ class FoundWordsViewController: UIViewController {
     wordViewSize = CGSize(width: wordViewWidth, height: wordViewHeight)
     fontSize = wordViewSize.height * 0.15
     
-    foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth - 2 * vD.tilePadding(), height: wordViewHeight - 2 * vD.tilePadding()), fontSize: fontSize)
+    foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth - 2 * vD.tilePadding(), height: wordViewHeight - 2 * vD.tilePadding()), rowHieght: fontSize)
     
     super.init(nibName: nil, bundle: nil)
     

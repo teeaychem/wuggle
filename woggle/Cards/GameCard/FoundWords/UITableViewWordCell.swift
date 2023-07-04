@@ -30,7 +30,7 @@ class UITableViewWordCell : UITableViewCell {
         NSAttributedString.Key.strokeColor : regularText,
         NSAttributedString.Key.foregroundColor : regularText,
         NSAttributedString.Key.strokeWidth : -1,
-        NSAttributedString.Key.font : UIFont(name: textFontName, size: h)!
+        NSAttributedString.Key.font : UIFont(name: textFontName, size: h * 0.8)!
         ] as [NSAttributedString.Key : Any]
 //    }
     

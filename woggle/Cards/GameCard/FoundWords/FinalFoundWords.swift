@@ -25,11 +25,11 @@ class FinalFoundWordsViewController: UIViewController {
     wordViewSize = CGSize(width: wordViewWidth, height: wordViewHeight)
     fontSize = wordViewSize.height * 0.05
     
-    foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight), fontSize: fontSize)
+    foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight), rowHieght: fontSize)
     foundWordView.frame.origin = CGPoint(x: vD.tilePadding(), y: vD.tilePadding())
     
     
-    noseeWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight), fontSize: fontSize)
+    noseeWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight), rowHieght: fontSize)
     noseeWordView.frame.origin = CGPoint(x: vD.tilePadding() * 2 + wordViewWidth, y: vD.tilePadding())
     
     foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
@@ -58,8 +58,9 @@ class FinalFoundWordsViewController: UIViewController {
   
   
   func addWordsAsFound(words: [String]) {
+    let sorted = words.sorted()
     
-    for word in words {
+    for word in sorted {
       foundWordView.updateAndScroll(word: word)
     }
   }

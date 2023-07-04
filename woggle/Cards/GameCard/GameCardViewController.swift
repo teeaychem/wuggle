@@ -139,10 +139,7 @@ class GameCardViewController: CardViewController {
   
   
   func processWord(word w: String) {
-    let wordObject = GameWord(context: delegate!.currentSettings().returnContext())
-    wordObject.value = w
     foundWordsViewController.update(word: w)
-    delegate!.currentGameInstance()!.addToFoundWords(wordObject)
     if delegate?.currentGameInstance()?.foundWordsSet == nil {
       delegate?.currentGameInstance()?.foundWordsSet = [w]
     } else {
@@ -270,7 +267,7 @@ extension GameCardViewController {
       let wordAttempt = stringFromSelectedTiles()
       let endTrie = rootTrie!.traceString(word: wordAttempt)
       if (endTrie != nil && endTrie!.isWord) {
-        processWord(word: wordAttempt)
+        processWord(word: wordAttempt.replacingOccurrences(of: "!", with: "Qu"))
       }
       
       // Clean up the view by deselecting tiles.

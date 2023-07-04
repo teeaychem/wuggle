@@ -89,7 +89,7 @@ extension GameInstance {
       
       // If this is a word, update the word list.
       if trieNode.isWord {
-        wordSet.insert(wordString)
+        wordSet.insert(wordString.replacingOccurrences(of: "!", with: "Qu"))
       }
       
       // Restrict tiles to search.

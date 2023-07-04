@@ -12,19 +12,17 @@ class FoundWordView: UITableView {
   var wordList =  [String]()
   
   private let listDimensions: CGSize
-  private let fontSize: CGFloat
   
-  init(listDimensions lD: CGSize, fontSize fS: CGFloat) {
+  init(listDimensions lD: CGSize, rowHieght rH: CGFloat) {
     
     listDimensions = lD
-    fontSize = fS
     
     super.init(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: listDimensions), style: .plain)
     
     separatorStyle = .none
     dataSource = self
     delegate = self
-    rowHeight = UIFont(name: textFontName, size: fontSize)!.lineHeight
+    rowHeight = rH
   }
   
   required init?(coder: NSCoder) {
