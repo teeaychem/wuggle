@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       if result.count > 0 {
         print("Tries found")
+        
       } else {
         print("New trie created")
         let newTrie = TrieNode(context: context)

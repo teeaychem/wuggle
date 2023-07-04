@@ -72,4 +72,28 @@ class FinalFoundWordsViewController: UIViewController {
       noseeWordView.updateAndScroll(word: word)
     }
   }
+  
+  func addNoseeWordsDiff(noseeWords: Set<String>, seeWords: [String]) {
+    // Differentiate nosee from see words.
+    // Sorts both nosee and see, then works through nosee.
+    // As both sets are sorted, we'll for sure get to the ith seeSorted in nosee
+    // before the ith + 1.
+    // However, need an extra element to ensure seeIndex doesn't go out of range.
+    let noseeSorted = noseeWords.sorted()
+    let seeSorted = (seeWords + ["Z!"]).sorted()
+    
+    var seeIndex = 0
+    
+    for seeWord in noseeSorted {
+      if (seeWord == seeSorted[seeIndex]) {
+        seeIndex += 1
+        print("found")
+        // Shade
+        noseeWordView.updateNoScroll(word: seeWord)
+      } else {
+        noseeWordView.updateNoScroll(word: seeWord)
+      }
+    }
+  }
+
 }

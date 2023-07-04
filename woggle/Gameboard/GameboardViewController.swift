@@ -158,7 +158,15 @@ class GameboardViewController: UIViewController {
   
   func removeGestureRecognizer(recogniser: UIGestureRecognizer) {
     gameboardView.removeGestureRecognizer(recogniser)
-    
+  }
+  
+  
+  func removeAllGestureRecognizers() {
+    if gameboardView.gestureRecognizers != nil {
+      for gr in gameboardView.gestureRecognizers! {
+        gameboardView.removeGestureRecognizer(gr)
+      }
+    }
   }
   
   

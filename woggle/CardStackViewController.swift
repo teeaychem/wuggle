@@ -31,12 +31,18 @@ class CardStackViewController: UIViewController {
 
     
     super.init(nibName: nil, bundle: nil)
-    
-    let testViewData = CardViewData(name: "test", width: width, colour: UIColor.gray.cgColor)
-    let testCardController = GameCardViewController(viewData: testViewData, delegate: self)
-    
-    self.embed(testCardController, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: 50), size: testViewData.cardSize))
-    testCardController.view.frame.origin = CGPoint(x: 0, y: 50)
+
+    let settCardVD = CardViewData(name: "sett", width: width, colour: UIColor.white.cgColor)
+    let statCardVD = CardViewData(name: "sett", width: width, colour: UIColor.darkGray.cgColor)
+    let gameCardVD = CardViewData(name: "game", width: width, colour: UIColor.gray.cgColor)
+
+    let settCardC = CardViewController(viewData: settCardVD, delegate: self)
+    let statCardC = CardViewController(viewData: statCardVD, delegate: self)
+    let gameCardC = GameCardViewController(viewData: gameCardVD, delegate: self)
+
+    self.embed(statCardC, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: 50), size: statCardVD.cardSize))
+    self.embed(settCardC, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: 100), size: settCardVD.cardSize))
+    self.embed(gameCardC, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: 150), size: gameCardVD.cardSize))
   }
   
   required init?(coder: NSCoder) {

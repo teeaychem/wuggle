@@ -25,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // TODO: Revise so this either loads primary settings or creates primary settings.
     let testSettings = Settings(context: context)
 
+
     window.rootViewController = CardStackViewController(settings: testSettings)
     self.window = window
     window.makeKeyAndVisible()

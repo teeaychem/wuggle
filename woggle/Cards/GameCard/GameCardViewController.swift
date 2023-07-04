@@ -184,6 +184,7 @@ extension GameCardViewController {
     boardViewController.gameboardView.displayTileViews()
     displayLinkOne = CADisplayLink(target: self, selector: #selector(Counting))
     displayLinkOne!.add(to: .current, forMode: .common)
+    boardViewController.removeAllGestureRecognizers()
     boardViewController.addGestureRecognizer(recogniser: boardPanGR!)
     playButtonsViewController.paintPauseIcon()
     gameInProgess = true
@@ -194,7 +195,7 @@ extension GameCardViewController {
     displayLinkOne?.invalidate()
     boardViewController.gameboardView.hideTileViews()
     playButtonsViewController.paintPlayIcon()
-    boardViewController.removeGestureRecognizer(recogniser: boardPanGR!)
+    boardViewController.removeAllGestureRecognizers()
     gameInProgess = false
   }
   
@@ -210,7 +211,8 @@ extension GameCardViewController {
     finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
     self.embed(finalWordsViewController!, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding() + viewData.gameBoardSize() * 0.075, y: viewData.height - viewData.gameBoardSize() * 0.925 - viewData.gameBoardPadding()), size: CGSize(width: viewData.gameBoardSize() * 0.85, height: viewData.gameBoardSize() * 0.85)))
     finalWordsViewController?.addWordsAsFound(words: delegate!.currentGameInstance()!.foundWordsSet!)
-    finalWordsViewController?.addWordsAsNosee(words: (delegate?.currentGameInstance()?.findAllWords())!)
+    finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate?.currentGameInstance()?.findAllWords())!, seeWords: delegate!.currentGameInstance()!.foundWordsSet!)
+    boardViewController.addGestureRecognizer(recogniser: UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBoard)))
   }
 }
 
@@ -339,6 +341,23 @@ extension GameCardViewController {
     default:
       break
     }
+  }
+  
+  
+  @objc func didLongPressBoard(_ sender: UILongPressGestureRecognizer) {
+    
+    switch sender.state {
+      
+    case .began:
+      finalWordsViewController!.view.layer.opacity = 0
+    case .ended, .cancelled:
+      finalWordsViewController!.view.layer.opacity = 1
+    default:
+      break
+    }
+    
+    
+    
   }
 }
 

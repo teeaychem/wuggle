@@ -33,7 +33,6 @@ class CardViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    view.frame.size = CGSize(width: viewData.width, height: viewData.height)
   }
   
   

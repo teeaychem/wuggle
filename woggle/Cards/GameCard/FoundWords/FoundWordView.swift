@@ -63,6 +63,12 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
     return false
   }
   
+
+  public func updateNoScroll(word: String) {
+    wordList.append(word)
+    reloadData()
+  }
+  
   
   public func updateAndScroll(word: String) {
     var wordIndex: Int
