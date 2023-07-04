@@ -7,6 +7,11 @@
 
 import Foundation
 
+func getCornerRadius(width w: CGFloat) -> CGFloat {
+  return w * (1/30)
+}
+
+
 func distributionSelect(dist: [Double]) -> Int {
   // Assumes distibution is ordered from smallest to largest
   
