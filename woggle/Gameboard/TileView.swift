@@ -65,56 +65,8 @@ class TileView: UIView {
   }
   
   
-  deinit {
-    print("tile gone")
-  }
-  
-  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-  
-  
-  func rotateToOrientation(orientation: String) {
-    
-    if orientation == "left" {
-      tileRotateFromTo(rotation: -angle + CGFloat.pi/2, toAngle: CGFloat.pi/2)
-    } else if orientation == "right" {
-      tileRotateFromTo(rotation: -angle + -CGFloat.pi/2, toAngle: -CGFloat.pi/2)
-    } else if orientation == "flip" {
-      tileRotateFromTo(rotation: -angle + CGFloat.pi, toAngle: CGFloat.pi)
-    } else {
-      tileRotateFromTo(rotation: -angle, toAngle: 0)
-    }
-  }
-  
-  
-  func tileRotateFromTo(rotation r: CGFloat, toAngle ta: CGFloat) {
-    
-    var ra = r.truncatingRemainder(dividingBy: .pi*2)
-    if (ra < -.pi) {
-      ra += .pi*2
-    } else if ra > .pi {
-      ra -= .pi*2
-    }
-    
-    transform = transform.rotated(by: r)
-    
-    CATransaction.begin()
-    CATransaction.setAnimationDuration(tileAnimDuration)
-    let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
-    rotation.fromValue = angle
-    rotation.byValue = ra
-    rotation.duration = 0.5
-    rotation.isCumulative = false
-    rotation.timingFunction = CAMediaTimingFunction(controlPoints: 0.5, 0.01, 0.5, 1.5)
-    CATransaction.setCompletionBlock {
-      self.layer.removeAllAnimations()
-    }
-    CATransaction.commit()
-    
-    layer.add(rotation, forKey: "rotationAnimation")
-    angle = ta
   }
   
   

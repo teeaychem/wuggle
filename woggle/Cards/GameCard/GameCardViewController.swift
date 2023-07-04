@@ -33,7 +33,6 @@ class GameCardViewController: CardViewController {
   var displayLinkTwo: CADisplayLink?
   var displayLinkOneTimeElapsed = Double(0)
   var displayLinkTwoTimeElapsed = Double(0)
-  let gameTimeInterval = 0.05
   
   // MARK: Variables which depend on gameInstance.
   // Initialised to 0, and then updated with setVaribalesFromCurrentGameInstance
@@ -56,7 +55,7 @@ class GameCardViewController: CardViewController {
     // TODO: Collect together reused terms
     
     // Fix controllers  for the current views
-    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), tileSqrtFloat: CGFloat(currentGameInstace!.settings!.tileSqrt), tilePadding: vD.tilePadding())
+    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), tilePadding: vD.tilePadding())
     
     stopwatchViewController = StopwatchViewController(viewData: vD)
     
@@ -76,7 +75,7 @@ class GameCardViewController: CardViewController {
 //    foundWordsViewController.view.frame.origin =
     
     // TODO: At the end of the init I want to get things up.
-    boardViewController.createAllTileViews(board: currentGameInstace!.board!)
+    boardViewController.createAllTileViews(board: delegate!.provideCurrentSettings().currentGame!.board!)
     
     // Add gesture recognisers
     boardPanGR = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
@@ -161,13 +160,13 @@ extension GameCardViewController {
 
 //    foundWordsViewController = nil
     // Remove all the tiles from the previous game.
-    boardViewController.removeAllTimeViews()
+    boardViewController.removeAllTileViews()
     // Get a new game.
     currentGameInstace = delegate?.provideCurrentSettings().setAndGetNewGame()
     // Make sure variables are good.
     setVaribalesFromCurrentGameInstance()
     // Make new tiles.
-    boardViewController.createAllTileViews(board: currentGameInstace!.board!)
+    boardViewController.createAllTileViews(board: delegate!.provideCurrentSettings().getCurrentGame()!.board!)
     // Fix stopwatch
     stopwatchViewController.resetHand()
     stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)

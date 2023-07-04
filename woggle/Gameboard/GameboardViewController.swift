@@ -25,7 +25,7 @@ class GameboardViewController: UIViewController {
   let boardSize: CGFloat
   let gameboardView: GameboardView
   
-  init(boardSize bS: CGFloat, tileSqrtFloat tSqrtF: CGFloat, tilePadding tP: CGFloat) {
+  init(boardSize bS: CGFloat, tilePadding tP: CGFloat) {
     
     // Constants for placing elements
     boardSize = bS
@@ -76,7 +76,7 @@ class GameboardViewController: UIViewController {
   
   func createAllTileViews(board: Board) {
     
-    removeAllTimeViews()
+    removeAllTileViews()
     
     let tileSqrtFloat = sqrt(Double(board.tiles!.count))
     let tilePadding = boardSize * 0.01
@@ -92,7 +92,7 @@ class GameboardViewController: UIViewController {
   }
   
   
-  func removeAllTimeViews() {
+  func removeAllTileViews() {
     gameboardView.removeAllTileViews()
   }
   

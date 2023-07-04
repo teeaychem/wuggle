@@ -22,6 +22,9 @@ extension Settings {
   
   
   func setAndGetNewGame() -> GameInstance {
+    if (self.currentGame != nil) {
+      self.managedObjectContext?.delete(self.currentGame!)
+    }
     self.currentGame = GameInstance(context: self.managedObjectContext!)
     self.currentGame!.populateBoard()
     return self.currentGame!
@@ -31,8 +34,7 @@ extension Settings {
   
   func getOrMakeCurrentGame() -> GameInstance {
     if (self.currentGame == nil) {
-      self.currentGame = GameInstance(context: self.managedObjectContext!)
-      self.currentGame!.populateBoard()
+      return setAndGetNewGame()
     }
     return self.currentGame!
   }

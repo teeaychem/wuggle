@@ -19,26 +19,29 @@ class FinalFoundWordsViewController: UIViewController {
   init(viewData vD: CardViewData) {
     
     // TODO: Fix this
-    wordViewWidth = (vD.width - (3 * vD.gameBoardPadding())) * 0.5
-    wordViewHeight = vD.gameBoardSize() * 0.9
+    wordViewWidth = (vD.gameBoardSize() * 0.85 - (3 * vD.tilePadding())) * 0.5
+    wordViewHeight = vD.gameBoardSize() * 0.85 - (2 * vD.tilePadding())
     
     wordViewSize = CGSize(width: wordViewWidth, height: wordViewHeight)
     fontSize = wordViewSize.height * 0.15
     
+    foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight))
+    foundWordView.frame.origin = CGPoint(x: vD.tilePadding(), y: vD.tilePadding())
     
-//    background = UIView(frame: CGRect(origin: CGPoint(x: vD.gameBoardPadding() + vD.gameBoardSize() * 0.075, y: vD.height - (vD.gameBoardPadding() + vD.gameBoardSize() * 0.925)), size: CGSize(width: vD.gameBoardSize() * 0.85, height: vD.gameBoardSize() * 0.85)))
+    noseeWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight))
+    noseeWordView.frame.origin = CGPoint(x: vD.tilePadding() * 2 + wordViewWidth, y: vD.tilePadding())
     
-    
-    
-    
-    foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth - 2 * vD.tilePadding(), height: wordViewHeight - 2 * vD.tilePadding()))
-    noseeWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth - 2 * vD.tilePadding(), height: wordViewHeight - 2 * vD.tilePadding()))
+    foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
+    noseeWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
+    foundWordView.backgroundColor = UIColor.lightGray
+    noseeWordView.backgroundColor = UIColor.lightGray
     
     super.init(nibName: nil, bundle: nil)
     
     view.backgroundColor = UIColor.darkGray
     view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
   }
+  
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -48,11 +51,8 @@ class FinalFoundWordsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = UIColor.red
+    view.addSubview(foundWordView)
+    view.addSubview(noseeWordView)
+
   }
-  
-  deinit {
-    print("final goodbye")
-  }
-  
 }

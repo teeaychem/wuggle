@@ -2,13 +2,13 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Board" representedClassName="Board" syncable="YES" codeGenerationType="class">
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="foundWords" toMany="YES" deletionRule="Nullify" destinationEntity="GameWord" inverseName="inBoard" inverseEntity="GameWord"/>
+        <relationship name="foundWords" toMany="YES" deletionRule="Cascade" destinationEntity="GameWord" inverseName="inBoard" inverseEntity="GameWord"/>
         <relationship name="settings" maxCount="1" deletionRule="Nullify" destinationEntity="GameInstance" inverseName="board" inverseEntity="GameInstance"/>
-        <relationship name="tiles" toMany="YES" deletionRule="Nullify" destinationEntity="Tile" inverseName="board" inverseEntity="Tile"/>
+        <relationship name="tiles" toMany="YES" deletionRule="Cascade" destinationEntity="Tile" inverseName="board" inverseEntity="Tile"/>
     </entity>
     <entity name="GameInstance" representedClassName="GameInstance" syncable="YES" codeGenerationType="class">
         <attribute name="timeUsedPercent" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
+        <relationship name="board" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="currentGame" inverseEntity="Settings"/>
     </entity>
     <entity name="GameWord" representedClassName="GameWord" syncable="YES" codeGenerationType="class">
