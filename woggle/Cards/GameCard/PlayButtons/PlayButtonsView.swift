@@ -83,7 +83,7 @@ class PlayButtonsView: UIView {
     // A line goes to the desired point, minus the desired corner radius.
     // To get the corner we then place a circle by adjusting the current point to accomodate the radius.
     
-    // Oops, it's already available as an construction.
+    // Ah, it's already available.
     // I wonder if it works the same way…
     // Not really, there's no need to explicitly add lines between arcs
     // See makeNewGameIcon
@@ -146,8 +146,6 @@ class PlayButtonsView: UIView {
     // Initial angle is pi.
     // Drawing an equalateral triangle, so each arc will be 2pi/3
     // Then, the next point is (r cos(angle), r sin(angle) offset by target point and radius.
-    
-    // But there's no constuction for triangles…
     let iconCornerRadius = forView.layer.cornerRadius * 0.5
   
     let playIcon = UIBezierPath()

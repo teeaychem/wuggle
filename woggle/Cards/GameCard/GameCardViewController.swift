@@ -56,9 +56,7 @@ class GameCardViewController: CardViewController {
     
     // Fix controllers  for the current views
     boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), tilePadding: vD.tilePadding())
-    
     stopwatchViewController = StopwatchViewController(viewData: vD)
-    
     playButtonsViewController = PlayButtonsViewController(viewData: vD)
     foundWordsViewController = FoundWordsViewController(viewData: vD)
     
@@ -67,12 +65,6 @@ class GameCardViewController: CardViewController {
     setVaribalesFromCurrentGameInstance()
     playButtonsViewController.paintPlayIcon()
     playButtonsViewController.paintStopIcon()
-    
-    // Position views
-//    boardViewController.view.frame.origin =
-//    stopwatchViewController.view.frame.origin =
-//    playButtonsViewController.view.frame.origin = CGPoint(x: (2 * vD.gameBoardPadding() + vD.stopWatchSize()), y: (vD.gameBoardPadding() + vD.statusBarHeight))
-//    foundWordsViewController.view.frame.origin =
     
     // TODO: At the end of the init I want to get things up.
     boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)

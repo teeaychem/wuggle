@@ -12,7 +12,9 @@ class CardViewController: UIViewController {
   weak var delegate: CardStackDelegate?
   
   let viewData: CardViewData
-  let card: CardView
+  let cardView: CardView
+  
+  let statusBarView: StatusBarView
   
   // displayViews collects the views which should only be shown when the card is displayed.
   var displayViews = [UIView]()
@@ -20,8 +22,9 @@ class CardViewController: UIViewController {
   
   init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
     viewData = vD
-    card = CardView(cardWidth: viewData.width, cardColour: viewData.colour)
+    cardView = CardView(cardWidth: viewData.width, cardColour: viewData.colour)
     delegate = d
+    statusBarView = StatusBarView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: viewData.width, height: viewData.statusBarHeight)))
     
     super.init(nibName: nil, bundle: nil)
     view.frame.size.width = vD.width
@@ -41,12 +44,18 @@ class CardViewController: UIViewController {
     
     // So, subviews need to be added after viewDidLoad.
     // If this doesn't happen, then gestures are broken.
-    view.addSubview(card)
+    view.addSubview(cardView)
+    cardView.addSubview(statusBarView)
   }
   
   
   func specificSetup() {
     // Called by default, and specific in subclasses by overriding.
+  }
+  
+  
+  func addGestureToStatusBar(gesture: UIGestureRecognizer) {
+    statusBarView.addGestureRecognizer(gesture)
   }
   
   required init?(coder: NSCoder) {

@@ -18,6 +18,7 @@
 		57BADD842A4A45F3009074DF /* FoundWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD832A4A45F3009074DF /* FoundWordView.swift */; };
 		57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */; };
 		57BADD882A4A4E55009074DF /* GameWordExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD872A4A4E55009074DF /* GameWordExtension.swift */; };
+		57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3732A5481150097D1D2 /* StatusBarView.swift */; };
 		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
 		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
 		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
@@ -80,6 +81,7 @@
 		57BADD832A4A45F3009074DF /* FoundWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundWordView.swift; sourceTree = "<group>"; };
 		57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewWordCell.swift; sourceTree = "<group>"; };
 		57BADD872A4A4E55009074DF /* GameWordExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWordExtension.swift; sourceTree = "<group>"; };
+		57E2F3732A5481150097D1D2 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
 		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
 		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
@@ -171,9 +173,18 @@
 			path = FoundWords;
 			sourceTree = "<group>";
 		};
+		57E2F3722A54810A0097D1D2 /* StatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				57E2F3732A5481150097D1D2 /* StatusBarView.swift */,
+			);
+			path = StatusBar;
+			sourceTree = "<group>";
+		};
 		57EB7A3F2A47817C00BCA44B /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				57E2F3722A54810A0097D1D2 /* StatusBar */,
 				57EB7A4E2A479C2D00BCA44B /* CardViewData.swift */,
 				57EB7A482A478BF500BCA44B /* CardViewController.swift */,
 				57EF4B6D2A4665D8008C57FF /* CardView.swift */,
@@ -210,6 +221,7 @@
 				57EB7A572A47A99D00BCA44B /* UIRelated.swift */,
 				57EF4B6F2A46670D008C57FF /* MiscXFunctions.swift */,
 				57EB7A532A47A7FC00BCA44B /* tileText.swift */,
+				57EF4B792A466F47008C57FF /* MiscFunctions.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -251,7 +263,6 @@
 				57EB7A522A47A7F000BCA44B /* Misc */,
 				57EB7A412A47820900BCA44B /* Gameboard */,
 				57EB7A3F2A47817C00BCA44B /* Cards */,
-				57EF4B792A466F47008C57FF /* MiscFunctions.swift */,
 				57EF4B742A466BA4008C57FF /* Extensions */,
 				57EF4B712A466B7B008C57FF /* Resources */,
 				57EF4B6B2A466528008C57FF /* CardStackViewController.swift */,
@@ -444,6 +455,7 @@
 			files = (
 				57EB7A542A47A7FC00BCA44B /* tileText.swift in Sources */,
 				57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */,
+				57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */,
 				57EB7A4F2A479C2D00BCA44B /* CardViewData.swift in Sources */,
 				5735DD3F2A4E4B560071B29B /* FoundWordsViewController.swift in Sources */,
 				57455B432A4CFFA40019FFB5 /* PlayButtonsView.swift in Sources */,
