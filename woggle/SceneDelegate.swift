@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // TODO: Revise so this either loads primary settings or creates primary settings.
-    var testSettings = Settings(context: context)
+    let testSettings = Settings(context: context)
 
     window.rootViewController = CardStackViewController(settings: testSettings)
     self.window = window

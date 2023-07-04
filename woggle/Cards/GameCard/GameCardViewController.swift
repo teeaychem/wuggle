@@ -48,8 +48,8 @@ class GameCardViewController: CardViewController {
   override init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
     
     // Use delegate to pull some general infomration.
-    rootTrie = d.provideCurrentSettings().getTrieRoot()
-    currentGameInstace = d.provideCurrentSettings().getOrMakeCurrentGame()
+    rootTrie = d.currentSettings().getTrieRoot()
+    currentGameInstace = d.currentSettings().getOrMakeCurrentGame()
     
     // Constants to create and position views
     // TODO: Collect together reused terms
@@ -75,7 +75,7 @@ class GameCardViewController: CardViewController {
 //    foundWordsViewController.view.frame.origin =
     
     // TODO: At the end of the init I want to get things up.
-    boardViewController.createAllTileViews(board: delegate!.provideCurrentSettings().currentGame!.board!)
+    boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
     
     // Add gesture recognisers
     boardPanGR = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
@@ -139,9 +139,15 @@ class GameCardViewController: CardViewController {
   
   
   func processWord(word w: String) {
-    let wordObject = GameWord(context: delegate!.provideCurrentSettings().returnContext())
+    let wordObject = GameWord(context: delegate!.currentSettings().returnContext())
     wordObject.value = w
-    foundWordsViewController.update(word: wordObject)
+    foundWordsViewController.update(word: w)
+    delegate!.currentGameInstance()!.addToFoundWords(wordObject)
+    if delegate?.currentGameInstance()?.foundWordsSet == nil {
+      delegate?.currentGameInstance()?.foundWordsSet = [w]
+    } else {
+      delegate!.currentGameInstance()?.foundWordsSet!.append(w)
+    }
   }
 
 }
@@ -162,11 +168,11 @@ extension GameCardViewController {
     // Remove all the tiles from the previous game.
     boardViewController.removeAllTileViews()
     // Get a new game.
-    currentGameInstace = delegate?.provideCurrentSettings().setAndGetNewGame()
+    currentGameInstace = delegate?.currentSettings().setAndGetNewGame()
     // Make sure variables are good.
     setVaribalesFromCurrentGameInstance()
     // Make new tiles.
-    boardViewController.createAllTileViews(board: delegate!.provideCurrentSettings().getCurrentGame()!.board!)
+    boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
     // Fix stopwatch
     stopwatchViewController.resetHand()
     stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
@@ -206,6 +212,8 @@ extension GameCardViewController {
     timeUsedPercent = 1
     finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
     self.embed(finalWordsViewController!, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding() + viewData.gameBoardSize() * 0.075, y: viewData.height - viewData.gameBoardSize() * 0.925 - viewData.gameBoardPadding()), size: CGSize(width: viewData.gameBoardSize() * 0.85, height: viewData.gameBoardSize() * 0.85)))
+    finalWordsViewController?.addWordsAsFound(words: delegate!.currentGameInstance()!.foundWordsSet!)
+    finalWordsViewController?.addWordsAsNosee(words: (delegate?.currentGameInstance()?.findAllWords())!)
   }
 }
 
@@ -217,7 +225,7 @@ extension GameCardViewController {
     // TODO: Maybe update this with a custom recogniser.
     // Basically, extend pan to include initial touch.
     
-    let tilePosition = boardViewController.basicTilePositionFromCGPoint(point: sender.location(in: boardViewController.gameboardView), tileSqrtFloat: CGFloat((delegate?.provideCurrentSettings().tileSqrt)!))
+    let tilePosition = boardViewController.basicTilePositionFromCGPoint(point: sender.location(in: boardViewController.gameboardView), tileSqrtFloat: CGFloat((delegate?.currentSettings().tileSqrt)!))
     
     switch sender.state {
     case .began:
@@ -344,7 +352,7 @@ extension GameCardViewController {
     // As the timer for counting is tied to the refresh rate, updating the stopwatch is
     // done by calculating how much time has passed.
     let estimate = (displayLinkOne!.targetTimestamp - displayLinkOne!.timestamp)
-    let usedPercent = estimate/(delegate!.provideCurrentSettings().time * 60)
+    let usedPercent = estimate/(delegate!.currentSettings().time * 60)
     displayLinkOneTimeElapsed += estimate
     timeUsedPercent += usedPercent
     stopwatchViewController.incrementHand(percent: usedPercent)

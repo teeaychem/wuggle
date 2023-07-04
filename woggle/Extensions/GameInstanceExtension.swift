@@ -11,13 +11,12 @@ import CoreData
 extension GameInstance {
   
   func populateBoard() {
-    print("Make board")
     self.board = Board(context: self.managedObjectContext!)
     
     let tileNum = self.settings!.tileSqrt
 
     let distribtion = [7.8,2,4,3.8,11,1.4,3,2.3,8.6,0.21,0.97,5.3,2.7,7.2,6.1,2.8,0.19,7.3,8.7,6.7,3.3,1,0.91,0.27,1.6,0.44]
-    let alph = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "!", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    let alph = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "!", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     for i in (1 ..< tileNum + 1) {
       for j in (1 ..< tileNum + 1) {
@@ -42,37 +41,33 @@ extension GameInstance {
     }
   }
   
-  func findAllWords() {
+  func findAllWords() -> Set<String>? {
     // Call exploreTileWithList with helper variables.
     //
-    guard (self.board != nil) else { print("no board"); return }
+    guard (self.board != nil) else { print("no board"); return nil }
     
     // Get the trie root
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
     do {
-      guard (self.managedObjectContext != nil) else { return }
+      guard (self.managedObjectContext != nil) else { return nil }
       
       let results = try self.managedObjectContext!.fetch(fetchRequest)
       
       if results.count > 0 {
-        print("found trie via settings")
         var node = results.first as! TrieNode
         node = node.goToRoot()!
         var allTiles = self.board!.tiles! as! Set<Tile>
-//        for tile in allTiles {
-//          print(tile.value)
-//        }
-        
         var wordSet = Set<String>()
         var wordString = ""
         for tile in allTiles {
           exploreTileWithList(tile: tile, availableTiles: &allTiles, trieNode: &node, wordString: &wordString, wordSet: &wordSet)
         }
-        print(wordSet)
+        return wordSet
       }
     } catch {
       print("no found trie via settings")
     }
+    return nil
   }
   
   func exploreTileWithList(tile: Tile, availableTiles: inout Set<Tile>, trieNode: inout TrieNode, wordString: inout String, wordSet: inout Set<String>) {
@@ -84,7 +79,6 @@ extension GameInstance {
     // However, there may be no child for the value of the tile.
     if (trieNode.getChild(val: tile.value!) != nil) {
       // We have a child, so this is worth exploring
-
       
       // Remove current tile from available
       availableTiles.remove(tile)
@@ -130,6 +124,5 @@ extension GameInstance {
     // If no, create relevant stats.
     // So, individual methods for each stat
   }
-  
   
 }

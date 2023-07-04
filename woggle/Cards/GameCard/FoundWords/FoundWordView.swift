@@ -9,15 +9,15 @@ import UIKit
 
 class FoundWordView: UITableView {
   
-  var wordList =  [GameWord]()
+  var wordList =  [String]()
   
   private let listDimensions: CGSize
   private let fontSize: CGFloat
   
-  init(listDimensions lD: CGSize) {
+  init(listDimensions lD: CGSize, fontSize fS: CGFloat) {
     
     listDimensions = lD
-    fontSize = lD.height * 0.15
+    fontSize = fS
     
     super.init(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: listDimensions), style: .plain)
     
@@ -45,7 +45,7 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
     let word = wordList[indexPath.row]
     
     // Trying to reuse a cell
-    let cellIdentifier = word.value!
+    let cellIdentifier = word
     let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
     ?? UITableViewWordCell(style: .default, reuseIdentifier: cellIdentifier, word: word, width: listDimensions.width, height: rowHeight, shadeWords: false)
     // To disable highlighting cell when tapped.
@@ -66,10 +66,10 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
   }
   
   
-  public func updateAndScroll(word: GameWord) {
+  public func updateAndScroll(word: String) {
     var wordIndex: Int
     
-    let first = wordList.first(where: { $0.value == word.value})
+    let first = wordList.first(where: { $0 == word})
     
     if (first != nil) {
       wordIndex = wordList.firstIndex(of: first!)!
@@ -82,7 +82,7 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
     // TODO: Add some visial flair, at the moment it's not clear what this is doing.
   }
   
-  public func listUpdateAndScroll(updateList: [GameWord]) {
+  public func listUpdateAndScroll(updateList: [String]) {
     for word in updateList { wordList.append(word) }
     reloadData()
     if (wordList.count > 0) { scrollToRow(at: [0, wordList.count - 1], at: .bottom, animated: false) } // Count is total, etc.

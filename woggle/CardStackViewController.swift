@@ -50,7 +50,11 @@ extension CardStackViewController: CardStackDelegate {
     print("Asked to process update")
   }
   
-  func provideCurrentSettings() -> Settings {
+  func currentSettings() -> Settings {
     return settings
+  }
+  
+  func currentGameInstance() -> GameInstance? {
+    return settings.currentGame
   }
 }

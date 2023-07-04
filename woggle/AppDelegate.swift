@@ -26,11 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       if result.count > 0 {
         print("Tries found")
-        print(result.count)
-        let node  = result.last as! TrieNode
-        print("children: ", node.getChildVals())
-        print(node.goToRoot()?.getChildVals())
-        
       } else {
         print("New trie created")
         let newTrie = TrieNode(context: context)

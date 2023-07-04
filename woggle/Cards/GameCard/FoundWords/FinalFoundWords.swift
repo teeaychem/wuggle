@@ -23,12 +23,13 @@ class FinalFoundWordsViewController: UIViewController {
     wordViewHeight = vD.gameBoardSize() * 0.85 - (2 * vD.tilePadding())
     
     wordViewSize = CGSize(width: wordViewWidth, height: wordViewHeight)
-    fontSize = wordViewSize.height * 0.15
+    fontSize = wordViewSize.height * 0.05
     
-    foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight))
+    foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight), fontSize: fontSize)
     foundWordView.frame.origin = CGPoint(x: vD.tilePadding(), y: vD.tilePadding())
     
-    noseeWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight))
+    
+    noseeWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight), fontSize: fontSize)
     noseeWordView.frame.origin = CGPoint(x: vD.tilePadding() * 2 + wordViewWidth, y: vD.tilePadding())
     
     foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
@@ -53,6 +54,21 @@ class FinalFoundWordsViewController: UIViewController {
     super.viewDidLoad()
     view.addSubview(foundWordView)
     view.addSubview(noseeWordView)
-
+  }
+  
+  
+  func addWordsAsFound(words: [String]) {
+    
+    for word in words {
+      foundWordView.updateAndScroll(word: word)
+    }
+  }
+  
+  func addWordsAsNosee(words: Set<String>) {
+    let sorted = words.sorted()
+    
+    for word in sorted {
+      noseeWordView.updateAndScroll(word: word)
+    }
   }
 }

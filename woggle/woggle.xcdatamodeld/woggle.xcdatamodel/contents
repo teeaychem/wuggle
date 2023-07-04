@@ -2,19 +2,20 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Board" representedClassName="Board" syncable="YES" codeGenerationType="class">
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="foundWords" toMany="YES" deletionRule="Cascade" destinationEntity="GameWord" inverseName="inBoard" inverseEntity="GameWord"/>
         <relationship name="settings" maxCount="1" deletionRule="Nullify" destinationEntity="GameInstance" inverseName="board" inverseEntity="GameInstance"/>
         <relationship name="tiles" toMany="YES" deletionRule="Cascade" destinationEntity="Tile" inverseName="board" inverseEntity="Tile"/>
     </entity>
     <entity name="GameInstance" representedClassName="GameInstance" syncable="YES" codeGenerationType="class">
-        <attribute name="timeUsedPercent" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="foundWordsSet" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="timeUsedPercent" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" customClassName="NSSet&lt;String&gt;"/>
         <relationship name="board" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
+        <relationship name="foundWords" toMany="YES" deletionRule="Cascade" destinationEntity="GameWord" inverseName="inGame" inverseEntity="GameWord"/>
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="currentGame" inverseEntity="Settings"/>
     </entity>
     <entity name="GameWord" representedClassName="GameWord" syncable="YES" codeGenerationType="class">
         <attribute name="found" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="value" attributeType="String" defaultValueString=""/>
-        <relationship name="inBoard" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="foundWords" inverseEntity="Board"/>
+        <relationship name="inGame" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GameInstance" inverseName="foundWords" inverseEntity="GameInstance"/>
     </entity>
     <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
         <attribute name="lexicon" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

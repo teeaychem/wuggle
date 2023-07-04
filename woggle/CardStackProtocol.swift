@@ -17,5 +17,8 @@ protocol CardStackDelegate: AnyObject {
   
   // Allow cards to request current settings.
   // Cards should not store settings in order to ensure a unique settings file is in use at any given time.
-  func provideCurrentSettings() -> Settings
+  func currentSettings() -> Settings
+  
+  // Allow cards to request current gameInstance.
+  func currentGameInstance() -> GameInstance?
 }
