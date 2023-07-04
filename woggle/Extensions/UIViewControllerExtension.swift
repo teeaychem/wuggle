@@ -15,11 +15,22 @@ extension UIViewController {
   // Add the bounds of the view are limited to the frame of the view controller
   // Add the controller
   // State the move is completed.
-    func embed(_ viewController:UIViewController, inView view:UIView){
-        viewController.willMove(toParent: self)
-        viewController.view.frame = view.bounds
-        view.addSubview(viewController.view)
-        self.addChild(viewController)
-        viewController.didMove(toParent: self)
-    }
+  func embed(_ viewController:UIViewController, inView view:UIView, frame f: CGRect){
+    viewController.willMove(toParent: self)
+    viewController.view.frame = f
+    view.addSubview(viewController.view)
+    self.addChild(viewController)
+    viewController.didMove(toParent: self)
+  }
+  
+  // As when I embed a UIViewController the VC view is added as a subview,
+  // this means there's a reference to the VC view.
+  // And, it's final for the VC view to exist even when the VC is gone.
+  // So, to get rid of a UIViewController, need to 'unembed'.
+  // TODO: Figure out whether the final willMove call is appropriate
+  func unembed(_ viewController:UIViewController, inView view:UIView) {
+    viewController.view.removeFromSuperview()
+    viewController.removeFromParent()
+    viewController.willMove(toParent: self)
+  }
 }

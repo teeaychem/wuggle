@@ -35,7 +35,7 @@ class CardStackViewController: UIViewController {
     let testViewData = CardViewData(name: "test", width: width, colour: UIColor.gray.cgColor)
     let testCardController = GameCardViewController(viewData: testViewData, delegate: self)
     
-    self.embed(testCardController, inView: self.view)
+    self.embed(testCardController, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: 50), size: testViewData.cardSize))
     testCardController.view.frame.origin = CGPoint(x: 0, y: 50)
   }
   

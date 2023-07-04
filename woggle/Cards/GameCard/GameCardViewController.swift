@@ -70,10 +70,10 @@ class GameCardViewController: CardViewController {
     playButtonsViewController.paintStopIcon()
     
     // Position views
-    boardViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.height - (vD.gameBoardSize() + vD.gameBoardPadding()))
-    stopwatchViewController.view.frame.origin = CGPoint(x: vD.gameBoardPadding(), y: vD.gameBoardPadding() + vD.statusBarHeight)
-    playButtonsViewController.view.frame.origin = CGPoint(x: (2 * vD.gameBoardPadding() + vD.stopWatchSize()), y: (vD.gameBoardPadding() + vD.statusBarHeight))
-    foundWordsViewController.view.frame.origin = CGPoint(x: ((3 * vD.gameBoardPadding()) + (1.5 * vD.stopWatchSize())), y: (vD.gameBoardPadding() + vD.statusBarHeight))
+//    boardViewController.view.frame.origin =
+//    stopwatchViewController.view.frame.origin =
+//    playButtonsViewController.view.frame.origin = CGPoint(x: (2 * vD.gameBoardPadding() + vD.stopWatchSize()), y: (vD.gameBoardPadding() + vD.statusBarHeight))
+//    foundWordsViewController.view.frame.origin =
     
     // TODO: At the end of the init I want to get things up.
     boardViewController.createAllTileViews(board: currentGameInstace!.board!)
@@ -93,11 +93,11 @@ class GameCardViewController: CardViewController {
     super.viewDidLoad()
     
     // TODO: board needs to be last in order for touch to work.
-    self.embed(boardViewController, inView: self.view)
+    self.embed(boardViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding(), y: viewData.height - (viewData.gameBoardSize() + viewData.gameBoardPadding())), size: CGSize(width: viewData.gameBoardSize(), height: viewData.gameBoardSize())))
     boardViewController.addGameboardView()
-    self.embed(stopwatchViewController, inView: self.view)
-    self.embed(playButtonsViewController, inView: self.view)
-    self.embed(foundWordsViewController, inView: self.view)
+    self.embed(stopwatchViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding(), y: viewData.gameBoardPadding() + viewData.statusBarHeight), size: CGSize(width: viewData.stopWatchSize(), height: viewData.stopWatchSize())))
+    self.embed(playButtonsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: (2 * viewData.gameBoardPadding() + viewData.stopWatchSize()), y: (viewData.gameBoardPadding() + viewData.statusBarHeight)), size: CGSize(width: viewData.stopWatchSize() * 0.5, height: viewData.stopWatchSize())))
+    self.embed(foundWordsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: ((3 * viewData.gameBoardPadding()) + (1.5 * viewData.stopWatchSize())), y: (viewData.gameBoardPadding() + viewData.statusBarHeight)), size: CGSize(width: viewData.width - ((4 * viewData.gameBoardPadding()) + (1.5 * viewData.stopWatchSize())), height: viewData.stopWatchSize())))
     
     // TODO: Only add this when a game is in progress.
     
@@ -114,10 +114,7 @@ class GameCardViewController: CardViewController {
   
   func setVaribalesFromCurrentGameInstance() {
     guard currentGameInstace != nil else { print("No game instance"); return }
-    
-//    timeUsedPerStep = (currentGameInstace!.settings!.time / 60) * gameTimeInterval
     timeUsedPercent = currentGameInstace!.timeUsedPercent
-//    stopWatchIncrementPercent = ((2 * Double.pi) / (currentGameInstace!.settings!.time * 60)) * gameTimeInterval
   }
   
   
@@ -157,6 +154,12 @@ extension GameCardViewController {
   
   func newGameMain() {
     print("new game main")
+    if (finalWordsViewController != nil) {
+      self.unembed(finalWordsViewController!, inView: self.view)
+      finalWordsViewController = nil
+    }
+
+//    foundWordsViewController = nil
     // Remove all the tiles from the previous game.
     boardViewController.removeAllTimeViews()
     // Get a new game.
@@ -203,8 +206,7 @@ extension GameCardViewController {
     gameInProgess = false
     timeUsedPercent = 1
     finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
-    self.embed(finalWordsViewController!, inView: self.view)
-
+    self.embed(finalWordsViewController!, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding() + viewData.gameBoardSize() * 0.075, y: viewData.height - viewData.gameBoardSize() * 0.925 - viewData.gameBoardPadding()), size: CGSize(width: viewData.gameBoardSize() * 0.85, height: viewData.gameBoardSize() * 0.85)))
   }
 }
 
@@ -348,7 +350,7 @@ extension GameCardViewController {
     timeUsedPercent += usedPercent
     stopwatchViewController.incrementHand(percent: usedPercent)
 
-    if (timeUsedPercent > 1) {
+    if (timeUsedPercent >= 1) {
       endGameMain()
     }
   }

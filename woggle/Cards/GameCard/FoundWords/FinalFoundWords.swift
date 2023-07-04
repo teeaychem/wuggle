@@ -13,7 +13,6 @@ class FinalFoundWordsViewController: UIViewController {
   private let wordViewHeight: CGFloat
   private let wordViewSize: CGSize
   private let fontSize: CGFloat
-  private let background: UIView
   private let foundWordView: FoundWordView
   private let noseeWordView: FoundWordView
   
@@ -27,9 +26,9 @@ class FinalFoundWordsViewController: UIViewController {
     fontSize = wordViewSize.height * 0.15
     
     
-    background = UIView(frame: CGRect(origin: CGPoint(x: vD.gameBoardPadding() + vD.gameBoardSize() * 0.1, y: vD.height - (vD.gameBoardPadding() + vD.gameBoardSize() * 0.9)), size: CGSize(width: vD.gameBoardSize() * 0.8, height: vD.gameBoardSize() * 0.8)))
-    background.backgroundColor = UIColor.darkGray
-    background.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
+//    background = UIView(frame: CGRect(origin: CGPoint(x: vD.gameBoardPadding() + vD.gameBoardSize() * 0.075, y: vD.height - (vD.gameBoardPadding() + vD.gameBoardSize() * 0.925)), size: CGSize(width: vD.gameBoardSize() * 0.85, height: vD.gameBoardSize() * 0.85)))
+    
+    
     
     
     foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth - 2 * vD.tilePadding(), height: wordViewHeight - 2 * vD.tilePadding()))
@@ -37,10 +36,8 @@ class FinalFoundWordsViewController: UIViewController {
     
     super.init(nibName: nil, bundle: nil)
     
-    
+    view.backgroundColor = UIColor.darkGray
     view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
-    view.layer.frame.size = CGSize(width: vD.gameBoardSize() * 0.9, height: vD.gameBoardSize() * 0.9)
-    view.frame.origin = CGPoint(x: vD.gameBoardSize() * 0.2, y: 0)
   }
   
   required init?(coder: NSCoder) {
@@ -51,17 +48,11 @@ class FinalFoundWordsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.addSubview(background)
+    view.backgroundColor = UIColor.red
   }
   
-  
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-
+  deinit {
+    print("final goodbye")
   }
-  
-  
-  
-  
   
 }
