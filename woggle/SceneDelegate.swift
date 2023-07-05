@@ -29,7 +29,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window.rootViewController = CardStackViewController(settings: testSettings)
     self.window = window
     window.makeKeyAndVisible()
-    print("Window created")
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {

@@ -30,7 +30,7 @@ class CardStackViewController: UIViewController {
     width = min(((UIScreen.main.bounds.size.height)/1.4/1.16)*0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
     
-    let settCardVD = CardViewData(name: "sett", width: width, colour: UIColor.black.cgColor)
+    let settCardVD = CardViewData(name: "sett", width: width, colour: UIColor.lightGray.cgColor)
     let statCardVD = CardViewData(name: "sett", width: width, colour: UIColor.darkGray.cgColor)
     let gameCardVD = CardViewData(name: "game", width: width, colour: UIColor.gray.cgColor)
     

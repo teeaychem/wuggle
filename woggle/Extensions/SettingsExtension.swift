@@ -27,7 +27,7 @@ extension Settings {
     }
     self.currentGame = GameInstance(context: self.managedObjectContext!)
     self.currentGame!.populateBoard()
-    self.currentGame!.foundWordsSet = []
+    self.currentGame!.foundWordsList = []
     return self.currentGame!
   }
   

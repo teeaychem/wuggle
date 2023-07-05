@@ -132,10 +132,10 @@ class GameCardViewController: CardViewController {
   
   func processWord(word w: String) {
     foundWordsViewController.update(word: w)
-    if delegate?.currentGameInstance()?.foundWordsSet == nil {
-      delegate?.currentGameInstance()?.foundWordsSet = [w]
+    if delegate?.currentGameInstance()?.foundWordsList == nil {
+      delegate?.currentGameInstance()?.foundWordsList = [w]
     } else {
-      delegate!.currentGameInstance()?.foundWordsSet!.append(w)
+      delegate!.currentGameInstance()?.foundWordsList!.append(w)
     }
   }
 
@@ -202,8 +202,8 @@ extension GameCardViewController {
     timeUsedPercent = 1
     finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
     self.embed(finalWordsViewController!, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding() + viewData.gameBoardSize() * 0.075, y: viewData.height - viewData.gameBoardSize() * 0.925 - viewData.gameBoardPadding()), size: CGSize(width: viewData.gameBoardSize() * 0.85, height: viewData.gameBoardSize() * 0.85)))
-    finalWordsViewController?.addWordsAsFound(words: delegate!.currentGameInstance()!.foundWordsSet!)
-    finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate?.currentGameInstance()?.findAllWords())!, seeWords: delegate!.currentGameInstance()!.foundWordsSet!)
+    finalWordsViewController?.addWordsAsFound(words: delegate!.currentGameInstance()!.foundWordsList!)
+    finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate?.currentGameInstance()?.findAllWords())!, seeWords: delegate!.currentGameInstance()!.foundWordsList!)
     boardViewController.addGestureRecognizer(recogniser: UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBoard)))
   }
 }

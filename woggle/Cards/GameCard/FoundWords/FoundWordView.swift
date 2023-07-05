@@ -56,13 +56,6 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
     cell.backgroundColor = UIColor.clear
   }
   
-  private func gameWordHasValue(word w: GameWord, value v: String) -> Bool {
-    if w.value == v {
-      return true
-    }
-    return false
-  }
-  
 
   public func updateNoScroll(word: String) {
     wordList.append(word)
