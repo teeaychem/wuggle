@@ -15,7 +15,7 @@ class OptionView: UIView {
   let displayOptions: [String]
   let internalName: String
   let internalOptions: [Int]
-  var choiceLabels = [ChoiceLabel]()
+  var choiceLabels = [Int: ChoiceLabel]()
   
   init(frame f: CGRect, viewData: CardViewData, displayName dN: String, displayOptions dO: [String], internalName iN: String, internalOptions iO: [Int], delegate d: SettingsCardViewControllerDelegate) {
     
@@ -38,14 +38,14 @@ class OptionView: UIView {
     let choiceLabelSize = (f.width * 0.5) / CGFloat(displayOptions.count)
     
     for i in 0 ..< displayOptions.count {
-      let choiceLabel = ChoiceLabel(frame: CGRect(origin: CGPoint(x: (f.width * 0.5) + choiceLabelSize * CGFloat(i), y: 0), size: CGSize(width: choiceLabelSize, height: choiceLabelSize)), displayText: dO[i], internalName: iN, internalValue: iO[i], delegate: d)
-      choiceLabels.append(choiceLabel)
+      let choiceLabel = ChoiceLabel(frame: CGRect(origin: CGPoint(x: (f.width * 0.5) + choiceLabelSize * CGFloat(i), y: 0), size: CGSize(width: choiceLabelSize, height: choiceLabelSize)), displayText: dO[i], internalName: iN, internalValue: iO[i], delegate: self)
+      choiceLabels[internalOptions[i]] = choiceLabel
     }
   }
   
   
   func addAndEnableChoiceLabels() {
-    for label in choiceLabels {
+    for label in choiceLabels.values {
       addSubview(label)
       label.addGestures()
     }
@@ -53,7 +53,7 @@ class OptionView: UIView {
   
   
   func removeChoiceLabels() {
-    for label in choiceLabels {
+    for label in choiceLabels.values {
       label.removeGestures()
       label.removeFromSuperview()
     }
@@ -71,6 +71,24 @@ class OptionView: UIView {
   }
   
   
+  
+  
+}
+
+
+extension OptionView: OptionViewDelegate {
+  
+  func choiceChangedTo(internalValue: Int) {
+    print(choiceLabels[internalValue])
+    for k in choiceLabels.keys {
+      if k != internalValue {
+        print("no", k)
+      }
+      
+    }
+    
+    delegate.updateSetting(internalName: internalName, internalValue: internalValue)
+  }
   
   
 }

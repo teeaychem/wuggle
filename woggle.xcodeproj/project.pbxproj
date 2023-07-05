@@ -15,6 +15,7 @@
 		57506C1F2A48D80500367AE9 /* StopwatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506C1E2A48D80500367AE9 /* StopwatchViewController.swift */; };
 		57506C212A48D82900367AE9 /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506C202A48D82900367AE9 /* StopwatchView.swift */; };
 		5782956E2A4A03E60038B48F /* SettingsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782956D2A4A03E60038B48F /* SettingsExtension.swift */; };
+		57AC997C2A558F0300B2E892 /* OptionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AC997B2A558F0300B2E892 /* OptionViewDelegate.swift */; };
 		57BADD842A4A45F3009074DF /* FoundWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD832A4A45F3009074DF /* FoundWordView.swift */; };
 		57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */; };
 		57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155122A5579D000A802C9 /* ChoiceLabel.swift */; };
@@ -85,6 +86,7 @@
 		57506C1E2A48D80500367AE9 /* StopwatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewController.swift; sourceTree = "<group>"; };
 		57506C202A48D82900367AE9 /* StopwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
 		5782956D2A4A03E60038B48F /* SettingsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExtension.swift; sourceTree = "<group>"; };
+		57AC997B2A558F0300B2E892 /* OptionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewDelegate.swift; sourceTree = "<group>"; };
 		57BADD832A4A45F3009074DF /* FoundWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundWordView.swift; sourceTree = "<group>"; };
 		57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewWordCell.swift; sourceTree = "<group>"; };
 		57D155122A5579D000A802C9 /* ChoiceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceLabel.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				570A572C2A4B83BA006129FD /* CardStackDelegate.swift */,
 				57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */,
+				57AC997B2A558F0300B2E892 /* OptionViewDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 			files = (
 				57EB7A542A47A7FC00BCA44B /* tileText.swift in Sources */,
 				57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */,
+				57AC997C2A558F0300B2E892 /* OptionViewDelegate.swift in Sources */,
 				57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */,
 				57EB7A4F2A479C2D00BCA44B /* CardViewData.swift in Sources */,
 				57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */,

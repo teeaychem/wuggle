@@ -9,14 +9,14 @@ import UIKit
 
 class ChoiceLabel: UILabel {
   
-  unowned var delegate: SettingsCardViewControllerDelegate
+  unowned var delegate: OptionViewDelegate
   
   let displayText: String
   let internalName: String
   let internalValue: Int
   
   
-  init(frame f: CGRect, displayText dT: String, internalName iN: String, internalValue iV: Int, delegate d: SettingsCardViewControllerDelegate) {
+  init(frame f: CGRect, displayText dT: String, internalName iN: String, internalValue iV: Int, delegate d: OptionViewDelegate) {
     
     delegate = d
     
@@ -49,7 +49,7 @@ class ChoiceLabel: UILabel {
   
   @objc func didTapChoiceLabel(_ sender: UITapGestureRecognizer) {
     print("tap")
-    delegate.updateSetting(internalName: internalName, internalValue: internalValue)
+    delegate.choiceChangedTo(internalValue: internalValue)
   }
   
   required init?(coder: NSCoder) {
