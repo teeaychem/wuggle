@@ -28,7 +28,13 @@ class OptionView: UIView {
     internalOptions = iO
     vertical = v
     
-    super.init(frame: CGRect(x: f.origin.x, y: f.origin.y, width: f.width, height: f.height * CGFloat(displayOptions.count)))
+    // Auto stretch frame if vertical is true.
+    // Else, frame height is as specificed.
+    if vertical {
+      super.init(frame: CGRect(x: f.origin.x, y: f.origin.y, width: f.width, height: f.height * CGFloat(displayOptions.count)))
+    } else {
+      super.init(frame: CGRect(x: f.origin.x, y: f.origin.y, width: f.width, height: f.height))
+    }
     
     backgroundColor = UIColor.clear
     
