@@ -12,22 +12,31 @@ class ChoiceLabel: UILabel {
   unowned var delegate: OptionViewDelegate
   
   let displayText: String
-  let internalName: String
   let internalValue: Int
   
   
-  init(frame f: CGRect, displayText dT: String, internalName iN: String, internalValue iV: Int, delegate d: OptionViewDelegate) {
+  init(frame f: CGRect, displayText dT: String, internalValue iV: Int, delegate d: OptionViewDelegate) {
     
     delegate = d
     
     displayText = dT
-    internalName = iN
     internalValue = iV
     
     super.init(frame: f)
     
-    text = dT
-    backgroundColor = UIColor.black
+    layer.borderColor = UIColor.clear.cgColor
+      
+    attributedText = NSMutableAttributedString(string: dT, attributes: delegate.getViewData().settingsTextAttributePlain)
+  }
+  
+  
+  func select() {
+    attributedText = NSMutableAttributedString(string: displayText, attributes: delegate.getViewData().settingsTextAttributeHighlighted)
+  }
+  
+  
+  func deselect() {
+    attributedText = NSMutableAttributedString(string: displayText, attributes: delegate.getViewData().settingsTextAttributePlain)
   }
   
   
@@ -48,7 +57,6 @@ class ChoiceLabel: UILabel {
   
   
   @objc func didTapChoiceLabel(_ sender: UITapGestureRecognizer) {
-    print("tap")
     delegate.choiceChangedTo(internalValue: internalValue)
   }
   

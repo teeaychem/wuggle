@@ -15,9 +15,10 @@ class OptionView: UIView {
   let displayOptions: [String]
   let internalName: String
   let internalOptions: [Int]
+  let vertical: Bool
   var choiceLabels = [Int: ChoiceLabel]()
   
-  init(frame f: CGRect, viewData: CardViewData, displayName dN: String, displayOptions dO: [String], internalName iN: String, internalOptions iO: [Int], delegate d: SettingsCardViewControllerDelegate) {
+  init(frame f: CGRect, displayName dN: String, displayOptions dO: [String], internalName iN: String, internalOptions iO: [Int], vertical v: Bool, delegate d: SettingsCardViewControllerDelegate) {
     
     delegate = d
     
@@ -25,21 +26,31 @@ class OptionView: UIView {
     displayOptions = dO
     internalName = iN
     internalOptions = iO
+    vertical = v
     
-    super.init(frame: f)
+    super.init(frame: CGRect(x: f.origin.x, y: f.origin.y, width: f.width, height: f.height * CGFloat(displayOptions.count)))
     
     backgroundColor = UIColor.clear
     
-    let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: f.width * 0.2, height: f.height))
-    nameLabel.text = dN
-    nameLabel.textColor = UIColor.gray
+    let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: f.width * 0.4, height: f.height))
+    
+    nameLabel.attributedText = NSMutableAttributedString(string: dN, attributes: delegate.getViewData().settingsTextAttributePlain)
     addSubview(nameLabel)
     
-    let choiceLabelSize = (f.width * 0.5) / CGFloat(displayOptions.count)
-    
-    for i in 0 ..< displayOptions.count {
-      let choiceLabel = ChoiceLabel(frame: CGRect(origin: CGPoint(x: (f.width * 0.5) + choiceLabelSize * CGFloat(i), y: 0), size: CGSize(width: choiceLabelSize, height: choiceLabelSize)), displayText: dO[i], internalName: iN, internalValue: iO[i], delegate: self)
-      choiceLabels[internalOptions[i]] = choiceLabel
+    if vertical {
+      let choiceLabelWidth = (f.width * 0.6)
+      for i in 0 ..< displayOptions.count {
+        let choiceLabel = ChoiceLabel(frame: CGRect(origin: CGPoint(x: (f.width - choiceLabelWidth), y: CGFloat(i) * f.height), size: CGSize(width: choiceLabelWidth, height: f.height)), displayText: dO[i], internalValue: iO[i], delegate: self)
+        choiceLabel.textAlignment = .right
+        choiceLabels[internalOptions[i]] = choiceLabel
+      }
+    } else {
+      let choiceLabelWidth =  f.height * 1 // (f.width * 0.6) / CGFloat(displayOptions.count)
+      for i in 0 ..< displayOptions.count {
+        let choiceLabel = ChoiceLabel(frame: CGRect(origin: CGPoint(x: f.width - choiceLabelWidth * CGFloat(displayOptions.count - i), y: 0), size: CGSize(width: choiceLabelWidth, height: f.height)), displayText: dO[i], internalValue: iO[i], delegate: self)
+        choiceLabel.textAlignment = .center
+        choiceLabels[internalOptions[i]] = choiceLabel
+      }
     }
   }
   
@@ -60,12 +71,6 @@ class OptionView: UIView {
   }
   
   
-  
-  
-  
-  
-  
-  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -79,16 +84,19 @@ class OptionView: UIView {
 extension OptionView: OptionViewDelegate {
   
   func choiceChangedTo(internalValue: Int) {
-    print(choiceLabels[internalValue])
+    choiceLabels[internalValue]?.select()
     for k in choiceLabels.keys {
       if k != internalValue {
-        print("no", k)
+        choiceLabels[k]!.deselect()
       }
       
     }
-    
     delegate.updateSetting(internalName: internalName, internalValue: internalValue)
   }
+
   
-  
+  func getViewData() -> CardViewData {
+    return delegate.getViewData()
+  }
+
 }

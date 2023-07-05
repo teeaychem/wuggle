@@ -26,8 +26,8 @@ class CardView: UIView {
     
     layer.cornerRadius = getCornerRadius(width: cardWidth)
     layer.backgroundColor = cardColour
-    layer.borderColor = UIColor.black.cgColor
-    layer.borderWidth = 1
+//    layer.borderColor = UIColor.black.cgColor
+//    layer.borderWidth = 1
     
 //    addSubview(statusBar)
   }
