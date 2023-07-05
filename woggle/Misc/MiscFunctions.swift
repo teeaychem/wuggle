@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 func getCornerRadius(width w: CGFloat) -> CGFloat {
   return w * (1/30)
@@ -51,4 +52,45 @@ func getPoints(word: String) -> Int {
 //  default:
 //    return 11
 //  }
+}
+
+func getFontFor(height: CGFloat) -> Double {
+  // I want to scale the font used so that it matches the size of the display.
+  // All of the frames, etc. I use are calculated relative to the size of the screen.
+  // I.e. they're some percentage of width/height.
+  // And, height is fixed, while width varies.
+  // So, the idea is to use either the height of the frame containing text or some given ratio to find an appropriate font size.
+
+  // To do this, binary search.
+  // I'll fix min and max font sizes.
+  // Then, split the difference.
+  // Draw text with Q as this *might* drop below the line using the split.
+  // If the font fits, I might need bigger. So, split is new min.
+  // If font doesn't fix I need smaller, so split is new max.
+  // Keep doing this until the difference between min and max is neglibile.
+  // Finally, store the result in a dictionary.
+  // I'll use the same height a lot, and so will save much effort by storing.
+  let tolerance = 1.00
+  var fontMax = 200.00
+  var fontMin = 2.00
+  
+  while (fontMax - fontMin) > tolerance {
+    print("fontMax", fontMax)
+    print("fontMin", fontMin)
+    
+    let fontSplit = (fontMax + fontMin) * 0.5
+    
+    let testAttributes = [
+      NSAttributedString.Key.font : UIFont(name: uiFontName, size: fontSplit)!
+      ]
+    let testString = NSMutableAttributedString(string: "Q", attributes: testAttributes)
+    let fontHeight = testString.boundingRect(with: CGSize(width: 100, height: CGFloat.Magnitude.greatestFiniteMagnitude), context: nil).height
+    if (fontHeight > height) {
+      fontMax = fontSplit
+    } else {
+      fontMin = fontSplit
+    }
+  }
+  // fontMin is guaranteed to fit.
+  return fontMin
 }

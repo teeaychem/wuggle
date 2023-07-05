@@ -26,17 +26,17 @@ class ChoiceLabel: UILabel {
     
     layer.borderColor = UIColor.clear.cgColor
       
-    attributedText = NSMutableAttributedString(string: dT, attributes: delegate.getViewData().settingsTextAttributePlain)
+    attributedText = NSMutableAttributedString(string: dT, attributes: delegate.getViewData().getSettingsTextAttributePlain(height: f.height * 0.8))
   }
   
   
   func select() {
-    attributedText = NSMutableAttributedString(string: displayText, attributes: delegate.getViewData().settingsTextAttributeHighlighted)
+    attributedText = NSMutableAttributedString(string: displayText, attributes: delegate.getViewData().getSettingsTextAttributeHighlighted(height: frame.height * 0.8))
   }
   
   
   func deselect() {
-    attributedText = NSMutableAttributedString(string: displayText, attributes: delegate.getViewData().settingsTextAttributePlain)
+    attributedText = NSMutableAttributedString(string: displayText, attributes: delegate.getViewData().getSettingsTextAttributePlain(height: frame.height * 0.8))
   }
   
   

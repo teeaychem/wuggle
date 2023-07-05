@@ -24,7 +24,7 @@ class LengthIcon: IconView {
   
   func test() {
     let letterLayer = CAShapeLayer()
-    let characterLayers = getStringLayers(text: "6", font: UIFont(name: uiFontName, size: 25)!)
+    let characterLayers = getStringLayers(text: "6", font: UIFont(name: uiFontName, size: getFontFor(height: size))!)
     for lay in characterLayers {
       print("AH")
       letterLayer.bounds = lay.path!.boundingBox
