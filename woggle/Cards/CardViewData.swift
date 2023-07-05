@@ -25,8 +25,8 @@ class CardViewData {
     ] as [NSAttributedString.Key : Any]
   let settingsTextAttributeHighlighted = [
     NSAttributedString.Key.strokeColor : UIColor.black,
-    NSAttributedString.Key.strokeWidth : -4,
-    NSAttributedString.Key.foregroundColor : UIColor.gray,
+    NSAttributedString.Key.strokeWidth : 0,
+    NSAttributedString.Key.foregroundColor : UIColor.darkGray,
     NSAttributedString.Key.font : UIFont(name: uiFontName, size: 25)!
     ] as [NSAttributedString.Key : Any]
   

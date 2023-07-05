@@ -40,7 +40,7 @@ class OptionView: UIView {
     
     let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: f.width * 0.4, height: f.height))
     
-    nameLabel.attributedText = NSMutableAttributedString(string: dN, attributes: delegate.getViewData().settingsTextAttributePlain)
+    nameLabel.attributedText = NSMutableAttributedString(string: dN, attributes: delegate.getViewData().settingsTextAttributeHighlighted)
     addSubview(nameLabel)
     
     if vertical {
