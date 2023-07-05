@@ -13,7 +13,6 @@ class CardViewController: UIViewController {
   
   let viewData: CardViewData
   let cardView: CardView
-  
   let statusBarView: StatusBarView
   
   // displayViews collects the views which should only be shown when the card is displayed.
@@ -51,6 +50,16 @@ class CardViewController: UIViewController {
   
   func specificSetup() {
     // Called by default, and specific in subclasses by overriding.
+  }
+  
+  
+  func broughtToTop() {
+    // Called when card is brought to the top of the stack
+  }
+  
+  
+  func shuffledToDeck() {
+    // Called when card is shffuled into the deck
   }
   
   

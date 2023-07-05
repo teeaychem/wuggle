@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		570A572D2A4B83BA006129FD /* CardStackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570A572C2A4B83BA006129FD /* CardStackProtocol.swift */; };
+		570A572D2A4B83BA006129FD /* CardStackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570A572C2A4B83BA006129FD /* CardStackDelegate.swift */; };
 		5735DD3F2A4E4B560071B29B /* FoundWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735DD3E2A4E4B560071B29B /* FoundWordsViewController.swift */; };
 		5741FA292A53782E00B4164D /* FinalFoundWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5741FA282A53782E00B4164D /* FinalFoundWords.swift */; };
 		57455B412A4CFF8C0019FFB5 /* PlayButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57455B402A4CFF8C0019FFB5 /* PlayButtonsViewController.swift */; };
@@ -17,6 +17,8 @@
 		5782956E2A4A03E60038B48F /* SettingsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782956D2A4A03E60038B48F /* SettingsExtension.swift */; };
 		57BADD842A4A45F3009074DF /* FoundWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD832A4A45F3009074DF /* FoundWordView.swift */; };
 		57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */; };
+		57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155122A5579D000A802C9 /* ChoiceLabel.swift */; };
+		57D155162A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */; };
 		57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3732A5481150097D1D2 /* StatusBarView.swift */; };
 		57E2F3772A54E1420097D1D2 /* SettingsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */; };
 		57E2F37A2A54E5850097D1D2 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3792A54E5850097D1D2 /* IconView.swift */; };
@@ -75,7 +77,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		570A572C2A4B83BA006129FD /* CardStackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackProtocol.swift; sourceTree = "<group>"; };
+		570A572C2A4B83BA006129FD /* CardStackDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackDelegate.swift; sourceTree = "<group>"; };
 		5735DD3E2A4E4B560071B29B /* FoundWordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundWordsViewController.swift; sourceTree = "<group>"; };
 		5741FA282A53782E00B4164D /* FinalFoundWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalFoundWords.swift; sourceTree = "<group>"; };
 		57455B402A4CFF8C0019FFB5 /* PlayButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonsViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,8 @@
 		5782956D2A4A03E60038B48F /* SettingsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExtension.swift; sourceTree = "<group>"; };
 		57BADD832A4A45F3009074DF /* FoundWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundWordView.swift; sourceTree = "<group>"; };
 		57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewWordCell.swift; sourceTree = "<group>"; };
+		57D155122A5579D000A802C9 /* ChoiceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceLabel.swift; sourceTree = "<group>"; };
+		57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewControllerDelegate.swift; sourceTree = "<group>"; };
 		57E2F3732A5481150097D1D2 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewController.swift; sourceTree = "<group>"; };
 		57E2F3792A54E5850097D1D2 /* IconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
@@ -183,6 +187,15 @@
 			path = FoundWords;
 			sourceTree = "<group>";
 		};
+		57D155142A557D4D00A802C9 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				570A572C2A4B83BA006129FD /* CardStackDelegate.swift */,
+				57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		57E2F3722A54810A0097D1D2 /* StatusBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +209,7 @@
 			children = (
 				57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */,
 				57E2F3842A54F3200097D1D2 /* OptionView.swift */,
+				57D155122A5579D000A802C9 /* ChoiceLabel.swift */,
 				57E2F3782A54E57A0097D1D2 /* Icons */,
 			);
 			path = SettingsCard;
@@ -300,13 +314,13 @@
 		57EF4B372A4664F2008C57FF /* woggle */ = {
 			isa = PBXGroup;
 			children = (
+				57D155142A557D4D00A802C9 /* Delegates */,
 				57EB7A522A47A7F000BCA44B /* Misc */,
 				57EB7A412A47820900BCA44B /* Gameboard */,
 				57EB7A3F2A47817C00BCA44B /* Cards */,
 				57EF4B742A466BA4008C57FF /* Extensions */,
 				57EF4B712A466B7B008C57FF /* Resources */,
 				57EF4B6B2A466528008C57FF /* CardStackViewController.swift */,
-				570A572C2A4B83BA006129FD /* CardStackProtocol.swift */,
 				57EF4B382A4664F2008C57FF /* AppDelegate.swift */,
 				57EF4B3A2A4664F2008C57FF /* SceneDelegate.swift */,
 				57EF4B3C2A4664F2008C57FF /* ViewController.swift */,
@@ -496,6 +510,7 @@
 				57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */,
 				57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */,
 				57EB7A4F2A479C2D00BCA44B /* CardViewData.swift in Sources */,
+				57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */,
 				5735DD3F2A4E4B560071B29B /* FoundWordsViewController.swift in Sources */,
 				57455B432A4CFFA40019FFB5 /* PlayButtonsView.swift in Sources */,
 				57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */,
@@ -512,12 +527,13 @@
 				57506C1F2A48D80500367AE9 /* StopwatchViewController.swift in Sources */,
 				57E2F37A2A54E5850097D1D2 /* IconView.swift in Sources */,
 				57506C212A48D82900367AE9 /* StopwatchView.swift in Sources */,
-				570A572D2A4B83BA006129FD /* CardStackProtocol.swift in Sources */,
+				570A572D2A4B83BA006129FD /* CardStackDelegate.swift in Sources */,
 				57EF4B432A4664F2008C57FF /* woggle.xcdatamodeld in Sources */,
 				57EF4B3D2A4664F2008C57FF /* ViewController.swift in Sources */,
 				57E2F3822A54E59D0097D1D2 /* LengthIcon.swift in Sources */,
 				57EB7A492A478BF500BCA44B /* CardViewController.swift in Sources */,
 				57EB7A4B2A478CF000BCA44B /* GameCardViewController.swift in Sources */,
+				57D155162A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift in Sources */,
 				5782956E2A4A03E60038B48F /* SettingsExtension.swift in Sources */,
 				57EF4B392A4664F2008C57FF /* AppDelegate.swift in Sources */,
 				57EF4B6E2A4665D8008C57FF /* CardView.swift in Sources */,

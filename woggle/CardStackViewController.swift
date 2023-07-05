@@ -87,9 +87,11 @@ extension CardStackViewController: CardStackDelegate {
   @objc func statusBarTap(_ r: UIGestureRecognizer) {
     let cardIndex = cardViews.firstIndex(where: {r.view?.superview as! CardView == $0.cardView})
     if (cardIndex != nil && cardIndex != cardViews.count - 1) {
+      cardViews.last!.shuffledToDeck()
       cardViews.append(cardViews[cardIndex!])
       cardViews.remove(at: cardIndex!)
       reorderCardsByList()
+      cardViews.last!.broughtToTop()
     }
   }
   
