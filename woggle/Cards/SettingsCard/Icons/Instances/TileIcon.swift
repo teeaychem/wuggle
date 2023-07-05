@@ -54,16 +54,7 @@ class TileIcon: IconView {
     tileLayer.strokeColor = UIColor.black.cgColor
     tileLayer.lineWidth = 0.5
     
-    let miniTileLayer = CAShapeLayer()
-    let sMult = 0.35
-    let miniTilePath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: frame.width - size*0.4725, y: size*0.125), size: CGSize(width: size*sMult, height: size*sMult)), cornerRadius: size * 0.1)
-    miniTileLayer.path = miniTilePath.cgPath
-    miniTileLayer.fillColor = UIColor.lightGray.cgColor
-    miniTileLayer.strokeColor = UIColor.black.cgColor
-    miniTileLayer.lineWidth = 0.5
-    
     layer.addSublayer(tileLayer)
-//    layer.addSublayer(miniTileLayer)
   }
   
   
@@ -80,8 +71,8 @@ class TileIcon: IconView {
     
     for lay in letterLayers {
       
-//      lay.position.x = size * 0.125
-//      lay.position.y = size - (lay.path!.boundingBox.height + 2 * indent)
+      lay.position.x = lay.position.x + size * 0.3
+      lay.position.y = lay.position.y + 2 * indent
       lay.fillColor = textColour
       lay.strokeColor = textColour
       
