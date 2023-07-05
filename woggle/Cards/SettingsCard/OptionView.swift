@@ -52,6 +52,14 @@ class OptionView: UIView {
   }
   
   
+  func removeChoiceLabels() {
+    for label in choiceLabels {
+      label.removeGestures()
+      label.removeFromSuperview()
+    }
+  }
+  
+  
   
   
   
