@@ -9,7 +9,7 @@ import Foundation
 
 protocol SettingsCardViewControllerDelegate: AnyObject {
   
-  func updateSetting(internalName: String, internalValue: Int)
+  func updateSetting(internalName: String, internalValue: Int16)
   
   func getViewData() -> CardViewData
   

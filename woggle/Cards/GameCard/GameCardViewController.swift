@@ -360,7 +360,7 @@ extension GameCardViewController {
     // As the timer for counting is tied to the refresh rate, updating the stopwatch is
     // done by calculating how much time has passed.
     let estimate = (displayLinkOne!.targetTimestamp - displayLinkOne!.timestamp)
-    let usedPercent = estimate/(delegate!.currentSettings().time * 60)
+    let usedPercent = estimate/(Double(delegate!.currentSettings().time) * 60)
     displayLinkOneTimeElapsed += estimate
     timeUsedPercent += usedPercent
     stopwatchViewController.incrementHand(percent: usedPercent)

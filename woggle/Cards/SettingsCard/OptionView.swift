@@ -14,11 +14,11 @@ class OptionView: UIView {
   let displayName: String
   let displayOptions: [String]
   let internalName: String
-  let internalOptions: [Int]
+  let internalOptions: [Int16]
   let vertical: Bool
-  var choiceLabels = [Int: ChoiceLabel]()
+  var choiceLabels = [Int16: ChoiceLabel]()
   
-  init(frame f: CGRect, displayName dN: String, displayOptions dO: [String], internalName iN: String, internalOptions iO: [Int], vertical v: Bool, delegate d: SettingsCardViewControllerDelegate) {
+  init(frame f: CGRect, displayName dN: String, displayOptions dO: [String], internalName iN: String, internalOptions iO: [Int16], vertical v: Bool, delegate d: SettingsCardViewControllerDelegate) {
     
     delegate = d
     
@@ -77,6 +77,11 @@ class OptionView: UIView {
   }
   
   
+  func highlightChoice(internalOption: Int16) {
+    choiceLabels[internalOption]?.select()
+  }
+  
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -89,7 +94,7 @@ class OptionView: UIView {
 
 extension OptionView: OptionViewDelegate {
   
-  func choiceChangedTo(internalValue: Int) {
+  func choiceChangedTo(internalValue: Int16) {
     choiceLabels[internalValue]?.select()
     for k in choiceLabels.keys {
       if k != internalValue {

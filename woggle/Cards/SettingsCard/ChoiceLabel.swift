@@ -12,10 +12,10 @@ class ChoiceLabel: UILabel {
   unowned var delegate: OptionViewDelegate
   
   let displayText: String
-  let internalValue: Int
+  let internalValue: Int16
   
   
-  init(frame f: CGRect, displayText dT: String, internalValue iV: Int, delegate d: OptionViewDelegate) {
+  init(frame f: CGRect, displayText dT: String, internalValue iV: Int16, delegate d: OptionViewDelegate) {
     
     delegate = d
     

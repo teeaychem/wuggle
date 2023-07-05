@@ -10,7 +10,7 @@ import Foundation
 
 protocol OptionViewDelegate: AnyObject {
   
-  func choiceChangedTo(internalValue: Int)
+  func choiceChangedTo(internalValue: Int16)
   // Called by choice label when choice is selected.
   
   func getViewData() -> CardViewData
