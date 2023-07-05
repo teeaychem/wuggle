@@ -87,8 +87,7 @@ class FinalFoundWordsViewController: UIViewController {
     for seeWord in noseeSorted {
       if (seeWord == seeSorted[seeIndex]) {
         seeIndex += 1
-        print("found")
-        // Shade
+        // TODO: Shade
         noseeWordView.updateNoScroll(word: seeWord)
       } else {
         noseeWordView.updateNoScroll(word: seeWord)

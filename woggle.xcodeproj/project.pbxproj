@@ -19,6 +19,12 @@
 		57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */; };
 		57BADD882A4A4E55009074DF /* GameWordExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD872A4A4E55009074DF /* GameWordExtension.swift */; };
 		57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3732A5481150097D1D2 /* StatusBarView.swift */; };
+		57E2F3772A54E1420097D1D2 /* SettingsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */; };
+		57E2F37A2A54E5850097D1D2 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3792A54E5850097D1D2 /* IconView.swift */; };
+		57E2F3802A54E59D0097D1D2 /* TimeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F37C2A54E59D0097D1D2 /* TimeIcon.swift */; };
+		57E2F3812A54E59D0097D1D2 /* TileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F37D2A54E59D0097D1D2 /* TileIcon.swift */; };
+		57E2F3822A54E59D0097D1D2 /* LengthIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F37E2A54E59D0097D1D2 /* LengthIcon.swift */; };
+		57E2F3832A54E59D0097D1D2 /* LexiconIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F37F2A54E59D0097D1D2 /* LexiconIcon.swift */; };
 		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
 		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
 		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
@@ -81,6 +87,12 @@
 		57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewWordCell.swift; sourceTree = "<group>"; };
 		57BADD872A4A4E55009074DF /* GameWordExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWordExtension.swift; sourceTree = "<group>"; };
 		57E2F3732A5481150097D1D2 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
+		57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewController.swift; sourceTree = "<group>"; };
+		57E2F3792A54E5850097D1D2 /* IconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		57E2F37C2A54E59D0097D1D2 /* TimeIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeIcon.swift; sourceTree = "<group>"; };
+		57E2F37D2A54E59D0097D1D2 /* TileIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileIcon.swift; sourceTree = "<group>"; };
+		57E2F37E2A54E59D0097D1D2 /* LengthIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LengthIcon.swift; sourceTree = "<group>"; };
+		57E2F37F2A54E59D0097D1D2 /* LexiconIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexiconIcon.swift; sourceTree = "<group>"; };
 		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
 		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
 		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
@@ -179,6 +191,35 @@
 			path = StatusBar;
 			sourceTree = "<group>";
 		};
+		57E2F3752A54E12E0097D1D2 /* SettingsCard */ = {
+			isa = PBXGroup;
+			children = (
+				57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */,
+				57E2F3782A54E57A0097D1D2 /* Icons */,
+			);
+			path = SettingsCard;
+			sourceTree = "<group>";
+		};
+		57E2F3782A54E57A0097D1D2 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				57E2F3792A54E5850097D1D2 /* IconView.swift */,
+				57E2F37B2A54E58D0097D1D2 /* Instances */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		57E2F37B2A54E58D0097D1D2 /* Instances */ = {
+			isa = PBXGroup;
+			children = (
+				57E2F37E2A54E59D0097D1D2 /* LengthIcon.swift */,
+				57E2F37F2A54E59D0097D1D2 /* LexiconIcon.swift */,
+				57E2F37D2A54E59D0097D1D2 /* TileIcon.swift */,
+				57E2F37C2A54E59D0097D1D2 /* TimeIcon.swift */,
+			);
+			path = Instances;
+			sourceTree = "<group>";
+		};
 		57EB7A3F2A47817C00BCA44B /* Cards */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +227,7 @@
 				57EB7A4E2A479C2D00BCA44B /* CardViewData.swift */,
 				57EB7A482A478BF500BCA44B /* CardViewController.swift */,
 				57EF4B6D2A4665D8008C57FF /* CardView.swift */,
+				57E2F3752A54E12E0097D1D2 /* SettingsCard */,
 				57EB7A402A47818600BCA44B /* GameCard */,
 			);
 			path = Cards;
@@ -460,15 +502,19 @@
 				5741FA292A53782E00B4164D /* FinalFoundWords.swift in Sources */,
 				57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */,
 				57EB7A512A47A65000BCA44B /* GameInstanceExtension.swift in Sources */,
+				57E2F3772A54E1420097D1D2 /* SettingsCardViewController.swift in Sources */,
 				57EB7A4D2A47950500BCA44B /* UIViewControllerExtension.swift in Sources */,
 				57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */,
 				57EF4B6C2A466528008C57FF /* CardStackViewController.swift in Sources */,
 				57455B412A4CFF8C0019FFB5 /* PlayButtonsViewController.swift in Sources */,
+				57E2F3802A54E59D0097D1D2 /* TimeIcon.swift in Sources */,
 				57506C1F2A48D80500367AE9 /* StopwatchViewController.swift in Sources */,
+				57E2F37A2A54E5850097D1D2 /* IconView.swift in Sources */,
 				57506C212A48D82900367AE9 /* StopwatchView.swift in Sources */,
 				570A572D2A4B83BA006129FD /* CardStackProtocol.swift in Sources */,
 				57EF4B432A4664F2008C57FF /* woggle.xcdatamodeld in Sources */,
 				57EF4B3D2A4664F2008C57FF /* ViewController.swift in Sources */,
+				57E2F3822A54E59D0097D1D2 /* LengthIcon.swift in Sources */,
 				57EB7A492A478BF500BCA44B /* CardViewController.swift in Sources */,
 				57EB7A4B2A478CF000BCA44B /* GameCardViewController.swift in Sources */,
 				5782956E2A4A03E60038B48F /* SettingsExtension.swift in Sources */,
@@ -480,6 +526,8 @@
 				57BADD842A4A45F3009074DF /* FoundWordView.swift in Sources */,
 				57EB7A562A47A83900BCA44B /* TileView.swift in Sources */,
 				57EB7A582A47A99D00BCA44B /* UIRelated.swift in Sources */,
+				57E2F3812A54E59D0097D1D2 /* TileIcon.swift in Sources */,
+				57E2F3832A54E59D0097D1D2 /* LexiconIcon.swift in Sources */,
 				57EF4B7A2A466F47008C57FF /* MiscFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

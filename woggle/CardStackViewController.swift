@@ -30,7 +30,7 @@ class CardStackViewController: UIViewController {
     width = min(((UIScreen.main.bounds.size.height)/1.4/1.16)*0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
     
-    let settCardVD = CardViewData(name: "sett", width: width, colour: UIColor.white.cgColor)
+    let settCardVD = CardViewData(name: "sett", width: width, colour: UIColor.black.cgColor)
     let statCardVD = CardViewData(name: "sett", width: width, colour: UIColor.darkGray.cgColor)
     let gameCardVD = CardViewData(name: "game", width: width, colour: UIColor.gray.cgColor)
     
@@ -40,18 +40,16 @@ class CardStackViewController: UIViewController {
     
     super.init(nibName: nil, bundle: nil)
 
-    let settCardC = CardViewController(viewData: settCardVD, delegate: self)
+    let settCardC = SettingsCardViewController(viewData: settCardVD, delegate: self)
     let statCardC = CardViewController(viewData: statCardVD, delegate: self)
     let gameCardC = GameCardViewController(viewData: gameCardVD, delegate: self)
     
-    cardViews = [settCardC, statCardC, gameCardC]
+    cardViews = [statCardC, settCardC, gameCardC]
 
 
     self.embed(statCardC, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY), size: statCardVD.cardSize))
     self.embed(settCardC, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY + gameCardVD.statusBarHeight), size: settCardVD.cardSize))
     self.embed(gameCardC, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY + gameCardVD.statusBarHeight * 2), size: gameCardVD.cardSize))
-    
-    reorderCardsByList()
     
     for cV in cardViews {
       cV.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
