@@ -10,34 +10,8 @@ import UIKit
 
 
 class LexiconIcon: IconView {
-  
-  let bookHeight: Double
-  let bookWidth: Double
-  let bookSquish = Double(1.5)
-  let bookEllipseAngle = Double.pi/8
-  
-  let lambdaStrokeWidth: CGFloat
-  let bookStrokeWidth: CGFloat
-  
-  let bookColour = UIColor.gray.cgColor
-  let lambdaColour = UIColor.lightGray.cgColor
-  
-  let bookBaseX: Double
-  let bookBaseY: Double
-  let bookBasePoint: CGPoint
     
   override init(size s: CGFloat) {
-    
-    bookHeight = Double(s*0.7)
-    bookWidth = Double((bookHeight * 2)/3)
-    
-    lambdaStrokeWidth = CGFloat(bookHeight)/12
-    bookStrokeWidth = CGFloat(bookHeight)/15
-    
-    bookBaseX = Double(s*0.38)
-    bookBaseY = Double(s*0.96)
-
-    bookBasePoint = CGPoint(x: bookBaseX, y: bookBaseY)
     
     super.init(size: s)
     
@@ -105,34 +79,4 @@ class LexiconIcon: IconView {
     layer.addSublayer(letterLayer)
   }
   
-
-}
-
-
-func getEllipsePoint(origin: CGPoint, radius: Double, squish: Double, theta: Double) -> CGPoint {
-  // See the following link for details
-  // https://math.stackexchange.com/questions/22064/calculating-a-point-that-lies-on-an-ellipse-given-an-angle/22067#22067
-  
-  let a = radius
-  let b = radius/squish
-  
-  let ab = a * b
-  
-  let aSinTheta = a * sin(theta)
-  let bCosTheta = b * cos(theta)
-  
-  let denom = sqrt((bCosTheta * bCosTheta) + (aSinTheta * aSinTheta))
-  
-  var xPos = ((ab * cos(theta)) / denom)
-  var yPos = ((ab * sin(theta)) / denom)
-  
-  if !(Double.pi/2 < theta || theta < (Double.pi*2)/3) {
-    xPos = -xPos
-    yPos = -yPos
-  }
-  
-  xPos = xPos + Double(origin.x)
-  yPos = Double(origin.y) - yPos
-  
-  return CGPoint(x: xPos, y: yPos)
 }

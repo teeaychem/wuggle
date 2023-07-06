@@ -9,21 +9,11 @@
 import UIKit
 
 class TileIcon: IconView {
-  
-  let tileColour = UIColor.gray.cgColor
-  let textColour = UIColor.lightGray.cgColor
-  
-  let textStrokeWidth: CGFloat
-  
-  let centerPoint: CGPoint
-  
+        
   var textLayers = [CAShapeLayer]()
   
   
   override init(size s: CGFloat) {
-    
-    textStrokeWidth = CGFloat(s)/12
-    centerPoint = CGPoint(x: s/2, y: s/2)
     
     super.init(size: s)
 
@@ -50,7 +40,7 @@ class TileIcon: IconView {
     let tileLayer = CAShapeLayer()
     tileLayer.path = tile.cgPath
     
-    tileLayer.fillColor = tileColour
+    tileLayer.fillColor = UIColor.gray.cgColor
     tileLayer.strokeColor = UIColor.black.cgColor
     tileLayer.lineWidth = 0.5
     
@@ -73,8 +63,8 @@ class TileIcon: IconView {
       
       lay.position.x = lay.position.x + size * 0.3
       lay.position.y = lay.position.y + 2 * indent
-      lay.fillColor = textColour
-      lay.strokeColor = textColour
+      lay.fillColor = UIColor.lightGray.cgColor
+      lay.strokeColor = UIColor.lightGray.cgColor
       
       textLayers.append(lay)
       layer.addSublayer(lay)

@@ -76,16 +76,13 @@ func getFontFor(height: CGFloat) -> Double {
   
   
   if fontByHeightDict.keys.contains(height) {
-    print("Stored")
     return fontByHeightDict[height]!
   } else {
-    let tolerance = 1.00
-    var fontMax = 200.00
+    let tolerance = 0.5
+    var fontMax = 400.00
     var fontMin = 2.00
     
     while (fontMax - fontMin) > tolerance {
-//      print("fontMax", fontMax)
-//      print("fontMin", fontMin)
       
       let fontSplit = (fontMax + fontMin) * 0.5
       
@@ -93,7 +90,7 @@ func getFontFor(height: CGFloat) -> Double {
         NSAttributedString.Key.font : UIFont(name: uiFontName, size: fontSplit)!
       ]
       let testString = NSMutableAttributedString(string: "Q", attributes: testAttributes)
-      let fontHeight = testString.boundingRect(with: CGSize(width: 100, height: CGFloat.Magnitude.greatestFiniteMagnitude), context: nil).height
+      let fontHeight = testString.boundingRect(with: CGSize(width: CGFloat.Magnitude.greatestFiniteMagnitude, height: CGFloat.Magnitude.greatestFiniteMagnitude), context: nil).height
       if (fontHeight > height) {
         fontMax = fontSplit
       } else {

@@ -12,20 +12,11 @@ class TileView: UIView {
   
   let text: String
   var letterLayers: [CAShapeLayer] = []
-  let tileFont: UIFont
-  var angle = CGFloat(0)
   let size: CGFloat
-  let tileFrame: CGRect
-  
-  
+    
   init(position p: CGPoint, size s: CGFloat, boardSize bS: CGFloat, text t: String) {
 
     size = s
-    tileFrame = CGRect(x: p.x, y: p.y, width: size, height: size)
-    
-    let fontSizeAdjust = (getFontPixelSize(fontSize: 12) * size) * 0.5
-    
-    tileFont = UIFont(name: tileFontName, size: fontSizeAdjust)!
 
     
     if (t == "!") {
@@ -34,11 +25,11 @@ class TileView: UIView {
       text = t.capitalized
     }
     
-    super.init(frame: tileFrame)
+    super.init(frame: CGRect(x: p.x, y: p.y, width: size, height: size))
     
     layer.cornerRadius = getCornerRadius(width: bS)
     
-    letterLayers = getStringLayers(text: text, font: tileFont)
+    letterLayers = getStringLayers(text: text, font: UIFont(name: tileFontName, size: getFontFor(height: size))!)
     
     var lastWidth = CGFloat(0)
     var maxHeight = CGFloat(0)

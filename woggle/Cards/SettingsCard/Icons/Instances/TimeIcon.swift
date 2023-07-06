@@ -15,7 +15,6 @@ class TimeIcon : IconView {
   let handColour = UIColor.lightGray.cgColor
   
   let handStrokeWidth: CGFloat
-  
   let centerPoint: CGPoint
   
   var handLayer: CAShapeLayer?
