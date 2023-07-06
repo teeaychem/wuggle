@@ -18,9 +18,9 @@ class CardStackViewController: UIViewController {
   private let firstCardY: CGFloat
   private let statusBarH: CGFloat
   
-  private var settCardC: SettingsCardViewController?
-  private var statCardC: CardViewController?
-  private var gameCardC: GameCardViewController?
+  var settCardC: SettingsCardViewController?
+  var statCardC: CardViewController?
+  var gameCardC: GameCardViewController?
   
   private var cardViews: [CardViewController] = []
   private var cardOrigin: CGFloat = 0.0
@@ -104,14 +104,6 @@ extension CardStackViewController: CardStackDelegate {
   
   
   func processUpdate() {
-    print(settings.managedObjectContext?.hasChanges)
-    settings.managedObjectContext?.didChangeValue(forKey: "lexicon")
-    print(settings.managedObjectContext?.hasChanges)
-//    do {
-//      try settings.managedObjectContext?.save()
-//    } catch {
-//      print("fail")
-//    }
     print("Asked to process update")
   }
   

@@ -49,15 +49,15 @@ class SettingsCardViewController: CardViewController {
     
   override func broughtToTop() {
     super.broughtToTop()
-    optionViews["time"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding(), y: viewData.statusBarHeight * 1.25, width: viewData.width - viewData.gameBoardPadding() * 2, height: viewData.statusBarHeight), displayName: "Time", displayOptions: ["1", "2", "3", "5", "7", "∞"], internalName: "time", internalOptions: [1, 2, 3, 5, 7, 0], vertical: false, delegate: self)
-    optionViews["lexicon"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding(), y: optionViews["time"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding() * 2, height: viewData.statusBarHeight), displayName: "lexicon", displayOptions: ["Many words", "Jane Austen", "Virgina Woolf", "King James Bible", "Shakespeare"], internalName: "lexicon", internalOptions: [0, 1, 2, 3, 4], vertical: true, delegate: self)
-    optionViews["length"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding(), y: optionViews["lexicon"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding() * 2, height: viewData.statusBarHeight), displayName: "Word Length", displayOptions: ["3+", "4+", "5+", "6+"], internalName: "length", internalOptions: [3, 4, 5, 6], vertical: false, delegate: self)
-    optionViews["tiles"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding(), y: optionViews["length"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding() * 2, height: viewData.statusBarHeight), displayName: "Tiles", displayOptions: ["4²", "5²", "6²", "7²", "8²"], internalName: "tiles", internalOptions: [4, 5, 6, 7, 8], vertical: false, delegate: self)
+    optionViews["time"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: viewData.statusBarHeight * 1.25, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarHeight), displayName: "Time", displayOptions: ["1", "2", "3", "5", "7", "∞"], internalName: "time", internalOptions: [1, 2, 3, 5, 7, 0], vertical: false, delegate: self)
+    optionViews["lexicon"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["time"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarHeight), displayName: "lexicon", displayOptions: ["Many words", "Jane Austen", "Virgina Woolf", "King James Bible", "Shakespeare"], internalName: "lexicon", internalOptions: [0, 1, 2, 3, 4], vertical: true, delegate: self)
+    optionViews["length"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["lexicon"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarHeight), displayName: "Word Length", displayOptions: ["3+", "4+", "5+", "6+"], internalName: "length", internalOptions: [3, 4, 5, 6], vertical: false, delegate: self)
+    optionViews["tiles"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["length"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarHeight), displayName: "Tiles", displayOptions: ["4²", "5²", "6²", "7²", "8²"], internalName: "tiles", internalOptions: [4, 5, 6, 7, 8], vertical: false, delegate: self)
     
     for optionView in optionViews.values {
       view.addSubview(optionView)
       optionView.addAndEnableChoiceLabels()
-      let sep = UIView(frame: CGRect(x: viewData.gameBoardPadding(), y: optionView.frame.maxY, width: viewData.width - viewData.gameBoardPadding() * 2, height: viewData.height * 0.005))
+      let sep = UIView(frame: CGRect(x: viewData.gameBoardPadding, y: optionView.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.height * 0.005))
       sep.layer.backgroundColor = UIColor.darkGray.cgColor
       view.addSubview(sep)
     }

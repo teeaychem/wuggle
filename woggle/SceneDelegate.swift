@@ -12,7 +12,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
   // Store a general reference to the settings.
-  var testSettings: Settings?
+  var settingsToUse: Settings?
+  var stackViewController: CardStackViewController?
 
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -23,24 +24,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     let window = UIWindow(windowScene: w)
     
+    // See if there's already some settings to pull from!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let settingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
     do {
       let result = try context.fetch(settingsFetchRequest)
       
       if result.count > 0 {
-        testSettings = (result.first as! Settings)
+        settingsToUse = (result.first as! Settings)
         // TODO: Delete other instances.
       } else {
         // If nothing found, default settings.
-        testSettings = Settings(context: context)
+        settingsToUse = Settings(context: context)
       }
     } catch {
       // If load fails, things should be fine with default settings.
-      testSettings = Settings(context: context)
+      settingsToUse = Settings(context: context)
     }
+    stackViewController = CardStackViewController(settings: settingsToUse!)
 
-    window.rootViewController = CardStackViewController(settings: testSettings!)
+    window.rootViewController = stackViewController!
     self.window = window
     window.makeKeyAndVisible()
   }
@@ -51,6 +54,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // This occurs shortly after the scene enters the background, or when its session is discarded.
     // Release any resources associated with this scene that can be re-created the next time the scene connects.
     // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+    
+//    (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
   }
 
   func sceneDidBecomeActive(_ scene: UIScene) {
@@ -61,6 +66,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func sceneWillResignActive(_ scene: UIScene) {
     // Called when the scene will move from an active state to an inactive state.
     // This may occur due to temporary interruptions (ex. an incoming phone call).
+    stackViewController!.gameCardC?.pauseGameMain(animated: false)
+    (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
   }
 
   func sceneWillEnterForeground(_ scene: UIScene) {
@@ -74,14 +81,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // to restore the scene back to its current state.
 
     // Save changes in the application's managed object context when the application transitions to the background.
-//        do {
-//          try testSettings?.managedObjectContext?.save()
-//        } catch {
-//          print("fail")
-//        }
-    print("test")
-//    print(UIApplication.shared.delegate)
-    (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    
+//    (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
   }
 
 

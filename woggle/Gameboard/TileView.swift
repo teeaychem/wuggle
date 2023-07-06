@@ -77,27 +77,11 @@ class TileView: UIView {
     let borderWidth = size*0.02
     
     if animated {
-//      let bgcl = CABasicAnimation(keyPath: "backgroundColor")
-//      bgcl.fromValue = UIColor.clear.cgColor
-//      bgcl.toValue = tileBackgroundColour.cgColor
-//
-//      CATransaction.begin()
-//      CATransaction.setAnimationDuration(tileAnimDuration)
-//      layer.backgroundColor = tileBackgroundColour.cgColor
-//      layer.borderWidth = borderWidth
-//      CATransaction.commit()
-//
-//      layer.add(bgcl, forKey: bgcl.keyPath)
-      
       for lay in letterLayers {
         animateStringLayerAppear(layer: lay)
         lay.lineWidth = borderWidth
       }
     } else {
-      
-//      layer.backgroundColor = tileBackgroundColour.cgColor
-//      layer.borderWidth = borderWidth
-      
       for lay in letterLayers {
         lay.opacity = 1
         lay.strokeEnd = 1
@@ -115,26 +99,10 @@ class TileView: UIView {
     }
     
     if animated {
-      
-//      let col = CABasicAnimation(keyPath: "backgroundColor")
-//      col.fromValue = tileBackgroundColour.cgColor
-//      col.toValue = UIColor.clear.cgColor
-//
-//      CATransaction.begin()
-//      CATransaction.setAnimationDuration(tileAnimDuration)
-//      layer.backgroundColor = UIColor.clear.cgColor
-//      layer.borderWidth = 0
-//      CATransaction.commit()
-//
-//      layer.add(col, forKey: col.keyPath)
-      
       for lay in letterLayers {
         animateStringLayerDisappear(layer: lay)
       }
     } else {
-      
-//      layer.backgroundColor = UIColor.clear.cgColor
-//      layer.borderWidth = 0
       
       for lay in letterLayers {
         lay.opacity = 0

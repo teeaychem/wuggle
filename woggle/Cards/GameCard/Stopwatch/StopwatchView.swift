@@ -25,13 +25,13 @@ class StopwatchView: UIView {
   
   init(viewData vD: CardViewData) {
     
-    watchSize = vD.stopWatchSize()
-    indent = vD.tilePadding()
+    watchSize = vD.stopWatchSize
+    indent = vD.tilePadding
     lineWidth = watchSize * 0.05
     centerFLoat = watchSize  * 0.5
     watchRadius = watchSize * 0.4
     secondsLength = (watchRadius * 0.9) - (lineWidth)
-    cornerRadius = getCornerRadius(width: vD.gameBoardSize())
+    cornerRadius = getCornerRadius(width: vD.gameBoardSize)
     
     super.init(frame: CGRect(x: 0, y: 0, width: watchSize, height: watchSize))
     

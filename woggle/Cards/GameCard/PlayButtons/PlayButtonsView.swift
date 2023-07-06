@@ -31,8 +31,8 @@ class PlayButtonsView: UIView {
   
   init(viewData vD: CardViewData) {
     
-    buttonSize = vD.playPauseStopSize()
-    xPadding = vD.gameBoardPadding() * 0.5
+    buttonSize = vD.playPauseStopSize
+    xPadding = vD.gameBoardPadding * 0.5
     subButtonWidth = buttonSize.width - (xPadding * 2)
     yPadding = (buttonSize.height - (2 * (subButtonWidth))) / 3
     iconIndent = xPadding * 1.5

@@ -46,9 +46,9 @@ class GameboardView: UIView {
   }
   
   
-  func hideTileViews() {
+  func hideTileViews(animated a: Bool) {
     for tile in tiles.values {
-      tile.disappear(animated: true)
+      tile.disappear(animated: a)
     }
   }
   

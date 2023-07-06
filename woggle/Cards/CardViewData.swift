@@ -12,41 +12,35 @@ class CardViewData {
     
   let name: String
   let width: CGFloat
+  var colour: CGColor
+  
   let height: CGFloat
   let cardSize: CGSize
   let statusBarHeight: CGFloat
-  var colour: CGColor
+  let gameBoardSize: CGFloat
+  let tilePadding: CGFloat
+  let gameBoardPadding: CGFloat
   
-  init(name: String, width: CGFloat, colour: CGColor) {
-    self.name = name
-    self.width = width
-    self.height = width * 1.4
-    self.cardSize = CGSize(width: width, height: height)
-    self.colour = colour
-    self.statusBarHeight = height * 0.07
-  }
+  let stopWatchSize: CGFloat
+  let playPauseStopSize: CGSize
+  let foundWordViewWidth: CGFloat
   
   
-  func gameBoardSize() -> CGFloat {
-    return width * 0.95
-  }
-  
-  
-  func gameBoardPadding() -> CGFloat {
-    return (width - gameBoardSize()) * 0.5
-  }
-  
-  
-  func stopWatchSize() -> CGFloat {
-    height - ((3 * gameBoardPadding()) + gameBoardSize() + statusBarHeight)
-  }
-  
-  func playPauseStopSize() -> CGSize {
-    CGSize(width: stopWatchSize() * 0.5, height: stopWatchSize())
-  }
-  
-  func tilePadding() -> CGFloat {
-    gameBoardSize() * 0.01
+  init(name n: String, width w: CGFloat, colour c: CGColor) {
+    name = n
+    width = w
+    colour = c
+    height = width * 1.4
+
+    cardSize = CGSize(width: width, height: height)
+    statusBarHeight = height * 0.07
+    gameBoardSize = width * 0.95
+    tilePadding = gameBoardSize * 0.01
+    gameBoardPadding = (width - gameBoardSize) * 0.5
+    
+    stopWatchSize = height - (3 * gameBoardPadding + gameBoardSize + statusBarHeight)
+    playPauseStopSize = CGSize(width: stopWatchSize * 0.5, height: stopWatchSize)
+    foundWordViewWidth = width - ((4 * gameBoardPadding) + (1.5 * stopWatchSize))
   }
   
  func getSettingsTextAttributePlain(height: CGFloat) -> [NSAttributedString.Key : Any] {

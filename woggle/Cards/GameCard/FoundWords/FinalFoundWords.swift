@@ -19,28 +19,28 @@ class FinalFoundWordsViewController: UIViewController {
   init(viewData vD: CardViewData) {
     
     // TODO: Fix this
-    wordViewWidth = (vD.gameBoardSize() * 0.85 - (3 * vD.tilePadding())) * 0.5
-    wordViewHeight = vD.gameBoardSize() * 0.85 - (2 * vD.tilePadding())
+    wordViewWidth = (vD.gameBoardSize * 0.85 - (3 * vD.tilePadding)) * 0.5
+    wordViewHeight = vD.gameBoardSize * 0.85 - (2 * vD.tilePadding)
     
     wordViewSize = CGSize(width: wordViewWidth, height: wordViewHeight)
-    fontSize = wordViewSize.height * 0.05
+    fontSize = vD.stopWatchSize * 0.2
     
     foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight), rowHieght: fontSize)
-    foundWordView.frame.origin = CGPoint(x: vD.tilePadding(), y: vD.tilePadding())
+    foundWordView.frame.origin = CGPoint(x: vD.tilePadding, y: vD.tilePadding)
     
     
     noseeWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight), rowHieght: fontSize)
-    noseeWordView.frame.origin = CGPoint(x: vD.tilePadding() * 2 + wordViewWidth, y: vD.tilePadding())
+    noseeWordView.frame.origin = CGPoint(x: vD.tilePadding * 2 + wordViewWidth, y: vD.tilePadding)
     
-    foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
-    noseeWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
+    foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
+    noseeWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
     foundWordView.backgroundColor = UIColor.lightGray
     noseeWordView.backgroundColor = UIColor.lightGray
     
     super.init(nibName: nil, bundle: nil)
     
     view.backgroundColor = UIColor.darkGray
-    view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
+    view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
   }
   
   

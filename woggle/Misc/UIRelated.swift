@@ -36,7 +36,7 @@ let settingsMenuBackgroundColour = UIColor.lightGray
 let settingsTextColour = UIColor.darkGray
 let settingsTextSelectedColour = UIColor.lightGray
 
-let tileAnimDuration = 0.5
+let tileAnimDuration = 1.0
 
 let defaultAnimationDuration = 10.0
 

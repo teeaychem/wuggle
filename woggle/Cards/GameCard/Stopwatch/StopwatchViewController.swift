@@ -16,10 +16,10 @@ class StopwatchViewController: UIViewController {
   init(viewData vD: CardViewData) {
     
     viewData = vD
-    size = vD.stopWatchSize()
+    size = vD.stopWatchSize
     watchView = StopwatchView(viewData: vD)
     
-    watchView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
+    watchView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
     
     super.init(nibName: nil, bundle: nil)
   }

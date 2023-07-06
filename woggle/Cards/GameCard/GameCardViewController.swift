@@ -46,7 +46,7 @@ class GameCardViewController: CardViewController {
     // TODO: Collect together reused terms
     
     // Fix controllers  for the current views
-    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize(), tilePadding: vD.tilePadding())
+    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize, tilePadding: vD.tilePadding)
     stopwatchViewController = StopwatchViewController(viewData: vD)
     playButtonsViewController = PlayButtonsViewController(viewData: vD)
     foundWordsViewController = FoundWordsViewController(viewData: vD)
@@ -71,11 +71,11 @@ class GameCardViewController: CardViewController {
     super.viewDidLoad()
     
     // TODO: board needs to be last in order for touch to work.
-    self.embed(boardViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding(), y: viewData.height - (viewData.gameBoardSize() + viewData.gameBoardPadding())), size: CGSize(width: viewData.gameBoardSize(), height: viewData.gameBoardSize())))
+    self.embed(boardViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.height - (viewData.gameBoardSize + viewData.gameBoardPadding)), size: CGSize(width: viewData.gameBoardSize, height: viewData.gameBoardSize)))
     boardViewController.addGameboardView()
-    self.embed(stopwatchViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding(), y: viewData.gameBoardPadding() + viewData.statusBarHeight), size: CGSize(width: viewData.stopWatchSize(), height: viewData.stopWatchSize())))
-    self.embed(playButtonsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: (2 * viewData.gameBoardPadding() + viewData.stopWatchSize()), y: (viewData.gameBoardPadding() + viewData.statusBarHeight)), size: CGSize(width: viewData.stopWatchSize() * 0.5, height: viewData.stopWatchSize())))
-    self.embed(foundWordsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: ((3 * viewData.gameBoardPadding()) + (1.5 * viewData.stopWatchSize())), y: (viewData.gameBoardPadding() + viewData.statusBarHeight)), size: CGSize(width: viewData.width - ((4 * viewData.gameBoardPadding()) + (1.5 * viewData.stopWatchSize())), height: viewData.stopWatchSize())))
+    self.embed(stopwatchViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.gameBoardPadding + viewData.statusBarHeight), size: CGSize(width: viewData.stopWatchSize, height: viewData.stopWatchSize)))
+    self.embed(playButtonsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.stopWatchSize), y: (viewData.gameBoardPadding + viewData.statusBarHeight)), size: CGSize(width: viewData.stopWatchSize * 0.5, height: viewData.stopWatchSize)))
+    self.embed(foundWordsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: ((3 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), y: (viewData.gameBoardPadding + viewData.statusBarHeight)), size: CGSize(width: viewData.width - ((4 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), height: viewData.stopWatchSize)))
     
     // TODO: Only add this when a game is in progress.
     
@@ -129,15 +129,20 @@ extension GameCardViewController {
   func onLoad() {
     
     if delegate!.currentSettings().getCurrentGame() != nil {
-      // If there's already a game, set things with stored data.
-      playButtonsViewController.paintStopIcon()
-      playButtonsViewController.stopAddGesture(gesture: stopGR!)
-      playButtonsViewController.paintPlayIcon()
       
       boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
       stopwatchViewController.incrementHand(percent: delegate!.currentGameInstance()!.timeUsedPercent)
       for word in delegate!.currentGameInstance()!.foundWordsList! {
         foundWordsViewController.update(word: word)
+      }
+      
+      if delegate!.currentGameInstance()!.timeUsedPercent < 1 {
+        // If there's already a game, set things with stored data.
+        playButtonsViewController.paintStopIcon()
+        playButtonsViewController.stopAddGesture(gesture: stopGR!)
+        playButtonsViewController.paintPlayIcon()
+      } else {
+        endGameMain()
       }
     } else {
       // Otherwise, let the user start a game.
@@ -155,6 +160,8 @@ extension GameCardViewController {
 
     // Remove all the tiles from the previous game.
     boardViewController.removeAllTileViews()
+    // Clear foundWords
+    foundWordsViewController.clear()
     // Get a new game.
     delegate?.currentSettings().setNewGame()
     delegate?.currentGameInstance()?.findAndSavePossibleWords()
@@ -182,9 +189,9 @@ extension GameCardViewController {
   }
   
   
-  func pauseGameMain() {
+  func pauseGameMain(animated a: Bool) {
     displayLinkOne?.invalidate()
-    boardViewController.gameboardView.hideTileViews()
+    boardViewController.gameboardView.hideTileViews(animated: a)
     playButtonsViewController.paintPlayIcon()
     boardViewController.removeAllGestureRecognizers()
     gameInProgess = false
@@ -204,7 +211,7 @@ extension GameCardViewController {
     stopwatchViewController.view.removeGestureRecognizer(watchGestureRecognizer!)
     // Display final words
     finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
-    self.embed(finalWordsViewController!, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding() + viewData.gameBoardSize() * 0.075, y: viewData.height - viewData.gameBoardSize() * 0.925 - viewData.gameBoardPadding()), size: CGSize(width: viewData.gameBoardSize() * 0.85, height: viewData.gameBoardSize() * 0.85)))
+    self.embed(finalWordsViewController!, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding + viewData.gameBoardSize * 0.075, y: viewData.height - viewData.gameBoardSize * 0.925 - viewData.gameBoardPadding), size: CGSize(width: viewData.gameBoardSize * 0.85, height: viewData.gameBoardSize * 0.85)))
     finalWordsViewController?.addWordsAsFound(words: delegate!.currentGameInstance()!.foundWordsList!)
     finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate!.currentGameInstance()!.allWordsList!), seeWords: delegate!.currentGameInstance()!.foundWordsList!)
     // Add gesture to see board.
@@ -283,13 +290,15 @@ extension GameCardViewController {
   
   @objc func didTapOnTime(_ sender: UITapGestureRecognizer) {
     guard delegate!.currentGameInstance() != nil else { return }
-    print("Tip and game instance")
+    // Stopwatch tap only works for controlling a gamme.
+    // Does not create a new game, etc.
+    
     if (delegate!.currentGameInstance()!.timeUsedPercent > 1) {
       // Game is over
       endGameMain()
     } else {
       if (gameInProgess) {
-        pauseGameMain()
+        pauseGameMain(animated: true)
       } else {
         resumeGameMain()
       }
@@ -299,7 +308,7 @@ extension GameCardViewController {
   
   @objc func didTapOnPlayPause(_ sender: UITapGestureRecognizer) {
     if gameInProgess {
-      pauseGameMain()
+      pauseGameMain(animated: true)
     } else {
       if (delegate!.currentGameInstance() != nil && delegate!.currentGameInstance()!.timeUsedPercent < 1) {
         resumeGameMain()

@@ -11,25 +11,20 @@ class FoundWordsViewController: UIViewController {
   
   private let wordViewWidth: CGFloat
   private let wordViewHeight: CGFloat
-  private let wordViewSize: CGSize
-  private let fontSize: CGFloat
   private let foundWordView: FoundWordView
   
   init(viewData vD: CardViewData) {
     
-    wordViewWidth = vD.width - ((4 * vD.gameBoardPadding()) + (1.5 * vD.stopWatchSize()))
-    wordViewHeight = vD.stopWatchSize()
+    wordViewWidth = vD.foundWordViewWidth
+    wordViewHeight = vD.stopWatchSize
     
-    wordViewSize = CGSize(width: wordViewWidth, height: wordViewHeight)
-    fontSize = wordViewSize.height * 0.15
-    
-    foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth - 2 * vD.tilePadding(), height: wordViewHeight - 2 * vD.tilePadding()), rowHieght: fontSize)
+    foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth - 2 * vD.tilePadding, height: wordViewHeight - 2 * vD.tilePadding), rowHieght: wordViewHeight * 0.2)
     
     super.init(nibName: nil, bundle: nil)
     
-    self.view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
-    foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize())
-    foundWordView.frame.origin = CGPoint(x: vD.tilePadding(), y: vD.tilePadding())
+    self.view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
+    foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
+    foundWordView.frame.origin = CGPoint(x: vD.tilePadding, y: vD.tilePadding)
   }
   
   
@@ -47,12 +42,17 @@ class FoundWordsViewController: UIViewController {
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    view.frame.size = wordViewSize
+    view.frame.size = CGSize(width: wordViewWidth, height: wordViewHeight)
   }
   
   
   func update(word: String) {
     foundWordView.updateAndScroll(word: word)
+  }
+  
+  
+  func clear() {
+    foundWordView.clearWords()
   }
   
   
