@@ -129,13 +129,18 @@ extension GameCardViewController {
   func onLoad() {
     
     if delegate!.currentSettings().getCurrentGame() != nil {
+      // If there's already a game, set things with stored data.
       playButtonsViewController.paintStopIcon()
       playButtonsViewController.stopAddGesture(gesture: stopGR!)
       playButtonsViewController.paintPlayIcon()
       
       boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
       stopwatchViewController.incrementHand(percent: delegate!.currentGameInstance()!.timeUsedPercent)
+      for word in delegate!.currentGameInstance()!.foundWordsList! {
+        foundWordsViewController.update(word: word)
+      }
     } else {
+      // Otherwise, let the user start a game.
       playButtonsViewController.paintNewGameIcon()
     }
   }
