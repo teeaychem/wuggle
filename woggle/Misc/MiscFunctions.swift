@@ -54,6 +54,9 @@ func getPoints(word: String) -> Int {
 //  }
 }
 
+
+var fontByHeightDict = Dictionary<CGFloat, Double>() //   [CGFloat: Double]()
+
 func getFontFor(height: CGFloat) -> Double {
   // I want to scale the font used so that it matches the size of the display.
   // All of the frames, etc. I use are calculated relative to the size of the screen.
@@ -70,27 +73,36 @@ func getFontFor(height: CGFloat) -> Double {
   // Keep doing this until the difference between min and max is neglibile.
   // Finally, store the result in a dictionary.
   // I'll use the same height a lot, and so will save much effort by storing.
-  let tolerance = 1.00
-  var fontMax = 200.00
-  var fontMin = 2.00
   
-  while (fontMax - fontMin) > tolerance {
-    print("fontMax", fontMax)
-    print("fontMin", fontMin)
+  
+  if fontByHeightDict.keys.contains(height) {
+    print("Stored")
+    return fontByHeightDict[height]!
+  } else {
+    let tolerance = 1.00
+    var fontMax = 200.00
+    var fontMin = 2.00
     
-    let fontSplit = (fontMax + fontMin) * 0.5
-    
-    let testAttributes = [
-      NSAttributedString.Key.font : UIFont(name: uiFontName, size: fontSplit)!
+    while (fontMax - fontMin) > tolerance {
+//      print("fontMax", fontMax)
+//      print("fontMin", fontMin)
+      
+      let fontSplit = (fontMax + fontMin) * 0.5
+      
+      let testAttributes = [
+        NSAttributedString.Key.font : UIFont(name: uiFontName, size: fontSplit)!
       ]
-    let testString = NSMutableAttributedString(string: "Q", attributes: testAttributes)
-    let fontHeight = testString.boundingRect(with: CGSize(width: 100, height: CGFloat.Magnitude.greatestFiniteMagnitude), context: nil).height
-    if (fontHeight > height) {
-      fontMax = fontSplit
-    } else {
-      fontMin = fontSplit
+      let testString = NSMutableAttributedString(string: "Q", attributes: testAttributes)
+      let fontHeight = testString.boundingRect(with: CGSize(width: 100, height: CGFloat.Magnitude.greatestFiniteMagnitude), context: nil).height
+      if (fontHeight > height) {
+        fontMax = fontSplit
+      } else {
+        fontMin = fontSplit
+      }
     }
+    
+    fontByHeightDict.updateValue(fontMin, forKey: height)
+    // fontMin is guaranteed to fit.
+    return fontMin
   }
-  // fontMin is guaranteed to fit.
-  return fontMin
 }

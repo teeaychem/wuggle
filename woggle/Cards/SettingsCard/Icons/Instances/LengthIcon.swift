@@ -15,11 +15,144 @@ class LengthIcon: IconView {
     
     super.init(size: s)
     
-    test()
+    test2()
   }
   
   
   override func updateIcon(value v: String) {
+  }
+  
+  
+  func test2() {
+    
+    let tile = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size*0.1, y: size*0.1), size: CGSize(width: size*0.8, height: size*0.8)), cornerRadius: radius)
+    
+    let tileLayer = CAShapeLayer()
+    tileLayer.path = tile.cgPath
+    
+    tileLayer.fillColor = UIColor.gray.cgColor
+    tileLayer.strokeColor = UIColor.black.cgColor
+    tileLayer.lineWidth = 0.5
+    
+    layer.addSublayer(tileLayer)
+    
+    let tileIndent: CGFloat = size * 0.1
+    let tilePadding: CGFloat = size * 0.05
+    let tileSize: CGFloat = size * 0.25
+    
+    let radius2 = size * 0.05
+    
+//    for i in 0..<3 {
+//
+//      let xPoint: CGFloat = tileIndent + (tileSize * CGFloat(i)) + (tilePadding * (CGFloat(i) + 1))
+//
+//      let tile4 = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: xPoint, y: size - ((size * 0.1) + tileIndent + tilePadding * 2)), size: CGSize(width: tileSize, height: tileSize)), cornerRadius: radius)
+//
+//      let tileLayer4 = CAShapeLayer()
+//      tileLayer4.path = tile4.cgPath
+//      tileLayer4.fillColor = UIColor.lightGray.cgColor
+//      tileLayer4.strokeColor = UIColor.black.cgColor
+//      tileLayer4.lineWidth = 0.5
+//
+//      layer.addSublayer(tileLayer4)
+//    }
+    
+//    for i in 2..<3 {
+//
+//      let xPoint: CGFloat = tileIndent + (tileSize * CGFloat(i)) + (tilePadding * (CGFloat(i) + 1))
+//
+//      let tile4 = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: xPoint, y: size - ((size * 0.1) + tileIndent + tileSize + tilePadding * 3)), size: CGSize(width: tileSize, height: tileSize)), cornerRadius: radius)
+//
+//      let tileLayer4 = CAShapeLayer()
+//      tileLayer4.path = tile4.cgPath
+//      tileLayer4.fillColor = UIColor.lightGray.cgColor
+//      tileLayer4.strokeColor = UIColor.black.cgColor
+//      tileLayer4.lineWidth = 0.5
+//
+//      layer.addSublayer(tileLayer4)
+//    }
+    
+//    for i in 3..<3 {
+//
+//      let xPoint: CGFloat = tileIndent + (tileSize * CGFloat(i)) + (tilePadding * (CGFloat(i) + 1))
+//
+//      let tile4 = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: xPoint, y: size - ((size * 0.1) + tileIndent + tileSize * 2 + tilePadding * 3)), size: CGSize(width: tileSize, height: tileSize)), cornerRadius: radius)
+//
+//      let tileLayer4 = CAShapeLayer()
+//      tileLayer4.path = tile4.cgPath
+//      tileLayer4.fillColor = UIColor.lightGray.cgColor
+//      tileLayer4.strokeColor = UIColor.black.cgColor
+//      tileLayer4.lineWidth = 0.5
+//
+//      layer.addSublayer(tileLayer4)
+//    }
+    
+    let tile2 = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size - (tileIndent + tilePadding + tileSize), y: size - (tileIndent + tilePadding + tileSize)), size: CGSize(width: tileSize, height: tileSize)), cornerRadius: radius2)
+
+    let tileLayer2 = CAShapeLayer()
+    tileLayer2.path = tile2.cgPath
+
+    tileLayer2.fillColor = UIColor.lightGray.cgColor
+    tileLayer2.strokeColor = UIColor.white.cgColor
+    tileLayer2.lineWidth = 0.5
+    
+    layer.addSublayer(tileLayer2)
+//
+//    let tile2 = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: tileIndent + tileSize + tilePadding * 2, y: tileIndent + tilePadding), size: CGSize(width: tileSize, height: tileSize)), cornerRadius: radius2)
+//
+//    let tileLayer2 = CAShapeLayer()
+//    tileLayer2.path = tile2.cgPath
+//
+//    tileLayer2.fillColor = UIColor.lightGray.cgColor
+//    tileLayer2.strokeColor = UIColor.black.cgColor
+//    tileLayer2.lineWidth = 0.5
+//
+//    let tile3 = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: tileIndent + tileSize * 2 + tilePadding * 3, y: tileIndent + tilePadding), size: CGSize(width: tileSize, height: tileSize)), cornerRadius: radius2)
+//
+//    let tileLayer3 = CAShapeLayer()
+//    tileLayer3.path = tile3.cgPath
+//
+//    tileLayer3.fillColor = UIColor.lightGray.cgColor
+//    tileLayer3.strokeColor = UIColor.black.cgColor
+//    tileLayer3.lineWidth = 0.5
+//
+//    let tile4 = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: tileIndent + tileSize * 3 + tilePadding * 4, y: tileIndent + tilePadding), size: CGSize(width: tileSize, height: tileSize)), cornerRadius: radius2)
+//
+//    let tileLayer4 = CAShapeLayer()
+//    tileLayer4.path = tile4.cgPath
+//
+//    tileLayer4.fillColor = UIColor.lightGray.cgColor
+//    tileLayer4.strokeColor = UIColor.black.cgColor
+//    tileLayer4.lineWidth = 0.5
+    
+    
+//    layer.addSublayer(tileLayer)
+//    layer.addSublayer(tileLayer2)
+//    layer.addSublayer(tileLayer3)
+//    layer.addSublayer(tileLayer4)
+    
+    let letterLayer = CAShapeLayer()
+    let characterLayers = getStringLayers(text: "5", font: UIFont(name: uiFontName, size: getFontFor(height: size * 0.8))!)
+    for lay in characterLayers {
+      print("AH")
+      letterLayer.bounds = lay.path!.boundingBox
+      lay.fillColor = UIColor.lightGray.cgColor
+      letterLayer.addSublayer(lay)
+    }
+    letterLayer.frame.origin = CGPoint(x: indent * 2, y: indent * 2)
+    
+    let plusLayer = CAShapeLayer()
+    let plusLayers = getStringLayers(text: "+", font: UIFont(name: uiFontName, size: getFontFor(height: size * 0.6))!)
+    for lay in plusLayers {
+      plusLayer.bounds = lay.path!.boundingBox
+      lay.fillColor = UIColor.lightGray.cgColor
+      plusLayer.addSublayer(lay)
+    }
+    plusLayer.frame.origin = CGPoint(x: letterLayer.bounds.width + plusLayer.bounds.width, y: indent * 2)
+    
+    layer.addSublayer(letterLayer)
+    layer.addSublayer(plusLayer)
+    
   }
   
   func test() {

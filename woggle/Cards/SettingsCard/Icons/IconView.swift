@@ -24,7 +24,7 @@ class IconView : UIView {
     
     size = s
     indent = size * 0.1
-    radius = size * 0.15
+    radius = size * 0.1
     
     super.init(frame: CGRect(x: 0, y: 0, width: s, height: s))
   }
