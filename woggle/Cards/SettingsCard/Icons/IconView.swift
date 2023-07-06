@@ -7,18 +7,16 @@
 //
 
 
-// Class for icon views. This is mostly here for the updateIcon function, so as to
-// ensure it's always implemented. Probably could have something along the lines of
-// conforms to, but I haven't got the knowledge for that yet…
+// Class for icon views. This is mostly here for the updateIcon function, to ensure size is constant, and to get some constants to match.
 
 
 import UIKit
 
 class IconView : UIView {
 
-  private let size: CGFloat
-  private let indent: CGFloat
-  private let radius: CGFloat
+  let size: CGFloat
+  let indent: CGFloat
+  let radius: CGFloat
   
   init(size s: CGFloat) {
     
