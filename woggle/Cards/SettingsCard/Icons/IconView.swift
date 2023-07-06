@@ -16,9 +16,9 @@ import UIKit
 
 class IconView : UIView {
 
-  let size: CGFloat
-  let indent: CGFloat
-  let radius: CGFloat
+  private let size: CGFloat
+  private let indent: CGFloat
+  private let radius: CGFloat
   
   init(size s: CGFloat) {
     
@@ -29,13 +29,15 @@ class IconView : UIView {
     super.init(frame: CGRect(x: 0, y: 0, width: s, height: s))
   }
   
+  func updateIcon(value v: String) {
+    fatalError("updateIcon must be overriden")
+  }
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func updateIcon(value v: String) {
-    fatalError("updateIcon must be overriden")
-  }
+
   
 
 

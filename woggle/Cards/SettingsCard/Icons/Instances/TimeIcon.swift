@@ -43,7 +43,7 @@ class TimeIcon : IconView {
   }
   
   
-  func addFace() {
+  private func addFace() {
     let face = UIBezierPath(arcCenter: centerPoint, radius: size*0.4, startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
     
     let faceLayer = CAShapeLayer()
@@ -57,7 +57,7 @@ class TimeIcon : IconView {
     
   }
   
-  func addHand(angle a: Double) {
+  private func addHand(angle a: Double) {
     let hand = UIBezierPath()
     hand.move(to: centerPoint)
     

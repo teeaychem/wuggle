@@ -15,10 +15,8 @@ class LexiconIcon: IconView {
     
     super.init(size: s)
     
-    backgroundColor = UIColor.clear
     addBook()
-    addLetter(letter: "L")
-//    updateIcon(value: gameConfig.getLexicon())
+    updateIcon(value: "L")
   }
   
   
@@ -27,10 +25,11 @@ class LexiconIcon: IconView {
   }
   
   override func updateIcon(value v: String) {
+    addLetter(letter: "L")
   }
   
   
-  func addBook() {
+  private func addBook() {
     // Overlap three square to create something which looks bookish
     
     let bookFrontLayer = CAShapeLayer()
@@ -62,18 +61,12 @@ class LexiconIcon: IconView {
   }
   
   
-  func addLetter(letter: String) {
+  private func addLetter(letter: String) {
     
-    let letterLayer = CAShapeLayer()
-    let characterLayers = getStringLayers(text: letter, font: UIFont(name: uiFontName, size: 25)!)
-    for lay in characterLayers {
-      print("AH")
-      letterLayer.bounds = lay.path!.boundingBox
-      lay.fillColor = UIColor.lightGray.cgColor
-      lay.strokeColor = UIColor.lightGray.cgColor
-      lay.lineWidth = 1
-      letterLayer.addSublayer(lay)
-    }
+    let letterLayer = getStringLayers(text: letter, font: UIFont(name: uiFontName, size: getFontFor(height: size * 0.9))!).first!
+    letterLayer.bounds = letterLayer.path!.boundingBox
+    letterLayer.fillColor = UIColor.lightGray.cgColor
+        
     letterLayer.frame.origin = CGPoint(x: indent + (size * 0.7 - letterLayer.bounds.width) * 0.5, y: size - (((size * 0.7 - letterLayer.bounds.height) * 0.5) + indent + letterLayer.bounds.height))
     
     layer.addSublayer(letterLayer)

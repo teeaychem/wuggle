@@ -10,31 +10,23 @@ import UIKit
 
 class TileIcon: IconView {
         
-  var textLayers = [CAShapeLayer]()
-  
+  private var textLayer: CAShapeLayer?
   
   override init(size s: CGFloat) {
     
     super.init(size: s)
 
     addTile()
-    addText(text: "8²")
-//    updateIcon(value: gameConfig.getTiles())
+    addSquare()
+    updateIcon(value: "8")
   }
   
   override func updateIcon(value v: String) {
-    switch v {
-    case "stock":
-      addText(text: "t")
-    case "deluxe":
-      addText(text: "T")
-    default:
-      addText(text: "e")
-    }
+    addText(text: v)
   }
   
   
-  func addTile() {
+  private func addTile() {
     let tile = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size*0.1, y: size*0.1), size: CGSize(width: size*0.8, height: size*0.8)), cornerRadius: radius)
     
     let tileLayer = CAShapeLayer()
@@ -48,28 +40,32 @@ class TileIcon: IconView {
   }
   
   
-  func addText(text t: String) {
+  private func addSquare() {
     
-    for lay in textLayers {
-      lay.removeFromSuperlayer()
+    let tileFont = UIFont(name: uiFontName, size: size * 0.5)!
+    
+    let letterLayer = getStringLayers(text: "²", font: tileFont).first
+    letterLayer!.bounds = letterLayer!.path!.boundingBox
+    letterLayer?.frame.origin = CGPoint(x: frame.width - (letterLayer!.bounds.width + indent * 1.5), y: indent * 1.5)
+    letterLayer?.fillColor = UIColor.lightGray.cgColor
+    
+    layer.addSublayer(letterLayer!)
+  }
+  
+  
+  private func addText(text t: String) {
+    
+    if (textLayer != nil) {
+      textLayer!.removeFromSuperlayer()
     }
-    textLayers.removeAll()
+
+    let tileFont = UIFont(name: uiFontName, size: size * 0.8)!
     
-    let tileFont = UIFont(name: uiFontName, size: 25)!
-    
-    let letterLayers = getStringLayers(text: t, font: tileFont)
-    
-    for lay in letterLayers {
-      
-      lay.position.x = lay.position.x + size * 0.3
-      lay.position.y = lay.position.y + 2 * indent
-      lay.fillColor = UIColor.lightGray.cgColor
-      lay.strokeColor = UIColor.lightGray.cgColor
-      
-      textLayers.append(lay)
-      layer.addSublayer(lay)
-    }
-    
+    textLayer = getStringLayers(text: t, font: tileFont).first
+    textLayer!.bounds = textLayer!.path!.boundingBox
+    textLayer!.frame.origin = CGPoint(x: indent * 1.5, y: frame.height - (textLayer!.bounds.height + indent * 1.5))
+    textLayer!.fillColor = UIColor.lightGray.cgColor
+    layer.addSublayer(textLayer!)
     
   }
   

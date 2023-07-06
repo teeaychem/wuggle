@@ -23,14 +23,14 @@ class UITableViewWordCell : UITableViewCell {
 //        NSAttributedString.Key.strokeColor : reguardTextShaded,
 //        NSAttributedString.Key.foregroundColor : reguardTextShaded,
 //        NSAttributedString.Key.strokeWidth : -1,
-//        NSAttributedString.Key.font : UIFont(name: textFontName, size: h)!
+//        NSAttributedString.Key.font : UIFont(name: textFontName, size: getFontFor(height: h))!
 //        ] as [NSAttributedString.Key : Any]
 //    } else {
       wordTextAttributes = [
         NSAttributedString.Key.strokeColor : regularText,
         NSAttributedString.Key.foregroundColor : regularText,
         NSAttributedString.Key.strokeWidth : -1,
-        NSAttributedString.Key.font : UIFont(name: textFontName, size: h * 0.8)!
+        NSAttributedString.Key.font : UIFont(name: textFontName, size: getFontFor(height: h))!
         ] as [NSAttributedString.Key : Any]
 //    }
     

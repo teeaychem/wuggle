@@ -11,22 +11,23 @@ import UIKit
 
 class LengthIcon: IconView {
   
-  var numberLayer: CAShapeLayer?
+  private var numberLayer: CAShapeLayer?
   
   override init(size s: CGFloat) {
     
     super.init(size: s)
     
     paintBackground()
-    paintNumber(num: "3")
+    updateIcon(value: "4")
   }
   
   
   override func updateIcon(value v: String) {
+    paintNumber(num: v)
   }
   
   
-  func paintBackground() {
+  private func paintBackground() {
     
     let boardPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size*0.1, y: size*0.1), size: CGSize(width: size*0.8, height: size*0.8)), cornerRadius: radius)
     
@@ -68,7 +69,7 @@ class LengthIcon: IconView {
   }
   
   
-  func paintNumber(num: String) {
+  private func paintNumber(num: String) {
     
     if numberLayer != nil {
       numberLayer!.removeFromSuperlayer()

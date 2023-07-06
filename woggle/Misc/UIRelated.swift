@@ -40,17 +40,8 @@ let tileAnimDuration = 0.5
 
 let defaultAnimationDuration = 10.0
 
-
-let gCardFontSize = CGFloat(12)
 let tileFontName = "K2D-ExtraBold"
 let uiFontName = "K2D-ExtraBold"
 let textFontName = "K2D-Regular"
 let italicFontName = "K2D-Italic"
 
-let gCardFont = UIFont(name: uiFontName, size: gCardFontSize)!
-
-func getFontPixelSize(fontSize: CGFloat) -> CGFloat {
-  let fontLayer = getStringLayers(text: "M", font: gCardFont)
-  let gCardFontPixelMultiplyer = 1 / (fontLayer[0].path?.boundingBox.width)!
-  return gCardFontSize * gCardFontPixelMultiplyer
-}

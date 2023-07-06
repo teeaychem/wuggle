@@ -17,20 +17,6 @@ class CardViewData {
   let statusBarHeight: CGFloat
   var colour: CGColor
   
-  let settingsTextAttributePlain = [
-    NSAttributedString.Key.strokeColor : UIColor.black,
-    NSAttributedString.Key.strokeWidth : 0,
-    NSAttributedString.Key.foregroundColor : UIColor.gray,
-    NSAttributedString.Key.font : UIFont(name: uiFontName, size: 25)!
-    ] as [NSAttributedString.Key : Any]
-  let settingsTextAttributeHighlighted = [
-    NSAttributedString.Key.strokeColor : UIColor.black,
-    NSAttributedString.Key.strokeWidth : 0,
-    NSAttributedString.Key.foregroundColor : UIColor.darkGray,
-    NSAttributedString.Key.font : UIFont(name: uiFontName, size: 25)!
-    ] as [NSAttributedString.Key : Any]
-  
-  
   init(name: String, width: CGFloat, colour: CGColor) {
     self.name = name
     self.width = width
