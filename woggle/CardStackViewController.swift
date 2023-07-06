@@ -10,12 +10,17 @@
 import UIKit
 
 class CardStackViewController: UIViewController {
+  
   // Controls the main UI
   
   private let width: CGFloat
   private let cardIndent: CGFloat
   private let firstCardY: CGFloat
   private let statusBarH: CGFloat
+  
+  private var settCardC: SettingsCardViewController?
+  private var statCardC: CardViewController?
+  private var gameCardC: GameCardViewController?
   
   private var cardViews: [CardViewController] = []
   private var cardOrigin: CGFloat = 0.0
@@ -24,6 +29,8 @@ class CardStackViewController: UIViewController {
   unowned var settings: Settings
   
   init(settings s: Settings) {
+    
+    
     
     settings = s
     
@@ -40,30 +47,71 @@ class CardStackViewController: UIViewController {
     
     super.init(nibName: nil, bundle: nil)
 
-    let settCardC = SettingsCardViewController(viewData: settCardVD, delegate: self)
-    let statCardC = CardViewController(viewData: statCardVD, delegate: self)
-    let gameCardC = GameCardViewController(viewData: gameCardVD, delegate: self)
+    settCardC = SettingsCardViewController(viewData: settCardVD, delegate: self)
+    statCardC = CardViewController(viewData: statCardVD, delegate: self)
+    gameCardC = GameCardViewController(viewData: gameCardVD, delegate: self)
     
-    cardViews = [statCardC, settCardC, gameCardC]
+    cardViews = [statCardC!, settCardC!, gameCardC!]
 
 
-    self.embed(statCardC, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY), size: statCardVD.cardSize))
-    self.embed(settCardC, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY + gameCardVD.statusBarHeight), size: settCardVD.cardSize))
-    self.embed(gameCardC, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY + gameCardVD.statusBarHeight * 2), size: gameCardVD.cardSize))
+    self.embed(statCardC!, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY), size: statCardVD.cardSize))
+    self.embed(settCardC!, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY + gameCardVD.statusBarHeight), size: settCardVD.cardSize))
+    self.embed(gameCardC!, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY + gameCardVD.statusBarHeight * 2), size: gameCardVD.cardSize))
     
     for cV in cardViews {
       cV.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
     }
+    
+    setIcons()
   }
+  
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+  
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  
+  func setIcons() {
+    settCardC?.updateIcon(internalName: "time", internalValue: settings.time)
+    settCardC?.updateIcon(internalName: "lexicon", internalValue: settings.lexicon)
+    settCardC?.updateIcon(internalName: "length", internalValue: settings.minWordLength)
+    settCardC?.updateIcon(internalName: "tiles", internalValue: settings.tileSqrt)
   }
 }
 
 extension CardStackViewController: CardStackDelegate {
   
-  func processUIUpdate() {
+  
+  func updateSetting(internalName: String, internalValue: Int16) {
+    switch internalName {
+    case "time":
+      settings.time = internalValue
+    case "lexicon":
+      settings.lexicon = internalValue
+    case "length":
+      settings.minWordLength = internalValue
+    case "tiles":
+      settings.tileSqrt = internalValue
+    default:
+      return
+    }
+  }
+  
+  
+  func processUpdate() {
+    print(settings.managedObjectContext?.hasChanges)
+    settings.managedObjectContext?.didChangeValue(forKey: "lexicon")
+    print(settings.managedObjectContext?.hasChanges)
+//    do {
+//      try settings.managedObjectContext?.save()
+//    } catch {
+//      print("fail")
+//    }
     print("Asked to process update")
   }
   
@@ -72,6 +120,7 @@ extension CardStackViewController: CardStackDelegate {
   }
   
   func currentGameInstance() -> GameInstance? {
+//    print(settings.currentGame)
     return settings.currentGame
   }
   

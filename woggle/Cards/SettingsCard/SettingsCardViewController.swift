@@ -50,8 +50,8 @@ class SettingsCardViewController: CardViewController {
   override func broughtToTop() {
     super.broughtToTop()
     optionViews["time"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding(), y: viewData.statusBarHeight * 1.25, width: viewData.width - viewData.gameBoardPadding() * 2, height: viewData.statusBarHeight), displayName: "Time", displayOptions: ["1", "2", "3", "5", "7", "∞"], internalName: "time", internalOptions: [1, 2, 3, 5, 7, 0], vertical: false, delegate: self)
-    optionViews["dictionary"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding(), y: optionViews["time"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding() * 2, height: viewData.statusBarHeight), displayName: "Dictionary", displayOptions: ["Lots of words", "Jane Austen", "Virgina Woolf", "King James Bible", "Shakespeare"], internalName: "dictionary", internalOptions: [0, 1, 2, 3, 4], vertical: true, delegate: self)
-    optionViews["length"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding(), y: optionViews["dictionary"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding() * 2, height: viewData.statusBarHeight), displayName: "Word Length", displayOptions: ["3+", "4+", "5+", "6+"], internalName: "length", internalOptions: [3, 4, 5, 6], vertical: false, delegate: self)
+    optionViews["lexicon"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding(), y: optionViews["time"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding() * 2, height: viewData.statusBarHeight), displayName: "lexicon", displayOptions: ["Many words", "Jane Austen", "Virgina Woolf", "King James Bible", "Shakespeare"], internalName: "lexicon", internalOptions: [0, 1, 2, 3, 4], vertical: true, delegate: self)
+    optionViews["length"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding(), y: optionViews["lexicon"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding() * 2, height: viewData.statusBarHeight), displayName: "Word Length", displayOptions: ["3+", "4+", "5+", "6+"], internalName: "length", internalOptions: [3, 4, 5, 6], vertical: false, delegate: self)
     optionViews["tiles"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding(), y: optionViews["length"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding() * 2, height: viewData.statusBarHeight), displayName: "Tiles", displayOptions: ["4²", "5²", "6²", "7²", "8²"], internalName: "tiles", internalOptions: [4, 5, 6, 7, 8], vertical: false, delegate: self)
     
     for optionView in optionViews.values {
@@ -63,7 +63,7 @@ class SettingsCardViewController: CardViewController {
     }
 
     optionViews["time"]?.highlightChoice(internalOption: delegate!.currentSettings().time)
-    optionViews["dictionary"]?.highlightChoice(internalOption: delegate!.currentSettings().lexicon)
+    optionViews["lexicon"]?.highlightChoice(internalOption: delegate!.currentSettings().lexicon)
     optionViews["length"]?.highlightChoice(internalOption: delegate!.currentSettings().minWordLength)
     optionViews["tiles"]?.highlightChoice(internalOption: delegate!.currentSettings().tileSqrt)
   }
@@ -91,10 +91,27 @@ class SettingsCardViewController: CardViewController {
 extension SettingsCardViewController: SettingsCardViewControllerDelegate {
   
   func updateSetting(internalName: String, internalValue: Int16) {
+    updateIcon(internalName: internalName, internalValue: internalValue)
+    delegate!.updateSetting(internalName: internalName, internalValue: internalValue)
     // Update the card delegate, which will then update the stored settings and other cards.
     // Update the settings on the card?
-    print(internalName)
-    print(internalValue)
+    delegate!.processUpdate()
+  }
+  
+  
+  func updateIcon(internalName: String, internalValue: Int16) {
+    switch internalName {
+    case "time":
+      timeIcon.updateIcon(value: String(internalValue))
+    case "lexicon":
+      lexiconIcon.updateIcon(value: String(internalValue))
+    case "length":
+      lengthIcon.updateIcon(value: String(internalValue))
+    case "tiles":
+      tileIcon.updateIcon(value: String(internalValue))
+    default:
+      return
+    }
   }
   
   

@@ -41,6 +41,17 @@ extension GameInstance {
     }
   }
   
+  
+  func findAndSavePossibleWords() {
+    
+    settings?.getCurrentGame()?.allWordsList = findAllWords()?.sorted()
+    do {
+      try managedObjectContext!.save()
+    } catch {
+      print("fail")
+    }
+  }
+  
   func findAllWords() -> Set<String>? {
     // Call exploreTileWithList with helper variables.
     //

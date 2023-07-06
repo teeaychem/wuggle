@@ -34,10 +34,8 @@ class TimeIcon : IconView {
   
   override func updateIcon(value v: String) {
     
-    let val = (Double(v) ?? 0)/12 * 360
-    let radians = -((val * Double.pi/180) - Double.pi/2)
-    
-    print(val)
+    let valPercent = (Double(v) ?? 0)/12
+    let radians = (Double.pi * 0.5) - (2 * Double.pi * valPercent)
     
     addHand(angle: radians)
   }
@@ -65,7 +63,6 @@ class TimeIcon : IconView {
     let handAngle = a
     
     let handEnd = CGPoint(x: Double(centerPoint.x) + handRadius * cos(handAngle) , y: Double(centerPoint.y) - handRadius * sin(handAngle))
-    
     hand.addLine(to: handEnd)
     
     if handLayer != nil {

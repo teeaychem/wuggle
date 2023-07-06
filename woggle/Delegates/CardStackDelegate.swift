@@ -13,7 +13,10 @@ protocol CardStackDelegate: AnyObject {
   // And, then the cardStackController processes the request.
   
   // Used to request some UI update, such as updating the longest word or most points.
-  func processUIUpdate()
+  func processUpdate()
+  
+  // Used to update particular setting
+  func updateSetting(internalName: String, internalValue: Int16)
   
   // Allow cards to request current settings.
   // Cards should not store settings in order to ensure a unique settings file is in use at any given time.

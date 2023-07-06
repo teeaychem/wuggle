@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import CoreData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
+  // Store a general reference to the settings.
+  var testSettings: Settings?
 
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -21,17 +24,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: w)
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    // TODO: Revise so this either loads primary settings or creates primary settings.
-    let testSettings = Settings(context: context)
+    let settingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+    do {
+      let result = try context.fetch(settingsFetchRequest)
+      
+      if result.count > 0 {
+        testSettings = (result.first as! Settings)
+        // TODO: Delete other instances.
+      } else {
+        // If nothing found, default settings.
+        testSettings = Settings(context: context)
+      }
+    } catch {
+      // If load fails, things should be fine with default settings.
+      testSettings = Settings(context: context)
+    }
 
-
-    window.rootViewController = CardStackViewController(settings: testSettings)
+    window.rootViewController = CardStackViewController(settings: testSettings!)
     self.window = window
     window.makeKeyAndVisible()
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {
+    print("Ouch")
     // Called as the scene is being released by the system.
     // This occurs shortly after the scene enters the background, or when its session is discarded.
     // Release any resources associated with this scene that can be re-created the next time the scene connects.
@@ -59,6 +74,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // to restore the scene back to its current state.
 
     // Save changes in the application's managed object context when the application transitions to the background.
+//        do {
+//          try testSettings?.managedObjectContext?.save()
+//        } catch {
+//          print("fail")
+//        }
+    print("test")
+//    print(UIApplication.shared.delegate)
     (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
   }
 

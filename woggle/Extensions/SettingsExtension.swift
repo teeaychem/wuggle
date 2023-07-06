@@ -21,7 +21,7 @@ extension Settings {
   }
   
   
-  func setAndGetNewGame() -> GameInstance {
+  func setNewGame() {
     if (self.currentGame != nil) {
       self.managedObjectContext?.delete(self.currentGame!)
     }
@@ -29,17 +29,15 @@ extension Settings {
     self.currentGame!.populateBoard()
     self.currentGame!.foundWordsList = []
     self.currentGame!.allWordsList = []
-    return self.currentGame!
   }
   
   
-  
-  func getOrMakeCurrentGame() -> GameInstance {
-    if (self.currentGame == nil) {
-      return setAndGetNewGame()
-    }
-    return self.currentGame!
-  }
+//  func getOrMakeCurrentGame() -> GameInstance {
+//    if (self.currentGame == nil) {
+//      return setNewGame()
+//    }
+//    return self.currentGame!
+//  }
   
   func getTrieRoot() -> TrieNode {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")

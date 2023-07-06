@@ -26,19 +26,11 @@ class GameCardViewController: CardViewController {
   var boardPanGR: UIPanGestureRecognizer?
   var playPauseGR: UITapGestureRecognizer?
   var stopGR: UILongPressGestureRecognizer?
-
-  var currentGameInstace: GameInstance?
   
   var displayLinkOne: CADisplayLink?
   var displayLinkTwo: CADisplayLink?
   var displayLinkOneTimeElapsed = Double(0)
   var displayLinkTwoTimeElapsed = Double(0)
-  
-  // MARK: Variables which depend on gameInstance.
-  // Initialised to 0, and then updated with setVaribalesFromCurrentGameInstance
-//  var timeUsedPerStep = Double(0)
-  var timeUsedPercent = Double(0)
-//  var stopWatchIncrementPercent = Double(0)
   
   var gameInProgess = false
     
@@ -49,7 +41,6 @@ class GameCardViewController: CardViewController {
     
     // Use delegate to pull some general infomration.
     rootTrie = d.currentSettings().getTrieRoot()
-    currentGameInstace = d.currentSettings().getOrMakeCurrentGame()
     
     // Constants to create and position views
     // TODO: Collect together reused terms
@@ -61,14 +52,7 @@ class GameCardViewController: CardViewController {
     foundWordsViewController = FoundWordsViewController(viewData: vD)
     
     super.init(viewData: vD, delegate: d)
-    
-    setVaribalesFromCurrentGameInstance()
-    playButtonsViewController.paintPlayIcon()
-    playButtonsViewController.paintStopIcon()
-    
-    // TODO: At the end of the init I want to get things up.
-    boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
-    
+        
     // Add gesture recognisers
     boardPanGR = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
     boardPanGR!.maximumNumberOfTouches = 1
@@ -77,6 +61,9 @@ class GameCardViewController: CardViewController {
     playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
     playButtonsViewController.stopAddGesture(gesture: stopGR!)
     stopGR?.minimumPressDuration = 0.1
+    
+    // TODO: At the end of the init I want to get things up.
+    onLoad()
   }
   
   
@@ -102,14 +89,7 @@ class GameCardViewController: CardViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
-  
-  func setVaribalesFromCurrentGameInstance() {
-    guard currentGameInstace != nil else { print("No game instance"); return }
-    timeUsedPercent = currentGameInstace!.timeUsedPercent
-  }
-  
-  
-  
+   
   func stringFromSelectedTiles() -> String {
     var builtString = ""
     
@@ -146,6 +126,21 @@ class GameCardViewController: CardViewController {
 extension GameCardViewController {
   
   
+  func onLoad() {
+    
+    if delegate!.currentSettings().getCurrentGame() != nil {
+      playButtonsViewController.paintStopIcon()
+      playButtonsViewController.stopAddGesture(gesture: stopGR!)
+      playButtonsViewController.paintPlayIcon()
+      
+      boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
+      stopwatchViewController.incrementHand(percent: delegate!.currentGameInstance()!.timeUsedPercent)
+    } else {
+      playButtonsViewController.paintNewGameIcon()
+    }
+  }
+  
+  
   func newGameMain() {
     print("new game main")
     if (finalWordsViewController != nil) {
@@ -153,13 +148,12 @@ extension GameCardViewController {
       finalWordsViewController = nil
     }
 
-//    foundWordsViewController = nil
     // Remove all the tiles from the previous game.
     boardViewController.removeAllTileViews()
     // Get a new game.
-    currentGameInstace = delegate?.currentSettings().setAndGetNewGame()
-    // Make sure variables are good.
-    setVaribalesFromCurrentGameInstance()
+    delegate?.currentSettings().setNewGame()
+    delegate?.currentGameInstance()?.findAndSavePossibleWords()
+    
     // Make new tiles.
     boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
     // Fix stopwatch
@@ -193,17 +187,22 @@ extension GameCardViewController {
   
   
   func endGameMain() {
+    // Cancel timer, pause and end game
     displayLinkOne?.invalidate()
+    gameInProgess = false
+    delegate!.currentGameInstance()!.timeUsedPercent = 1
+    // Update buttons
     playButtonsViewController.hideStopIcon()
     playButtonsViewController.paintNewGameIcon()
+    // Remove gestures
     boardViewController.removeGestureRecognizer(recogniser: boardPanGR!)
     stopwatchViewController.view.removeGestureRecognizer(watchGestureRecognizer!)
-    gameInProgess = false
-    timeUsedPercent = 1
+    // Display final words
     finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
     self.embed(finalWordsViewController!, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding() + viewData.gameBoardSize() * 0.075, y: viewData.height - viewData.gameBoardSize() * 0.925 - viewData.gameBoardPadding()), size: CGSize(width: viewData.gameBoardSize() * 0.85, height: viewData.gameBoardSize() * 0.85)))
     finalWordsViewController?.addWordsAsFound(words: delegate!.currentGameInstance()!.foundWordsList!)
-    finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate?.currentGameInstance()?.findAllWords())!, seeWords: delegate!.currentGameInstance()!.foundWordsList!)
+    finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate!.currentGameInstance()!.allWordsList!), seeWords: delegate!.currentGameInstance()!.foundWordsList!)
+    // Add gesture to see board.
     boardViewController.addGestureRecognizer(recogniser: UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBoard)))
   }
 }
@@ -278,7 +277,9 @@ extension GameCardViewController {
   
   
   @objc func didTapOnTime(_ sender: UITapGestureRecognizer) {
-    if (timeUsedPercent > 1) {
+    guard delegate!.currentGameInstance() != nil else { return }
+    print("Tip and game instance")
+    if (delegate!.currentGameInstance()!.timeUsedPercent > 1) {
       // Game is over
       endGameMain()
     } else {
@@ -295,7 +296,7 @@ extension GameCardViewController {
     if gameInProgess {
       pauseGameMain()
     } else {
-      if (timeUsedPercent < 1) {
+      if (delegate!.currentGameInstance() != nil && delegate!.currentGameInstance()!.timeUsedPercent < 1) {
         resumeGameMain()
       } else {
         newGameMain()
@@ -362,10 +363,10 @@ extension GameCardViewController {
     let estimate = (displayLinkOne!.targetTimestamp - displayLinkOne!.timestamp)
     let usedPercent = estimate/(Double(delegate!.currentSettings().time) * 60)
     displayLinkOneTimeElapsed += estimate
-    timeUsedPercent += usedPercent
+    delegate!.currentGameInstance()!.timeUsedPercent += usedPercent
     stopwatchViewController.incrementHand(percent: usedPercent)
 
-    if (timeUsedPercent >= 1) {
+    if (delegate!.currentGameInstance()!.timeUsedPercent >= 1) {
       endGameMain()
     }
   }

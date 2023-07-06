@@ -10,13 +10,15 @@ import UIKit
 
 
 class LexiconIcon: IconView {
+  
+  var letterLayer: CAShapeLayer?
     
   override init(size s: CGFloat) {
     
     super.init(size: s)
     
     addBook()
-    updateIcon(value: "L")
+    updateIcon(value: "0")
   }
   
   
@@ -25,7 +27,20 @@ class LexiconIcon: IconView {
   }
   
   override func updateIcon(value v: String) {
-    addLetter(letter: "L")
+    switch v {
+    case "0":
+      addLetter(letter: "M")
+    case "1":
+      addLetter(letter: "A")
+    case "2":
+      addLetter(letter: "W")
+    case "3":
+      addLetter(letter: "B")
+    case "4":
+      addLetter(letter: "S")
+    default:
+      return
+    }
   }
   
   
@@ -63,13 +78,17 @@ class LexiconIcon: IconView {
   
   private func addLetter(letter: String) {
     
-    let letterLayer = getStringLayers(text: letter, font: UIFont(name: uiFontName, size: getFontFor(height: size * 0.9))!).first!
-    letterLayer.bounds = letterLayer.path!.boundingBox
-    letterLayer.fillColor = UIColor.lightGray.cgColor
-        
-    letterLayer.frame.origin = CGPoint(x: indent + (size * 0.7 - letterLayer.bounds.width) * 0.5, y: size - (((size * 0.7 - letterLayer.bounds.height) * 0.5) + indent + letterLayer.bounds.height))
+    if letterLayer != nil {
+      letterLayer!.removeFromSuperlayer()
+    }
     
-    layer.addSublayer(letterLayer)
+    letterLayer = getStringLayers(text: letter, font: UIFont(name: uiFontName, size: getFontFor(height: size * 0.9))!).first!
+    letterLayer!.bounds = letterLayer!.path!.boundingBox
+    letterLayer!.fillColor = UIColor.lightGray.cgColor
+        
+    letterLayer!.frame.origin = CGPoint(x: indent + (size * 0.7 - letterLayer!.bounds.width) * 0.5, y: size - (((size * 0.7 - letterLayer!.bounds.height) * 0.5) + indent + letterLayer!.bounds.height))
+    
+    layer.addSublayer(letterLayer!)
   }
   
 }

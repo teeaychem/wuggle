@@ -74,7 +74,6 @@ func getFontFor(height: CGFloat) -> Double {
   // Finally, store the result in a dictionary.
   // I'll use the same height a lot, and so will save much effort by storing.
   
-  
   if fontByHeightDict.keys.contains(height) {
     return fontByHeightDict[height]!
   } else {
