@@ -141,4 +141,60 @@ func randomStartUIBeizerPath(width w: CGFloat, height h: CGFloat) -> UIBezierPat
 }
 
 
+func randomStraightPointOnroundedRectangle(width w: CGFloat, height h: CGFloat, cornerRadius: CGFloat) -> CGPoint {
+  // To get random point on perimiter of rectangle, treat the perimiter as a straight line split into four different sections.
+  // Get random number on the line, and then find out which section it belongs to.
+  let adjustWidth = w - (cornerRadius * 2)
+  let adjustHeight = h - (cornerRadius * 2)
+  
+  let randomPoint = Double.random(in: 0...(adjustWidth * 2 + adjustHeight * 2))
+  
+  if randomPoint < adjustHeight {
+    return CGPoint(x: 0, y: cornerRadius + randomPoint)
+  } else if randomPoint < (adjustWidth + adjustHeight) {
+    return CGPoint(x: cornerRadius + randomPoint - adjustHeight, y: 0)
+  } else if randomPoint < (adjustWidth + 2 * adjustHeight) {
+    return CGPoint(x: w, y: cornerRadius + randomPoint - (adjustWidth + adjustHeight))
+  } else {
+    return CGPoint(x: cornerRadius + randomPoint - ((2 * adjustHeight) + adjustWidth), y: h)
+  }
+}
 
+
+func randomStartRoundedUIBeizerPath(width w: CGFloat, height h: CGFloat, cornerRadius: CGFloat) -> UIBezierPath {
+  // To draw a rectangle from a random starting point, get a random point on the perimiter.
+  // Then, find which side it's on, and go to one of the points on that side.
+  // Then, loop round all the points and close.
+
+  let corners = [
+    (Double.pi, CGPoint(x: cornerRadius, y: cornerRadius)),
+    (1, CGPoint(x: cornerRadius, y: 0)),
+    (1, CGPoint(x: w - cornerRadius, y: 0)),
+    (Double.pi * -0.5, CGPoint(x: w - cornerRadius, y: cornerRadius)),
+    (1, CGPoint(x: w, y: cornerRadius)),
+    (1, CGPoint(x: w, y: h - cornerRadius)),
+    (0, CGPoint(x: w - cornerRadius, y: h - cornerRadius)),
+    (1, CGPoint(x: w - cornerRadius, y: h)),
+    (1, CGPoint(x: cornerRadius, y: h)),
+    (Double.pi * 0.5, CGPoint(x: cornerRadius, y: h - cornerRadius)),
+    (1, CGPoint(x: 0, y: h - cornerRadius)),
+    (1, CGPoint(x: 0, y: cornerRadius))
+  ]
+  let startPoint = randomStraightPointOnroundedRectangle(width: w, height: h, cornerRadius: cornerRadius)
+  
+  let path = UIBezierPath()
+  path.move(to: startPoint)
+  let firstIndex = corners.firstIndex(where: {$0.1.x == startPoint.x || $0.1.y == startPoint.y })
+  for i in 0...corners.count {
+    let position = corners[(firstIndex! + i) % corners.count]
+    if (position.0 == 1) {
+      path.addLine(to: position.1)
+    } else {
+      path.addArc(withCenter: position.1, radius: cornerRadius, startAngle: position.0, endAngle: position.0 + Double.pi * 0.5, clockwise: true)
+    }
+    
+      
+  }
+  path.close()
+  return path
+}
