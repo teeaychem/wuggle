@@ -153,7 +153,7 @@ class PlayButtonsView: UIView {
     let iconCornerRadius = forView.layer.cornerRadius * 0.5
   
     let playIcon = UIBezierPath()
-    playIcon.move(to: CGPoint(x: 0, y: 0 + iconCornerRadius))
+    playIcon.move(to: CGPoint(x: 0, y: iconCornerRadius))
     
     let angleIncrement = (2/3) * Double.pi
     
@@ -210,7 +210,7 @@ class PlayButtonsView: UIView {
     let iconArcIndent = iconCornerRadius
     
     let newGameIcon = UIBezierPath()
-    newGameIcon.move(to: CGPoint(x: 0, y: (forView.frame.height * 0.3 + iconCornerRadius)))
+    newGameIcon.move(to: CGPoint(x: iconCornerRadius, y: forView.frame.height * 0.3 + iconCornerRadius))
     newGameIcon.addArc(withCenter: CGPoint(x: iconArcIndent, y: forView.frame.height * 0.3), radius: iconCornerRadius, startAngle: Double.pi * 0.5, endAngle: Double.pi * 1.5 , clockwise: true)
     newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.3) - iconCornerRadius * 2, y: (forView.frame.height * 0.3) - iconCornerRadius * 2), radius: iconCornerRadius, startAngle: Double.pi * 0.5, endAngle: 0, clockwise: false)
     newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.3), y: iconArcIndent), radius: iconCornerRadius, startAngle: Double.pi, endAngle: 0, clockwise: true)

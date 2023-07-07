@@ -132,7 +132,7 @@ func randomStartUIBeizerPath(width w: CGFloat, height h: CGFloat) -> UIBezierPat
   
   let path = UIBezierPath()
   path.move(to: startPoint)
-  var firstIndex = corners.firstIndex(where: {$0.x == startPoint.x || $0.y == startPoint.y })
+  let firstIndex = corners.firstIndex(where: {$0.x == startPoint.x || $0.y == startPoint.y })
   for i in 0...corners.count {
       path.addLine(to: corners[(firstIndex! + i) % corners.count])
   }

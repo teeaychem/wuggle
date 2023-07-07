@@ -13,6 +13,7 @@
 // TODO: Found words
 
 import UIKit
+import CoreData
 
 class GameCardViewController: CardViewController {
 
@@ -59,7 +60,6 @@ class GameCardViewController: CardViewController {
     playPauseGR = UITapGestureRecognizer(target: self, action: #selector(didTapOnPlayPause(_:)))
     stopGR = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressStop(_:)))
     playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
-    playButtonsViewController.stopAddGesture(gesture: stopGR!)
     stopGR?.minimumPressDuration = 0.1
     
     // TODO: At the end of the init I want to get things up.
@@ -153,6 +153,7 @@ extension GameCardViewController {
   
   
   func newGameMain() {
+//    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
     // Remove all the tiles from the previous game.
     boardViewController.removeAllTileViews()
     // Get a new game.
@@ -163,11 +164,8 @@ extension GameCardViewController {
     stopwatchViewController.resetHand()
     boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
     
-
-    
     print("new game main")
-    displayLinkTwo = CADisplayLink(target: self, selector: #selector(newGameWait))
-    displayLinkTwo!.add(to: .current, forMode: .common)
+
     
     if (finalWordsViewController != nil) {
       self.unembed(finalWordsViewController!, inView: self.view)
@@ -175,26 +173,49 @@ extension GameCardViewController {
     }
     
     playButtonsViewController.playPauseRemoveGesture(gesture: playPauseGR!)
-
     
-//    delegate?.currentGameInstance()?.findAndSavePossibleWords()
+    displayLinkTwo = CADisplayLink(target: self, selector: #selector(newGameWait))
+    displayLinkTwo!.add(to: .current, forMode: .common)
     
     
+    // So, basically, as part of this function we load up a private managed context which runs on a different thread.
+    // This then works on the settings file separately from the settings in use on the main thread.
+    // Perform means that we don't wait around for what is requested.
+    // Saving then merges the two contexts.
+    
+      let privateManagedObjectContext: NSManagedObjectContext = {
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        managedObjectContext.parent = self.delegate?.currentSettings().managedObjectContext
+        return managedObjectContext
+      }()
+            
+      let settingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+      settingsFetchRequest.fetchLimit = 1
+      if let result = try? privateManagedObjectContext.fetch(settingsFetchRequest) {
+        let settings = result.first as! Settings
+        privateManagedObjectContext.perform {
+//          DispatchQueue.global(qos: .default).async {
+          settings.currentGame?.findPossibleWords()
+          do {
+            try privateManagedObjectContext.save()
+          } catch {
+            print("heck")
+          }
+        }
+      }
+//    }
   }
   
   
   @objc func newGameWait() {
     displayLinkTwoTimeElapsed += displayLinkTwo!.targetTimestamp - displayLinkTwo!.timestamp
     
-    playButtonsViewController.rotatePlayPauseIcon(percent: displayLinkTwoTimeElapsed)
+//    playButtonsViewController.rotatePlayPauseIcon(percent: displayLinkTwoTimeElapsed)
     for tile in boardViewController.gameboardView.tiles.values {
       tile.partialDiplayTile(percent: displayLinkTwoTimeElapsed)
     }
     
-    
     if displayLinkTwoTimeElapsed > 1 {
-      // Make new tiles.
-      
       // Fix the icons.
       playButtonsViewController.paintStopIcon()
       playButtonsViewController.stopAddGesture(gesture: stopGR!)
@@ -342,12 +363,10 @@ extension GameCardViewController {
   @objc func didTapOnPlayPause(_ sender: UITapGestureRecognizer) {
     if gameInProgess {
       pauseGameMain(animated: true)
-    } else {
-      if (delegate!.currentGameInstance() != nil && delegate!.currentGameInstance()!.timeUsedPercent < 1) {
+    } else if (delegate!.currentGameInstance() != nil && delegate!.currentGameInstance()!.timeUsedPercent < 1) {
         resumeGameMain()
-      } else {
-        newGameMain()
-      }
+    } else {
+      newGameMain()
     }
   }
   

@@ -42,14 +42,9 @@ extension GameInstance {
   }
   
   
-  func findAndSavePossibleWords() {
-    
-    settings?.getCurrentGame()?.allWordsList = findAllWords()?.sorted()
-    do {
-      try managedObjectContext!.save()
-    } catch {
-      print("fail")
-    }
+  func findPossibleWords() {
+    guard self.settings?.currentGame != nil else { return }
+    self.settings!.currentGame!.allWordsList = findAllWords()?.sorted()
   }
   
   func findAllWords() -> Set<String>? {
