@@ -54,6 +54,7 @@ extension GameInstance {
     
     // Get the trie root
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
+    fetchRequest.fetchLimit = 1
     do {
       guard (self.managedObjectContext != nil) else { return nil }
       

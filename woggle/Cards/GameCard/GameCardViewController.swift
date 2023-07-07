@@ -153,7 +153,7 @@ extension GameCardViewController {
   
   
   func newGameMain() {
-//    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
     // Remove all the tiles from the previous game.
     boardViewController.removeAllTileViews()
     // Get a new game.
