@@ -20,7 +20,6 @@ class PlayButtonsView: UIView {
   private let xPadding: CGFloat
   private let subButtonWidth: CGFloat
   private let yPadding: CGFloat
-  private let iconIndent: CGFloat
   
   // Two subviews for playPause/Stop buttons
   let playPauseView: UIView
@@ -35,7 +34,6 @@ class PlayButtonsView: UIView {
     xPadding = vD.gameBoardPadding * 0.5
     subButtonWidth = buttonSize.width - (xPadding * 2)
     yPadding = (buttonSize.height - (2 * (subButtonWidth))) / 3
-    iconIndent = xPadding * 1.5
     
     playPauseView = UIView(frame: CGRect(x: xPadding, y: yPadding, width: subButtonWidth, height: subButtonWidth))
     stopView = UIView(frame: CGRect(x: xPadding, y: (2 *  yPadding) + (subButtonWidth), width: subButtonWidth, height: subButtonWidth))
@@ -99,7 +97,7 @@ class PlayButtonsView: UIView {
 //    stopIcon.addLine(to: CGPoint(x: iconIndent, y: iconIndent + iconCornerRadius))
 //    stopIcon.addArc(withCenter: CGPoint(x: (iconIndent + iconCornerRadius), y: (iconIndent + iconCornerRadius)), radius: iconCornerRadius, startAngle: Double.pi, endAngle: Double.pi * 1.5, clockwise: true)
     
-    let stopIcon = UIBezierPath(roundedRect: CGRect(x: iconIndent, y: iconIndent, width: forView.frame.width - (2 * iconIndent), height: forView.frame.height - (2 * iconIndent)), cornerRadius: forView.layer.cornerRadius / 2)
+    let stopIcon = UIBezierPath(roundedRect: CGRect(x: forView.frame.width * 0.2, y: forView.frame.height * 0.2, width: forView.frame.width * 0.6, height: forView.frame.height * 0.6), cornerRadius: forView.layer.cornerRadius / 2)
 
     stopIcon.close()
     
@@ -122,18 +120,24 @@ class PlayButtonsView: UIView {
   
   func addPlayIcon() {
     playPauseLayer = makePlayIcon(forView: playPauseView)
+    playPauseLayer.frame = playPauseLayer.path!.boundingBox
+    playPauseLayer.frame.origin = CGPoint(x: playPauseView.frame.width * 0.2, y: playPauseView.frame.height * 0.2)
     playPauseView.layer.addSublayer(playPauseLayer)
   }
   
   
   func addPauseIcon() {
     playPauseLayer = makePauseIcon(forView: playPauseView)
+    playPauseLayer.frame = playPauseLayer.path!.boundingBox
+    playPauseLayer.frame.origin = CGPoint(x: playPauseView.frame.width * 0.2, y: playPauseView.frame.height * 0.2)
     playPauseView.layer.addSublayer(playPauseLayer)
   }
   
   
   func addNewGameIcon() {
     playPauseLayer = makeNewGameIcon(forView: playPauseView)
+    playPauseLayer.frame = playPauseLayer.path!.boundingBox
+    playPauseLayer.frame.origin = CGPoint(x: playPauseView.frame.width * 0.2, y: playPauseView.frame.height * 0.2)
     playPauseView.layer.addSublayer(playPauseLayer)
   }
   
@@ -149,13 +153,13 @@ class PlayButtonsView: UIView {
     let iconCornerRadius = forView.layer.cornerRadius * 0.5
   
     let playIcon = UIBezierPath()
-    playIcon.move(to: CGPoint(x: iconIndent, y: iconIndent + iconCornerRadius))
+    playIcon.move(to: CGPoint(x: 0, y: 0 + iconCornerRadius))
     
     let angleIncrement = (2/3) * Double.pi
     
-    playIcon.addArc(withCenter: CGPoint(x: (iconIndent + iconCornerRadius), y: (iconIndent + iconCornerRadius)), radius: iconCornerRadius, startAngle: Double.pi, endAngle: Double.pi + angleIncrement, clockwise: true)
-    playIcon.addArc(withCenter: CGPoint(x: forView.frame.width - (iconIndent + iconCornerRadius), y: forView.frame.height * 0.5), radius: iconCornerRadius, startAngle: Double.pi + angleIncrement, endAngle: Double.pi - angleIncrement, clockwise: true)
-    playIcon.addArc(withCenter: CGPoint(x: iconIndent + iconCornerRadius, y: forView.frame.height - (iconIndent + iconCornerRadius)), radius: iconCornerRadius, startAngle: Double.pi - angleIncrement, endAngle: Double.pi, clockwise: true)
+    playIcon.addArc(withCenter: CGPoint(x: iconCornerRadius, y:  iconCornerRadius), radius: iconCornerRadius, startAngle: Double.pi, endAngle: Double.pi + angleIncrement, clockwise: true)
+    playIcon.addArc(withCenter: CGPoint(x: forView.frame.width * 0.6 - iconCornerRadius, y: forView.frame.height * 0.3), radius: iconCornerRadius, startAngle: Double.pi + angleIncrement, endAngle: Double.pi - angleIncrement, clockwise: true)
+    playIcon.addArc(withCenter: CGPoint(x: iconCornerRadius, y: forView.frame.height * 0.6 - iconCornerRadius), radius: iconCornerRadius, startAngle: Double.pi - angleIncrement, endAngle: Double.pi, clockwise: true)
     playIcon.close()
     
     playIconLayer.path = playIcon.cgPath
@@ -169,16 +173,21 @@ class PlayButtonsView: UIView {
   }
   
   
+  func rotatePlayPauseLayer(percent: Double) {
+    playPauseLayer.transform = CATransform3DMakeRotation((percent * (2 * Double.pi)), 0.0, 0.0, 1.0)
+  }
+  
+  
   func makePauseIcon(forView: UIView) -> CAShapeLayer {
     
     let iconCornerRadius = forView.layer.cornerRadius * 0.5
     let pauseIconLayer = CAShapeLayer()
     
     let pauseIconPath = CGMutablePath()
-    let pauseSegmentWidth = (forView.frame.width - (3 * iconIndent)) / 2
+    let pauseSegmentWidth = forView.frame.width * 0.25
     
-    let pauseIconLeft = UIBezierPath(roundedRect: CGRect(x: iconIndent, y: iconIndent, width: pauseSegmentWidth, height: forView.frame.height - (2 * iconIndent)), cornerRadius: iconCornerRadius)
-    let pauseIconRight = UIBezierPath(roundedRect: CGRect(x: forView.frame.width - (iconIndent + pauseSegmentWidth), y: iconIndent, width: pauseSegmentWidth, height: forView.frame.height - (2 * iconIndent)), cornerRadius: iconCornerRadius)
+    let pauseIconLeft = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: pauseSegmentWidth, height: forView.frame.height * 0.6), cornerRadius: iconCornerRadius)
+    let pauseIconRight = UIBezierPath(roundedRect: CGRect(x: forView.frame.width * 0.35, y: 0, width: pauseSegmentWidth, height: forView.frame.height * 0.6), cornerRadius: iconCornerRadius)
 
     
     pauseIconPath.addPath(pauseIconLeft.cgPath)
@@ -198,18 +207,18 @@ class PlayButtonsView: UIView {
     
     let iconCornerRadius = forView.layer.cornerRadius * 0.25
     let newGameIconLayer = CAShapeLayer()
-    let iconArcIndent = iconIndent + iconCornerRadius
+    let iconArcIndent = iconCornerRadius
     
     let newGameIcon = UIBezierPath()
-    newGameIcon.move(to: CGPoint(x: iconArcIndent, y: (forView.frame.height * 0.5 + iconCornerRadius)))
-    newGameIcon.addArc(withCenter: CGPoint(x: iconArcIndent, y: forView.frame.height * 0.5), radius: iconCornerRadius, startAngle: Double.pi * 0.5, endAngle: Double.pi * 1.5 , clockwise: true)
-    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.5) - iconCornerRadius * 2, y: (forView.frame.height * 0.5) - iconCornerRadius * 2), radius: iconCornerRadius, startAngle: Double.pi * 0.5, endAngle: 0, clockwise: false)
-    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.5), y: iconArcIndent), radius: iconCornerRadius, startAngle: Double.pi, endAngle: 0, clockwise: true)
-    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.5 + iconCornerRadius * 2), y: (forView.frame.height * 0.5) - iconCornerRadius * 2), radius: iconCornerRadius, startAngle: Double.pi, endAngle: Double.pi * 0.5, clockwise: false)
-    newGameIcon.addArc(withCenter: CGPoint(x: forView.frame.width - iconArcIndent, y: forView.frame.height * 0.5), radius: iconCornerRadius, startAngle: Double.pi * -0.5, endAngle: Double.pi * 0.5 , clockwise: true)
-    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.5 + iconCornerRadius * 2), y: (forView.frame.height * 0.5) + iconCornerRadius * 2), radius: iconCornerRadius, startAngle: Double.pi * -0.5, endAngle: -Double.pi, clockwise: false)
-    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.5), y: forView.frame.height - iconArcIndent), radius: iconCornerRadius, startAngle: 0, endAngle: Double.pi, clockwise: true)
-    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.5 - iconCornerRadius * 2), y: (forView.frame.height * 0.5) + iconCornerRadius * 2), radius: iconCornerRadius, startAngle: 0, endAngle: Double.pi * -0.5, clockwise: false)
+    newGameIcon.move(to: CGPoint(x: 0, y: (forView.frame.height * 0.3 + iconCornerRadius)))
+    newGameIcon.addArc(withCenter: CGPoint(x: iconArcIndent, y: forView.frame.height * 0.3), radius: iconCornerRadius, startAngle: Double.pi * 0.5, endAngle: Double.pi * 1.5 , clockwise: true)
+    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.3) - iconCornerRadius * 2, y: (forView.frame.height * 0.3) - iconCornerRadius * 2), radius: iconCornerRadius, startAngle: Double.pi * 0.5, endAngle: 0, clockwise: false)
+    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.3), y: iconArcIndent), radius: iconCornerRadius, startAngle: Double.pi, endAngle: 0, clockwise: true)
+    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.3 + iconCornerRadius * 2), y: (forView.frame.height * 0.3) - iconCornerRadius * 2), radius: iconCornerRadius, startAngle: Double.pi, endAngle: Double.pi * 0.5, clockwise: false)
+    newGameIcon.addArc(withCenter: CGPoint(x: forView.frame.width * 0.6 - iconArcIndent, y: forView.frame.height * 0.3), radius: iconCornerRadius, startAngle: Double.pi * -0.5, endAngle: Double.pi * 0.5 , clockwise: true)
+    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.3 + iconCornerRadius * 2), y: (forView.frame.height * 0.3) + iconCornerRadius * 2), radius: iconCornerRadius, startAngle: Double.pi * -0.5, endAngle: -Double.pi, clockwise: false)
+    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.3), y: forView.frame.height * 0.6 - iconArcIndent), radius: iconCornerRadius, startAngle: 0, endAngle: Double.pi, clockwise: true)
+    newGameIcon.addArc(withCenter: CGPoint(x: (forView.frame.width * 0.3 - iconCornerRadius * 2), y: (forView.frame.height * 0.3) + iconCornerRadius * 2), radius: iconCornerRadius, startAngle: 0, endAngle: Double.pi * -0.5, clockwise: false)
     newGameIcon.close()
     
     newGameIconLayer.path = newGameIcon.cgPath

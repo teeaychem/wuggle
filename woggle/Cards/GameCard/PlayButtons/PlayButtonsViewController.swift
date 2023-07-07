@@ -57,6 +57,11 @@ class PlayButtonsViewController: UIViewController {
   }
   
   
+  func rotatePlayPauseIcon(percent p: Double) {
+    playButtonsView.rotatePlayPauseLayer(percent: p)
+  }
+  
+  
   func paintStopIcon() {
     playButtonsView.removeStopIcon()
     playButtonsView.addStopIcon()

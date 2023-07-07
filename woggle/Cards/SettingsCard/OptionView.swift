@@ -39,12 +39,12 @@ class OptionView: UIView {
     backgroundColor = UIColor.clear
     
     // Note, use f.height for font size as  as frame.height may has been adjusted if vertical.
-    let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: f.width * 0.4, height: f.height))
+    let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: f.width, height: f.height))
     nameLabel.attributedText = NSMutableAttributedString(string: dN, attributes: delegate.getViewData().getSettingsTextAttributeHighlighted(height: f.height * 0.8))
     addSubview(nameLabel)
     
     if vertical {
-      let choiceLabelWidth = (f.width * 0.6)
+      let choiceLabelWidth = (f.width)
       for i in 0 ..< displayOptions.count {
         let choiceLabel = ChoiceLabel(frame: CGRect(origin: CGPoint(x: (f.width - choiceLabelWidth), y: CGFloat(i) * f.height), size: CGSize(width: choiceLabelWidth, height: f.height)), displayText: dO[i], internalValue: iO[i], delegate: self)
         choiceLabel.textAlignment = .right

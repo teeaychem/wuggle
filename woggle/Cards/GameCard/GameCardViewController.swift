@@ -153,6 +153,10 @@ extension GameCardViewController {
   
   func newGameMain() {
     print("new game main")
+    displayLinkTwo = CADisplayLink(target: self, selector: #selector(newGameWait))
+    displayLinkTwo!.add(to: .current, forMode: .common)
+    
+    
     if (finalWordsViewController != nil) {
       self.unembed(finalWordsViewController!, inView: self.view)
       finalWordsViewController = nil
@@ -166,15 +170,31 @@ extension GameCardViewController {
     delegate?.currentSettings().setNewGame()
     delegate?.currentGameInstance()?.findAndSavePossibleWords()
     
-    // Make new tiles.
-    boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
     // Fix stopwatch
     stopwatchViewController.resetHand()
-    stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
-    // Fix the icons.
-    playButtonsViewController.paintStopIcon()
-    playButtonsViewController.stopAddGesture(gesture: stopGR!)
-    playButtonsViewController.paintPlayIcon()
+    
+  }
+  
+  
+  @objc func newGameWait() {
+    displayLinkTwoTimeElapsed += displayLinkTwo!.targetTimestamp - displayLinkTwo!.timestamp
+    
+    playButtonsViewController.rotatePlayPauseIcon(percent: displayLinkTwoTimeElapsed)
+    
+    
+    if displayLinkTwoTimeElapsed > 1 {
+      // Make new tiles.
+      boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
+      // Fix the icons.
+      playButtonsViewController.paintStopIcon()
+      playButtonsViewController.stopAddGesture(gesture: stopGR!)
+      playButtonsViewController.paintPlayIcon()
+      
+      stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
+
+      displayLinkTwo?.invalidate()
+      displayLinkTwoTimeElapsed = 0
+    }
   }
   
   
