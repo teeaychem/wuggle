@@ -194,6 +194,7 @@ extension GameCardViewController {
       if let result = try? privateManagedObjectContext.fetch(settingsFetchRequest) {
         let settings = result.first as! Settings
         privateManagedObjectContext.perform {
+//          DispatchQueue.global(qos: .default).async {
           settings.currentGame?.findPossibleWords()
           do {
             try privateManagedObjectContext.save()
@@ -202,6 +203,7 @@ extension GameCardViewController {
           }
         }
       }
+//    }
   }
   
   

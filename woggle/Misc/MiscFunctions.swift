@@ -141,25 +141,8 @@ func randomStartUIBeizerPath(width w: CGFloat, height h: CGFloat) -> UIBezierPat
 }
 
 
-func randomStraightPointOnroundedRectangle(width w: CGFloat, height h: CGFloat, cornerRadius: CGFloat) -> CGPoint {
-  // To get random point on perimiter of rectangle, treat the perimiter as a straight line split into four different sections.
-  // Get random number on the line, and then find out which section it belongs to.
-  let adjustWidth = w - (cornerRadius * 2)
-  let adjustHeight = h - (cornerRadius * 2)
-  
-  let randomPoint = Double.random(in: 0...(adjustWidth * 2 + adjustHeight * 2))
-  
-  if randomPoint < adjustHeight {
-    return CGPoint(x: 0, y: cornerRadius + randomPoint)
-  } else if randomPoint < (adjustWidth + adjustHeight) {
-    return CGPoint(x: cornerRadius + randomPoint - adjustHeight, y: 0)
-  } else if randomPoint < (adjustWidth + 2 * adjustHeight) {
-    return CGPoint(x: w, y: cornerRadius + randomPoint - (adjustWidth + adjustHeight))
-  } else {
-    return CGPoint(x: cornerRadius + randomPoint - ((2 * adjustHeight) + adjustWidth), y: h)
-  }
-}
 
+<<<<<<< HEAD
 
 func randomStartRoundedUIBeizerPath(width w: CGFloat, height h: CGFloat, cornerRadius: CGFloat) -> UIBezierPath {
   // To draw a rectangle from a random starting point, get a random point on the perimiter.
@@ -198,3 +181,5 @@ func randomStartRoundedUIBeizerPath(width w: CGFloat, height h: CGFloat, cornerR
   path.close()
   return path
 }
+=======
+>>>>>>> parent of fd3055e (Updated randomBorder functions to include curved path.)
