@@ -20,6 +20,8 @@
 		57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */; };
 		57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155122A5579D000A802C9 /* ChoiceLabel.swift */; };
 		57D155162A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */; };
+		57DC41042A58774400704D20 /* KJB.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41032A58774400704D20 /* KJB.txt */; };
+		57DC41062A587A5B00704D20 /* Shake.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41052A587A5B00704D20 /* Shake.txt */; };
 		57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3732A5481150097D1D2 /* StatusBarView.swift */; };
 		57E2F3772A54E1420097D1D2 /* SettingsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */; };
 		57E2F37A2A54E5850097D1D2 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3792A54E5850097D1D2 /* IconView.swift */; };
@@ -91,6 +93,8 @@
 		57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewWordCell.swift; sourceTree = "<group>"; };
 		57D155122A5579D000A802C9 /* ChoiceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceLabel.swift; sourceTree = "<group>"; };
 		57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewControllerDelegate.swift; sourceTree = "<group>"; };
+		57DC41032A58774400704D20 /* KJB.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KJB.txt; sourceTree = "<group>"; };
+		57DC41052A587A5B00704D20 /* Shake.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Shake.txt; sourceTree = "<group>"; };
 		57E2F3732A5481150097D1D2 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewController.swift; sourceTree = "<group>"; };
 		57E2F3792A54E5850097D1D2 /* IconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
@@ -358,6 +362,8 @@
 			children = (
 				57EB7A5D2A47ACA200BCA44B /* Fonts */,
 				57EF4B722A466B8D008C57FF /* wordlistQu.txt */,
+				57DC41032A58774400704D20 /* KJB.txt */,
+				57DC41052A587A5B00704D20 /* Shake.txt */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -478,8 +484,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				57EB7A622A47ACAE00BCA44B /* K2D-ExtraBold.ttf in Resources */,
+				57DC41062A587A5B00704D20 /* Shake.txt in Resources */,
 				57EB7A652A47ACAE00BCA44B /* K2D-Medium.ttf in Resources */,
 				57EB7A642A47ACAE00BCA44B /* K2D-Italic.ttf in Resources */,
+				57DC41042A58774400704D20 /* KJB.txt in Resources */,
 				57EF4B482A4664F3008C57FF /* LaunchScreen.storyboard in Resources */,
 				57EF4B452A4664F3008C57FF /* Assets.xcassets in Resources */,
 				57EF4B732A466B8D008C57FF /* wordlistQu.txt in Resources */,

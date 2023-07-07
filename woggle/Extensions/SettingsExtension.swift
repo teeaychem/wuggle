@@ -32,15 +32,9 @@ extension Settings {
   }
   
   
-//  func getOrMakeCurrentGame() -> GameInstance {
-//    if (self.currentGame == nil) {
-//      return setNewGame()
-//    }
-//    return self.currentGame!
-//  }
-  
   func getTrieRoot() -> TrieNode {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
+    fetchRequest.fetchLimit = 1
     do {
       let result = try self.managedObjectContext!.fetch(fetchRequest)
       

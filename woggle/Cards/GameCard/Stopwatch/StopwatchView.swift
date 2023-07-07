@@ -9,7 +9,6 @@ import UIKit
 
 class StopwatchView: UIView {
   
-//  private let faceLayer = CAShapeLayer()
   private let secondsLayer = CAShapeLayer()
   
   private let watchSize: CGFloat
@@ -50,6 +49,7 @@ class StopwatchView: UIView {
   
   
   func resetSeconds() {
+    secondsAngle = Double.pi
     secondsLayer.transform = CATransform3DMakeRotation(Double.pi, 0.0, 0.0, 1.0)
   }
   

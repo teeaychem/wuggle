@@ -131,7 +131,7 @@ extension GameCardViewController {
     if delegate!.currentSettings().getCurrentGame() != nil {
       
       boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
-      stopwatchViewController.incrementHand(percent: delegate!.currentGameInstance()!.timeUsedPercent)
+      stopwatchViewController.incrementHandBy(percent: delegate!.currentGameInstance()!.timeUsedPercent)
       for word in delegate!.currentGameInstance()!.foundWordsList! {
         foundWordsViewController.update(word: word)
       }
@@ -426,10 +426,11 @@ extension GameCardViewController {
     // done by calculating how much time has passed.
     let estimate = (displayLinkOne!.targetTimestamp - displayLinkOne!.timestamp)
     let usedPercent = estimate/(Double(delegate!.currentSettings().time) * 60)
+    
     displayLinkOneTimeElapsed += estimate
     delegate!.currentGameInstance()!.timeUsedPercent += usedPercent
-    stopwatchViewController.incrementHand(percent: usedPercent)
-
+    stopwatchViewController.incrementHandBy(percent: usedPercent)
+    print(delegate!.currentGameInstance()!.timeUsedPercent)
     if (delegate!.currentGameInstance()!.timeUsedPercent >= 1) {
       endGameMain()
     }

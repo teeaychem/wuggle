@@ -165,6 +165,8 @@ func randomStartRoundedUIBeizerPath(width w: CGFloat, height h: CGFloat, cornerR
   // To draw a rectangle from a random starting point, get a random point on the perimiter.
   // Then, find which side it's on, and go to one of the points on that side.
   // Then, loop round all the points and close.
+  // 1 indicates line start/end
+  // 0 indicates arc origin.
 
   let corners = [
     (Double.pi, CGPoint(x: cornerRadius, y: cornerRadius)),
@@ -192,8 +194,6 @@ func randomStartRoundedUIBeizerPath(width w: CGFloat, height h: CGFloat, cornerR
     } else {
       path.addArc(withCenter: position.1, radius: cornerRadius, startAngle: position.0, endAngle: position.0 + Double.pi * 0.5, clockwise: true)
     }
-    
-      
   }
   path.close()
   return path
