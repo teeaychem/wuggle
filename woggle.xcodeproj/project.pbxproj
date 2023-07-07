@@ -22,6 +22,7 @@
 		57D155162A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */; };
 		57DC41042A58774400704D20 /* KJB.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41032A58774400704D20 /* KJB.txt */; };
 		57DC41062A587A5B00704D20 /* Shake.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41052A587A5B00704D20 /* Shake.txt */; };
+		57DC41082A58C09700704D20 /* JA.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41072A58C09700704D20 /* JA.txt */; };
 		57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3732A5481150097D1D2 /* StatusBarView.swift */; };
 		57E2F3772A54E1420097D1D2 /* SettingsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */; };
 		57E2F37A2A54E5850097D1D2 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3792A54E5850097D1D2 /* IconView.swift */; };
@@ -95,6 +96,7 @@
 		57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewControllerDelegate.swift; sourceTree = "<group>"; };
 		57DC41032A58774400704D20 /* KJB.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KJB.txt; sourceTree = "<group>"; };
 		57DC41052A587A5B00704D20 /* Shake.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Shake.txt; sourceTree = "<group>"; };
+		57DC41072A58C09700704D20 /* JA.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JA.txt; sourceTree = "<group>"; };
 		57E2F3732A5481150097D1D2 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewController.swift; sourceTree = "<group>"; };
 		57E2F3792A54E5850097D1D2 /* IconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				57EF4B722A466B8D008C57FF /* wordlistQu.txt */,
 				57DC41032A58774400704D20 /* KJB.txt */,
 				57DC41052A587A5B00704D20 /* Shake.txt */,
+				57DC41072A58C09700704D20 /* JA.txt */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				57EF4B482A4664F3008C57FF /* LaunchScreen.storyboard in Resources */,
 				57EF4B452A4664F3008C57FF /* Assets.xcassets in Resources */,
 				57EF4B732A466B8D008C57FF /* wordlistQu.txt in Resources */,
+				57DC41082A58C09700704D20 /* JA.txt in Resources */,
 				57EF4B402A4664F2008C57FF /* Main.storyboard in Resources */,
 				57EB7A632A47ACAE00BCA44B /* K2D-Regular.ttf in Resources */,
 			);
