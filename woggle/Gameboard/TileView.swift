@@ -13,10 +13,13 @@ class TileView: UIView {
   let text: String
   var letterLayers: [CAShapeLayer] = []
   let size: CGFloat
+  let borderWidth: CGFloat
+  let borderLayer = CAShapeLayer()
     
   init(position p: CGPoint, size s: CGFloat, boardSize bS: CGFloat, text t: String) {
 
     size = s
+    borderWidth = s * 0.02
 
     
     if (t == "!") {
@@ -53,6 +56,8 @@ class TileView: UIView {
       sublayer.position.x += indent
       sublayer.position.y = (size - maxHeight)/2
     }
+    
+    makeBorder()
   }
   
   
@@ -60,12 +65,31 @@ class TileView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  func makeBorder() {
+    
+    let borderPath = randomStartUIBeizerPath(width: frame.width, height: frame.height)
+    borderLayer.path = borderPath.cgPath
+    borderLayer.lineWidth = 1
+    borderLayer.strokeColor = UIColor.black.cgColor
+    borderLayer.fillColor = UIColor.clear.cgColor
+    
+    layer.addSublayer(borderLayer)
+    borderLayer.strokeStart = 0 //.75 // Double.random(in: 0...0.5)
+    borderLayer.strokeEnd = 0
+  }
+  
   
   func displayTile() {
-    let borderWidth = size * 0.02
-    layer.borderWidth = borderWidth
+//    layer.borderWidth = borderWidth
     layer.backgroundColor = tileBackgroundColour.cgColor
   }
+  
+  
+  func partialDiplayTile(percent: Double) {
+//    layer.opacity = Float(percent)
+    borderLayer.strokeEnd = percent
+  }
+  
   
   
   func displayLetter(animated: Bool) {
@@ -73,8 +97,6 @@ class TileView: UIView {
     for lay in letterLayers {
       lay.removeAllAnimations()
     }
-    
-    let borderWidth = size*0.02
     
     if animated {
       for lay in letterLayers {

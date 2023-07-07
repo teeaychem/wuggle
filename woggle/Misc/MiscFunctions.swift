@@ -102,3 +102,43 @@ func getFontFor(height: CGFloat) -> Double {
     return fontMin
   }
 }
+
+
+func randomPointOnRectangle(width: CGFloat, height: CGFloat) -> CGPoint {
+  // To get random point on perimiter of rectangle, treat the perimiter as a straight line split into four different sections.
+  // Get random number on the line, and then find out which section it belongs to.
+  
+  let randomPoint = Double.random(in: 0...(width * 2 + height * 2))
+  
+  if randomPoint < height {
+    return CGPoint(x: 0, y: randomPoint)
+  } else if randomPoint < (width + height) {
+    return CGPoint(x: randomPoint - height, y: 0)
+  } else if randomPoint < (width + 2 * height) {
+    return CGPoint(x: width, y: randomPoint - (width + height))
+  } else {
+    return CGPoint(x: randomPoint - (2 * height + width), y: height)
+  }
+}
+
+
+func randomStartUIBeizerPath(width w: CGFloat, height h: CGFloat) -> UIBezierPath {
+  // To draw a rectangle from a random starting point, get a random point on the perimiter.
+  // Then, find which side it's on, and go to one of the points on that side.
+  // Then, loop round all the points and close.
+
+  let corners = [CGPoint(x: 0, y: 0), CGPoint(x: 0, y: w), CGPoint(x: h, y: w), CGPoint(x: h, y: 0)]
+  let startPoint = randomPointOnRectangle(width: w, height: h)
+  
+  let path = UIBezierPath()
+  path.move(to: startPoint)
+  var firstIndex = corners.firstIndex(where: {$0.x == startPoint.x || $0.y == startPoint.y })
+  for i in 0...corners.count {
+      path.addLine(to: corners[(firstIndex! + i) % corners.count])
+  }
+  path.close()
+  return path
+}
+
+
+

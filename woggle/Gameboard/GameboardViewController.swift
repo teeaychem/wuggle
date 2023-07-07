@@ -87,7 +87,13 @@ class GameboardViewController: UIViewController {
       let newTile = createTileView(tile: tileTrueForm, tileWidth: tileWidth, tilePadding: tilePadding)
       let tileKey = tileLocationCombine(x: tileTrueForm.col, y: tileTrueForm.row)
       gameboardView.addTileSubview(tileKey: tileKey, tileView: newTile)
-      newTile.displayTile()
+    }
+  }
+  
+  
+  func displayAllTiles() {
+    for tile in gameboardView.tiles.values {
+      tile.displayTile()
     }
   }
   

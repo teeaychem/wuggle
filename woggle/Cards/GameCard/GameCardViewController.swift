@@ -135,6 +135,7 @@ extension GameCardViewController {
       for word in delegate!.currentGameInstance()!.foundWordsList! {
         foundWordsViewController.update(word: word)
       }
+      boardViewController.displayAllTiles()
       
       if delegate!.currentGameInstance()!.timeUsedPercent < 1 {
         // If there's already a game, set things with stored data.
@@ -152,26 +153,32 @@ extension GameCardViewController {
   
   
   func newGameMain() {
+    // Remove all the tiles from the previous game.
+    boardViewController.removeAllTileViews()
+    // Get a new game.
+    delegate?.currentSettings().setNewGame()
+    // Clear foundWords
+    foundWordsViewController.clear()
+    // Fix stopwatch
+    stopwatchViewController.resetHand()
+    boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
+    
+
+    
     print("new game main")
     displayLinkTwo = CADisplayLink(target: self, selector: #selector(newGameWait))
     displayLinkTwo!.add(to: .current, forMode: .common)
-    
     
     if (finalWordsViewController != nil) {
       self.unembed(finalWordsViewController!, inView: self.view)
       finalWordsViewController = nil
     }
-
-    // Remove all the tiles from the previous game.
-    boardViewController.removeAllTileViews()
-    // Clear foundWords
-    foundWordsViewController.clear()
-    // Get a new game.
-    delegate?.currentSettings().setNewGame()
-    delegate?.currentGameInstance()?.findAndSavePossibleWords()
     
-    // Fix stopwatch
-    stopwatchViewController.resetHand()
+    playButtonsViewController.playPauseRemoveGesture(gesture: playPauseGR!)
+
+    
+//    delegate?.currentGameInstance()?.findAndSavePossibleWords()
+    
     
   }
   
@@ -180,17 +187,23 @@ extension GameCardViewController {
     displayLinkTwoTimeElapsed += displayLinkTwo!.targetTimestamp - displayLinkTwo!.timestamp
     
     playButtonsViewController.rotatePlayPauseIcon(percent: displayLinkTwoTimeElapsed)
+    for tile in boardViewController.gameboardView.tiles.values {
+      tile.partialDiplayTile(percent: displayLinkTwoTimeElapsed)
+    }
     
     
     if displayLinkTwoTimeElapsed > 1 {
       // Make new tiles.
-      boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
+      
       // Fix the icons.
       playButtonsViewController.paintStopIcon()
       playButtonsViewController.stopAddGesture(gesture: stopGR!)
       playButtonsViewController.paintPlayIcon()
       
       stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
+      playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
+      
+      boardViewController.displayAllTiles()
 
       displayLinkTwo?.invalidate()
       displayLinkTwoTimeElapsed = 0

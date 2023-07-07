@@ -113,6 +113,10 @@ class PlayButtonsViewController: UIViewController {
     playButtonsView.playPauseView.addGestureRecognizer(gesture)
   }
   
+  func playPauseRemoveGesture(gesture: UIGestureRecognizer) {
+    playButtonsView.playPauseView.removeGestureRecognizer(gesture)
+  }
+  
   
   func stopAddGesture(gesture: UIGestureRecognizer) {
     playButtonsView.stopView.addGestureRecognizer(gesture)
