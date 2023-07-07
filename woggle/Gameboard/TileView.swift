@@ -67,27 +67,26 @@ class TileView: UIView {
   
   func makeBorder() {
     
-    let borderPath = randomStartUIBeizerPath(width: frame.width, height: frame.height)
+    let borderPath = randomStartRoundedUIBeizerPath(width: frame.width, height: frame.height, cornerRadius: layer.cornerRadius)
     borderLayer.path = borderPath.cgPath
     borderLayer.lineWidth = 1
     borderLayer.strokeColor = UIColor.black.cgColor
     borderLayer.fillColor = UIColor.clear.cgColor
     
     layer.addSublayer(borderLayer)
-    borderLayer.strokeStart = 0 //.75 // Double.random(in: 0...0.5)
+    borderLayer.strokeStart = 0
     borderLayer.strokeEnd = 0
   }
   
   
   func displayTile() {
-//    layer.borderWidth = borderWidth
+    borderLayer.strokeEnd = 1
     layer.backgroundColor = tileBackgroundColour.cgColor
   }
   
   
   func partialDiplayTile(percent: Double) {
-//    layer.opacity = Float(percent)
-    borderLayer.strokeEnd = percent
+    borderLayer.strokeEnd = percent * 1.5
   }
   
   
