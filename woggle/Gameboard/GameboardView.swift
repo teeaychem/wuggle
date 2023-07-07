@@ -24,6 +24,13 @@ class GameboardView: UIView {
   }
   
   
+  func setOpacity(to: Float) {
+    for v in subviews {
+      v.layer.opacity = to
+    }
+  }
+  
+  
   func addTileSubview(tileKey: Int16, tileView: TileView) {
     tiles.updateValue(tileView, forKey: tileKey)
     self.addSubview(tileView)

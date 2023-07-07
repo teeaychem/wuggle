@@ -251,6 +251,7 @@ extension GameCardViewController {
   
   
   func endGameMain() {
+    boardViewController.gameboardView.setOpacity(to: 0.25)
     // Cancel timer, pause and end game
     displayLinkOne?.invalidate()
     gameInProgess = false
@@ -407,8 +408,10 @@ extension GameCardViewController {
       
     case .began:
       finalWordsViewController!.view.layer.opacity = 0
+      boardViewController.gameboardView.setOpacity(to: 1)
     case .ended, .cancelled:
       finalWordsViewController!.view.layer.opacity = 1
+      boardViewController.gameboardView.setOpacity(to: 0.25)
     default:
       break
     }
