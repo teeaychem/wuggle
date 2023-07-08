@@ -31,6 +31,7 @@
 		57E2F3822A54E59D0097D1D2 /* LengthIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F37E2A54E59D0097D1D2 /* LengthIcon.swift */; };
 		57E2F3832A54E59D0097D1D2 /* LexiconIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F37F2A54E59D0097D1D2 /* LexiconIcon.swift */; };
 		57E2F3852A54F3200097D1D2 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3842A54F3200097D1D2 /* OptionView.swift */; };
+		57E758B92A5A164400823989 /* ScoreIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758B82A5A164400823989 /* ScoreIcon.swift */; };
 		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
 		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
 		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
@@ -105,6 +106,7 @@
 		57E2F37E2A54E59D0097D1D2 /* LengthIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LengthIcon.swift; sourceTree = "<group>"; };
 		57E2F37F2A54E59D0097D1D2 /* LexiconIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexiconIcon.swift; sourceTree = "<group>"; };
 		57E2F3842A54F3200097D1D2 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
+		57E758B82A5A164400823989 /* ScoreIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreIcon.swift; sourceTree = "<group>"; };
 		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
 		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
 		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
@@ -219,7 +221,6 @@
 				57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */,
 				57E2F3842A54F3200097D1D2 /* OptionView.swift */,
 				57D155122A5579D000A802C9 /* ChoiceLabel.swift */,
-				57E2F3782A54E57A0097D1D2 /* Icons */,
 			);
 			path = SettingsCard;
 			sourceTree = "<group>";
@@ -237,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				57E2F37E2A54E59D0097D1D2 /* LengthIcon.swift */,
+				57E758B82A5A164400823989 /* ScoreIcon.swift */,
 				57E2F37F2A54E59D0097D1D2 /* LexiconIcon.swift */,
 				57E2F37D2A54E59D0097D1D2 /* TileIcon.swift */,
 				57E2F37C2A54E59D0097D1D2 /* TimeIcon.swift */,
@@ -247,6 +249,7 @@
 		57EB7A3F2A47817C00BCA44B /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				57E2F3782A54E57A0097D1D2 /* Icons */,
 				57E2F3722A54810A0097D1D2 /* StatusBar */,
 				57EB7A4E2A479C2D00BCA44B /* CardViewData.swift */,
 				57EB7A482A478BF500BCA44B /* CardViewController.swift */,
@@ -524,6 +527,7 @@
 				57EB7A542A47A7FC00BCA44B /* tileText.swift in Sources */,
 				57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */,
 				57AC997C2A558F0300B2E892 /* OptionViewDelegate.swift in Sources */,
+				57E758B92A5A164400823989 /* ScoreIcon.swift in Sources */,
 				57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */,
 				57EB7A4F2A479C2D00BCA44B /* CardViewData.swift in Sources */,
 				57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */,

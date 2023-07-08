@@ -16,6 +16,10 @@ import UIKit
 import CoreData
 
 class GameCardViewController: CardViewController {
+  
+  let foundIcon: IconView
+  let scoreIcon: IconView
+  let perceIcon: IconView
 
   let boardViewController: GameboardViewController
   let stopwatchViewController: StopwatchViewController
@@ -43,8 +47,10 @@ class GameCardViewController: CardViewController {
     // Use delegate to pull some general infomration.
     rootTrie = d.currentSettings().getTrieRoot()
     
-    // Constants to create and position views
-    // TODO: Collect together reused terms
+    // Icons
+    foundIcon = ScoreIcon(size: vD.statusBarHeight)
+    scoreIcon = ScoreIcon(size: vD.statusBarHeight)
+    perceIcon = ScoreIcon(size: vD.statusBarHeight)
     
     // Fix controllers  for the current views
     boardViewController = GameboardViewController(boardSize: vD.gameBoardSize, tilePadding: vD.tilePadding)
@@ -53,6 +59,15 @@ class GameCardViewController: CardViewController {
     foundWordsViewController = FoundWordsViewController(viewData: vD)
     
     super.init(viewData: vD, delegate: d)
+    
+    
+    let sBIconIndent = (statusBarView.frame.width - (3 * vD.statusBarHeight)) * 0.25
+    statusBarView.addSubview(foundIcon)
+    statusBarView.addSubview(scoreIcon)
+    statusBarView.addSubview(perceIcon)
+    foundIcon.frame.origin = CGPoint(x: sBIconIndent, y: 0)
+    scoreIcon.frame.origin = CGPoint(x: (sBIconIndent * 2) + vD.statusBarHeight, y: 0)
+    perceIcon.frame.origin = CGPoint(x: (sBIconIndent * 3) + vD.statusBarHeight * 2, y: 0)
         
     // Add gesture recognisers
     boardPanGR = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
@@ -118,11 +133,19 @@ class GameCardViewController: CardViewController {
       delegate!.currentGameInstance()?.foundWordsList!.append(w)
     }
   }
-
 }
 
 
-// MARK: Functions for starting, pausing, and ending a game
+
+// MARK: StatusBar
+
+extension GameboardViewController {
+  
+}
+
+
+
+// MARK: Starting, pausing, and ending a game
 extension GameCardViewController {
   
   
@@ -163,10 +186,7 @@ extension GameCardViewController {
     // Fix stopwatch
     stopwatchViewController.resetHand()
     boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
-    
-    print("new game main")
-
-    
+        
     if (finalWordsViewController != nil) {
       self.unembed(finalWordsViewController!, inView: self.view)
       finalWordsViewController = nil
@@ -208,7 +228,7 @@ extension GameCardViewController {
   @objc func newGameWait() {
     displayLinkTwoTimeElapsed += displayLinkTwo!.targetTimestamp - displayLinkTwo!.timestamp
     
-//    playButtonsViewController.rotatePlayPauseIcon(percent: displayLinkTwoTimeElapsed)
+    playButtonsViewController.rotatePlayPauseIcon(percent: displayLinkTwoTimeElapsed)
     for tile in boardViewController.gameboardView.tiles.values {
       tile.partialDiplayTile(percent: displayLinkTwoTimeElapsed)
     }
@@ -390,7 +410,7 @@ extension GameCardViewController {
     case .ended, .cancelled:
       displayLinkTwo?.invalidate()
       playButtonsViewController.removeHighlight()
-      if (displayLinkTwoTimeElapsed > 0.5) {
+      if (displayLinkTwoTimeElapsed > 0.125) {
         endGameMain()
         playButtonsViewController.stopRemoveGesture(gesture: stopGR!)
       }
@@ -433,7 +453,6 @@ extension GameCardViewController {
     displayLinkOneTimeElapsed += estimate
     delegate!.currentGameInstance()!.timeUsedPercent += usedPercent
     stopwatchViewController.incrementHandBy(percent: usedPercent)
-    print(delegate!.currentGameInstance()!.timeUsedPercent)
     if (delegate!.currentGameInstance()!.timeUsedPercent >= 1) {
       endGameMain()
     }
