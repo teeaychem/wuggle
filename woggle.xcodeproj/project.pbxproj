@@ -22,7 +22,6 @@
 		57D155162A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */; };
 		57DC41042A58774400704D20 /* King James Bible.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41032A58774400704D20 /* King James Bible.txt */; };
 		57DC41062A587A5B00704D20 /* Shakespeare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41052A587A5B00704D20 /* Shakespeare.txt */; };
-		57DC41082A58C09700704D20 /* Jane Austen.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41072A58C09700704D20 /* Jane Austen.txt */; };
 		57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3732A5481150097D1D2 /* StatusBarView.swift */; };
 		57E2F3772A54E1420097D1D2 /* SettingsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */; };
 		57E2F37A2A54E5850097D1D2 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3792A54E5850097D1D2 /* IconView.swift */; };
@@ -36,6 +35,7 @@
 		57E758BE2A5B8F6E00823989 /* StatsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758BD2A5B8F6E00823989 /* StatsCardViewController.swift */; };
 		57E758C02A5C2A0B00823989 /* CombinedScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */; };
 		57E758C32A5C4D4600823989 /* 3of6game.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758C22A5C4D4600823989 /* 3of6game.txt */; };
+		57E758C52A5C5E0700823989 /* Jane Austen.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758C42A5C5E0600823989 /* Jane Austen.txt */; };
 		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
 		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
 		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
@@ -100,7 +100,6 @@
 		57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewControllerDelegate.swift; sourceTree = "<group>"; };
 		57DC41032A58774400704D20 /* King James Bible.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "King James Bible.txt"; sourceTree = "<group>"; };
 		57DC41052A587A5B00704D20 /* Shakespeare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Shakespeare.txt; sourceTree = "<group>"; };
-		57DC41072A58C09700704D20 /* Jane Austen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Jane Austen.txt"; sourceTree = "<group>"; };
 		57E2F3732A5481150097D1D2 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewController.swift; sourceTree = "<group>"; };
 		57E2F3792A54E5850097D1D2 /* IconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
@@ -114,6 +113,7 @@
 		57E758BD2A5B8F6E00823989 /* StatsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCardViewController.swift; sourceTree = "<group>"; };
 		57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedScoreViewController.swift; sourceTree = "<group>"; };
 		57E758C22A5C4D4600823989 /* 3of6game.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3of6game.txt; sourceTree = "<group>"; };
+		57E758C42A5C5E0600823989 /* Jane Austen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Jane Austen.txt"; sourceTree = "<group>"; };
 		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
 		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
 		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
@@ -268,7 +268,7 @@
 				57E758BA2A5A1D7500823989 /* Odgen's Basic.txt */,
 				57DC41032A58774400704D20 /* King James Bible.txt */,
 				57DC41052A587A5B00704D20 /* Shakespeare.txt */,
-				57DC41072A58C09700704D20 /* Jane Austen.txt */,
+				57E758C42A5C5E0600823989 /* Jane Austen.txt */,
 			);
 			path = Lexicons;
 			sourceTree = "<group>";
@@ -523,9 +523,9 @@
 				57E758BB2A5A1D7500823989 /* Odgen's Basic.txt in Resources */,
 				57EF4B452A4664F3008C57FF /* Assets.xcassets in Resources */,
 				57E758C32A5C4D4600823989 /* 3of6game.txt in Resources */,
-				57DC41082A58C09700704D20 /* Jane Austen.txt in Resources */,
 				57EF4B402A4664F2008C57FF /* Main.storyboard in Resources */,
 				57EB7A632A47ACAE00BCA44B /* K2D-Regular.ttf in Resources */,
+				57E758C52A5C5E0700823989 /* Jane Austen.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
