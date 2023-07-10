@@ -11,6 +11,6 @@ protocol SettingsCardViewControllerDelegate: AnyObject {
   
   func updateSetting(internalName: String, internalValue: Int16)
   
-  func getViewData() -> CardViewData
+  func getViewData() -> ViewData
   
 }

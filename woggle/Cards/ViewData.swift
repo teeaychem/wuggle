@@ -8,7 +8,7 @@
 import UIKit
 
 
-class CardViewData {
+class ViewData {
     
   let name: String
   let width: CGFloat
@@ -37,9 +37,9 @@ class CardViewData {
     width = w
     colour = c
     
-    colourL = UIColor.red // UIColor.lightGray
-    colourM = UIColor.orange // UIColor.gray
-    colourD = UIColor.purple //  UIColor.darkGray
+    colourL = UIColor.lightGray
+    colourM = UIColor.gray
+    colourD = UIColor.darkGray
     
     height = width * 1.4
 

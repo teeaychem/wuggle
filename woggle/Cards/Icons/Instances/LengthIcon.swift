@@ -16,7 +16,7 @@ class LengthIcon: IconView {
   let plusLayer = CAShapeLayer()
   let numberLayer = CAShapeLayer()
   
-  override init(size s: CGSize, viewData vD: CardViewData) {
+  override init(size s: CGSize, viewData vD: ViewData) {
     
     super.init(size: s, viewData: vD)
     

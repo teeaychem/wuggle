@@ -25,7 +25,7 @@ class StopwatchView: UIView {
   
   private var secondsAngle = Double.pi
   
-  init(viewData vD: CardViewData) {
+  init(viewData vD: ViewData) {
     
     watchSize = vD.stopWatchSize
     indent = vD.tilePadding

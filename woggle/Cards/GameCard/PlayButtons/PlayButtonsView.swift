@@ -28,7 +28,7 @@ class PlayButtonsView: UIView {
   let stopView: UIView
   private var stopLayer = CAShapeLayer()
   
-  init(viewData vD: CardViewData) {
+  init(viewData vD: ViewData) {
     
     buttonSize = vD.playPauseStopSize
     xPadding = vD.gameBoardPadding * 0.5

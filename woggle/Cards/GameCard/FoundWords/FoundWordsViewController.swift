@@ -13,7 +13,7 @@ class FoundWordsViewController: UIViewController {
   private let wordViewHeight: CGFloat
   private let foundWordView: FoundWordView
   
-  init(viewData vD: CardViewData) {
+  init(viewData vD: ViewData) {
     
     wordViewWidth = vD.foundWordViewWidth
     wordViewHeight = vD.stopWatchSize

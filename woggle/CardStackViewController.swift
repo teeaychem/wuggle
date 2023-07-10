@@ -30,14 +30,12 @@ class CardStackViewController: UIViewController {
   
   init(settings s: Settings) {
     
-    
-    
     settings = s
     
     width = min(((UIScreen.main.bounds.size.height)/1.4/1.16)*0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
     
-    let CardVD = CardViewData(name: "sett", width: width, colour: UIColor.lightGray.cgColor)
+    let CardVD = ViewData(name: "sett", width: width, colour: UIColor.lightGray.cgColor)
     
     firstCardY = (UIScreen.main.bounds.height - (CardVD.height + CardVD.statusBarSize.height * 2)) * 0.5
     statusBarH = CardVD.statusBarSize.height
@@ -50,8 +48,8 @@ class CardStackViewController: UIViewController {
     gameCardC = GameCardViewController(viewData: CardVD, delegate: self)
     
     statCardC?.cardView.backgroundColor = CardVD.colourD
-    settCardC?.cardView.backgroundColor = CardVD.colourM
-    gameCardC?.cardView.backgroundColor = CardVD.colourL
+    settCardC?.cardView.backgroundColor = CardVD.colourL
+    gameCardC?.cardView.backgroundColor = CardVD.colourM
     
     cardViews = [statCardC!, settCardC!, gameCardC!]
 
@@ -85,6 +83,8 @@ class CardStackViewController: UIViewController {
   }
 }
 
+
+
 extension CardStackViewController: CardStackDelegate {
   
   
@@ -108,9 +108,11 @@ extension CardStackViewController: CardStackDelegate {
     print("Asked to process update")
   }
   
+  
   func currentSettings() -> Settings {
     return settings
   }
+  
   
   func currentGameInstance() -> GameInstance? {
     return settings.currentGame
@@ -135,7 +137,4 @@ extension CardStackViewController: CardStackDelegate {
       cardViews.last!.broughtToTop()
     }
   }
-  
-  
-  
 }

@@ -16,7 +16,7 @@ class ScoreIcon: IconView {
   var textAttributes: [NSAttributedString.Key : Any]?
   
   
-  init(size s: CGSize, viewData vD: CardViewData, abv: String) {
+  init(size s: CGSize, viewData vD: ViewData, abv: String) {
     
     scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
     

@@ -19,7 +19,7 @@ class LexiconIcon: IconView {
   
   let coverWidth: CGFloat
     
-  override init(size s: CGSize, viewData vD: CardViewData) {
+  override init(size s: CGSize, viewData vD: ViewData) {
     
     coverWidth = s.width * 0.7
     

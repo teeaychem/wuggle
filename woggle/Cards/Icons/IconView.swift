@@ -18,7 +18,7 @@ class IconView : UIView {
   let indent: CGFloat
   let radius: CGFloat
   
-  init(size s: CGSize, viewData vD: CardViewData) {
+  init(size s: CGSize, viewData vD: ViewData) {
     
     size = s
     indent = size.height * 0.1

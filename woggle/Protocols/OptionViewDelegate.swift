@@ -13,6 +13,6 @@ protocol OptionViewDelegate: AnyObject {
   func choiceChangedTo(internalValue: Int16)
   // Called by choice label when choice is selected.
   
-  func getViewData() -> CardViewData
+  func getViewData() -> ViewData
   
 }

@@ -16,7 +16,7 @@ class FinalFoundWordsViewController: UIViewController {
   private let foundWordView: FoundWordView
   private let noseeWordView: FoundWordView
   
-  init(viewData vD: CardViewData) {
+  init(viewData vD: ViewData) {
     
     // TODO: Fix this
     wordViewWidth = (vD.gameBoardSize * 0.85 - (3 * vD.tilePadding)) * 0.5

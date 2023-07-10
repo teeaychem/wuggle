@@ -10,10 +10,10 @@ import UIKit
 class StopwatchViewController: UIViewController {
   
   private let size: CGFloat
-  private let viewData: CardViewData
+  private let viewData: ViewData
   let watchView: StopwatchView
   
-  init(viewData vD: CardViewData) {
+  init(viewData vD: ViewData) {
     
     viewData = vD
     size = vD.stopWatchSize

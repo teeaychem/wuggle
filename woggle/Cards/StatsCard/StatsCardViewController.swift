@@ -13,7 +13,7 @@ class StatsCardViewController: CardViewController {
   
   let combinedScoreViewC: CombinedScoreViewController
   
-  override init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
+  override init(viewData vD: ViewData, delegate d: CardStackDelegate) {
     
     combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD)
     

@@ -20,7 +20,7 @@ class TimeIcon : IconView {
   var handLayer: CAShapeLayer?
   
   
-  override init(size s: CGSize, viewData vD: CardViewData) {
+  override init(size s: CGSize, viewData vD: ViewData) {
     
     handStrokeWidth = CGFloat(s.height)/12
     centerPoint = CGPoint(x: s.width * 0.5, y: s.height * 0.5)

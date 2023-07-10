@@ -14,7 +14,7 @@ class TileIcon: IconView {
   let tileLayer = CAShapeLayer()
   let letterLayer = CAShapeLayer()
   
-  override init(size s: CGSize, viewData vD: CardViewData) {
+  override init(size s: CGSize, viewData vD: ViewData) {
     
     tileLayer.fillColor = vD.colourM.cgColor
     

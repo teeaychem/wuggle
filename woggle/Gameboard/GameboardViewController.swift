@@ -24,9 +24,9 @@ class GameboardViewController: UIViewController {
   
   let boardSize: CGFloat
   let gameboardView: GameboardView
-  let viewData: CardViewData
+  let viewData: ViewData
   
-  init(boardSize bS: CGFloat, viewData vD: CardViewData, tilePadding tP: CGFloat) {
+  init(boardSize bS: CGFloat, viewData vD: ViewData, tilePadding tP: CGFloat) {
     
     // Constants for placing elements
     boardSize = bS

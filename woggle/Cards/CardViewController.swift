@@ -11,7 +11,7 @@ class CardViewController: UIViewController {
   
   weak var delegate: CardStackDelegate?
   
-  let viewData: CardViewData
+  let viewData: ViewData
   let cardView: CardView
   let statusBarView: StatusBarView
   
@@ -19,7 +19,7 @@ class CardViewController: UIViewController {
   var displayViews = [UIView]()
   
   
-  init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
+  init(viewData vD: ViewData, delegate d: CardStackDelegate) {
     viewData = vD
     cardView = CardView(cardWidth: viewData.width, cardColour: viewData.colour)
     delegate = d

@@ -17,7 +17,7 @@ class CombinedScoreViewController: UIViewController {
   let scoreIcon: IconView
   let perceIcon: IconView
   
-  init(size s: CGSize, viewData vD: CardViewData) {
+  init(size s: CGSize, viewData vD: ViewData) {
     
     scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
     sepColor = vD.colourL

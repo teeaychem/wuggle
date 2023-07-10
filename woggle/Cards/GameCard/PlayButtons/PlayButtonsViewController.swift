@@ -13,7 +13,7 @@ class PlayButtonsViewController: UIViewController {
   private let highlightLayer = CAShapeLayer()
 
   
-  init(viewData vD: CardViewData) {
+  init(viewData vD: ViewData) {
     
     playButtonsView = PlayButtonsView(viewData: vD)
    

@@ -17,7 +17,7 @@ class SettingsCardViewController: CardViewController {
   var optionViews = [String: OptionView]()
   var tempViews = [UIView]()
   
-  override init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
+  override init(viewData vD: ViewData, delegate d: CardStackDelegate) {
     
     let iconSize = vD.squareIconSize
     
@@ -118,7 +118,7 @@ extension SettingsCardViewController: SettingsCardViewControllerDelegate {
   }
   
   
-  func getViewData() -> CardViewData {
+  func getViewData() -> ViewData {
     return viewData
   }
 }

@@ -40,7 +40,7 @@ class GameCardViewController: CardViewController {
   var selectedTiles = [Int16]()
   var rootTrie: TrieNode?
   
-  override init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
+  override init(viewData vD: ViewData, delegate d: CardStackDelegate) {
     
     // Use delegate to pull some general infomration.
     rootTrie = d.currentSettings().getTrieRoot()

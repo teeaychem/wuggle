@@ -106,7 +106,7 @@ extension OptionView: OptionViewDelegate {
   }
 
   
-  func getViewData() -> CardViewData {
+  func getViewData() -> ViewData {
     return delegate.getViewData()
   }
 
