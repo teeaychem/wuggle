@@ -19,7 +19,7 @@ class SettingsCardViewController: CardViewController {
   
   override init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
     
-    let iconSize = vD.iconSize
+    let iconSize = vD.squareIconSize
     
     lengthIcon = LengthIcon(size: iconSize)
     lexiconIcon = LexiconIcon(size: iconSize)
@@ -28,7 +28,7 @@ class SettingsCardViewController: CardViewController {
     
     super.init(viewData: vD, delegate: d)
     
-    let iconPadding = (vD.width - (vD.iconSize.width * 4)) * 0.2
+    let iconPadding = (vD.width - (vD.squareIconSize.width * 4)) * 0.2
     
     // Set up the icons
     statusBarView.addSubview(timeIcon)
@@ -49,13 +49,13 @@ class SettingsCardViewController: CardViewController {
     
   override func broughtToTop() {
     super.broughtToTop()
-    optionViews["time"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: viewData.statusBarHeight * 1.25, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarHeight), displayName: "Time", displayOptions: ["1", "2", "3", "5", "7", "∞"], internalName: "time", internalOptions: [1, 2, 3, 5, 7, 0], vertical: false, delegate: self)
-    optionViews["lexicon"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["time"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarHeight), displayName: "Lexicon", displayOptions: ["12dicts 3of6", "Odgen's Basic", "Jane Austen", "King James Bible", "Shakespeare"], internalName: "lexicon", internalOptions: [0, 1, 2, 3, 4], vertical: true, delegate: self)
-    optionViews["length"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["lexicon"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarHeight), displayName: "Word length", displayOptions: ["3+", "4+", "5+", "6+"], internalName: "length", internalOptions: [3, 4, 5, 6], vertical: false, delegate: self)
-    optionViews["tiles"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["length"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarHeight), displayName: "Tiles", displayOptions: ["3²", "4²", "5²", "6²", "7²", "8²"], internalName: "tiles", internalOptions: [3, 4, 5, 6, 7, 8], vertical: false, delegate: self)
-    optionViews["pfound"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["tiles"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarHeight), displayName: "Show % of words found", displayOptions: ["Yes", "No"], internalName: "pfound", internalOptions: [0, 1], vertical: false, delegate: self)
+    optionViews["time"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: viewData.statusBarSize.height * 1.25, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarSize.height), displayName: "Time", displayOptions: ["1", "2", "3", "5", "7", "∞"], internalName: "time", internalOptions: [1, 2, 3, 5, 7, 0], vertical: false, delegate: self)
+    optionViews["lexicon"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["time"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarSize.height), displayName: "Lexicon", displayOptions: ["12dicts 3of6", "Odgen's Basic", "Jane Austen", "King James Bible", "Shakespeare"], internalName: "lexicon", internalOptions: [0, 1, 2, 3, 4], vertical: true, delegate: self)
+    optionViews["length"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["lexicon"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarSize.height), displayName: "Word length", displayOptions: ["3+", "4+", "5+", "6+"], internalName: "length", internalOptions: [3, 4, 5, 6], vertical: false, delegate: self)
+    optionViews["tiles"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["length"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarSize.height), displayName: "Tiles", displayOptions: ["3²", "4²", "5²", "6²", "7²", "8²"], internalName: "tiles", internalOptions: [3, 4, 5, 6, 7, 8], vertical: false, delegate: self)
+    optionViews["pfound"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["tiles"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarSize.height), displayName: "Show % of words found", displayOptions: ["Yes", "No"], internalName: "pfound", internalOptions: [0, 1], vertical: false, delegate: self)
     // TODO: Make impact when on is pressed.
-    optionViews["impact"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["pfound"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarHeight), displayName: "Impact", displayOptions: ["On", "Off"], internalName: "impact", internalOptions: [0, 1], vertical: false, delegate: self)
+    optionViews["impact"] = OptionView(frame: CGRect(x: viewData.gameBoardPadding, y: optionViews["pfound"]!.layer.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarSize.height), displayName: "Impact", displayOptions: ["On", "Off"], internalName: "impact", internalOptions: [0, 1], vertical: false, delegate: self)
     
     for optionView in optionViews.values {
       view.addSubview(optionView)

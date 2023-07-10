@@ -19,7 +19,7 @@ class CardStackViewController: UIViewController {
   private let statusBarH: CGFloat
   
   var settCardC: SettingsCardViewController?
-  var statCardC: CardViewController?
+  var statCardC: StatsCardViewController?
   var gameCardC: GameCardViewController?
   
   private var cardViews: [CardViewController] = []
@@ -41,22 +41,22 @@ class CardStackViewController: UIViewController {
     let statCardVD = CardViewData(name: "sett", width: width, colour: UIColor.darkGray.cgColor)
     let gameCardVD = CardViewData(name: "game", width: width, colour: UIColor.gray.cgColor)
     
-    firstCardY = (UIScreen.main.bounds.height - (gameCardVD.height + gameCardVD.statusBarHeight * 2)) * 0.5
-    statusBarH = gameCardVD.statusBarHeight
+    firstCardY = (UIScreen.main.bounds.height - (gameCardVD.height + gameCardVD.statusBarSize.height * 2)) * 0.5
+    statusBarH = gameCardVD.statusBarSize.height
 
     
     super.init(nibName: nil, bundle: nil)
 
     settCardC = SettingsCardViewController(viewData: settCardVD, delegate: self)
-    statCardC = CardViewController(viewData: statCardVD, delegate: self)
+    statCardC = StatsCardViewController(viewData: statCardVD, delegate: self)
     gameCardC = GameCardViewController(viewData: gameCardVD, delegate: self)
     
     cardViews = [statCardC!, settCardC!, gameCardC!]
 
 
     self.embed(statCardC!, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY), size: statCardVD.cardSize))
-    self.embed(settCardC!, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY + gameCardVD.statusBarHeight), size: settCardVD.cardSize))
-    self.embed(gameCardC!, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY + gameCardVD.statusBarHeight * 2), size: gameCardVD.cardSize))
+    self.embed(settCardC!, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY + gameCardVD.statusBarSize.height), size: settCardVD.cardSize))
+    self.embed(gameCardC!, inView: self.view, frame: CGRect(origin: CGPoint(x: 0, y: firstCardY + gameCardVD.statusBarSize.height * 2), size: gameCardVD.cardSize))
     
     for cV in cardViews {
       cV.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))

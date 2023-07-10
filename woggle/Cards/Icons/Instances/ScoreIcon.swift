@@ -13,32 +13,25 @@ class ScoreIcon: IconView {
   var scoreLayer: CAShapeLayer?
   let scoreFont: UIFont
   let scoreLabel: UILabel
+  var textAttributes: [NSAttributedString.Key : Any]?
   
   
   init(size s: CGSize, abv: String) {
     
-    scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.65))!
+    scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
     
-    scoreLabel = UILabel(frame: CGRect(origin: CGPoint(x: s.width * 0.3, y: s.height * 0.2), size: CGSize(width: s.width * 0.6, height: s.height * 0.6)))
-    
+    scoreLabel = UILabel(frame: CGRect(origin: CGPoint(x: s.width * 0.3, y: s.height * 0.175), size: CGSize(width: s.width * 0.6, height: s.height * 0.6)))
     
     
     super.init(size: s)
     
-    let bPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size.width * 0.1, y: size.height * 0.2), size: CGSize(width: size.width * 0.8, height: size.height * 0.6)), cornerRadius: radius)
-    
-    let bLayer = CAShapeLayer()
-    bLayer.path = bPath.cgPath
-    
-    bLayer.fillColor = UIColor.lightGray.cgColor
-//    bLayer.strokeColor = UIColor.black.cgColor
-//    bLayer.lineWidth = 0.5
-    
-    layer.addSublayer(bLayer)
-    
-    scoreLabel.text = "0"
-    scoreLabel.font = scoreFont
-    scoreLabel.textColor = UIColor.darkGray
+    textAttributes = [
+      NSAttributedString.Key.strokeColor : UIColor.black,
+      NSAttributedString.Key.strokeWidth : -0.5,
+      NSAttributedString.Key.foregroundColor : UIColor.darkGray,
+      NSAttributedString.Key.font : UIFont(name: uiFontName, size: getFontFor(height: size.height * 0.8))!
+      ]
+        scoreLabel.attributedText = NSMutableAttributedString(string: "0", attributes: textAttributes)
     scoreLabel.textAlignment = .center
     
     addSubview(scoreLabel)
@@ -54,18 +47,20 @@ class ScoreIcon: IconView {
   
   func setAbv(abv: String) {
     
-    let abvLabel = UILabel(frame: CGRect(origin: CGPoint(x: size.width * 0.125, y: size.height * 0.2), size: CGSize(width: size.width * 0.2, height: size.height * 0.6)))
-    abvLabel.text = abv
+    let abvLabel = UILabel(frame: CGRect(origin: CGPoint(x: size.width * 0, y: size.height * 0.175), size: CGSize(width: size.width * 0.3, height: size.height * 0.6)))
+//    abvLabel.text = abv
     abvLabel.font = scoreFont
     abvLabel.textColor = UIColor.darkGray
     abvLabel.textAlignment = .center
+    
+    abvLabel.attributedText = NSMutableAttributedString(string: abv, attributes: textAttributes)
     
     addSubview(abvLabel)
   }
   
   
   override func updateIcon(value v: String) {
-    scoreLabel.text = v
+    scoreLabel.attributedText = NSMutableAttributedString(string: v, attributes: textAttributes)
   }
   
 }

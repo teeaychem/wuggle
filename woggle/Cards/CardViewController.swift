@@ -23,7 +23,7 @@ class CardViewController: UIViewController {
     viewData = vD
     cardView = CardView(cardWidth: viewData.width, cardColour: viewData.colour)
     delegate = d
-    statusBarView = StatusBarView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: viewData.width, height: viewData.statusBarHeight)))
+    statusBarView = StatusBarView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: viewData.width, height: viewData.statusBarSize.height)))
     
     super.init(nibName: nil, bundle: nil)
     view.frame.size.width = vD.width

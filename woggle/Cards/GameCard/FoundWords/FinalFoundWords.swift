@@ -34,8 +34,8 @@ class FinalFoundWordsViewController: UIViewController {
     
     foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
     noseeWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
-    foundWordView.backgroundColor = UIColor.lightGray
-    noseeWordView.backgroundColor = UIColor.lightGray
+    foundWordView.backgroundColor = vD.colourL
+    noseeWordView.backgroundColor = vD.colourL
     
     super.init(nibName: nil, bundle: nil)
     

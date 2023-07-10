@@ -14,13 +14,18 @@ class CardViewData {
   let width: CGFloat
   var colour: CGColor
   
+  let colourL: UIColor
+  let colourM: UIColor
+  let colourD: UIColor
+  
   let height: CGFloat
   let cardSize: CGSize
-  let statusBarHeight: CGFloat
+  let statusBarSize: CGSize
   let gameBoardSize: CGFloat
   let tilePadding: CGFloat
   let gameBoardPadding: CGFloat
-  let iconSize: CGSize
+  let squareIconSize: CGSize
+  let scoreIconSize: CGSize
   
   let stopWatchSize: CGFloat
   let playPauseStopSize: CGSize
@@ -31,16 +36,22 @@ class CardViewData {
     name = n
     width = w
     colour = c
+    
+    colourL = UIColor.lightGray
+    colourM = UIColor.gray
+    colourD = UIColor.darkGray
+    
     height = width * 1.4
 
     cardSize = CGSize(width: width, height: height)
-    statusBarHeight = height * 0.07
+    statusBarSize = CGSize(width: width, height: height * 0.07)
     gameBoardSize = width * 0.95
     tilePadding = gameBoardSize * 0.01
     gameBoardPadding = (width - gameBoardSize) * 0.5
-    iconSize = CGSize(width: statusBarHeight, height: statusBarHeight)  
+    squareIconSize = CGSize(width: statusBarSize.height, height: statusBarSize.height)
+    scoreIconSize = CGSize(width: statusBarSize.height * 3, height: statusBarSize.height)
     
-    stopWatchSize = height - (3 * gameBoardPadding + gameBoardSize + statusBarHeight)
+    stopWatchSize = height - (3 * gameBoardPadding + gameBoardSize + statusBarSize.height)
     playPauseStopSize = CGSize(width: stopWatchSize * 0.5, height: stopWatchSize)
     foundWordViewWidth = width - ((4 * gameBoardPadding) + (1.5 * stopWatchSize))
   }

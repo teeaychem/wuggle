@@ -36,7 +36,7 @@
     </entity>
     <entity name="TrieNode" representedClassName="TrieNode" syncable="YES" codeGenerationType="class">
         <attribute name="isWord" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="safe" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="lexiconMember" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Boolean]"/>
         <attribute name="value" attributeType="String" defaultValueString=""/>
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrieNode" inverseName="parent" inverseEntity="TrieNode"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrieNode" inverseName="children" inverseEntity="TrieNode"/>

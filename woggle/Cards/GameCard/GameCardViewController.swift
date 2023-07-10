@@ -17,9 +17,7 @@ import CoreData
 
 class GameCardViewController: CardViewController {
   
-  let foundIcon: IconView
-  let scoreIcon: IconView
-  let perceIcon: IconView
+  let combinedScoreViewC: CombinedScoreViewController
 
   let boardViewController: GameboardViewController
   let stopwatchViewController: StopwatchViewController
@@ -48,9 +46,7 @@ class GameCardViewController: CardViewController {
     rootTrie = d.currentSettings().getTrieRoot()
     
     // Icons
-    foundIcon = ScoreIcon(size: CGSize(width: vD.iconSize.width * 2.5, height: vD.iconSize.height), abv: "W")
-    scoreIcon = ScoreIcon(size: CGSize(width: vD.iconSize.width * 2.5, height: vD.iconSize.height), abv: "P")
-    perceIcon = ScoreIcon(size: CGSize(width: vD.iconSize.width * 2.5, height: vD.iconSize.height), abv: "%")
+    combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD)
     
     // Fix controllers  for the current views
     boardViewController = GameboardViewController(boardSize: vD.gameBoardSize, tilePadding: vD.tilePadding)
@@ -61,13 +57,8 @@ class GameCardViewController: CardViewController {
     super.init(viewData: vD, delegate: d)
     
     
-    let sBIconIndent = (statusBarView.frame.width - (3 * vD.iconSize.width * 2.5)) * 0.25
-    statusBarView.addSubview(foundIcon)
-    statusBarView.addSubview(scoreIcon)
-    statusBarView.addSubview(perceIcon)
-    foundIcon.frame.origin = CGPoint(x: sBIconIndent, y: 0)
-    scoreIcon.frame.origin = CGPoint(x: (sBIconIndent * 2) + vD.iconSize.width * 2.5, y: 0)
-    perceIcon.frame.origin = CGPoint(x: (sBIconIndent * 3) + vD.iconSize.width * 5, y: 0)
+    embed(combinedScoreViewC, inView: self.statusBarView, frame: CGRect(origin: CGPoint(x: 0, y: 0), size: vD.statusBarSize))
+    
         
     // Add gesture recognisers
     boardPanGR = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
@@ -88,9 +79,9 @@ class GameCardViewController: CardViewController {
     // TODO: board needs to be last in order for touch to work.
     self.embed(boardViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.height - (viewData.gameBoardSize + viewData.gameBoardPadding)), size: CGSize(width: viewData.gameBoardSize, height: viewData.gameBoardSize)))
     boardViewController.addGameboardView()
-    self.embed(stopwatchViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.gameBoardPadding + viewData.statusBarHeight), size: CGSize(width: viewData.stopWatchSize, height: viewData.stopWatchSize)))
-    self.embed(playButtonsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.stopWatchSize), y: (viewData.gameBoardPadding + viewData.statusBarHeight)), size: CGSize(width: viewData.stopWatchSize * 0.5, height: viewData.stopWatchSize)))
-    self.embed(foundWordsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: ((3 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), y: (viewData.gameBoardPadding + viewData.statusBarHeight)), size: CGSize(width: viewData.width - ((4 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), height: viewData.stopWatchSize)))
+    self.embed(stopwatchViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.gameBoardPadding + viewData.statusBarSize.height), size: CGSize(width: viewData.stopWatchSize, height: viewData.stopWatchSize)))
+    self.embed(playButtonsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.stopWatchSize), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)), size: CGSize(width: viewData.stopWatchSize * 0.5, height: viewData.stopWatchSize)))
+    self.embed(foundWordsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: ((3 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)), size: CGSize(width: viewData.width - ((4 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), height: viewData.stopWatchSize)))
     
     // TODO: Only add this when a game is in progress.
     
@@ -137,19 +128,10 @@ class GameCardViewController: CardViewController {
         delegate!.currentGameInstance()?.foundWordCount += 1
         delegate!.currentGameInstance()?.pointsCount += Int16(getPoints(word: w))
         
-        foundIcon.updateIcon(value: String(delegate!.currentGameInstance()!.foundWordCount))
-        scoreIcon.updateIcon(value: String(delegate!.currentGameInstance()!.pointsCount))
+        combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGameInstance()!)
       }
     }
   }
-}
-
-
-
-// MARK: StatusBar
-
-extension GameboardViewController {
-  
 }
 
 
@@ -206,7 +188,6 @@ extension GameCardViewController {
     displayLinkTwo = CADisplayLink(target: self, selector: #selector(newGameWait))
     displayLinkTwo!.add(to: .current, forMode: .common)
     
-    
     // So, basically, as part of this function we load up a private managed context which runs on a different thread.
     // This then works on the settings file separately from the settings in use on the main thread.
     // Perform means that we don't wait around for what is requested.
@@ -224,12 +205,6 @@ extension GameCardViewController {
         let settings = result.first as! Settings
         privateManagedObjectContext.perform {
           settings.currentGame?.findPossibleWords()
-          print(settings.currentGame?.allWordsList?.count)
-          var maxPoints = 0
-          for w in settings.currentGame!.allWordsList! {
-            maxPoints += getPoints(word: w)
-          }
-          print("mP", maxPoints)
           do {
             try privateManagedObjectContext.save()
           } catch {
@@ -450,9 +425,6 @@ extension GameCardViewController {
     default:
       break
     }
-    
-    
-    
   }
 }
 

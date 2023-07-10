@@ -20,9 +20,9 @@
 		57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */; };
 		57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155122A5579D000A802C9 /* ChoiceLabel.swift */; };
 		57D155162A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */; };
-		57DC41042A58774400704D20 /* KJB.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41032A58774400704D20 /* KJB.txt */; };
-		57DC41062A587A5B00704D20 /* Shake.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41052A587A5B00704D20 /* Shake.txt */; };
-		57DC41082A58C09700704D20 /* JA.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41072A58C09700704D20 /* JA.txt */; };
+		57DC41042A58774400704D20 /* King James Bible.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41032A58774400704D20 /* King James Bible.txt */; };
+		57DC41062A587A5B00704D20 /* Shakespeare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41052A587A5B00704D20 /* Shakespeare.txt */; };
+		57DC41082A58C09700704D20 /* Jane Austen.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41072A58C09700704D20 /* Jane Austen.txt */; };
 		57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3732A5481150097D1D2 /* StatusBarView.swift */; };
 		57E2F3772A54E1420097D1D2 /* SettingsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */; };
 		57E2F37A2A54E5850097D1D2 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3792A54E5850097D1D2 /* IconView.swift */; };
@@ -32,7 +32,9 @@
 		57E2F3832A54E59D0097D1D2 /* LexiconIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F37F2A54E59D0097D1D2 /* LexiconIcon.swift */; };
 		57E2F3852A54F3200097D1D2 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3842A54F3200097D1D2 /* OptionView.swift */; };
 		57E758B92A5A164400823989 /* ScoreIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758B82A5A164400823989 /* ScoreIcon.swift */; };
-		57E758BB2A5A1D7500823989 /* Oqu.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758BA2A5A1D7500823989 /* Oqu.txt */; };
+		57E758BB2A5A1D7500823989 /* Odgen's Basic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758BA2A5A1D7500823989 /* Odgen's Basic.txt */; };
+		57E758BE2A5B8F6E00823989 /* StatsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758BD2A5B8F6E00823989 /* StatsCardViewController.swift */; };
+		57E758C02A5C2A0B00823989 /* CombinedScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */; };
 		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
 		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
 		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
@@ -43,7 +45,7 @@
 		57EB7A512A47A65000BCA44B /* GameInstanceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A502A47A65000BCA44B /* GameInstanceExtension.swift */; };
 		57EB7A542A47A7FC00BCA44B /* tileText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A532A47A7FC00BCA44B /* tileText.swift */; };
 		57EB7A562A47A83900BCA44B /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A552A47A83900BCA44B /* TileView.swift */; };
-		57EB7A582A47A99D00BCA44B /* UIRelated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A572A47A99D00BCA44B /* UIRelated.swift */; };
+		57EB7A582A47A99D00BCA44B /* MiscConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A572A47A99D00BCA44B /* MiscConstants.swift */; };
 		57EB7A622A47ACAE00BCA44B /* K2D-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57EB7A5E2A47ACAE00BCA44B /* K2D-ExtraBold.ttf */; };
 		57EB7A632A47ACAE00BCA44B /* K2D-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57EB7A5F2A47ACAE00BCA44B /* K2D-Regular.ttf */; };
 		57EB7A642A47ACAE00BCA44B /* K2D-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57EB7A602A47ACAE00BCA44B /* K2D-Italic.ttf */; };
@@ -96,9 +98,9 @@
 		57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewWordCell.swift; sourceTree = "<group>"; };
 		57D155122A5579D000A802C9 /* ChoiceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceLabel.swift; sourceTree = "<group>"; };
 		57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewControllerDelegate.swift; sourceTree = "<group>"; };
-		57DC41032A58774400704D20 /* KJB.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KJB.txt; sourceTree = "<group>"; };
-		57DC41052A587A5B00704D20 /* Shake.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Shake.txt; sourceTree = "<group>"; };
-		57DC41072A58C09700704D20 /* JA.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JA.txt; sourceTree = "<group>"; };
+		57DC41032A58774400704D20 /* King James Bible.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "King James Bible.txt"; sourceTree = "<group>"; };
+		57DC41052A587A5B00704D20 /* Shakespeare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Shakespeare.txt; sourceTree = "<group>"; };
+		57DC41072A58C09700704D20 /* Jane Austen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Jane Austen.txt"; sourceTree = "<group>"; };
 		57E2F3732A5481150097D1D2 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewController.swift; sourceTree = "<group>"; };
 		57E2F3792A54E5850097D1D2 /* IconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
@@ -108,7 +110,9 @@
 		57E2F37F2A54E59D0097D1D2 /* LexiconIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexiconIcon.swift; sourceTree = "<group>"; };
 		57E2F3842A54F3200097D1D2 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		57E758B82A5A164400823989 /* ScoreIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreIcon.swift; sourceTree = "<group>"; };
-		57E758BA2A5A1D7500823989 /* Oqu.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Oqu.txt; sourceTree = "<group>"; };
+		57E758BA2A5A1D7500823989 /* Odgen's Basic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Odgen's Basic.txt"; sourceTree = "<group>"; };
+		57E758BD2A5B8F6E00823989 /* StatsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCardViewController.swift; sourceTree = "<group>"; };
+		57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedScoreViewController.swift; sourceTree = "<group>"; };
 		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
 		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
 		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
@@ -119,7 +123,7 @@
 		57EB7A502A47A65000BCA44B /* GameInstanceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstanceExtension.swift; sourceTree = "<group>"; };
 		57EB7A532A47A7FC00BCA44B /* tileText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tileText.swift; sourceTree = "<group>"; };
 		57EB7A552A47A83900BCA44B /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
-		57EB7A572A47A99D00BCA44B /* UIRelated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRelated.swift; sourceTree = "<group>"; };
+		57EB7A572A47A99D00BCA44B /* MiscConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiscConstants.swift; sourceTree = "<group>"; };
 		57EB7A5E2A47ACAE00BCA44B /* K2D-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "K2D-ExtraBold.ttf"; sourceTree = "<group>"; };
 		57EB7A5F2A47ACAE00BCA44B /* K2D-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "K2D-Regular.ttf"; sourceTree = "<group>"; };
 		57EB7A602A47ACAE00BCA44B /* K2D-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "K2D-Italic.ttf"; sourceTree = "<group>"; };
@@ -230,6 +234,7 @@
 		57E2F3782A54E57A0097D1D2 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */,
 				57E2F3792A54E5850097D1D2 /* IconView.swift */,
 				57E2F37B2A54E58D0097D1D2 /* Instances */,
 			);
@@ -248,6 +253,26 @@
 			path = Instances;
 			sourceTree = "<group>";
 		};
+		57E758BC2A5B8F5B00823989 /* StatsCard */ = {
+			isa = PBXGroup;
+			children = (
+				57E758BD2A5B8F6E00823989 /* StatsCardViewController.swift */,
+			);
+			path = StatsCard;
+			sourceTree = "<group>";
+		};
+		57E758C12A5C485200823989 /* Lexicons */ = {
+			isa = PBXGroup;
+			children = (
+				57EF4B722A466B8D008C57FF /* wordlistQu.txt */,
+				57E758BA2A5A1D7500823989 /* Odgen's Basic.txt */,
+				57DC41032A58774400704D20 /* King James Bible.txt */,
+				57DC41052A587A5B00704D20 /* Shakespeare.txt */,
+				57DC41072A58C09700704D20 /* Jane Austen.txt */,
+			);
+			path = Lexicons;
+			sourceTree = "<group>";
+		};
 		57EB7A3F2A47817C00BCA44B /* Cards */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +283,7 @@
 				57EF4B6D2A4665D8008C57FF /* CardView.swift */,
 				57E2F3752A54E12E0097D1D2 /* SettingsCard */,
 				57EB7A402A47818600BCA44B /* GameCard */,
+				57E758BC2A5B8F5B00823989 /* StatsCard */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -287,7 +313,7 @@
 		57EB7A522A47A7F000BCA44B /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				57EB7A572A47A99D00BCA44B /* UIRelated.swift */,
+				57EB7A572A47A99D00BCA44B /* MiscConstants.swift */,
 				57EB7A532A47A7FC00BCA44B /* tileText.swift */,
 				57EF4B792A466F47008C57FF /* MiscFunctions.swift */,
 			);
@@ -367,12 +393,8 @@
 		57EF4B712A466B7B008C57FF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				57E758C12A5C485200823989 /* Lexicons */,
 				57EB7A5D2A47ACA200BCA44B /* Fonts */,
-				57EF4B722A466B8D008C57FF /* wordlistQu.txt */,
-				57E758BA2A5A1D7500823989 /* Oqu.txt */,
-				57DC41032A58774400704D20 /* KJB.txt */,
-				57DC41052A587A5B00704D20 /* Shake.txt */,
-				57DC41072A58C09700704D20 /* JA.txt */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -493,15 +515,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				57EB7A622A47ACAE00BCA44B /* K2D-ExtraBold.ttf in Resources */,
-				57DC41062A587A5B00704D20 /* Shake.txt in Resources */,
+				57DC41062A587A5B00704D20 /* Shakespeare.txt in Resources */,
 				57EB7A652A47ACAE00BCA44B /* K2D-Medium.ttf in Resources */,
 				57EB7A642A47ACAE00BCA44B /* K2D-Italic.ttf in Resources */,
-				57DC41042A58774400704D20 /* KJB.txt in Resources */,
+				57DC41042A58774400704D20 /* King James Bible.txt in Resources */,
 				57EF4B482A4664F3008C57FF /* LaunchScreen.storyboard in Resources */,
-				57E758BB2A5A1D7500823989 /* Oqu.txt in Resources */,
+				57E758BB2A5A1D7500823989 /* Odgen's Basic.txt in Resources */,
 				57EF4B452A4664F3008C57FF /* Assets.xcassets in Resources */,
 				57EF4B732A466B8D008C57FF /* wordlistQu.txt in Resources */,
-				57DC41082A58C09700704D20 /* JA.txt in Resources */,
+				57DC41082A58C09700704D20 /* Jane Austen.txt in Resources */,
 				57EF4B402A4664F2008C57FF /* Main.storyboard in Resources */,
 				57EB7A632A47ACAE00BCA44B /* K2D-Regular.ttf in Resources */,
 			);
@@ -542,7 +564,9 @@
 				57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */,
 				57EB7A512A47A65000BCA44B /* GameInstanceExtension.swift in Sources */,
 				57E2F3772A54E1420097D1D2 /* SettingsCardViewController.swift in Sources */,
+				57E758BE2A5B8F6E00823989 /* StatsCardViewController.swift in Sources */,
 				57EB7A4D2A47950500BCA44B /* UIViewControllerExtension.swift in Sources */,
+				57E758C02A5C2A0B00823989 /* CombinedScoreViewController.swift in Sources */,
 				57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */,
 				57EF4B6C2A466528008C57FF /* CardStackViewController.swift in Sources */,
 				57455B412A4CFF8C0019FFB5 /* PlayButtonsViewController.swift in Sources */,
@@ -565,7 +589,7 @@
 				57EF4B762A466BAE008C57FF /* TrieExtension.swift in Sources */,
 				57BADD842A4A45F3009074DF /* FoundWordView.swift in Sources */,
 				57EB7A562A47A83900BCA44B /* TileView.swift in Sources */,
-				57EB7A582A47A99D00BCA44B /* UIRelated.swift in Sources */,
+				57EB7A582A47A99D00BCA44B /* MiscConstants.swift in Sources */,
 				57E2F3812A54E59D0097D1D2 /* TileIcon.swift in Sources */,
 				57E2F3832A54E59D0097D1D2 /* LexiconIcon.swift in Sources */,
 				57EF4B7A2A466F47008C57FF /* MiscFunctions.swift in Sources */,
