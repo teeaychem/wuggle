@@ -30,7 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       } else {
         print("New trie created")
         let newTrie = TrieNode(context: context)
-        newTrie.completeTrieFromFile(fName: "wordlistQu", context: context)
+        newTrie.completeTrieFromFile(fName: "3of6game", lexiconIndex: 0, context: context)
+        newTrie.completeTrieFromFile(fName: "Odgen's Basic", lexiconIndex: 1, context: context)
+        newTrie.completeTrieFromFile(fName: "Jane Austen", lexiconIndex: 2, context: context)
+        newTrie.completeTrieFromFile(fName: "King James Bible", lexiconIndex: 3, context: context)
+        newTrie.completeTrieFromFile(fName: "Shakespeare", lexiconIndex: 4, context: context)
       }
     } catch {
       print("Error")

@@ -69,7 +69,7 @@ extension TrieNode  {
   }
   
   
-  func addWord(word: String, context: NSManagedObjectContext) {
+  func addWord(word: String, lexiconIndex lexI: Int, context: NSManagedObjectContext) {
     // Safely add a word.
     // Got to root, then use moveToChild, which creates child if needed.
     guard !word.isEmpty else { return }
@@ -83,6 +83,10 @@ extension TrieNode  {
       node = node.moveToChild(value: String(char), context: context)!
     }
     node.isWord = true
+    if node.lexiconList == nil {
+      node.lexiconList = Array(repeating: false, count: lexiconOrder.count)
+    }
+    node.lexiconList![lexI] = true
   }
   
   
@@ -113,14 +117,14 @@ extension TrieNode  {
   }
   
   
-  func completeTrieFromFile(fName: String, context: NSManagedObjectContext) {
+  func completeTrieFromFile(fName: String, lexiconIndex lexI: Int, context: NSManagedObjectContext) {
     
     if let path = Bundle.main.path(forResource: fName, ofType: "txt") {
       do {
         let data = try String(contentsOfFile: path, encoding: .utf8)
         let myStrings = data.components(separatedBy: .newlines)
         for word in myStrings {
-          self.addWord(word: word, context: context)
+          self.addWord(word: word, lexiconIndex: lexI, context: context)
         }
       } catch {
         print("error")

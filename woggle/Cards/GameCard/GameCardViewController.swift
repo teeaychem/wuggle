@@ -334,7 +334,7 @@ extension GameCardViewController {
       // Check to see if current trie node is a word.
       let wordAttempt = stringFromSelectedTiles()
       let endTrie = rootTrie!.traceString(word: wordAttempt)
-      if (endTrie != nil && endTrie!.isWord) {
+      if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)]) {
         processWord(word: wordAttempt.replacingOccurrences(of: "!", with: "Qu"))
       }
       
