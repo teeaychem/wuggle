@@ -33,8 +33,31 @@ func distributionSelect(dist: [Double]) -> Int {
 
 
 func getPoints(word: String) -> Int {
-  return max(0, word.count - 2)
+  // Kind of random. Maybe mees with some more.
+  // Idea is length isn't the only thing.
   
+  var points = 0
+  for char in word {
+    switch char {
+    case "A", "B", "E", "I", "L", "M", "O", "R", "S", "T", "U", "C", "D", "G", "N":
+      points += 1
+    case "P", "F", "H":
+      points += 2
+    case "K", "W", "Y":
+      points += 3
+    case "V":
+      points += 4
+    case "J":
+      points += 5
+    case "!", "X", "Z":
+      points += 6
+    default:
+      points += 0
+    }
+  }
+  return points
+  
+//  return max(0, word.count - 2)
   
 //  guard (word == "") else {return 0}
 //
@@ -65,7 +88,7 @@ func getFontFor(height: CGFloat) -> Double {
   // So, the idea is to use either the height of the frame containing text or some given ratio to find an appropriate font size.
 
   // To do this, binary search.
-  // I'll fix min and max font sizes.
+  // Fix min and max font sizes.
   // Then, split the difference.
   // Draw text with Q as this *might* drop below the line using the split.
   // If the font fits, I might need bigger. So, split is new min.
@@ -96,7 +119,6 @@ func getFontFor(height: CGFloat) -> Double {
         fontMin = fontSplit
       }
     }
-    
     fontByHeightDict.updateValue(fontMin, forKey: height)
     // fontMin is guaranteed to fit.
     return fontMin

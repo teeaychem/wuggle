@@ -58,7 +58,7 @@ extension TrieNode  {
   }
   
   
-  func goToRoot() -> TrieNode? {
+  func getRoot() -> TrieNode? {
     // Root has no parent, so keep moving back.
     // If loop is introduced, this breaks.
     var currentNode = self
@@ -77,7 +77,7 @@ extension TrieNode  {
     
     var node = self
     if self.parent != nil {
-      node = self.goToRoot()!
+      node = self.getRoot()!
     }
     for char in lword {
       node = node.moveToChild(value: String(char), context: context)!

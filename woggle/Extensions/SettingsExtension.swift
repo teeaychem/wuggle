@@ -40,7 +40,7 @@ extension Settings {
       
       if result.count > 0 {
         let node = result.last as! TrieNode
-        return node.goToRoot()!
+        return node.getRoot()!
       }
     } catch {
       print("error")

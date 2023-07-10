@@ -216,8 +216,7 @@ extension GameCardViewController {
   
   
   @objc func newGameWait() {
-    
-    
+       
     if displayLinkTwoTimeElapsed < 1 {
       
       displayLinkTwoTimeElapsed += displayLinkTwo!.targetTimestamp - displayLinkTwo!.timestamp
@@ -288,6 +287,7 @@ extension GameCardViewController {
 
 // MARK: GestureRecognisers
 extension GameCardViewController {
+  
   
   @objc func didPanOnBoard(_ sender: UIPanGestureRecognizer) {
     // TODO: Maybe update this with a custom recogniser.

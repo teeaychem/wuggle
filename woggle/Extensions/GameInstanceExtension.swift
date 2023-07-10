@@ -62,7 +62,7 @@ extension GameInstance {
       
       if results.count > 0 {
         var node = results.first as! TrieNode
-        node = node.goToRoot()!
+        node = node.getRoot()!
         var allTiles = self.board!.tiles! as! Set<Tile>
         var wordSet = Set<String>()
         var wordString = ""
@@ -95,7 +95,7 @@ extension GameInstance {
       wordString += tile.value!
       
       // If this is a word, update the word list.
-      if trieNode.isWord {
+      if trieNode.isWord && trieNode.lexiconList![Int(settings!.lexicon)] {
         wordSet.insert(wordString.replacingOccurrences(of: "!", with: "Qu"))
       }
       

@@ -26,6 +26,7 @@ class ViewData {
   let gameBoardPadding: CGFloat
   let squareIconSize: CGSize
   let scoreIconSize: CGSize
+  let statSize: CGSize
   
   let stopWatchSize: CGFloat
   let playPauseStopSize: CGSize
@@ -51,9 +52,12 @@ class ViewData {
     squareIconSize = CGSize(width: statusBarSize.height, height: statusBarSize.height)
     scoreIconSize = CGSize(width: statusBarSize.height * 3, height: statusBarSize.height)
     
+    
     stopWatchSize = height - (3 * gameBoardPadding + gameBoardSize + statusBarSize.height)
     playPauseStopSize = CGSize(width: stopWatchSize * 0.5, height: stopWatchSize)
     foundWordViewWidth = width - ((4 * gameBoardPadding) + (1.5 * stopWatchSize))
+    
+    statSize = CGSize(width: width * 0.95, height: statusBarSize.height * 2.5)
   }
   
  func getSettingsTextAttributePlain(height: CGFloat) -> [NSAttributedString.Key : Any] {
