@@ -24,11 +24,13 @@ class GameboardViewController: UIViewController {
   
   let boardSize: CGFloat
   let gameboardView: GameboardView
+  let viewData: CardViewData
   
   init(boardSize bS: CGFloat, viewData vD: CardViewData, tilePadding tP: CGFloat) {
     
     // Constants for placing elements
     boardSize = bS
+    viewData = vD
 
     // Setup the view
     gameboardView = GameboardView(boardSize: bS)
@@ -108,7 +110,7 @@ class GameboardViewController: UIViewController {
     let xPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.col - 1)
     let yPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.row - 1)
     let tPosition = CGPoint(x: xPosition, y: yPosition)
-    return TileView(position: tPosition, size: tileWidth, boardSize: boardSize, text: tile.value ?? "Qr")
+    return TileView(position: tPosition, size: tileWidth, boardSize: boardSize, text: tile.value ?? "Qr", viewData: viewData)
   }
   
   

@@ -17,15 +17,18 @@ class TileView: UIView {
   let borderLayer = CAShapeLayer()
   let letterOutlineColour: CGColor
   let tileBackgroundColor: CGColor
+  let tileFillColour: CGColor
+  let tileSelectedColour: CGColor
     
-  init(position p: CGPoint, size s: CGFloat, boardSize bS: CGFloat, text t: String) {
+  init(position p: CGPoint, size s: CGFloat, boardSize bS: CGFloat, text t: String, viewData vD: CardViewData) {
 
     size = s
     borderWidth = s * 0.02
     
-    letterOutlineColour = UIColor.darkGray.cgColor
-    tileBackgroundColor = UIColor.lightGray.cgColor
-
+    letterOutlineColour = vD.colourD.cgColor
+    tileBackgroundColor = vD.colourL.cgColor
+    tileFillColour = vD.colourM.cgColor
+    tileSelectedColour = UIColor.white.cgColor
     
     if (t == "!") {
       text = "Qu"
@@ -121,7 +124,7 @@ class TileView: UIView {
         lay.opacity = 1
         lay.strokeEnd = 1
         lay.lineWidth = borderWidth
-        lay.fillColor = tileFillColour.cgColor
+        lay.fillColor = tileFillColour
       }
     }
   }
@@ -150,19 +153,76 @@ class TileView: UIView {
   
   func tileSelected() {
     for layer in letterLayers {
-      layer.fillColor = tileSelectedColour.cgColor
+      layer.fillColor = tileSelectedColour
     }
-      layer.borderColor = tileSelectedColour.cgColor
+      layer.borderColor = tileSelectedColour
   }
   
   
   func tileDeselected() {
     for layer in letterLayers {
-      layer.fillColor = tileFillColour.cgColor
+      layer.fillColor = tileFillColour
     }
       layer.borderColor = UIColor.black.cgColor
   }
   
+  
+  func animateStringLayerAppear(layer: CAShapeLayer) {
+    
+    let end = CABasicAnimation(keyPath: "strokeEnd")
+    end.fromValue = 0
+    end.toValue = 1
+    
+    let fill = CABasicAnimation(keyPath: "opacity")
+    fill.fromValue = 0
+    fill.toValue = 1
+    
+    let col = CABasicAnimation(keyPath: "fillColor")
+    col.fromValue = UIColor.clear.cgColor
+    col.toValue = tileFillColour
+    
+    CATransaction.begin()
+    CATransaction.setAnimationDuration(tileAnimDuration)
+    
+    layer.add(end, forKey: end.keyPath)
+    layer.add(fill, forKey: fill.keyPath)
+    layer.add(col, forKey: col.keyPath)
+
+    layer.strokeEnd = 1
+    layer.opacity = 1
+    layer.fillColor = tileFillColour
+
+    CATransaction.commit()
+  }
+
+
+  func animateStringLayerDisappear(layer: CAShapeLayer) {
+    
+    let end = CABasicAnimation(keyPath: "strokeEnd")
+    end.fromValue = 1
+    end.toValue = 0
+    
+    let fill = CABasicAnimation(keyPath: "opacity")
+    fill.fromValue = 1
+    fill.toValue = 0
+    
+    let col = CABasicAnimation(keyPath: "fillColor")
+    col.fromValue = tileFillColour
+    col.toValue = UIColor.clear.cgColor
+    
+    CATransaction.begin()
+    CATransaction.setAnimationDuration(tileAnimDuration)
+
+    layer.add(end, forKey: "strokeEnd")
+    layer.add(fill, forKey: "opacity")
+    layer.add(col, forKey: "fillColor")
+    
+    layer.opacity = 0
+    layer.strokeEnd = 0
+    layer.fillColor = UIColor.clear.cgColor
+    
+    CATransaction.commit()
+  }
   
   
 }

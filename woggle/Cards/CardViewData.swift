@@ -37,9 +37,9 @@ class CardViewData {
     width = w
     colour = c
     
-    colourL = UIColor.lightGray
-    colourM = UIColor.gray
-    colourD = UIColor.darkGray
+    colourL = UIColor.red // UIColor.lightGray
+    colourM = UIColor.orange // UIColor.gray
+    colourD = UIColor.purple //  UIColor.darkGray
     
     height = width * 1.4
 

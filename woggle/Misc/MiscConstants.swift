@@ -10,12 +10,6 @@ import UIKit
 let regularText = UIColor.darkGray
 let reguardTextShaded = UIColor.black
 
-let tileOutlineColour = UIColor.black
-let tileFillColour = UIColor.gray
-let tileSelectedColour = UIColor.white
-
-let interactiveStrokeColour = UIColor.black
-
 let tileAnimDuration = 1.0
 
 let tileFontName = "K2D-ExtraBold"

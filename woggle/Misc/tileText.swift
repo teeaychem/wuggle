@@ -33,62 +33,7 @@ func getStringPaths(text: String, font: UIFont) -> [CGPath] {
 }
 
 
-func animateStringLayerAppear(layer: CAShapeLayer) {
-  
-  let end = CABasicAnimation(keyPath: "strokeEnd")
-  end.fromValue = 0
-  end.toValue = 1
-  
-  let fill = CABasicAnimation(keyPath: "opacity")
-  fill.fromValue = 0
-  fill.toValue = 1
-  
-  let col = CABasicAnimation(keyPath: "fillColor")
-  col.fromValue = UIColor.clear.cgColor
-  col.toValue = tileFillColour.cgColor
-  
-  CATransaction.begin()
-  CATransaction.setAnimationDuration(tileAnimDuration)
-  
-  layer.add(end, forKey: end.keyPath)
-  layer.add(fill, forKey: fill.keyPath)
-  layer.add(col, forKey: col.keyPath)
 
-  layer.strokeEnd = 1
-  layer.opacity = 1
-  layer.fillColor = tileFillColour.cgColor
-
-  CATransaction.commit()
-}
-
-
-func animateStringLayerDisappear(layer: CAShapeLayer) {
-  
-  let end = CABasicAnimation(keyPath: "strokeEnd")
-  end.fromValue = 1
-  end.toValue = 0
-  
-  let fill = CABasicAnimation(keyPath: "opacity")
-  fill.fromValue = 1
-  fill.toValue = 0
-  
-  let col = CABasicAnimation(keyPath: "fillColor")
-  col.fromValue = tileFillColour.cgColor
-  col.toValue = UIColor.clear.cgColor
-  
-  CATransaction.begin()
-  CATransaction.setAnimationDuration(tileAnimDuration)
-
-  layer.add(end, forKey: "strokeEnd")
-  layer.add(fill, forKey: "opacity")
-  layer.add(col, forKey: "fillColor")
-  
-  layer.opacity = 0
-  layer.strokeEnd = 0
-  layer.fillColor = UIColor.clear.cgColor
-  
-  CATransaction.commit()
-}
 
 
 
