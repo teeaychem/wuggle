@@ -11,6 +11,7 @@ class CombinedScoreViewController: UIViewController {
   
   let scoreFont: UIFont
   var textAttributes: [NSAttributedString.Key : Any]?
+  let sepColor: UIColor
   
   let foundIcon: IconView
   let scoreIcon: IconView
@@ -19,10 +20,11 @@ class CombinedScoreViewController: UIViewController {
   init(size s: CGSize, viewData vD: CardViewData) {
     
     scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
+    sepColor = vD.colourL
     
-    foundIcon = ScoreIcon(size: vD.scoreIconSize, abv: "W")
-    scoreIcon = ScoreIcon(size: vD.scoreIconSize, abv: "P")
-    perceIcon = ScoreIcon(size: vD.scoreIconSize, abv: "%")
+    foundIcon = ScoreIcon(size: vD.scoreIconSize, viewData: vD, abv: "W")
+    scoreIcon = ScoreIcon(size: vD.scoreIconSize, viewData: vD, abv: "P")
+    perceIcon = ScoreIcon(size: vD.scoreIconSize, viewData: vD, abv: "%")
     
     super.init(nibName: nil, bundle: nil)
     
@@ -38,16 +40,10 @@ class CombinedScoreViewController: UIViewController {
     scoreIcon.frame.origin = CGPoint(x: (sBIconIndent * 2) + foundIcon.frame.width, y: 0)
     perceIcon.frame.origin = CGPoint(x: (sBIconIndent * 3) + foundIcon.frame.width * 2, y: 0)
     
-    
-
-//    addSeperator(xPos: foundIcon.frame.minX)
     addSeperator(xPos: foundIcon.frame.minX)
     addSeperator(xPos: scoreIcon.frame.minX)
     addSeperator(xPos: perceIcon.frame.minX)
 
-//
-//    foundIcon.backgroundColor = UIColor.orange
-//    scoreIcon.backgroundColor = UIColor.blue
   }
   
   required init?(coder: NSCoder) {
@@ -61,7 +57,7 @@ class CombinedScoreViewController: UIViewController {
     let sepLayer = CAShapeLayer()
     sepLayer.path = sepPath.cgPath
     sepLayer.fillColor = UIColor.clear.cgColor
-    sepLayer.strokeColor = UIColor.lightGray.cgColor
+    sepLayer.strokeColor = sepColor.cgColor
     sepLayer.lineCap = .round
     sepLayer.lineWidth = 0.5
     

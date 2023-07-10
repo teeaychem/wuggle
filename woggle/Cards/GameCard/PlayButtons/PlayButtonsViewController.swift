@@ -20,6 +20,7 @@ class PlayButtonsViewController: UIViewController {
     super.init(nibName: nil, bundle: nil)
     
     view.layer.cornerRadius = getCornerRadius(width: vD.width)
+    view.backgroundColor = vD.colourD
   }
   
   required init?(coder: NSCoder) {
@@ -35,7 +36,6 @@ class PlayButtonsViewController: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     view.frame.size = playButtonsView.frame.size
-    view.backgroundColor = UIColor.darkGray
   }
   
   
@@ -58,6 +58,8 @@ class PlayButtonsViewController: UIViewController {
   
   
   func rotatePlayPauseIcon(percent p: Double) {
+    guard p <= 1 else { return }
+    
     playButtonsView.rotatePlayPauseLayer(percent: p)
   }
   

@@ -25,6 +25,11 @@ class FoundWordsViewController: UIViewController {
     self.view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
     foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
     foundWordView.frame.origin = CGPoint(x: vD.tilePadding, y: vD.tilePadding)
+    
+    foundWordView.backgroundColor = vD.colourD
+    self.view.layer.backgroundColor = vD.colourD.cgColor
+    foundWordView.layer.backgroundColor = vD.colourL.cgColor
+
   }
   
   
@@ -33,10 +38,6 @@ class FoundWordsViewController: UIViewController {
     self.view.addSubview(foundWordView)
     foundWordView.layer.borderColor = UIColor.black.cgColor
     foundWordView.layer.borderWidth = 1
-    foundWordView.backgroundColor = UIColor.darkGray
-    
-    self.view.layer.backgroundColor = UIColor.darkGray.cgColor
-    foundWordView.layer.backgroundColor = UIColor.lightGray.cgColor
   }
   
   

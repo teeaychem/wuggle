@@ -9,14 +9,14 @@ import UIKit
 import CoreText
 
 
-func getStringLayers(text: String, font: UIFont) -> [CAShapeLayer] {
+func getStringPaths(text: String, font: UIFont) -> [CGPath] {
   // This works by getting the glyphs for each character in the string.
   // So, it does not contain any information about the x/y origin of the character in the string.
   
   var uniChars = [UniChar](text.utf16)
   var glyphs = [CGGlyph](repeating: 0, count: uniChars.count)
   let foundGlyphs = CTFontGetGlyphsForCharacters(font, &uniChars, &glyphs, uniChars.count)
-  var textLayer: [CAShapeLayer] = []
+  var textLayer: [CGPath] = []
   
   if foundGlyphs {
     for i in 0 ..< glyphs.count {
@@ -25,15 +25,8 @@ func getStringLayers(text: String, font: UIFont) -> [CAShapeLayer] {
       // fonts are drawn upside down, so we mirror over y then move down
       path.apply(CGAffineTransform(scaleX: 1, y: -1))
       path.apply(CGAffineTransform(translationX: 0, y: font.capHeight))
-      
-      let glyphLayer = CAShapeLayer()
-      glyphLayer.path = path.cgPath
-      glyphLayer.lineWidth = 1
-      glyphLayer.strokeEnd = 0
-      glyphLayer.fillColor = tileOutlineColour.cgColor
-      glyphLayer.strokeColor = tileStrokeColour.cgColor
-      
-      textLayer.append(glyphLayer)
+            
+      textLayer.append(path.cgPath)
     }
   }
   return textLayer

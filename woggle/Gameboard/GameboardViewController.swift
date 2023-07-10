@@ -25,14 +25,14 @@ class GameboardViewController: UIViewController {
   let boardSize: CGFloat
   let gameboardView: GameboardView
   
-  init(boardSize bS: CGFloat, tilePadding tP: CGFloat) {
+  init(boardSize bS: CGFloat, viewData vD: CardViewData, tilePadding tP: CGFloat) {
     
     // Constants for placing elements
     boardSize = bS
 
     // Setup the view
     gameboardView = GameboardView(boardSize: bS)
-    gameboardView.backgroundColor = UIColor.darkGray
+    gameboardView.backgroundColor = vD.colourD
     gameboardView.layer.cornerRadius = getCornerRadius(width: boardSize)
     
     super.init(nibName: nil, bundle: nil)

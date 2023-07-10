@@ -15,11 +15,16 @@ class TileView: UIView {
   let size: CGFloat
   let borderWidth: CGFloat
   let borderLayer = CAShapeLayer()
+  let letterOutlineColour: CGColor
+  let tileBackgroundColor: CGColor
     
   init(position p: CGPoint, size s: CGFloat, boardSize bS: CGFloat, text t: String) {
 
     size = s
     borderWidth = s * 0.02
+    
+    letterOutlineColour = UIColor.darkGray.cgColor
+    tileBackgroundColor = UIColor.lightGray.cgColor
 
     
     if (t == "!") {
@@ -32,22 +37,31 @@ class TileView: UIView {
     
     layer.cornerRadius = getCornerRadius(width: bS)
     
-    letterLayers = getStringLayers(text: text, font: UIFont(name: tileFontName, size: getFontFor(height: size))!)
+    let paths = getStringPaths(text: text, font: UIFont(name: tileFontName, size: getFontFor(height: size))!)
     
     var lastWidth = CGFloat(0)
     var maxHeight = CGFloat(0)
+  
     
-    for sublayer in letterLayers {
-      
-      sublayer.position.x = lastWidth
-      let indent = sublayer.path!.boundingBox.minX + sublayer.path!.boundingBox.maxX
+    for path in paths {
+    
+      let letterLayer = CAShapeLayer()
+      letterLayer.path = path
+    
+      letterLayer.position.x = lastWidth
+      let indent = letterLayer.path!.boundingBox.minX + letterLayer.path!.boundingBox.maxX
       lastWidth += CGFloat(indent)
       
-      if sublayer.path!.boundingBox.height > maxHeight {
-        maxHeight = sublayer.path!.boundingBox.height
+      if letterLayer.path!.boundingBox.height > maxHeight {
+        maxHeight = letterLayer.path!.boundingBox.height
       }
-      layer.addSublayer(sublayer)
-      sublayer.opacity = 0
+      layer.addSublayer(letterLayer)
+      letterLayer.opacity = 0
+      letterLayer.strokeStart = 0
+      letterLayer.strokeEnd = 1
+      letterLayer.strokeColor = letterOutlineColour
+      
+      letterLayers.append(letterLayer)
     }
     
     let indent = (size - lastWidth)/2
@@ -81,7 +95,7 @@ class TileView: UIView {
   
   func displayTile() {
     borderLayer.strokeEnd = 1
-    layer.backgroundColor = tileBackgroundColour.cgColor
+    layer.backgroundColor = tileBackgroundColor
   }
   
   

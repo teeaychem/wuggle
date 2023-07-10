@@ -11,26 +11,15 @@ import UIKit
 class StatsCardViewController: CardViewController {
   
   
-  let foundIcon: IconView
-  let scoreIcon: IconView
-  let perceIcon: IconView
+  let combinedScoreViewC: CombinedScoreViewController
   
   override init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
     
-    // Icons
-    foundIcon = ScoreIcon(size: vD.scoreIconSize, abv: "W")
-    scoreIcon = ScoreIcon(size: vD.scoreIconSize, abv: "P")
-    perceIcon = ScoreIcon(size: vD.scoreIconSize, abv: "%")
+    combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD)
     
     super.init(viewData: vD, delegate: d)
     
-    let sBIconIndent = (statusBarView.frame.width - (3 * vD.scoreIconSize.width)) * 0.25
-    statusBarView.addSubview(foundIcon)
-    statusBarView.addSubview(scoreIcon)
-    statusBarView.addSubview(perceIcon)
-    foundIcon.frame.origin = CGPoint(x: sBIconIndent, y: 0)
-    scoreIcon.frame.origin = CGPoint(x: (sBIconIndent * 2) + vD.scoreIconSize.width, y: 0)
-    perceIcon.frame.origin = CGPoint(x: (sBIconIndent * 3) + vD.scoreIconSize.width * 2, y: 0)
+    embed(combinedScoreViewC, inView: self.statusBarView, frame: CGRect(origin: CGPoint(x: 0, y: 0), size: vD.statusBarSize))
     
   }
   

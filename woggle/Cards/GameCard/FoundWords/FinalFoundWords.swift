@@ -39,7 +39,7 @@ class FinalFoundWordsViewController: UIViewController {
     
     super.init(nibName: nil, bundle: nil)
     
-    view.backgroundColor = UIColor.darkGray
+    view.backgroundColor = vD.colourD
     view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
   }
   

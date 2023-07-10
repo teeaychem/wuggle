@@ -10,16 +10,27 @@ import UIKit
 
 class TileIcon: IconView {
         
-  private var textLayer: CAShapeLayer?
+  let textLayer = CAShapeLayer()
+  let tileLayer = CAShapeLayer()
+  let letterLayer = CAShapeLayer()
   
-  override init(size s: CGSize) {
+  override init(size s: CGSize, viewData vD: CardViewData) {
     
-    super.init(size: s)
+    tileLayer.fillColor = vD.colourM.cgColor
+    
+    letterLayer.fillColor = vD.colourL.cgColor
+    textLayer.fillColor = vD.colourL.cgColor
+    
+    super.init(size: s, viewData: vD)
 
     addTile()
     addSquare()
-    updateIcon(value: "8")
+    
+    layer.addSublayer(letterLayer)
+    layer.addSublayer(textLayer)
   }
+    
+  
   
   override func updateIcon(value v: String) {
     addText(text: v)
@@ -29,10 +40,7 @@ class TileIcon: IconView {
   private func addTile() {
     let tile = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size.width * 0.1, y: size.height * 0.1), size: CGSize(width: size.width * 0.8, height: size.height * 0.8)), cornerRadius: radius)
     
-    let tileLayer = CAShapeLayer()
     tileLayer.path = tile.cgPath
-    
-    tileLayer.fillColor = UIColor.gray.cgColor
     tileLayer.strokeColor = UIColor.black.cgColor
     tileLayer.lineWidth = 0.5
     
@@ -44,29 +52,17 @@ class TileIcon: IconView {
     
     let tileFont = UIFont(name: uiFontName, size: size.height * 0.5)!
     
-    let letterLayer = getStringLayers(text: "²", font: tileFont).first
-    letterLayer!.bounds = letterLayer!.path!.boundingBox
-    letterLayer?.frame.origin = CGPoint(x: frame.width - (letterLayer!.bounds.width + indent * 1.5), y: indent * 1.5)
-    letterLayer?.fillColor = UIColor.lightGray.cgColor
-    
-    layer.addSublayer(letterLayer!)
+    letterLayer.path = getStringPaths(text: "²", font: tileFont).first
+    letterLayer.bounds = letterLayer.path!.boundingBox
+    letterLayer.frame.origin = CGPoint(x: frame.width - (letterLayer.bounds.width + indent * 1.5), y: indent * 1.5)
   }
   
   
   private func addText(text t: String) {
     
-    if (textLayer != nil) {
-      textLayer!.removeFromSuperlayer()
-    }
-
-    let tileFont = UIFont(name: uiFontName, size: size.height * 0.8)!
-    
-    textLayer = getStringLayers(text: t, font: tileFont).first
-    textLayer!.bounds = textLayer!.path!.boundingBox
-    textLayer!.frame.origin = CGPoint(x: indent * 1.5, y: frame.height - (textLayer!.bounds.height + indent * 1.5))
-    textLayer!.fillColor = UIColor.lightGray.cgColor
-    layer.addSublayer(textLayer!)
-    
+    textLayer.path = getStringPaths(text: t, font: UIFont(name: uiFontName, size: size.height * 0.8)!).first
+    textLayer.bounds = textLayer.path!.boundingBox
+    textLayer.frame.origin = CGPoint(x: indent * 1.5, y: frame.height - (textLayer.bounds.height + indent * 1.5))
   }
   
   required init?(coder aDecoder: NSCoder) {

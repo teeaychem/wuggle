@@ -11,10 +11,8 @@ let regularText = UIColor.darkGray
 let reguardTextShaded = UIColor.black
 
 let tileOutlineColour = UIColor.black
-let tileStrokeColour = UIColor.darkGray
 let tileFillColour = UIColor.gray
 let tileSelectedColour = UIColor.white
-let tileBackgroundColour = UIColor.lightGray
 
 let interactiveStrokeColour = UIColor.black
 

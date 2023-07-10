@@ -36,6 +36,7 @@
 		57E758C02A5C2A0B00823989 /* CombinedScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */; };
 		57E758C32A5C4D4600823989 /* 3of6game.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758C22A5C4D4600823989 /* 3of6game.txt */; };
 		57E758C52A5C5E0700823989 /* Jane Austen.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758C42A5C5E0600823989 /* Jane Austen.txt */; };
+		57E758C72A5C635900823989 /* ViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758C62A5C635900823989 /* ViewDelegate.swift */; };
 		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
 		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
 		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
@@ -114,6 +115,7 @@
 		57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedScoreViewController.swift; sourceTree = "<group>"; };
 		57E758C22A5C4D4600823989 /* 3of6game.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3of6game.txt; sourceTree = "<group>"; };
 		57E758C42A5C5E0600823989 /* Jane Austen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Jane Austen.txt"; sourceTree = "<group>"; };
+		57E758C62A5C635900823989 /* ViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDelegate.swift; sourceTree = "<group>"; };
 		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
 		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
 		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
@@ -203,14 +205,15 @@
 			path = FoundWords;
 			sourceTree = "<group>";
 		};
-		57D155142A557D4D00A802C9 /* Delegates */ = {
+		57D155142A557D4D00A802C9 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				570A572C2A4B83BA006129FD /* CardStackDelegate.swift */,
 				57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */,
 				57AC997B2A558F0300B2E892 /* OptionViewDelegate.swift */,
+				57E758C62A5C635900823989 /* ViewDelegate.swift */,
 			);
-			path = Delegates;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		57E2F3722A54810A0097D1D2 /* StatusBar */ = {
@@ -354,7 +357,7 @@
 		57EF4B372A4664F2008C57FF /* woggle */ = {
 			isa = PBXGroup;
 			children = (
-				57D155142A557D4D00A802C9 /* Delegates */,
+				57D155142A557D4D00A802C9 /* Protocols */,
 				57EB7A522A47A7F000BCA44B /* Misc */,
 				57EB7A412A47820900BCA44B /* Gameboard */,
 				57EB7A3F2A47817C00BCA44B /* Cards */,
@@ -591,6 +594,7 @@
 				57EB7A562A47A83900BCA44B /* TileView.swift in Sources */,
 				57EB7A582A47A99D00BCA44B /* MiscConstants.swift in Sources */,
 				57E2F3812A54E59D0097D1D2 /* TileIcon.swift in Sources */,
+				57E758C72A5C635900823989 /* ViewDelegate.swift in Sources */,
 				57E2F3832A54E59D0097D1D2 /* LexiconIcon.swift in Sources */,
 				57EF4B7A2A466F47008C57FF /* MiscFunctions.swift in Sources */,
 			);

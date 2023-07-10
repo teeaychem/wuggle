@@ -21,10 +21,10 @@ class SettingsCardViewController: CardViewController {
     
     let iconSize = vD.squareIconSize
     
-    lengthIcon = LengthIcon(size: iconSize)
-    lexiconIcon = LexiconIcon(size: iconSize)
-    tileIcon = TileIcon(size: iconSize)
-    timeIcon = TimeIcon(size: iconSize)
+    lengthIcon = LengthIcon(size: iconSize, viewData: vD)
+    lexiconIcon = LexiconIcon(size: iconSize, viewData: vD)
+    tileIcon = TileIcon(size: iconSize, viewData: vD)
+    timeIcon = TimeIcon(size: iconSize, viewData: vD)
     
     super.init(viewData: vD, delegate: d)
     

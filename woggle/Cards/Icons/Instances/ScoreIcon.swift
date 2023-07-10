@@ -16,22 +16,17 @@ class ScoreIcon: IconView {
   var textAttributes: [NSAttributedString.Key : Any]?
   
   
-  init(size s: CGSize, abv: String) {
+  init(size s: CGSize, viewData vD: CardViewData, abv: String) {
     
     scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
     
     scoreLabel = UILabel(frame: CGRect(origin: CGPoint(x: s.width * 0.3, y: s.height * 0.175), size: CGSize(width: s.width * 0.6, height: s.height * 0.6)))
     
     
-    super.init(size: s)
+    super.init(size: s, viewData: vD)
     
-    textAttributes = [
-      NSAttributedString.Key.strokeColor : UIColor.black,
-      NSAttributedString.Key.strokeWidth : -0.5,
-      NSAttributedString.Key.foregroundColor : UIColor.darkGray,
-      NSAttributedString.Key.font : UIFont(name: uiFontName, size: getFontFor(height: size.height * 0.8))!
-      ]
-        scoreLabel.attributedText = NSMutableAttributedString(string: "0", attributes: textAttributes)
+    textAttributes = vD.getSettingsTextAttributeHighlighted(height: size.height * 0.8)
+    scoreLabel.attributedText = NSMutableAttributedString(string: "0", attributes: textAttributes)
     scoreLabel.textAlignment = .center
     
     addSubview(scoreLabel)

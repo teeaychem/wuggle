@@ -11,11 +11,19 @@ import UIKit
 
 class LengthIcon: IconView {
   
-  private var numberLayer: CAShapeLayer?
+  let boardLayer = CAShapeLayer()
+  let highlightedTileLayer = CAShapeLayer()
+  let plusLayer = CAShapeLayer()
+  let numberLayer = CAShapeLayer()
   
-  override init(size s: CGSize) {
+  override init(size s: CGSize, viewData vD: CardViewData) {
     
-    super.init(size: s)
+    super.init(size: s, viewData: vD)
+    
+    boardLayer.fillColor = vD.colourM.cgColor
+    highlightedTileLayer.fillColor = vD.colourL.cgColor
+    plusLayer.fillColor = vD.colourL.cgColor
+    numberLayer.fillColor = vD.colourL.cgColor
     
     paintBackground()
     updateIcon(value: "4")
@@ -31,10 +39,9 @@ class LengthIcon: IconView {
     
     let boardPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size.width*0.1, y: size.height*0.1), size: CGSize(width: size.width*0.8, height: size.height*0.8)), cornerRadius: radius)
     
-    let boardLayer = CAShapeLayer()
     boardLayer.path = boardPath.cgPath
     
-    boardLayer.fillColor = UIColor.gray.cgColor
+    
     boardLayer.strokeColor = UIColor.black.cgColor
     boardLayer.lineWidth = 0.5
     
@@ -48,18 +55,15 @@ class LengthIcon: IconView {
     
     let highlightedTilePath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size.width - (tileIndent + tilePadding + tileSize), y: size.height - (tileIndent + tilePadding + tileSize)), size: CGSize(width: tileSize, height: tileSize)), cornerRadius: radius2)
 
-    let highlightedTileLayer = CAShapeLayer()
-    highlightedTileLayer.path = highlightedTilePath.cgPath
 
-    highlightedTileLayer.fillColor = UIColor.lightGray.cgColor
+    highlightedTileLayer.path = highlightedTilePath.cgPath
     highlightedTileLayer.strokeColor = UIColor.white.cgColor
     highlightedTileLayer.lineWidth = 0.5
     
     
     
-    let plusLayer = getStringLayers(text: "+", font: UIFont(name: uiFontName, size: getFontFor(height: size.height * 0.55))!).first!
+    plusLayer.path = getStringPaths(text: "+", font: UIFont(name: uiFontName, size: getFontFor(height: size.height * 0.55))!).first!
     plusLayer.bounds = plusLayer.path!.boundingBox
-    plusLayer.fillColor = UIColor.lightGray.cgColor
     plusLayer.frame.origin = CGPoint(x: frame.width * 0.85 - (plusLayer.bounds.width), y: indent * 1.5)
     
     layer.addSublayer(boardLayer)
@@ -70,18 +74,14 @@ class LengthIcon: IconView {
   
   
   private func paintNumber(num: String) {
+
     
-    if numberLayer != nil {
-      numberLayer!.removeFromSuperlayer()
-    }
-    
-    numberLayer = getStringLayers(text: num, font: UIFont(name: uiFontName, size: getFontFor(height: size.height * 0.9))!).first!
-    numberLayer!.bounds = numberLayer!.path!.boundingBox
-    numberLayer!.fillColor = UIColor.lightGray.cgColor
+    numberLayer.path = getStringPaths(text: num, font: UIFont(name: uiFontName, size: getFontFor(height: size.height * 0.9))!).first!
+    numberLayer.bounds = numberLayer.path!.boundingBox
         
-    numberLayer!.frame.origin = CGPoint(x: indent * 1.5, y: indent * 1.5)
+    numberLayer.frame.origin = CGPoint(x: indent * 1.5, y: indent * 1.5)
     
-    layer.addSublayer(numberLayer!)
+    layer.addSublayer(numberLayer)
   }
   
   

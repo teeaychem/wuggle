@@ -10,6 +10,9 @@ import UIKit
 class StopwatchView: UIView {
   
   private let secondsLayer = CAShapeLayer()
+  let highLightLayer = CAShapeLayer()
+  let outerFaceLayer = CAShapeLayer()
+  let innerFaceLayer = CAShapeLayer()
   
   private let watchSize: CGFloat
   private let indent: CGFloat
@@ -32,9 +35,14 @@ class StopwatchView: UIView {
     secondsLength = (watchRadius * 0.9) - (lineWidth)
     cornerRadius = getCornerRadius(width: vD.gameBoardSize)
     
+    secondsLayer.fillColor = vD.colourM.cgColor
+    highLightLayer.backgroundColor = vD.colourL.cgColor
+    outerFaceLayer.fillColor = vD.colourM.cgColor
+    innerFaceLayer.fillColor = vD.colourL.cgColor
+    
     super.init(frame: CGRect(x: 0, y: 0, width: watchSize, height: watchSize))
     
-    self.backgroundColor = UIColor.darkGray
+    self.backgroundColor = vD.colourD
   }
   
   
@@ -70,9 +78,9 @@ extension StopwatchView {
   func paintWatchBackground() {
     let backgroundWidth = watchSize - (2 * indent)
     
-    let highLightLayer = CAShapeLayer()
+    
     highLightLayer.frame = CGRect(origin: CGPoint(x: indent, y: indent), size: CGSize(width: backgroundWidth, height: backgroundWidth))
-    highLightLayer.backgroundColor = UIColor.lightGray.cgColor
+
 
     highLightLayer.cornerRadius = cornerRadius
     highLightLayer.borderColor = UIColor.black.cgColor
@@ -84,7 +92,7 @@ extension StopwatchView {
   
   func paintFaceLayer() {
     
-    let outerFaceLayer = CAShapeLayer()
+
     
     let outerFacePath = UIBezierPath(
       arcCenter: CGPoint(x: centerFLoat, y: centerFLoat),
@@ -94,7 +102,6 @@ extension StopwatchView {
       clockwise: true)
     
     outerFaceLayer.path = outerFacePath.cgPath
-    outerFaceLayer.fillColor = UIColor.gray.cgColor
     outerFaceLayer.strokeColor = UIColor.black.cgColor
     outerFaceLayer.lineWidth = 1
     
@@ -105,10 +112,7 @@ extension StopwatchView {
       endAngle: CGFloat(3 * (Double.pi / 2)),
       clockwise: true)
     
-    let innerFaceLayer = CAShapeLayer()
-    
     innerFaceLayer.path = innerFacePath.cgPath
-    innerFaceLayer.fillColor = UIColor.lightGray.cgColor
     innerFaceLayer.strokeColor = UIColor.black.cgColor
     innerFaceLayer.lineWidth = 1
     
@@ -124,7 +128,6 @@ extension StopwatchView {
 
     secondsLayer.lineCap = .round
     secondsLayer.path = secondsHand.cgPath
-    secondsLayer.fillColor = UIColor.gray.cgColor
     secondsLayer.strokeColor = UIColor.black.cgColor
     secondsLayer.lineWidth = 1
     

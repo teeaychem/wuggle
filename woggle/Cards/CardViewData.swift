@@ -16,7 +16,7 @@ class CardViewData {
   
   let colourL: UIColor
   let colourM: UIColor
-  let colourD: UIColor
+  var colourD: UIColor
   
   let height: CGFloat
   let cardSize: CGSize
@@ -60,7 +60,7 @@ class CardViewData {
     return [
       NSAttributedString.Key.strokeColor : UIColor.black,
       NSAttributedString.Key.strokeWidth : 0,
-      NSAttributedString.Key.foregroundColor : UIColor.gray,
+      NSAttributedString.Key.foregroundColor : colourM,
       NSAttributedString.Key.font : UIFont(name: uiFontName, size: getFontFor(height: height))!
       ] as [NSAttributedString.Key : Any]
   }
@@ -70,7 +70,7 @@ class CardViewData {
     return [
       NSAttributedString.Key.strokeColor : UIColor.black,
       NSAttributedString.Key.strokeWidth : 0,
-      NSAttributedString.Key.foregroundColor : UIColor.darkGray,
+      NSAttributedString.Key.foregroundColor : colourD,
       NSAttributedString.Key.font : UIFont(name: uiFontName, size: getFontFor(height: height))!
       ] as [NSAttributedString.Key : Any]
   }

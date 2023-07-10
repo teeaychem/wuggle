@@ -49,7 +49,7 @@ class GameCardViewController: CardViewController {
     combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD)
     
     // Fix controllers  for the current views
-    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize, tilePadding: vD.tilePadding)
+    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize, viewData: vD, tilePadding: vD.tilePadding)
     stopwatchViewController = StopwatchViewController(viewData: vD)
     playButtonsViewController = PlayButtonsViewController(viewData: vD)
     foundWordsViewController = FoundWordsViewController(viewData: vD)
@@ -224,6 +224,9 @@ extension GameCardViewController {
     }
     
     if displayLinkTwoTimeElapsed > 1 {
+      
+      displayLinkTwo?.invalidate()
+      displayLinkTwoTimeElapsed = 0
       // Fix the icons.
       playButtonsViewController.paintStopIcon()
       playButtonsViewController.stopAddGesture(gesture: stopGR!)
@@ -233,9 +236,6 @@ extension GameCardViewController {
       playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
       
       boardViewController.displayAllTiles()
-
-      displayLinkTwo?.invalidate()
-      displayLinkTwoTimeElapsed = 0
     }
   }
   
