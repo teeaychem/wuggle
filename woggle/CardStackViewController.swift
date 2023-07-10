@@ -112,7 +112,6 @@ extension CardStackViewController: CardStackDelegate {
   }
   
   func currentGameInstance() -> GameInstance? {
-//    print(settings.currentGame)
     return settings.currentGame
   }
   

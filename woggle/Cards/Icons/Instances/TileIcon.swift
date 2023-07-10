@@ -12,7 +12,7 @@ class TileIcon: IconView {
         
   private var textLayer: CAShapeLayer?
   
-  override init(size s: CGFloat) {
+  override init(size s: CGSize) {
     
     super.init(size: s)
 
@@ -27,7 +27,7 @@ class TileIcon: IconView {
   
   
   private func addTile() {
-    let tile = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size*0.1, y: size*0.1), size: CGSize(width: size*0.8, height: size*0.8)), cornerRadius: radius)
+    let tile = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size.width * 0.1, y: size.height * 0.1), size: CGSize(width: size.width * 0.8, height: size.height * 0.8)), cornerRadius: radius)
     
     let tileLayer = CAShapeLayer()
     tileLayer.path = tile.cgPath
@@ -42,7 +42,7 @@ class TileIcon: IconView {
   
   private func addSquare() {
     
-    let tileFont = UIFont(name: uiFontName, size: size * 0.5)!
+    let tileFont = UIFont(name: uiFontName, size: size.height * 0.5)!
     
     let letterLayer = getStringLayers(text: "²", font: tileFont).first
     letterLayer!.bounds = letterLayer!.path!.boundingBox
@@ -59,7 +59,7 @@ class TileIcon: IconView {
       textLayer!.removeFromSuperlayer()
     }
 
-    let tileFont = UIFont(name: uiFontName, size: size * 0.8)!
+    let tileFont = UIFont(name: uiFontName, size: size.height * 0.8)!
     
     textLayer = getStringLayers(text: t, font: tileFont).first
     textLayer!.bounds = textLayer!.path!.boundingBox

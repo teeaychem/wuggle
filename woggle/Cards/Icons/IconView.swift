@@ -14,17 +14,17 @@ import UIKit
 
 class IconView : UIView {
 
-  let size: CGFloat
+  let size: CGSize
   let indent: CGFloat
   let radius: CGFloat
   
-  init(size s: CGFloat) {
+  init(size s: CGSize) {
     
     size = s
-    indent = size * 0.1
-    radius = size * 0.1
+    indent = size.height * 0.1
+    radius = size.height * 0.1
     
-    super.init(frame: CGRect(x: 0, y: 0, width: s, height: s))
+    super.init(frame: CGRect(x: 0, y: 0, width: s.width, height: s.height))
   }
   
   func updateIcon(value v: String) {

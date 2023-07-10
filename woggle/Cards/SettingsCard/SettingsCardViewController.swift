@@ -19,7 +19,7 @@ class SettingsCardViewController: CardViewController {
   
   override init(viewData vD: CardViewData, delegate d: CardStackDelegate) {
     
-    let iconSize = vD.statusBarHeight
+    let iconSize = vD.iconSize
     
     lengthIcon = LengthIcon(size: iconSize)
     lexiconIcon = LexiconIcon(size: iconSize)
@@ -28,17 +28,17 @@ class SettingsCardViewController: CardViewController {
     
     super.init(viewData: vD, delegate: d)
     
-    let iconPadding = (vD.width - (vD.statusBarHeight * 4)) * 0.2
+    let iconPadding = (vD.width - (vD.iconSize.width * 4)) * 0.2
     
     // Set up the icons
     statusBarView.addSubview(timeIcon)
     timeIcon.frame.origin.x = iconPadding
     statusBarView.addSubview(lexiconIcon)
-    lexiconIcon.frame.origin.x = (iconPadding * 2) + iconSize
+    lexiconIcon.frame.origin.x = (iconPadding * 2) + iconSize.width
     statusBarView.addSubview(lengthIcon)
-    lengthIcon.frame.origin.x = (iconPadding * 3) + (iconSize * 2)
+    lengthIcon.frame.origin.x = (iconPadding * 3) + (iconSize.width * 2)
     statusBarView.addSubview(tileIcon)
-    tileIcon.frame.origin.x = (iconPadding * 4) + (iconSize * 3)
+    tileIcon.frame.origin.x = (iconPadding * 4) + (iconSize.width * 3)
           
   }
   

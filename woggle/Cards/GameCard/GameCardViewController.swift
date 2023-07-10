@@ -48,9 +48,9 @@ class GameCardViewController: CardViewController {
     rootTrie = d.currentSettings().getTrieRoot()
     
     // Icons
-    foundIcon = ScoreIcon(size: vD.statusBarHeight)
-    scoreIcon = ScoreIcon(size: vD.statusBarHeight)
-    perceIcon = ScoreIcon(size: vD.statusBarHeight)
+    foundIcon = ScoreIcon(size: CGSize(width: vD.iconSize.width * 2.5, height: vD.iconSize.height), abv: "W")
+    scoreIcon = ScoreIcon(size: CGSize(width: vD.iconSize.width * 2.5, height: vD.iconSize.height), abv: "P")
+    perceIcon = ScoreIcon(size: CGSize(width: vD.iconSize.width * 2.5, height: vD.iconSize.height), abv: "%")
     
     // Fix controllers  for the current views
     boardViewController = GameboardViewController(boardSize: vD.gameBoardSize, tilePadding: vD.tilePadding)
@@ -61,13 +61,13 @@ class GameCardViewController: CardViewController {
     super.init(viewData: vD, delegate: d)
     
     
-    let sBIconIndent = (statusBarView.frame.width - (3 * vD.statusBarHeight)) * 0.25
+    let sBIconIndent = (statusBarView.frame.width - (3 * vD.iconSize.width * 2.5)) * 0.25
     statusBarView.addSubview(foundIcon)
     statusBarView.addSubview(scoreIcon)
     statusBarView.addSubview(perceIcon)
     foundIcon.frame.origin = CGPoint(x: sBIconIndent, y: 0)
-    scoreIcon.frame.origin = CGPoint(x: (sBIconIndent * 2) + vD.statusBarHeight, y: 0)
-    perceIcon.frame.origin = CGPoint(x: (sBIconIndent * 3) + vD.statusBarHeight * 2, y: 0)
+    scoreIcon.frame.origin = CGPoint(x: (sBIconIndent * 2) + vD.iconSize.width * 2.5, y: 0)
+    perceIcon.frame.origin = CGPoint(x: (sBIconIndent * 3) + vD.iconSize.width * 5, y: 0)
         
     // Add gesture recognisers
     boardPanGR = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
@@ -130,7 +130,16 @@ class GameCardViewController: CardViewController {
     if delegate?.currentGameInstance()?.foundWordsList == nil {
       delegate?.currentGameInstance()?.foundWordsList = [w]
     } else {
-      delegate!.currentGameInstance()?.foundWordsList!.append(w)
+      if delegate!.currentGameInstance()!.foundWordsList!.contains(w) {
+        return
+      } else {
+        delegate!.currentGameInstance()?.foundWordsList!.append(w)
+        delegate!.currentGameInstance()?.foundWordCount += 1
+        delegate!.currentGameInstance()?.pointsCount += Int16(getPoints(word: w))
+        
+        foundIcon.updateIcon(value: String(delegate!.currentGameInstance()!.foundWordCount))
+        scoreIcon.updateIcon(value: String(delegate!.currentGameInstance()!.pointsCount))
+      }
     }
   }
 }
@@ -215,6 +224,12 @@ extension GameCardViewController {
         let settings = result.first as! Settings
         privateManagedObjectContext.perform {
           settings.currentGame?.findPossibleWords()
+          print(settings.currentGame?.allWordsList?.count)
+          var maxPoints = 0
+          for w in settings.currentGame!.allWordsList! {
+            maxPoints += getPoints(word: w)
+          }
+          print("mP", maxPoints)
           do {
             try privateManagedObjectContext.save()
           } catch {

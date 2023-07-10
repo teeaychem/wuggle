@@ -7,7 +7,9 @@
     </entity>
     <entity name="GameInstance" representedClassName="GameInstance" syncable="YES" codeGenerationType="class">
         <attribute name="allWordsList" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="foundWordCount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="foundWordsList" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="pointsCount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeUsedPercent" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" customClassName="NSSet&lt;String&gt;"/>
         <relationship name="board" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="currentGame" inverseEntity="Settings"/>

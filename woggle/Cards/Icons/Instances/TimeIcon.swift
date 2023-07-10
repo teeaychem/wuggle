@@ -20,10 +20,10 @@ class TimeIcon : IconView {
   var handLayer: CAShapeLayer?
   
   
-  override init(size s: CGFloat) {
+  override init(size s: CGSize) {
     
-    handStrokeWidth = CGFloat(s)/12
-    centerPoint = CGPoint(x: s/2, y: s/2)
+    handStrokeWidth = CGFloat(s.height)/12
+    centerPoint = CGPoint(x: s.width * 0.5, y: s.height * 0.5)
     
     super.init(size: s)
     
@@ -42,7 +42,7 @@ class TimeIcon : IconView {
   
   
   private func addFace() {
-    let face = UIBezierPath(arcCenter: centerPoint, radius: size*0.4, startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+    let face = UIBezierPath(arcCenter: centerPoint, radius: size.width * 0.4, startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
     
     let faceLayer = CAShapeLayer()
     faceLayer.path = face.cgPath
@@ -59,7 +59,7 @@ class TimeIcon : IconView {
     let hand = UIBezierPath()
     hand.move(to: centerPoint)
     
-    let handRadius = Double(size*0.25)
+    let handRadius = Double(size.height * 0.25)
     let handAngle = a
     
     let handEnd = CGPoint(x: Double(centerPoint.x) + handRadius * cos(handAngle) , y: Double(centerPoint.y) - handRadius * sin(handAngle))

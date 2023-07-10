@@ -10,6 +10,8 @@ import CoreText
 
 
 func getStringLayers(text: String, font: UIFont) -> [CAShapeLayer] {
+  // This works by getting the glyphs for each character in the string.
+  // So, it does not contain any information about the x/y origin of the character in the string.
   
   var uniChars = [UniChar](text.utf16)
   var glyphs = [CGGlyph](repeating: 0, count: uniChars.count)

@@ -34,11 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     } catch {
       print("Error")
-      
     }
-    
-    
-    
     return true
   }
 
@@ -89,11 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func saveContext () {
     let context = persistentContainer.viewContext
-    print("saveContext")
-    print(context.hasChanges)
       if context.hasChanges {
         do {
-          print("trying to save")
           try context.save()
         } catch {
             // Replace this implementation with code to handle the error appropriately.

@@ -12,8 +12,13 @@ import UIKit
 class LexiconIcon: IconView {
   
   var letterLayer: CAShapeLayer?
+  
+  var bookFrontLayer: CAShapeLayer?
+  let coverWidth: CGFloat
     
-  override init(size s: CGFloat) {
+  override init(size s: CGSize) {
+    
+    coverWidth = s.width * 0.7
     
     super.init(size: s)
     
@@ -47,23 +52,25 @@ class LexiconIcon: IconView {
   private func addBook() {
     // Overlap three square to create something which looks bookish
     
-    let bookFrontLayer = CAShapeLayer()
-    let bookFrontPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: indent, y: frame.height - (size * 0.7 + indent)), size: CGSize(width: size*0.7, height: size*0.7)), cornerRadius: radius)
+    bookFrontLayer = CAShapeLayer()
+    let bookFrontPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: coverWidth, height: coverWidth)), cornerRadius: radius)
     
-    bookFrontLayer.path = bookFrontPath.cgPath
-    bookFrontLayer.fillColor = UIColor.gray.cgColor
-    bookFrontLayer.lineWidth = 0.5
-    bookFrontLayer.strokeColor = UIColor.black.cgColor
+    bookFrontLayer!.path = bookFrontPath.cgPath
+    bookFrontLayer!.frame = bookFrontPath.cgPath.boundingBox
+    bookFrontLayer!.frame.origin = CGPoint(x: indent, y: size.height - (coverWidth + indent))
+    bookFrontLayer!.fillColor = UIColor.gray.cgColor
+    bookFrontLayer!.lineWidth = 0.5
+    bookFrontLayer!.strokeColor = UIColor.black.cgColor
     
     let bookMiddleLayer = CAShapeLayer()
-    let bookMiddlePath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: frame.width - (size * 0.7 + indent * 1.5), y: indent * 1.5), size: CGSize(width: size*0.7, height: size*0.7)), cornerRadius: radius)
+    let bookMiddlePath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: frame.width - (coverWidth + indent * 1.5), y: indent * 1.5), size: CGSize(width: coverWidth, height: coverWidth)), cornerRadius: radius)
     
     bookMiddleLayer.path = bookMiddlePath.cgPath
     bookMiddleLayer.fillColor = UIColor.lightGray.cgColor
     
     
     let bookBackLayer = CAShapeLayer()
-    let bookBackPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: frame.width - (size * 0.7 + indent), y: indent), size: CGSize(width: size*0.7, height: size*0.7)), cornerRadius: radius)
+    let bookBackPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: frame.width - (coverWidth + indent), y: indent), size: CGSize(width: coverWidth, height: coverWidth)), cornerRadius: radius)
     
     bookBackLayer.path = bookBackPath.cgPath
     bookBackLayer.fillColor = UIColor.gray.cgColor
@@ -72,7 +79,7 @@ class LexiconIcon: IconView {
 
     layer.addSublayer(bookBackLayer)
     layer.addSublayer(bookMiddleLayer)
-    layer.addSublayer(bookFrontLayer)
+    layer.addSublayer(bookFrontLayer!)
   }
   
   
@@ -82,11 +89,11 @@ class LexiconIcon: IconView {
       letterLayer!.removeFromSuperlayer()
     }
     
-    letterLayer = getStringLayers(text: letter, font: UIFont(name: uiFontName, size: getFontFor(height: size * 0.9))!).first!
+    letterLayer = getStringLayers(text: letter, font: UIFont(name: uiFontName, size: getFontFor(height: size.height * 0.9))!).first!
     letterLayer!.bounds = letterLayer!.path!.boundingBox
     letterLayer!.fillColor = UIColor.lightGray.cgColor
-        
-    letterLayer!.frame.origin = CGPoint(x: indent + (size * 0.7 - letterLayer!.bounds.width) * 0.5, y: size - (((size * 0.7 - letterLayer!.bounds.height) * 0.5) + indent + letterLayer!.bounds.height))
+    
+    letterLayer?.frame.origin = CGPoint(x: bookFrontLayer!.frame.minX +  (coverWidth - letterLayer!.frame.width) * 0.5, y: bookFrontLayer!.frame.minY + (coverWidth - letterLayer!.frame.height) * 0.5)
     
     layer.addSublayer(letterLayer!)
   }
