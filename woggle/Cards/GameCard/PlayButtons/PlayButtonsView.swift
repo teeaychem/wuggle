@@ -23,9 +23,12 @@ class PlayButtonsView: UIView {
   
   // Two subviews for playPause/Stop buttons
   let playPauseView: UIView
+  
   private var playPauseLayer = CAShapeLayer()
+  private var NewGameLayer = CAShapeLayer()
   
   let stopView: UIView
+  
   private var stopLayer = CAShapeLayer()
   
   init(viewData vD: ViewData) {
@@ -48,6 +51,10 @@ class PlayButtonsView: UIView {
     playPauseLayer.strokeColor = UIColor.black.cgColor
     playPauseLayer.lineWidth = 1
     playPauseLayer.fillColor = vD.colourM.cgColor
+    
+    NewGameLayer.strokeColor = UIColor.black.cgColor
+    NewGameLayer.lineWidth = 1
+    NewGameLayer.fillColor = vD.colourM.cgColor
     
     playPauseView.backgroundColor = vD.colourL
     playPauseView.layer.borderColor = UIColor.black.cgColor
@@ -110,10 +117,10 @@ class PlayButtonsView: UIView {
   
   
   func addNewGameIcon() {
-    playPauseLayer.path = makeNewGameIconPath(forView: playPauseView)
-    playPauseLayer.frame = playPauseLayer.path!.boundingBox
-    playPauseLayer.frame.origin = CGPoint(x: playPauseView.frame.width * 0.2, y: playPauseView.frame.height * 0.2)
-    playPauseView.layer.addSublayer(playPauseLayer)
+    NewGameLayer.path = makeNewGameIconPath(forView: playPauseView)
+    NewGameLayer.frame = NewGameLayer.path!.boundingBox
+    NewGameLayer.frame.origin = CGPoint(x: playPauseView.frame.width * 0.2, y: playPauseView.frame.height * 0.2)
+    playPauseView.layer.addSublayer(NewGameLayer)
   }
   
   
@@ -139,7 +146,7 @@ class PlayButtonsView: UIView {
   
   
   func rotatePlayPauseLayer(percent: Double) {
-    playPauseLayer.transform = CATransform3DMakeRotation((percent * (2 * Double.pi)), 0.0, 0.0, 1.0)
+    NewGameLayer.transform = CATransform3DMakeRotation((percent * (2 * Double.pi)), 0.0, 0.0, 1.0)
   }
   
   

@@ -37,6 +37,7 @@
 		57E758C32A5C4D4600823989 /* 3of6game.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758C22A5C4D4600823989 /* 3of6game.txt */; };
 		57E758C52A5C5E0700823989 /* Jane Austen.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758C42A5C5E0600823989 /* Jane Austen.txt */; };
 		57E758C72A5C635900823989 /* ViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758C62A5C635900823989 /* ViewDelegate.swift */; };
+		57E758C92A5C940100823989 /* StatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758C82A5C940100823989 /* StatViewController.swift */; };
 		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
 		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
 		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
@@ -116,6 +117,7 @@
 		57E758C22A5C4D4600823989 /* 3of6game.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3of6game.txt; sourceTree = "<group>"; };
 		57E758C42A5C5E0600823989 /* Jane Austen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Jane Austen.txt"; sourceTree = "<group>"; };
 		57E758C62A5C635900823989 /* ViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDelegate.swift; sourceTree = "<group>"; };
+		57E758C82A5C940100823989 /* StatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatViewController.swift; sourceTree = "<group>"; };
 		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
 		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
 		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				57E758BD2A5B8F6E00823989 /* StatsCardViewController.swift */,
+				57E758C82A5C940100823989 /* StatViewController.swift */,
 			);
 			path = StatsCard;
 			sourceTree = "<group>";
@@ -581,6 +584,7 @@
 				570A572D2A4B83BA006129FD /* CardStackDelegate.swift in Sources */,
 				57EF4B432A4664F2008C57FF /* woggle.xcdatamodeld in Sources */,
 				57EF4B3D2A4664F2008C57FF /* ViewController.swift in Sources */,
+				57E758C92A5C940100823989 /* StatViewController.swift in Sources */,
 				57E2F3822A54E59D0097D1D2 /* LengthIcon.swift in Sources */,
 				57EB7A492A478BF500BCA44B /* CardViewController.swift in Sources */,
 				57EB7A4B2A478CF000BCA44B /* GameCardViewController.swift in Sources */,

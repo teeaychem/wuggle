@@ -216,14 +216,17 @@ extension GameCardViewController {
   
   
   @objc func newGameWait() {
-    displayLinkTwoTimeElapsed += displayLinkTwo!.targetTimestamp - displayLinkTwo!.timestamp
     
-    playButtonsViewController.rotatePlayPauseIcon(percent: displayLinkTwoTimeElapsed)
-    for tile in boardViewController.gameboardView.tiles.values {
-      tile.partialDiplayTile(percent: displayLinkTwoTimeElapsed)
-    }
     
-    if displayLinkTwoTimeElapsed > 1 {
+    if displayLinkTwoTimeElapsed < 1 {
+      
+      displayLinkTwoTimeElapsed += displayLinkTwo!.targetTimestamp - displayLinkTwo!.timestamp
+      
+      playButtonsViewController.rotatePlayPauseIcon(percent: displayLinkTwoTimeElapsed)
+      for tile in boardViewController.gameboardView.tiles.values {
+        tile.partialDiplayTile(percent: displayLinkTwoTimeElapsed)
+      }
+    } else {
       
       displayLinkTwo?.invalidate()
       displayLinkTwoTimeElapsed = 0
