@@ -17,6 +17,7 @@ class OptionView: UIView {
   let internalOptions: [Int16]
   let vertical: Bool
   var choiceLabels = [Int16: ChoiceLabel]()
+  let textHighlightColour = UIColor.darkGray.cgColor
   
   init(frame f: CGRect, displayName dN: String, displayOptions dO: [String], internalName iN: String, internalOptions iO: [Int16], vertical v: Bool, delegate d: SettingsCardViewControllerDelegate) {
     
@@ -40,7 +41,7 @@ class OptionView: UIView {
     
     // Note, use f.height for font size as  as frame.height may has been adjusted if vertical.
     let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: f.width, height: f.height))
-    nameLabel.attributedText = NSMutableAttributedString(string: dN, attributes: delegate.getViewData().getSettingsTextAttributeHighlighted(height: f.height * 0.8))
+    nameLabel.attributedText = NSMutableAttributedString(string: dN, attributes: delegate.getViewData().getSettingsTextAttribute(height: f.height * 0.8, colour: textHighlightColour))
     addSubview(nameLabel)
     
     if vertical {

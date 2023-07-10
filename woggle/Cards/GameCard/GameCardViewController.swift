@@ -127,7 +127,6 @@ class GameCardViewController: CardViewController {
         delegate!.currentGameInstance()?.foundWordsList!.append(w)
         delegate!.currentGameInstance()?.foundWordCount += 1
         delegate!.currentGameInstance()?.pointsCount += Int16(getPoints(word: w))
-        
         combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGameInstance()!)
       }
     }
@@ -281,6 +280,19 @@ extension GameCardViewController {
     finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate!.currentGameInstance()!.allWordsList!), seeWords: delegate!.currentGameInstance()!.foundWordsList!)
     // Add gesture to see board.
     boardViewController.addGestureRecognizer(recogniser: UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBoard)))
+    
+    checkRecords()
+  }
+  
+  
+  func checkRecords() {
+    print("checking records")
+    if delegate!.currentGameInstance()!.pointsCount > delegate!.currentSettings().stats?.mostPoints ?? 0 {
+      print("Whoa, most points!")
+      delegate!.currentSettings().stats!.mostPoints = delegate!.currentGameInstance()!.pointsCount
+      delegate!.currentSettings().stats!.mostPointsBoard = delegate!.currentGameInstance()!.board!
+      print(delegate?.currentSettings().stats!.mostPointsBoard)
+    }
   }
 }
 

@@ -25,7 +25,7 @@ class ScoreIcon: IconView {
     
     super.init(size: s, viewData: vD)
     
-    textAttributes = vD.getSettingsTextAttributeHighlighted(height: size.height * 0.8)
+    textAttributes = vD.getSettingsTextAttribute(height: size.height * 0.8, colour: vD.colourD.cgColor)
     scoreLabel.attributedText = NSMutableAttributedString(string: "0", attributes: textAttributes)
     scoreLabel.textAlignment = .center
     

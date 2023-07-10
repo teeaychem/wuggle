@@ -24,11 +24,11 @@
         <relationship name="stats" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StatsCollection" inverseName="settings" inverseEntity="StatsCollection"/>
     </entity>
     <entity name="StatsCollection" representedClassName="StatsCollection" syncable="YES" codeGenerationType="class">
-        <attribute name="bestWord" optional="YES" attributeType="String"/>
+        <attribute name="bestWord" attributeType="String" defaultValueString=""/>
         <attribute name="longestWord" attributeType="String" defaultValueString=""/>
-        <attribute name="mostPercent" optional="YES" attributeType="Decimal" defaultValueString="0"/>
-        <attribute name="mostPoints" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="mostWords" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mostPercent" attributeType="Decimal" defaultValueString="0"/>
+        <attribute name="mostPoints" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mostWords" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="bestWordBoard" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Board"/>
         <relationship name="longestWordBoard" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Board"/>
         <relationship name="mostPercentBoard" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Board"/>

@@ -35,11 +35,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // TODO: Delete other instances.
       } else {
         // If nothing found, default settings.
-        settingsToUse = Settings(context: context)
+        settingsToUse = getDefaultSettings(context: context)
       }
     } catch {
       // If load fails, things should be fine with default settings.
-      settingsToUse = Settings(context: context)
+      settingsToUse = getDefaultSettings(context: context)
     }
     stackViewController = CardStackViewController(settings: settingsToUse!)
 
@@ -47,6 +47,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     self.window = window
     window.makeKeyAndVisible()
   }
+  
+  
+  func getDefaultSettings(context c: NSManagedObjectContext) -> Settings {
+    let dSettings = Settings(context: c)
+    dSettings.stats = StatsCollection(context: c)
+    
+    
+    return dSettings
+  }
+  
 
   func sceneDidDisconnect(_ scene: UIScene) {
     print("Ouch")

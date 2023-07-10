@@ -221,6 +221,7 @@
 		57E2F3722A54810A0097D1D2 /* StatusBar */ = {
 			isa = PBXGroup;
 			children = (
+				57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */,
 				57E2F3732A5481150097D1D2 /* StatusBarView.swift */,
 			);
 			path = StatusBar;
@@ -239,7 +240,6 @@
 		57E2F3782A54E57A0097D1D2 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */,
 				57E2F3792A54E5850097D1D2 /* IconView.swift */,
 				57E2F37B2A54E58D0097D1D2 /* Instances */,
 			);

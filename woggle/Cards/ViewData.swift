@@ -60,21 +60,11 @@ class ViewData {
     statSize = CGSize(width: width * 0.95, height: statusBarSize.height * 2.5)
   }
   
- func getSettingsTextAttributePlain(height: CGFloat) -> [NSAttributedString.Key : Any] {
+  func getSettingsTextAttribute(height: CGFloat, colour: CGColor) -> [NSAttributedString.Key : Any] {
     return [
       NSAttributedString.Key.strokeColor : UIColor.black,
       NSAttributedString.Key.strokeWidth : 0,
-      NSAttributedString.Key.foregroundColor : colourM,
-      NSAttributedString.Key.font : UIFont(name: uiFontName, size: getFontFor(height: height))!
-      ] as [NSAttributedString.Key : Any]
-  }
-  
-  
-  func getSettingsTextAttributeHighlighted(height: CGFloat) -> [NSAttributedString.Key : Any] {
-    return [
-      NSAttributedString.Key.strokeColor : UIColor.black,
-      NSAttributedString.Key.strokeWidth : 0,
-      NSAttributedString.Key.foregroundColor : colourD,
+      NSAttributedString.Key.foregroundColor : colour,
       NSAttributedString.Key.font : UIFont(name: uiFontName, size: getFontFor(height: height))!
       ] as [NSAttributedString.Key : Any]
   }

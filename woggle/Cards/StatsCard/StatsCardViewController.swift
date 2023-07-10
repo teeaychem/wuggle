@@ -29,12 +29,19 @@ class StatsCardViewController: CardViewController {
     
     super.init(viewData: vD, delegate: d)
     
+    let statVSep = (vD.height - (vD.statusBarSize.height + vD.statSize.height * 5)) / 6
+    
     embed(combinedScoreViewC, inView: self.statusBarView, frame: CGRect(origin: CGPoint(x: 0, y: 0), size: vD.statusBarSize))
-    embed(mostPointsSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height), size: vD.statSize))
-    embed(mostPercentSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height), size: vD.statSize))
-    embed(mostWordsFoundSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 2), size: vD.statSize))
-    embed(highWordSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 3), size: vD.statSize))
-    embed(longestWordSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 4), size: vD.statSize))
+    
+    embed(mostPointsSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + statVSep), size: vD.statSize))
+    
+    embed(mostPercentSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height + statVSep * 2), size: vD.statSize))
+    
+    embed(mostWordsFoundSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 2 + statVSep * 3), size: vD.statSize))
+   
+    embed(highWordSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 3 + statVSep * 4), size: vD.statSize))
+    
+    embed(longestWordSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 4 + statVSep * 5), size: vD.statSize))
 
   }
   
