@@ -1,16 +1,10 @@
 and
-a
-as
 all
 are
-at
-am
-an
 art
 away
 any
 again
-ay
 against
 aside
 after
@@ -23,7 +17,6 @@ alone
 alas
 age
 air
-ah
 ask
 almost
 above
@@ -388,7 +381,6 @@ aspiring
 ashamd
 artificial
 adds
-ad
 atone
 appearing
 alice
@@ -712,7 +704,6 @@ ally
 abated
 archer
 agate
-au
 assails
 aguecheek
 answerable
@@ -1120,7 +1111,6 @@ appoints
 announces
 abels
 avoirdupois
-ai
 afternourishment
 almain
 appertainings
@@ -1213,7 +1203,6 @@ avert
 assuming
 arow
 anti!ius
-ap
 adoreth
 answerest
 amamon
@@ -1567,9 +1556,7 @@ auld
 accosted
 amesace
 awaketh
-be
 but
-by
 before
 being
 been
@@ -1898,7 +1885,6 @@ blank
 bows
 basely
 boat
-b
 brazen
 blasted
 britons
@@ -2409,7 +2395,6 @@ beached
 bearbaiting
 breaker
 bake
-ba
 bridges
 bastards
 boiled
@@ -3512,7 +3497,6 @@ constant
 cease
 contrary
 camillo
-c
 cost
 commission
 cup
@@ -4523,7 +4507,6 @@ curfew
 certainties
 chertsey
 captivate
-ce
 che!erd
 caesars
 critic
@@ -4734,7 +4717,6 @@ crossbows
 councilboard
 chine
 chicken
-cs
 curan
 conversion
 cavaliers
@@ -5740,7 +5722,6 @@ crispianus
 checkd
 crawld
 cojoin
-ca
 crownet
 crusts
 comingin
@@ -6039,7 +6020,6 @@ coif
 chambermaids
 cabind
 chopping
-do
 did
 doth
 death
@@ -6066,7 +6046,6 @@ drink
 deep
 dog
 deny
-de
 door
 dream
 deeds
@@ -6470,7 +6449,6 @@ dialogue
 dive
 declare
 disturbd
-d
 doctors
 desolate
 dimmd
@@ -6709,7 +6687,6 @@ dependants
 dip
 dint
 discretions
-du
 deprivd
 decision
 dependency
@@ -7291,7 +7268,6 @@ dogfish
 disorders
 declares
 drains
-di
 dind
 dispatcheth
 disallow
@@ -7811,7 +7787,6 @@ england
 ear
 ears
 either
-em
 edward
 enemy
 eat
@@ -7867,7 +7842,6 @@ ended
 enterprise
 exchange
 error
-et
 example
 easily
 extremity
@@ -8018,7 +7992,6 @@ evident
 excel
 eastern
 enforcement
-en
 exiled
 enrichd
 eke
@@ -8082,7 +8055,6 @@ eclipse
 earned
 enthroned
 enacted
-e
 elected
 excrement
 exercises
@@ -8619,7 +8591,6 @@ excuses
 emulator
 entombd
 enseigne
-eo
 escapedst
 enrapt
 embar!ements
@@ -9301,7 +9272,6 @@ fulness
 forgetful
 frenchmens
 figured
-fa
 fer
 forge
 flea
@@ -9329,7 +9299,6 @@ fliers
 flayed
 fetter
 findst
-fe
 fighter
 fre!ent
 fustian
@@ -10320,7 +10289,6 @@ footstool
 filberts
 faithfullst
 good
-go
 give
 great
 god
@@ -10654,7 +10622,6 @@ gratitude
 grateful
 guardsman
 gardon
-g
 gender
 grandpre
 gardens
@@ -11042,7 +11009,6 @@ gossipd
 griefshot
 goodlimbd
 grays
-gi
 gush
 grassplot
 guilded
@@ -11235,7 +11201,6 @@ gallias
 glideth
 gorging
 his
-he
 have
 him
 her
@@ -11268,12 +11233,10 @@ honest
 henry
 high
 horse
-ha
 half
 happy
 heres
 holy
-ho
 highness
 hate
 heavy
@@ -11875,7 +11838,6 @@ haled
 holdeth
 hellfire
 holly
-h
 hostage
 humanely
 houseless
@@ -12424,11 +12386,6 @@ husewife
 hamstring
 haves
 handwriting
-i
-in
-is
-it
-if
 ill
 into
 indeed
@@ -12512,7 +12469,6 @@ imprisonment
 instruction
 informd
 inherit
-iv
 impediment
 indifferent
 immediate
@@ -12529,7 +12485,6 @@ importune
 interim
 ingrateful
 inn
-im
 infancy
 ini!ity
 images
@@ -12538,12 +12493,10 @@ inheritance
 invited
 inches
 inconstant
-id
 incense
 influence
 indignation
 impeach
-ii
 irish
 inhabit
 incorporate
@@ -12568,7 +12521,6 @@ ills
 imports
 inspired
 ignoble
-il
 issues
 indirect
 impiety
@@ -13121,7 +13073,6 @@ imperials
 immures
 imitari
 integer
-io
 imperfectly
 indirections
 insurrections
@@ -13316,7 +13267,6 @@ joys
 joyful
 jessica
 justly
-je
 journey
 ja!es
 joind
@@ -13798,11 +13748,9 @@ lion
 learn
 laugh
 lived
-lo
 leaves
 lookd
 lancaster
-la
 legs
 large
 liberty
@@ -13845,7 +13793,6 @@ league
 lent
 lusty
 lines
-le
 launcelot
 loyal
 lear
@@ -14218,7 +14165,6 @@ ludstown
 liker
 lengthen
 leafy
-l
 leonati
 leak
 lustier
@@ -14717,7 +14663,6 @@ loathsomeness
 loathsomest
 lighterheeld
 liberte
-ll
 leven
 limehouse
 lazarlike
@@ -14741,7 +14686,6 @@ londons
 las
 lordship
 lowborn
-ld
 lux
 lackbrain
 lint
@@ -14827,8 +14771,6 @@ ladyships
 labourer
 loosen
 loopholes
-my
-me
 more
 man
 make
@@ -15112,7 +15054,6 @@ mirror
 mole
 milfordhaven
 miscarried
-m
 merchants
 members
 misled
@@ -15173,7 +15114,6 @@ mature
 merchandise
 mounts
 moneys
-ma
 mounting
 malignant
 musical
@@ -15258,7 +15198,6 @@ monkeys
 minority
 momentary
 mort
-mi
 misshapen
 moi
 maket
@@ -16280,7 +16219,6 @@ merriments
 metheglin
 minerals
 not
-no
 now
 never
 nor
@@ -16417,7 +16355,6 @@ nether
 newborn
 namely
 nilus
-ne
 nun
 nettles
 nettle
@@ -16833,11 +16770,7 @@ nighttapers
 newconceived
 newbent
 newwaxen
-of
-on
 our
-o
-or
 one
 out
 own
@@ -16886,7 +16819,6 @@ observe
 odd
 ocean
 offices
-oh
 ope
 obedient
 octavia
@@ -16940,7 +16872,6 @@ overthrown
 overcome
 orsino
 offender
-ox
 oman
 obscured
 orb
@@ -17227,7 +17158,6 @@ oes
 operations
 overcast
 outpray
-os
 oerrule
 overleather
 overlooking
@@ -17327,7 +17257,6 @@ osprey
 oernight
 outlawd
 overnight
-ob
 overween
 overripend
 otherwhiles
@@ -19691,7 +19620,6 @@ presupposed
 pained
 perniciously
 philarmonus
-ps
 publishing
 prank
 pairs
@@ -19804,7 +19732,6 @@ peevishly
 purchasd
 pryst
 plentys
-po
 praisest
 prouds
 !een
@@ -19822,7 +19749,6 @@ prouds
 !alities
 !arter
 !arrels
-!e
 !ake
 !ince
 !antity
@@ -19847,7 +19773,6 @@ prouds
 !arrelling
 !ondam
 !illets
-!i
 !oted
 !enchd
 !ill
@@ -19868,7 +19793,6 @@ prouds
 !estionless
 !icker
 !ietus
-!o
 !its
 !and
 !ails
@@ -20289,7 +20213,6 @@ regiment
 razed
 rowland
 religiously
-re
 riding
 ram
 re!ital
@@ -20698,7 +20621,6 @@ reproving
 rewarded
 routs
 rears
-r
 reaching
 recantation
 ruby
@@ -21314,7 +21236,6 @@ resurrections
 rebusd
 remained
 roderigos
-so
 shall
 she
 sir
@@ -21458,7 +21379,6 @@ stone
 sooner
 study
 seeing
-s
 shepherd
 seat
 seeming
@@ -22194,7 +22114,6 @@ stoopd
 southampton
 samson
 sacrifices
-sa
 successful
 supplication
 sorely
@@ -22357,7 +22276,6 @@ singled
 snatches
 semblable
 strangest
-st
 seas
 sweetheart
 sauf
@@ -22747,7 +22665,6 @@ sardis
 sapling
 standeth
 streaks
-si
 saidst
 simpcox
 suckdst
@@ -23038,7 +22955,6 @@ scraped
 secondary
 simpring
 saddest
-se
 seamonster
 screechowls
 strongknit
@@ -23097,7 +23013,6 @@ sayst
 slackly
 suffred
 southwest
-ss
 scalps
 scambling
 southam
@@ -24623,7 +24538,6 @@ sanctuarize
 sweetsuggesting
 suppliants
 the
-to
 that
 this
 thou
@@ -24667,7 +24581,6 @@ together
 thoughts
 thyself
 told
-th
 tomorrow
 times
 talk
@@ -24682,7 +24595,6 @@ today
 ten
 twenty
 tender
-t
 traitor
 twere
 touch
@@ -24992,7 +24904,6 @@ thyreus
 threefold
 thirsty
 thereupon
-te
 travelld
 truths
 timeless
@@ -25226,7 +25137,6 @@ tool
 treatise
 trebles
 tumbling
-tu
 thankless
 tours
 tangled
@@ -25381,7 +25291,6 @@ tails
 taunted
 tamingschool
 thrones
-ti
 tilts
 thriceworthy
 turpitude
@@ -25409,7 +25318,6 @@ tasting
 traps
 tarries
 tuneable
-ts
 thickskin
 terrestrial
 tickles
@@ -25840,7 +25748,6 @@ tardied
 trumpettongued
 terrace
 tentroyal
-ta
 terram
 thirtyone
 thricegorgeous
@@ -26135,8 +26042,6 @@ toothpick
 tormented
 thaws
 upon
-us
-up
 unto
 use
 under
@@ -26242,7 +26147,6 @@ unable
 unwelcome
 upons
 union
-un
 unused
 unbruised
 usurers
@@ -26399,7 +26303,6 @@ unletterd
 usuring
 unveiling
 unwed
-us
 unpolished
 unsolicited
 unvalued
@@ -26442,7 +26345,6 @@ unclaspd
 unworthily
 unpruned
 underhand
-ut
 uncurable
 unbind
 unbridled
@@ -26987,7 +26889,6 @@ uttred
 unbegotten
 usances
 ubi!e
-u
 unveil
 undertaen
 unseduced
@@ -27105,7 +27006,6 @@ verse
 venus
 venture
 value
-vi
 virginity
 vulgar
 villanous
@@ -27338,7 +27238,6 @@ volubility
 vaults
 vineyards
 vestments
-v
 vincentios
 verba
 valentinus
@@ -27360,7 +27259,6 @@ varies
 votarists
 veronesa
 visitor
-va
 voutsafe
 venit
 verbosity
@@ -27559,7 +27457,6 @@ vouching
 with
 will
 what
-we
 which
 would
 was
@@ -27787,7 +27684,6 @@ weal
 wedding
 waked
 witty
-wi
 warning
 worldly
 waist
@@ -28450,7 +28346,6 @@ weakhinged
 warmarkd
 whoremasterly
 warden
-wo
 witold
 wryneckd
 whoresons
@@ -28695,13 +28590,11 @@ wroth
 wellmeant
 wafture
 waywardness
-xi
 xanthippe
 you
 your
 yet
 young
-ye
 yourself
 youth
 yours
@@ -28762,7 +28655,6 @@ yarn
 yearns
 yellows
 yorkplace
-y
 younglings
 yclad
 yeomen
@@ -28821,7 +28713,6 @@ zone
 zenelophon
 zwaggerd
 zodiacs
-zo
 zodiac
 zanies
 zed

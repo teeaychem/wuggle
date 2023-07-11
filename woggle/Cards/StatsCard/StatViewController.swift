@@ -25,18 +25,37 @@ class StatViewController: UIViewController {
   // So, with these suggestions, I have 8 + date.
   // This, then, is the plan.
   
+  let statDisplayName: String
+  let statDisplayValue: String
+  let statInternalName: String
+  
+  
   
 //  let gameBoardVC: GameboardViewController
   
 
   init(statID sID: String, viewData vD: ViewData) {
     
+    statInternalName = sID
+    statDisplayName = "Most points"
+    statDisplayValue = "500"
+    
 //    gameBoardVC = GameboardViewController(boardSize: vD.statSize.height * 0.95, viewData: vD, tilePadding: 1)
 //
     super.init(nibName: nil, bundle: nil)
 //
 //    view.backgroundColor = UIColor.gray
-//    view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize * 0.5)
+    view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize * 0.5)
+    
+    let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
+    nameLabel.attributedText = NSMutableAttributedString(string: statDisplayName, attributes: vD.getSettingsTextAttribute(height: vD.statSize.height * 0.64, colour: vD.colourL.cgColor))
+    view.addSubview(nameLabel)
+    
+    let valueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
+    valueLabel.attributedText = NSMutableAttributedString(string: statDisplayValue, attributes: vD.getSettingsTextAttribute(height: vD.statSize.height * 0.64, colour: vD.colourL.cgColor))
+    valueLabel.textAlignment = .right
+    view.addSubview(valueLabel)
+//    nameLabel.backgroundColor = UIColor.red
 //
 //    view.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: vD.width * 0.95, height: vD.stopWatchSize))
 //    embed(gameBoardVC, inView: self.view, frame: CGRect(x: vD.statSize.width - vD.statSize.height, y: vD.statSize.height * 0.025, width: vD.statSize.height * 0.95, height: vD.statSize.height * 0.95))

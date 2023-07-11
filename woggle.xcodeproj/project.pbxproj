@@ -20,8 +20,6 @@
 		57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */; };
 		57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155122A5579D000A802C9 /* ChoiceLabel.swift */; };
 		57D155162A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */; };
-		57DC41042A58774400704D20 /* King James Bible.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41032A58774400704D20 /* King James Bible.txt */; };
-		57DC41062A587A5B00704D20 /* Shakespeare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57DC41052A587A5B00704D20 /* Shakespeare.txt */; };
 		57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3732A5481150097D1D2 /* StatusBarView.swift */; };
 		57E2F3772A54E1420097D1D2 /* SettingsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */; };
 		57E2F37A2A54E5850097D1D2 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3792A54E5850097D1D2 /* IconView.swift */; };
@@ -31,13 +29,15 @@
 		57E2F3832A54E59D0097D1D2 /* LexiconIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F37F2A54E59D0097D1D2 /* LexiconIcon.swift */; };
 		57E2F3852A54F3200097D1D2 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3842A54F3200097D1D2 /* OptionView.swift */; };
 		57E758B92A5A164400823989 /* ScoreIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758B82A5A164400823989 /* ScoreIcon.swift */; };
-		57E758BB2A5A1D7500823989 /* Odgen's Basic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758BA2A5A1D7500823989 /* Odgen's Basic.txt */; };
 		57E758BE2A5B8F6E00823989 /* StatsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758BD2A5B8F6E00823989 /* StatsCardViewController.swift */; };
 		57E758C02A5C2A0B00823989 /* CombinedScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */; };
-		57E758C32A5C4D4600823989 /* 3of6game.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758C22A5C4D4600823989 /* 3of6game.txt */; };
-		57E758C52A5C5E0700823989 /* Jane Austen.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758C42A5C5E0600823989 /* Jane Austen.txt */; };
 		57E758C72A5C635900823989 /* ViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758C62A5C635900823989 /* ViewDelegate.swift */; };
 		57E758C92A5C940100823989 /* StatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E758C82A5C940100823989 /* StatViewController.swift */; };
+		57E758CB2A5D858A00823989 /* 3of6game.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758CA2A5D858A00823989 /* 3of6game.txt */; };
+		57E758D02A5D863200823989 /* Shakespeare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758CC2A5D863200823989 /* Shakespeare.txt */; };
+		57E758D12A5D863200823989 /* KJB.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758CD2A5D863200823989 /* KJB.txt */; };
+		57E758D22A5D863200823989 /* Odgen.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758CE2A5D863200823989 /* Odgen.txt */; };
+		57E758D32A5D863200823989 /* Austen.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758CF2A5D863200823989 /* Austen.txt */; };
 		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
 		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
 		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
@@ -100,8 +100,6 @@
 		57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewWordCell.swift; sourceTree = "<group>"; };
 		57D155122A5579D000A802C9 /* ChoiceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceLabel.swift; sourceTree = "<group>"; };
 		57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewControllerDelegate.swift; sourceTree = "<group>"; };
-		57DC41032A58774400704D20 /* King James Bible.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "King James Bible.txt"; sourceTree = "<group>"; };
-		57DC41052A587A5B00704D20 /* Shakespeare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Shakespeare.txt; sourceTree = "<group>"; };
 		57E2F3732A5481150097D1D2 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewController.swift; sourceTree = "<group>"; };
 		57E2F3792A54E5850097D1D2 /* IconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
@@ -111,13 +109,15 @@
 		57E2F37F2A54E59D0097D1D2 /* LexiconIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexiconIcon.swift; sourceTree = "<group>"; };
 		57E2F3842A54F3200097D1D2 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		57E758B82A5A164400823989 /* ScoreIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreIcon.swift; sourceTree = "<group>"; };
-		57E758BA2A5A1D7500823989 /* Odgen's Basic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Odgen's Basic.txt"; sourceTree = "<group>"; };
 		57E758BD2A5B8F6E00823989 /* StatsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCardViewController.swift; sourceTree = "<group>"; };
 		57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedScoreViewController.swift; sourceTree = "<group>"; };
-		57E758C22A5C4D4600823989 /* 3of6game.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3of6game.txt; sourceTree = "<group>"; };
-		57E758C42A5C5E0600823989 /* Jane Austen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Jane Austen.txt"; sourceTree = "<group>"; };
 		57E758C62A5C635900823989 /* ViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDelegate.swift; sourceTree = "<group>"; };
 		57E758C82A5C940100823989 /* StatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatViewController.swift; sourceTree = "<group>"; };
+		57E758CA2A5D858A00823989 /* 3of6game.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3of6game.txt; sourceTree = "<group>"; };
+		57E758CC2A5D863200823989 /* Shakespeare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Shakespeare.txt; sourceTree = "<group>"; };
+		57E758CD2A5D863200823989 /* KJB.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KJB.txt; sourceTree = "<group>"; };
+		57E758CE2A5D863200823989 /* Odgen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Odgen.txt; sourceTree = "<group>"; };
+		57E758CF2A5D863200823989 /* Austen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Austen.txt; sourceTree = "<group>"; };
 		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
 		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
 		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
@@ -270,11 +270,11 @@
 		57E758C12A5C485200823989 /* Lexicons */ = {
 			isa = PBXGroup;
 			children = (
-				57E758C22A5C4D4600823989 /* 3of6game.txt */,
-				57E758BA2A5A1D7500823989 /* Odgen's Basic.txt */,
-				57DC41032A58774400704D20 /* King James Bible.txt */,
-				57DC41052A587A5B00704D20 /* Shakespeare.txt */,
-				57E758C42A5C5E0600823989 /* Jane Austen.txt */,
+				57E758CF2A5D863200823989 /* Austen.txt */,
+				57E758CD2A5D863200823989 /* KJB.txt */,
+				57E758CE2A5D863200823989 /* Odgen.txt */,
+				57E758CC2A5D863200823989 /* Shakespeare.txt */,
+				57E758CA2A5D858A00823989 /* 3of6game.txt */,
 			);
 			path = Lexicons;
 			sourceTree = "<group>";
@@ -521,17 +521,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				57EB7A622A47ACAE00BCA44B /* K2D-ExtraBold.ttf in Resources */,
-				57DC41062A587A5B00704D20 /* Shakespeare.txt in Resources */,
+				57E758D02A5D863200823989 /* Shakespeare.txt in Resources */,
 				57EB7A652A47ACAE00BCA44B /* K2D-Medium.ttf in Resources */,
 				57EB7A642A47ACAE00BCA44B /* K2D-Italic.ttf in Resources */,
-				57DC41042A58774400704D20 /* King James Bible.txt in Resources */,
 				57EF4B482A4664F3008C57FF /* LaunchScreen.storyboard in Resources */,
-				57E758BB2A5A1D7500823989 /* Odgen's Basic.txt in Resources */,
+				57E758CB2A5D858A00823989 /* 3of6game.txt in Resources */,
 				57EF4B452A4664F3008C57FF /* Assets.xcassets in Resources */,
-				57E758C32A5C4D4600823989 /* 3of6game.txt in Resources */,
 				57EF4B402A4664F2008C57FF /* Main.storyboard in Resources */,
+				57E758D32A5D863200823989 /* Austen.txt in Resources */,
+				57E758D22A5D863200823989 /* Odgen.txt in Resources */,
+				57E758D12A5D863200823989 /* KJB.txt in Resources */,
 				57EB7A632A47ACAE00BCA44B /* K2D-Regular.ttf in Resources */,
-				57E758C52A5C5E0700823989 /* Jane Austen.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

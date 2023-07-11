@@ -18,6 +18,8 @@ class ViewData {
   let colourM: UIColor
   var colourD: UIColor
   
+  let textHighlightColour = UIColor.darkGray.cgColor
+  
   let height: CGFloat
   let cardSize: CGSize
   let statusBarSize: CGSize
@@ -57,7 +59,7 @@ class ViewData {
     playPauseStopSize = CGSize(width: stopWatchSize * 0.5, height: stopWatchSize)
     foundWordViewWidth = width - ((4 * gameBoardPadding) + (1.5 * stopWatchSize))
     
-    statSize = CGSize(width: width * 0.95, height: statusBarSize.height * 2.5)
+    statSize = CGSize(width: width * 0.95, height: statusBarSize.height * 1.25)
   }
   
   func getSettingsTextAttribute(height: CGFloat, colour: CGColor) -> [NSAttributedString.Key : Any] {

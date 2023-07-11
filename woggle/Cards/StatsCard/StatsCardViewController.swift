@@ -17,6 +17,7 @@ class StatsCardViewController: CardViewController {
   let mostWordsFoundSVC: StatViewController
   let highWordSVC: StatViewController
   let longestWordSVC: StatViewController
+  let bestPLRationSVC: StatViewController
   
   override init(viewData vD: ViewData, delegate d: CardStackDelegate) {
     
@@ -26,10 +27,11 @@ class StatsCardViewController: CardViewController {
     mostWordsFoundSVC = StatViewController(statID: "mostWordsFound", viewData: vD)
     highWordSVC = StatViewController(statID: "highWord", viewData: vD)
     longestWordSVC = StatViewController(statID: "longestWord", viewData: vD)
+    bestPLRationSVC = StatViewController(statID: "longestWord", viewData: vD)
     
     super.init(viewData: vD, delegate: d)
     
-    let statVSep = (vD.height - (vD.statusBarSize.height + vD.statSize.height * 5)) / 6
+    let statVSep = (vD.height - (vD.statusBarSize.height + vD.statSize.height * 6)) / 7
     
     embed(combinedScoreViewC, inView: self.statusBarView, frame: CGRect(origin: CGPoint(x: 0, y: 0), size: vD.statusBarSize))
     
@@ -42,6 +44,8 @@ class StatsCardViewController: CardViewController {
     embed(highWordSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 3 + statVSep * 4), size: vD.statSize))
     
     embed(longestWordSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 4 + statVSep * 5), size: vD.statSize))
+    
+    embed(bestPLRationSVC, inView: self.view, frame: CGRect(origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 5 + statVSep * 6), size: vD.statSize))
 
   }
   

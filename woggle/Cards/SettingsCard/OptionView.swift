@@ -39,7 +39,7 @@ class OptionView: UIView {
     
     backgroundColor = UIColor.clear
     
-    // Note, use f.height for font size as  as frame.height may has been adjusted if vertical.
+    // Note, f.height for font size as  as frame.height may has been adjusted if vertical.
     let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: f.width, height: f.height))
     nameLabel.attributedText = NSMutableAttributedString(string: dN, attributes: delegate.getViewData().getSettingsTextAttribute(height: f.height * 0.8, colour: textHighlightColour))
     addSubview(nameLabel)
