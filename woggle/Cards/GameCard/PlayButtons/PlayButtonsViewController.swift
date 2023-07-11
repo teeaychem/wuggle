@@ -130,4 +130,17 @@ class PlayButtonsViewController: UIViewController {
   }
   
   
+  func removeAllGestureRecognizers() {
+    if playButtonsView.playPauseView.gestureRecognizers != nil {
+      for gr in playButtonsView.playPauseView.gestureRecognizers! {
+        playButtonsView.playPauseView.removeGestureRecognizer(gr)
+      }
+    }
+    if playButtonsView.stopView.gestureRecognizers != nil {
+      for gr in playButtonsView.stopView.gestureRecognizers! {
+        playButtonsView.stopView.removeGestureRecognizer(gr)
+      }
+    }
+  }
+  
 }

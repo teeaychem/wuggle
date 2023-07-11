@@ -53,6 +53,11 @@ class StopwatchViewController: UIViewController {
     watchView.addSeconds()
   }
   
+  func setHandTo(percent: Double) {
+    // Argument is %, so angle is % of 2pi.
+    watchView.setSecondTo(angle: percent * (2 * Double.pi))
+  }
+  
   
   func incrementHandBy(percent: Double) {
     // Argument is %, so angle is % of 2pi.
@@ -65,8 +70,12 @@ class StopwatchViewController: UIViewController {
   }
   
   
-
-
-  
+  func removeAllGestureRecognizers() {
+    if view.gestureRecognizers != nil {
+      for gr in view.gestureRecognizers! {
+        view.removeGestureRecognizer(gr)
+      }
+    }
+  }
   
 }

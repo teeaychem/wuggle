@@ -61,6 +61,13 @@ class StopwatchView: UIView {
     secondsLayer.transform = CATransform3DMakeRotation(Double.pi, 0.0, 0.0, 1.0)
   }
   
+  
+  func setSecondTo(angle: Double) {
+    secondsAngle = (Double.pi - angle) //.truncatingRemainder(dividingBy: 2 * Double.pi)
+//    // There's no need to truncate.
+    secondsLayer.transform = CATransform3DMakeRotation(secondsAngle, 0.0, 0.0, 1.0)
+  }
+  
 
   
   func incrementSeconds(updateAngleIncrement: Double) {
