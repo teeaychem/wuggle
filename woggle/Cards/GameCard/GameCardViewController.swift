@@ -92,7 +92,7 @@ class GameCardViewController: CardViewController {
       }
       boardViewController.displayAllTiles()
       
-      if delegate!.currentGameInstance()!.timeUsedPercent < 1 {
+      if delegate!.currentGameInstance()!.viable {
         // If there's already a game, set things with stored data.
         playButtonsViewController.paintStopIcon()
         playButtonsViewController.stopAddGesture(gesture: stopGR!)
@@ -276,7 +276,7 @@ extension GameCardViewController {
     // Cancel timer, pause and end game
     displayLinkOne?.invalidate()
     gameInProgess = false
-    delegate!.currentGameInstance()!.timeUsedPercent = 1
+    delegate!.currentGameInstance()?.viable = false
     // Update buttons
     playButtonsViewController.hideStopIcon()
     playButtonsViewController.paintNewGameIcon()
@@ -381,15 +381,15 @@ extension GameCardViewController {
     // Stopwatch tap only works for controlling a gamme.
     // Does not create a new game, etc.
     
-    if (delegate!.currentGameInstance()!.timeUsedPercent > 1) {
-      // Game is over
-      endGameMain()
-    } else {
+    if (delegate!.currentGameInstance()!.viable) {
       if (gameInProgess) {
         pauseGameMain(animated: true)
       } else {
         resumeGameMain()
       }
+    } else {
+      // Game is over
+      endGameMain()
     }
   }
   
@@ -397,7 +397,7 @@ extension GameCardViewController {
   @objc func didTapOnPlayPause(_ sender: UITapGestureRecognizer) {
     if gameInProgess {
       pauseGameMain(animated: true)
-    } else if (delegate!.currentGameInstance() != nil && delegate!.currentGameInstance()!.timeUsedPercent < 1) {
+    } else if (delegate!.currentGameInstance() != nil && delegate!.currentGameInstance()!.viable) {
         resumeGameMain()
     } else {
       newGameMain()
