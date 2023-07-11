@@ -167,12 +167,27 @@ class GameCardViewController: CardViewController {
   
   
   func thinkAboutStats(word w: String) {
-    if Double(w.count) > delegate!.currentStats().topWordLength!.numVal {
-      delegate!.currentStats().topWordLength!.numVal = Double(w.count)
+    let wordLength = Double(w.count)
+    if wordLength > delegate!.currentStats().topWordLength!.numVal {
+      delegate!.currentStats().topWordLength!.numVal = wordLength
       delegate!.currentStats().topWordLength!.strVal = w.capitalized
       delegate!.currentStats().topWordLength!.date = Date()
+      delegate!.currentStats().topWordLength!.board = delegate!.currentGameInstance()?.board
     }
-    
+    let wordPoints = Double(getPoints(word: w))
+    if wordPoints > delegate!.currentStats().topWordPoints!.numVal {
+      delegate!.currentStats().topWordPoints!.numVal = wordPoints
+      delegate!.currentStats().topWordPoints!.strVal = w.capitalized
+      delegate!.currentStats().topWordPoints!.date = Date()
+      delegate!.currentStats().topWordPoints!.board = delegate!.currentGameInstance()?.board
+    }
+    let ratio = wordPoints/wordLength
+    if ratio > delegate!.currentStats().topRatio!.numVal {
+      delegate!.currentStats().topRatio!.numVal = wordPoints
+      delegate!.currentStats().topRatio!.strVal = w.capitalized
+      delegate!.currentStats().topRatio!.date = Date()
+      delegate!.currentStats().topRatio!.board = delegate!.currentGameInstance()?.board
+    }
   }
   
   

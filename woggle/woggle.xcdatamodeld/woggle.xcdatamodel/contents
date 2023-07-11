@@ -13,7 +13,7 @@
         <attribute name="pointsCount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeUsedPercent" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" customClassName="NSSet&lt;String&gt;"/>
         <attribute name="viable" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <relationship name="board" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
+        <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="currentGame" inverseEntity="Settings"/>
     </entity>
     <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">

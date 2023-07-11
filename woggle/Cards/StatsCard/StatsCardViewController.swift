@@ -46,7 +46,6 @@ class StatsCardViewController: CardViewController {
   
   override func broughtToTop() {
     super.broughtToTop()
-    
 
     mostPointsSVC.updateWith(stat: delegate!.currentStats().topPoints!)
     mostPercentSVC.updateWith(stat: delegate!.currentStats().topPercent!)
