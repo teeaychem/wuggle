@@ -55,6 +55,16 @@ class StatsCardViewController: CardViewController {
     embed(bestPLRationSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: longestWordSVC.view.frame.maxY + statVSep))
   }
   
+  
+  override func shuffledToDeck() {
+    unembed(mostPointsSVC, inView: self.mainView)
+    unembed(mostPercentSVC, inView: self.mainView)
+    unembed(mostWordsFoundSVC, inView: self.mainView)
+    unembed(highWordSVC, inView: self.mainView)
+    unembed(longestWordSVC, inView: self.mainView)
+    unembed(bestPLRationSVC, inView: self.mainView)
+  }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

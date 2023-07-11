@@ -56,6 +56,7 @@ class CardViewController: UIViewController {
   
   
   func broughtToTop() {
+    print("On top")
     // Called when card is brought to the top of the stack
   }
   

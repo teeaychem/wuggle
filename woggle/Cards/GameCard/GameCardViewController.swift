@@ -73,12 +73,6 @@ class GameCardViewController: CardViewController {
   }
   
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    
-  }
-  
   override func broughtToTop() {
     super.broughtToTop()
     
@@ -93,6 +87,19 @@ class GameCardViewController: CardViewController {
     watchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnTime(_:)))
     stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
     stopwatchViewController.paintSeconds()
+  }
+  
+  
+  override func shuffledToDeck() {
+    
+    pauseGameMain(animated: false)
+    
+    self.unembed(boardViewController, inView: self.cardView)
+    self.unembed(stopwatchViewController, inView: self.cardView)
+    self.unembed(playButtonsViewController, inView: self.cardView)
+    self.unembed(foundWordsViewController, inView: self.cardView)
+    
+    super.shuffledToDeck()
   }
   
   
