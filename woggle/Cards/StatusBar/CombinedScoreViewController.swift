@@ -28,6 +28,8 @@ class CombinedScoreViewController: UIViewController {
     
     super.init(nibName: nil, bundle: nil)
     
+    view.frame.size = s
+    
   }
   
   override func viewDidLoad() {

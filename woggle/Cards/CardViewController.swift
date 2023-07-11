@@ -26,8 +26,7 @@ class CardViewController: UIViewController {
     statusBarView = StatusBarView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: viewData.width, height: viewData.statusBarSize.height)))
     
     super.init(nibName: nil, bundle: nil)
-    view.frame.size.width = vD.width
-    view.frame.size.height = vD.height
+    view.frame.size = vD.cardSize
     
     specificSetup()
   }

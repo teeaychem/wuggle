@@ -57,7 +57,7 @@ class GameCardViewController: CardViewController {
     super.init(viewData: vD, delegate: d)
     
     
-    embed(combinedScoreViewC, inView: self.statusBarView, frame: CGRect(origin: CGPoint(x: 0, y: 0), size: vD.statusBarSize))
+    embed(combinedScoreViewC, inView: self.statusBarView, origin: CGPoint(x: 0, y: 0))
     
         
     // Add gesture recognisers
@@ -77,11 +77,11 @@ class GameCardViewController: CardViewController {
     super.viewDidLoad()
     
     // TODO: board needs to be last in order for touch to work.
-    self.embed(boardViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.height - (viewData.gameBoardSize + viewData.gameBoardPadding)), size: CGSize(width: viewData.gameBoardSize, height: viewData.gameBoardSize)))
+    self.embed(boardViewController, inView: self.view, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.height - (viewData.gameBoardSize + viewData.gameBoardPadding)))
     boardViewController.addGameboardView()
-    self.embed(stopwatchViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.gameBoardPadding + viewData.statusBarSize.height), size: CGSize(width: viewData.stopWatchSize, height: viewData.stopWatchSize)))
-    self.embed(playButtonsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.stopWatchSize), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)), size: CGSize(width: viewData.stopWatchSize * 0.5, height: viewData.stopWatchSize)))
-    self.embed(foundWordsViewController, inView: self.view, frame: CGRect(origin: CGPoint(x: ((3 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)), size: CGSize(width: viewData.width - ((4 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), height: viewData.stopWatchSize)))
+    self.embed(stopwatchViewController, inView: self.view, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.gameBoardPadding + viewData.statusBarSize.height))
+    self.embed(playButtonsViewController, inView: self.view, origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.stopWatchSize), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
+    self.embed(foundWordsViewController, inView: self.view, origin: CGPoint(x: ((3 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
     
     // TODO: Only add this when a game is in progress.
     
@@ -275,7 +275,7 @@ extension GameCardViewController {
     stopwatchViewController.view.removeGestureRecognizer(watchGestureRecognizer!)
     // Display final words
     finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
-    self.embed(finalWordsViewController!, inView: self.view, frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding + viewData.gameBoardSize * 0.075, y: viewData.height - viewData.gameBoardSize * 0.925 - viewData.gameBoardPadding), size: CGSize(width: viewData.gameBoardSize * 0.85, height: viewData.gameBoardSize * 0.85)))
+    self.embed(finalWordsViewController!, inView: self.view, origin: CGPoint(x: viewData.gameBoardPadding + viewData.gameBoardSize * 0.075, y: viewData.height - viewData.gameBoardSize * 0.925 - viewData.gameBoardPadding))
     finalWordsViewController?.addWordsAsFound(words: delegate!.currentGameInstance()!.foundWordsList!)
     finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate!.currentGameInstance()!.allWordsList!), seeWords: delegate!.currentGameInstance()!.foundWordsList!)
     // Add gesture to see board.

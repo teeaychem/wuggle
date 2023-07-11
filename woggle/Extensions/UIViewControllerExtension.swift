@@ -15,9 +15,9 @@ extension UIViewController {
   // Add the bounds of the view are limited to the frame of the view controller
   // Add the controller
   // State the move is completed.
-  func embed(_ viewController:UIViewController, inView view:UIView, frame f: CGRect){
+  func embed(_ viewController:UIViewController, inView view:UIView, origin o: CGPoint){
     viewController.willMove(toParent: self)
-    viewController.view.frame = f
+    viewController.view.frame.origin = o
     view.addSubview(viewController.view)
     self.addChild(viewController)
     viewController.didMove(toParent: self)
