@@ -40,7 +40,6 @@
 		57E758D32A5D863200823989 /* Austen.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57E758CF2A5D863200823989 /* Austen.txt */; };
 		57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A422A47827F00BCA44B /* GameboardViewController.swift */; };
 		57EB7A452A47856D00BCA44B /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A442A47856D00BCA44B /* GameboardView.swift */; };
-		57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A462A4787CF00BCA44B /* GameCardView.swift */; };
 		57EB7A492A478BF500BCA44B /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A482A478BF500BCA44B /* CardViewController.swift */; };
 		57EB7A4B2A478CF000BCA44B /* GameCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A4A2A478CF000BCA44B /* GameCardViewController.swift */; };
 		57EB7A4D2A47950500BCA44B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A4C2A47950500BCA44B /* UIViewControllerExtension.swift */; };
@@ -120,7 +119,6 @@
 		57E758CF2A5D863200823989 /* Austen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Austen.txt; sourceTree = "<group>"; };
 		57EB7A422A47827F00BCA44B /* GameboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardViewController.swift; sourceTree = "<group>"; };
 		57EB7A442A47856D00BCA44B /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
-		57EB7A462A4787CF00BCA44B /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
 		57EB7A482A478BF500BCA44B /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		57EB7A4A2A478CF000BCA44B /* GameCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardViewController.swift; sourceTree = "<group>"; };
 		57EB7A4C2A47950500BCA44B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -298,7 +296,6 @@
 			isa = PBXGroup;
 			children = (
 				57EB7A4A2A478CF000BCA44B /* GameCardViewController.swift */,
-				57EB7A462A4787CF00BCA44B /* GameCardView.swift */,
 				57455B3F2A4CFF720019FFB5 /* PlayButtons */,
 				57506C1D2A48D7F100367AE9 /* Stopwatch */,
 				57BADD822A4A4578009074DF /* FoundWords */,
@@ -567,7 +564,6 @@
 				57455B432A4CFFA40019FFB5 /* PlayButtonsView.swift in Sources */,
 				57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */,
 				5741FA292A53782E00B4164D /* FinalFoundWords.swift in Sources */,
-				57EB7A472A4787CF00BCA44B /* GameCardView.swift in Sources */,
 				57EB7A512A47A65000BCA44B /* GameInstanceExtension.swift in Sources */,
 				57E2F3772A54E1420097D1D2 /* SettingsCardViewController.swift in Sources */,
 				57E758BE2A5B8F6E00823989 /* StatsCardViewController.swift in Sources */,

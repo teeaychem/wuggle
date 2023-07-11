@@ -56,6 +56,7 @@ class CardStackViewController: UIViewController {
     self.embed(statCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY))
     self.embed(settCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + CardVD.statusBarSize.height))
     self.embed(gameCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + CardVD.statusBarSize.height * 2))
+    gameCardC?.broughtToTop()
     
     for cV in cardViews {
       cV.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))

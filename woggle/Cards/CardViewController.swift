@@ -14,6 +14,7 @@ class CardViewController: UIViewController {
   let viewData: ViewData
   let cardView: CardView
   let statusBarView: StatusBarView
+  let mainView: UIView
   
   // displayViews collects the views which should only be shown when the card is displayed.
   var displayViews = [UIView]()
@@ -24,6 +25,7 @@ class CardViewController: UIViewController {
     cardView = CardView(cardWidth: viewData.width, cardColour: viewData.colour)
     delegate = d
     statusBarView = StatusBarView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: viewData.width, height: viewData.statusBarSize.height)))
+    mainView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: vD.statusBarSize.height), size: CGSize(width: vD.cardSize.width, height: vD.cardSize.height - vD.statusBarSize.height)))
     
     super.init(nibName: nil, bundle: nil)
     
@@ -44,6 +46,7 @@ class CardViewController: UIViewController {
     // If this doesn't happen, then gestures are broken.
     view.addSubview(cardView)
     cardView.addSubview(statusBarView)
+    cardView.addSubview(mainView)
   }
   
   
@@ -59,6 +62,11 @@ class CardViewController: UIViewController {
   
   func shuffledToDeck() {
     // Called when card is shffuled into the deck
+    
+    // Remove every subview attached to the mainview.
+    for subview in mainView.subviews {
+      subview.removeFromSuperview()
+    }
   }
   
   

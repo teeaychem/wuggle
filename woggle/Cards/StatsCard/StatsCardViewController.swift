@@ -17,8 +17,13 @@ class StatsCardViewController: CardViewController {
   let highWordSVC: StatViewController
   let longestWordSVC: StatViewController
   let bestPLRationSVC: StatViewController
+  let statVSep: CGFloat
+  let statXOrigin: CGFloat
   
   override init(viewData vD: ViewData, delegate d: CardStackDelegate) {
+    
+    statVSep = (vD.height - (vD.statusBarSize.height + vD.statSize.height * 6)) / 7
+    statXOrigin = vD.width * 0.025
     
     combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD)
     mostPointsSVC = StatViewController(stat: d.currentStats().topPoints!, displayName: "Most points", viewData: vD)
@@ -28,24 +33,26 @@ class StatsCardViewController: CardViewController {
     longestWordSVC = StatViewController(stat: d.currentStats().topWordLength!, displayName: "Longest word", viewData: vD)
     bestPLRationSVC = StatViewController(stat: d.currentStats().topRatio!, displayName: "Best points:length", viewData: vD)
     
+    
     super.init(viewData: vD, delegate: d)
-    
-    let statVSep = (vD.height - (vD.statusBarSize.height + vD.statSize.height * 6)) / 7
-    
+      
     embed(combinedScoreViewC, inView: self.statusBarView, origin: CGPoint(x: 0, y: 0))
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+  }
+  
+  
+  override func broughtToTop() {
+    super.broughtToTop()
     
-    embed(mostPointsSVC, inView: self.view, origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + statVSep))
-    
-    embed(mostPercentSVC, inView: self.view, origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height + statVSep * 2))
-    
-    embed(mostWordsFoundSVC, inView: self.view, origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 2 + statVSep * 3))
-   
-    embed(highWordSVC, inView: self.view, origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 3 + statVSep * 4))
-    
-    embed(longestWordSVC, inView: self.view, origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 4 + statVSep * 5))
-    
-    embed(bestPLRationSVC, inView: self.view, origin: CGPoint(x: vD.width * 0.025, y: vD.statusBarSize.height + vD.statSize.height * 5 + statVSep * 6))
-
+    embed(mostPointsSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVSep))
+    embed(mostPercentSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: mostPointsSVC.view.frame.maxY + statVSep))
+    embed(mostWordsFoundSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: mostPercentSVC.view.frame.maxY + statVSep))
+    embed(highWordSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: mostWordsFoundSVC.view.frame.maxY + statVSep))
+    embed(longestWordSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: highWordSVC.view.frame.maxY + statVSep))
+    embed(bestPLRationSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: longestWordSVC.view.frame.maxY + statVSep))
   }
   
   required init?(coder: NSCoder) {

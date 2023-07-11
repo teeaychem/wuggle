@@ -27,6 +27,7 @@ class StatViewController: UIViewController {
   
   let stat: Stat
   let statDisplayName: String
+  let statSize: CGSize
   
   let nameLabel: UILabel
   let valueLabel: UILabel
@@ -35,6 +36,7 @@ class StatViewController: UIViewController {
     
     stat = s
     statDisplayName = dN
+    statSize = vD.statSize
     
     nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
     valueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
@@ -48,12 +50,17 @@ class StatViewController: UIViewController {
     
     valueLabel.attributedText = NSMutableAttributedString(string: s.strVal!, attributes: vD.getSettingsTextAttribute(height: vD.statSize.height * 0.64, colour: vD.colourL.cgColor))
     valueLabel.textAlignment = .right
-    
+  }
+  
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
   }
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    view.frame.size = statSize
     view.addSubview(nameLabel)
     view.addSubview(valueLabel)
   }
