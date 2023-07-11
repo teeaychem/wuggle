@@ -48,21 +48,16 @@ class GameboardViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Add the view as a subview
+    view.addSubview(gameboardView)
   }
-  
-  
-  func addGameboardView() {
-    self.view.addSubview(gameboardView)
-  }
-  
+
   
   override func viewDidLayoutSubviews() {
     // Before this is called the frame of the view has not been set.
     // So, this seems to be the appropriate place to fix things.
     // https://stackoverflow.com/questions/40737164/whats-exactly-viewdidlayoutsubviews
     super.viewDidLayoutSubviews()
-    view.frame.size = CGSize(width: boardSize, height: boardSize)
+    view.frame.size = gameboardView.frame.size
   }
   
   

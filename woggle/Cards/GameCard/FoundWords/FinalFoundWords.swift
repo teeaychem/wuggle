@@ -39,7 +39,7 @@ class FinalFoundWordsViewController: UIViewController {
     
     super.init(nibName: nil, bundle: nil)
     
-    view.frame.size = CGSize(width: vD.gameBoardSize * 0.85, height: vD.gameBoardSize * 0.85)
+    
     view.backgroundColor = vD.colourD
     view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
   }
@@ -55,6 +55,11 @@ class FinalFoundWordsViewController: UIViewController {
     super.viewDidLoad()
     view.addSubview(foundWordView)
     view.addSubview(noseeWordView)
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    view.frame.size = CGSize(width: wordViewWidth * 2.075, height: wordViewHeight * 1.025)
   }
   
   

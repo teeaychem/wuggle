@@ -28,7 +28,7 @@ class CombinedScoreViewController: UIViewController {
     
     super.init(nibName: nil, bundle: nil)
     
-    view.frame.size = s
+    view.bounds.size = s
   }
   
   override func viewDidLoad() {
@@ -40,6 +40,8 @@ class CombinedScoreViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
+
+    view.frame.size = CGSize(width: foundIcon.size.width * 10/3, height: foundIcon.size.height)
     
     let sBIconIndent = (view.frame.width - (3 * foundIcon.frame.width)) * 0.25
     foundIcon.frame.origin = CGPoint(x: sBIconIndent, y: 0)

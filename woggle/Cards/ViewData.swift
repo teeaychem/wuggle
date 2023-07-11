@@ -52,7 +52,7 @@ class ViewData {
     tilePadding = gameBoardSize * 0.01
     gameBoardPadding = (width - gameBoardSize) * 0.5
     squareIconSize = CGSize(width: statusBarSize.height, height: statusBarSize.height)
-    scoreIconSize = CGSize(width: statusBarSize.height * 3, height: statusBarSize.height)
+    scoreIconSize = CGSize(width: width * 0.3, height: statusBarSize.height)
     
     
     stopWatchSize = height - (3 * gameBoardPadding + gameBoardSize + statusBarSize.height)

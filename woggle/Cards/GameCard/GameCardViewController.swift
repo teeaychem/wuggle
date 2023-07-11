@@ -78,7 +78,6 @@ class GameCardViewController: CardViewController {
     
     // TODO: board needs to be last in order for touch to work.
     self.embed(boardViewController, inView: self.view, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.height - (viewData.gameBoardSize + viewData.gameBoardPadding)))
-    boardViewController.addGameboardView()
     self.embed(stopwatchViewController, inView: self.view, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.gameBoardPadding + viewData.statusBarSize.height))
     self.embed(playButtonsViewController, inView: self.view, origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.stopWatchSize), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
     self.embed(foundWordsViewController, inView: self.view, origin: CGPoint(x: ((3 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))

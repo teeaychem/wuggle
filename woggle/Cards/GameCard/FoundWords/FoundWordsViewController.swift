@@ -40,12 +40,11 @@ class FoundWordsViewController: UIViewController {
     foundWordView.layer.borderWidth = 1
   }
   
-  
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
     view.frame.size = CGSize(width: wordViewWidth, height: wordViewHeight)
   }
-  
+    
   
   func update(word: String) {
     foundWordView.updateAndScroll(word: word)
