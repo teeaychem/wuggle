@@ -26,12 +26,12 @@ class StatsCardViewController: CardViewController {
     statXOrigin = vD.width * 0.025
     
     combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD)
-    mostPointsSVC = StatViewController(stat: d.currentStats().topPoints!, displayName: "Most points", viewData: vD)
-    mostPercentSVC = StatViewController(stat: d.currentStats().topPercent!, displayName: "Highest % found", viewData: vD)
-    mostWordsFoundSVC = StatViewController(stat: d.currentStats().topWords!, displayName: "Most words found", viewData: vD)
-    highWordSVC = StatViewController(stat: d.currentStats().topWordPoints!, displayName: "Top scoring word", viewData: vD)
-    longestWordSVC = StatViewController(stat: d.currentStats().topWordLength!, displayName: "Longest word", viewData: vD)
-    bestPLRationSVC = StatViewController(stat: d.currentStats().topRatio!, displayName: "Best points:length", viewData: vD)
+    mostPointsSVC = StatViewController(stat: d.currentStats().topWords!, displayName: "Most Words Found", viewData: vD)
+    mostPercentSVC = StatViewController(stat: d.currentStats().topPoints!, displayName: "Most Points Collected", viewData: vD)
+    mostWordsFoundSVC = StatViewController(stat: d.currentStats().topPercent!, displayName: "Highest % Found", viewData: vD)
+    highWordSVC = StatViewController(stat: d.currentStats().topWordPoints!, displayName: "Top Scoring Word", viewData: vD)
+    longestWordSVC = StatViewController(stat: d.currentStats().topWordLength!, displayName: "Longest Word", viewData: vD)
+    bestPLRationSVC = StatViewController(stat: d.currentStats().topRatio!, displayName: "Best Points-Length Ratio", viewData: vD)
     
     
     super.init(viewData: vD, delegate: d)

@@ -26,6 +26,7 @@
     </entity>
     <entity name="Stat" representedClassName="Stat" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="extraStr" attributeType="String" defaultValueString=""/>
         <attribute name="numVal" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="strVal" attributeType="String" defaultValueString=""/>
         <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="stat" inverseEntity="Board"/>

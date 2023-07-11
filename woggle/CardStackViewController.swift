@@ -39,7 +39,6 @@ class CardStackViewController: UIViewController {
     
     firstCardY = (UIScreen.main.bounds.height - (CardVD.height + CardVD.statusBarSize.height * 2)) * 0.5
     statusBarH = CardVD.statusBarSize.height
-
     
     super.init(nibName: nil, bundle: nil)
 
@@ -61,18 +60,7 @@ class CardStackViewController: UIViewController {
     for cV in cardViews {
       cV.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
     }
-    
     setIcons()
-  }
-  
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-  
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
   }
   
   
@@ -81,6 +69,31 @@ class CardStackViewController: UIViewController {
     settCardC?.updateIcon(internalName: "lexicon", internalValue: settings.lexicon)
     settCardC?.updateIcon(internalName: "length", internalValue: settings.minWordLength)
     settCardC?.updateIcon(internalName: "tiles", internalValue: settings.tileSqrt)
+  }
+  
+  
+  func reorderCardsByList() {
+    for i in 0...cardViews.count - 1 {
+      view.bringSubviewToFront(cardViews[i].view)
+      cardViews[i].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(i) * statusBarH))
+    }
+  }
+  
+  
+  @objc func statusBarTap(_ r: UIGestureRecognizer) {
+    let cardIndex = cardViews.firstIndex(where: {r.view?.superview as! CardView == $0.cardView})
+    if (cardIndex != nil && cardIndex != cardViews.count - 1) {
+      cardViews.last!.shuffledToDeck()
+      cardViews.append(cardViews[cardIndex!])
+      cardViews.remove(at: cardIndex!)
+      reorderCardsByList()
+      cardViews.last!.broughtToTop()
+    }
+  }
+  
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }
 
@@ -126,25 +139,5 @@ extension CardStackViewController: CardStackDelegate {
       
     }
     return settings.stats!
-  }
-  
-  
-  func reorderCardsByList() {
-    for i in 0...cardViews.count - 1 {
-      view.bringSubviewToFront(cardViews[i].view)
-      cardViews[i].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(i) * statusBarH))
-    }
-  }
-  
-  
-  @objc func statusBarTap(_ r: UIGestureRecognizer) {
-    let cardIndex = cardViews.firstIndex(where: {r.view?.superview as! CardView == $0.cardView})
-    if (cardIndex != nil && cardIndex != cardViews.count - 1) {
-      cardViews.last!.shuffledToDeck()
-      cardViews.append(cardViews[cardIndex!])
-      cardViews.remove(at: cardIndex!)
-      reorderCardsByList()
-      cardViews.last!.broughtToTop()
-    }
   }
 }
