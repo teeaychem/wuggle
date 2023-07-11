@@ -25,18 +25,18 @@ class StatViewController: UIViewController {
   // So, with these suggestions, I have 8 + date.
   // This, then, is the plan.
   
-  let stat: Stat
   let statDisplayName: String
   let statSize: CGSize
+  let viewData: ViewData
   
   let nameLabel: UILabel
   let valueLabel: UILabel
   
   init(stat s: Stat, displayName dN: String, viewData vD: ViewData) {
     
-    stat = s
     statDisplayName = dN
     statSize = vD.statSize
+    viewData = vD
     
     nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
     valueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
@@ -51,6 +51,13 @@ class StatViewController: UIViewController {
     valueLabel.attributedText = NSMutableAttributedString(string: s.strVal!, attributes: vD.getSettingsTextAttribute(height: vD.statSize.height * 0.64, colour: vD.colourL.cgColor))
     valueLabel.textAlignment = .right
   }
+  
+  
+  
+  func updateWith(stat: Stat) {
+    valueLabel.attributedText = NSMutableAttributedString(string: stat.strVal!, attributes: viewData.getSettingsTextAttribute(height: viewData.statSize.height * 0.64, colour: viewData.colourL.cgColor))
+  }
+  
   
   
   override func viewDidLayoutSubviews() {

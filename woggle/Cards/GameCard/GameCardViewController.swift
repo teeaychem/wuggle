@@ -160,8 +160,19 @@ class GameCardViewController: CardViewController {
         delegate!.currentGameInstance()?.foundWordCount += 1
         delegate!.currentGameInstance()?.pointsCount += Int16(getPoints(word: w))
         combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGameInstance()!)
+        thinkAboutStats(word: w)
       }
     }
+  }
+  
+  
+  func thinkAboutStats(word w: String) {
+    if Double(w.count) > delegate!.currentStats().topWordLength!.numVal {
+      delegate!.currentStats().topWordLength!.numVal = Double(w.count)
+      delegate!.currentStats().topWordLength!.strVal = w.capitalized
+      delegate!.currentStats().topWordLength!.date = Date()
+    }
+    
   }
   
   

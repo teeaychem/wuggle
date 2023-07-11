@@ -10,13 +10,13 @@ import UIKit
 
 class StatsCardViewController: CardViewController {
   
-  let combinedScoreViewC: CombinedScoreViewController
-  let mostPointsSVC: StatViewController
-  let mostPercentSVC: StatViewController
-  let mostWordsFoundSVC: StatViewController
-  let highWordSVC: StatViewController
-  let longestWordSVC: StatViewController
-  let bestPLRationSVC: StatViewController
+  var combinedScoreViewC: CombinedScoreViewController
+  var mostPointsSVC: StatViewController
+  var mostPercentSVC: StatViewController
+  var mostWordsFoundSVC: StatViewController
+  var highWordSVC: StatViewController
+  var longestWordSVC: StatViewController
+  var bestPLRationSVC: StatViewController
   let statVSep: CGFloat
   let statXOrigin: CGFloat
   
@@ -26,9 +26,9 @@ class StatsCardViewController: CardViewController {
     statXOrigin = vD.width * 0.025
     
     combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD)
-    mostPointsSVC = StatViewController(stat: d.currentStats().topWords!, displayName: "Most Words Found", viewData: vD)
-    mostPercentSVC = StatViewController(stat: d.currentStats().topPoints!, displayName: "Most Points Collected", viewData: vD)
-    mostWordsFoundSVC = StatViewController(stat: d.currentStats().topPercent!, displayName: "Highest % Found", viewData: vD)
+    mostPointsSVC = StatViewController(stat: d.currentStats().topPoints!, displayName: "Most Words Found", viewData: vD)
+    mostPercentSVC = StatViewController(stat: d.currentStats().topPercent!, displayName: "Most Points Collected", viewData: vD)
+    mostWordsFoundSVC = StatViewController(stat: d.currentStats().topWords!, displayName: "Highest % Found", viewData: vD)
     highWordSVC = StatViewController(stat: d.currentStats().topWordPoints!, displayName: "Top Scoring Word", viewData: vD)
     longestWordSVC = StatViewController(stat: d.currentStats().topWordLength!, displayName: "Longest Word", viewData: vD)
     bestPLRationSVC = StatViewController(stat: d.currentStats().topRatio!, displayName: "Best Points-Length Ratio", viewData: vD)
@@ -46,6 +46,14 @@ class StatsCardViewController: CardViewController {
   
   override func broughtToTop() {
     super.broughtToTop()
+    
+
+    mostPointsSVC.updateWith(stat: delegate!.currentStats().topPoints!)
+    mostPercentSVC.updateWith(stat: delegate!.currentStats().topPercent!)
+    mostWordsFoundSVC.updateWith(stat: delegate!.currentStats().topWords!)
+    highWordSVC.updateWith(stat: delegate!.currentStats().topWordPoints!)
+    longestWordSVC.updateWith(stat: delegate!.currentStats().topWordLength!)
+    bestPLRationSVC.updateWith(stat: delegate!.currentStats().topRatio!)
     
     embed(mostPointsSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVSep))
     embed(mostPercentSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: mostPointsSVC.view.frame.maxY + statVSep))
