@@ -25,18 +25,16 @@ class StatViewController: UIViewController {
   // So, with these suggestions, I have 8 + date.
   // This, then, is the plan.
   
+  let stat: Stat
   let statDisplayName: String
-  let statDisplayValue: String
-  let statInternalName: String
   
   let nameLabel: UILabel
   let valueLabel: UILabel
   
-  init(statID sID: String, viewData vD: ViewData) {
+  init(stat s: Stat, displayName dN: String, viewData vD: ViewData) {
     
-    statInternalName = sID
-    statDisplayName = "Most points"
-    statDisplayValue = "500"
+    stat = s
+    statDisplayName = dN
     
     nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
     valueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
@@ -48,7 +46,7 @@ class StatViewController: UIViewController {
     nameLabel.attributedText = NSMutableAttributedString(string: statDisplayName, attributes: vD.getSettingsTextAttribute(height: vD.statSize.height * 0.64, colour: vD.colourL.cgColor))
     
     
-    valueLabel.attributedText = NSMutableAttributedString(string: statDisplayValue, attributes: vD.getSettingsTextAttribute(height: vD.statSize.height * 0.64, colour: vD.colourL.cgColor))
+    valueLabel.attributedText = NSMutableAttributedString(string: s.strVal!, attributes: vD.getSettingsTextAttribute(height: vD.statSize.height * 0.64, colour: vD.colourL.cgColor))
     valueLabel.textAlignment = .right
     
   }

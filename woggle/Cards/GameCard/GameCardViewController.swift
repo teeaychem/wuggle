@@ -286,12 +286,12 @@ extension GameCardViewController {
   
   func checkRecords() {
     print("checking records")
-    if delegate!.currentGameInstance()!.pointsCount > delegate!.currentSettings().stats?.mostPoints ?? 0 {
-      print("Whoa, most points!")
-      delegate!.currentSettings().stats!.mostPoints = delegate!.currentGameInstance()!.pointsCount
-      delegate!.currentSettings().stats!.mostPointsBoard = delegate!.currentGameInstance()!.board!
-      print(delegate?.currentSettings().stats!.mostPointsBoard)
-    }
+//    if delegate!.currentGameInstance()!.pointsCount > delegate!.currentSettings().stats! ?? 0 {
+//      print("Whoa, most points!")
+//      delegate!.currentSettings().stats!.mostPoints = delegate!.currentGameInstance()!.pointsCount
+//      delegate!.currentSettings().stats!.mostPointsBoard = delegate!.currentGameInstance()!.board!
+//      print(delegate?.currentSettings().stats!.mostPointsBoard)
+//    }
   }
 }
 

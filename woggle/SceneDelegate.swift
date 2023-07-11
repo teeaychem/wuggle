@@ -41,6 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       // If load fails, things should be fine with default settings.
       settingsToUse = getDefaultSettings(context: context)
     }
+    settingsToUse!.ensureDefaults()
     stackViewController = CardStackViewController(settings: settingsToUse!)
 
     window.rootViewController = stackViewController!

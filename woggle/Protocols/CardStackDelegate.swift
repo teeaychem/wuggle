@@ -24,5 +24,7 @@ protocol CardStackDelegate: AnyObject {
   
   // Allow cards to request current gameInstance.
   func currentGameInstance() -> GameInstance?
+  
+  func currentStats() -> StatsCollection
    
 }

@@ -119,6 +119,15 @@ extension CardStackViewController: CardStackDelegate {
   }
   
   
+  func currentStats() -> StatsCollection {
+    print("called")
+    if settings.stats == nil {
+      
+    }
+    return settings.stats!
+  }
+  
+  
   func reorderCardsByList() {
     for i in 0...cardViews.count - 1 {
       view.bringSubviewToFront(cardViews[i].view)

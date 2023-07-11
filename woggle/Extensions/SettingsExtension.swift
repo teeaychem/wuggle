@@ -10,11 +10,35 @@ import CoreData
 
 extension Settings {
   
-  func returnContext() -> NSManagedObjectContext {
-    return self.managedObjectContext!
+  
+  func ensureDefaults() {
+    if stats == nil {
+      stats = StatsCollection(context: managedObjectContext!)
+    }
+    if stats!.topPercent == nil {
+      stats!.topPercent = Stat(context: managedObjectContext!)
+    }
+    if stats!.topPoints == nil {
+      stats!.topPoints = Stat(context: managedObjectContext!)
+    }
+    if stats!.topRatio == nil {
+      stats!.topRatio = Stat(context: managedObjectContext!)
+    }
+    if stats!.topWordLength == nil {
+      stats!.topWordLength = Stat(context: managedObjectContext!)
+    }
+    if stats!.topWords == nil {
+      stats!.topWords = Stat(context: managedObjectContext!)
+    }
+    if stats!.topWordPoints == nil {
+      stats!.topWordPoints = Stat(context: managedObjectContext!)
+    }
   }
   
   
+  func returnContext() -> NSManagedObjectContext {
+    return self.managedObjectContext!
+  }
   
   func getCurrentGame() -> GameInstance? {
     return self.currentGame

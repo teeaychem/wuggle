@@ -10,7 +10,6 @@ import UIKit
 
 class StatsCardViewController: CardViewController {
   
-  
   let combinedScoreViewC: CombinedScoreViewController
   let mostPointsSVC: StatViewController
   let mostPercentSVC: StatViewController
@@ -22,12 +21,12 @@ class StatsCardViewController: CardViewController {
   override init(viewData vD: ViewData, delegate d: CardStackDelegate) {
     
     combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD)
-    mostPointsSVC = StatViewController(statID: "mostPoints", viewData: vD)
-    mostPercentSVC = StatViewController(statID: "mostPercent", viewData: vD)
-    mostWordsFoundSVC = StatViewController(statID: "mostWordsFound", viewData: vD)
-    highWordSVC = StatViewController(statID: "highWord", viewData: vD)
-    longestWordSVC = StatViewController(statID: "longestWord", viewData: vD)
-    bestPLRationSVC = StatViewController(statID: "longestWord", viewData: vD)
+    mostPointsSVC = StatViewController(stat: d.currentStats().topPoints!, displayName: "Most points", viewData: vD)
+    mostPercentSVC = StatViewController(stat: d.currentStats().topPercent!, displayName: "Highest % found", viewData: vD)
+    mostWordsFoundSVC = StatViewController(stat: d.currentStats().topWords!, displayName: "Most words found", viewData: vD)
+    highWordSVC = StatViewController(stat: d.currentStats().topWordPoints!, displayName: "Top scoring word", viewData: vD)
+    longestWordSVC = StatViewController(stat: d.currentStats().topWordLength!, displayName: "Longest word", viewData: vD)
+    bestPLRationSVC = StatViewController(stat: d.currentStats().topRatio!, displayName: "Best points:length", viewData: vD)
     
     super.init(viewData: vD, delegate: d)
     
