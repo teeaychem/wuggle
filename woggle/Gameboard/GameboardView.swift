@@ -9,9 +9,7 @@ import UIKit
 
 class GameboardView: UIView {
   
-  // TODO: Update this to a dictionary, so tiles are easily found by giving CGPoint.
   var tiles = Dictionary<Int16, TileView>()
-  
   
   init(boardSize bS: CGFloat) {
     

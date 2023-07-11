@@ -10,6 +10,7 @@ import UIKit
 
 class ScoreIcon: IconView {
   
+  let borderLayer = CAShapeLayer()
   var scoreLayer: CAShapeLayer?
   let scoreFont: UIFont
   let scoreLabel: UILabel
@@ -25,10 +26,18 @@ class ScoreIcon: IconView {
     
     super.init(size: s, viewData: vD)
     
+    
+    borderLayer.path = getBorderPath()
+    borderLayer.fillColor = UIColor.clear.cgColor
+    borderLayer.strokeColor = UIColor.white.cgColor
+    borderLayer.lineWidth = 0.5
+
+    
     textAttributes = vD.getSettingsTextAttribute(height: size.height * 0.8, colour: vD.colourD.cgColor)
     scoreLabel.attributedText = NSMutableAttributedString(string: "0", attributes: textAttributes)
     scoreLabel.textAlignment = .center
     
+    layer.addSublayer(borderLayer)
     addSubview(scoreLabel)
     
     setAbv(abv: abv)
@@ -51,6 +60,12 @@ class ScoreIcon: IconView {
     abvLabel.attributedText = NSMutableAttributedString(string: abv, attributes: textAttributes)
     
     addSubview(abvLabel)
+  }
+  
+  
+  private func getBorderPath() -> CGPath {
+    
+    return UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 0, y: frame.height * 0.1), size: CGSize(width: size.width, height: size.height * 0.8)), cornerRadius: 5).cgPath
   }
   
   

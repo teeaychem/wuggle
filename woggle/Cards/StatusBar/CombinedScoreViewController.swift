@@ -29,45 +29,31 @@ class CombinedScoreViewController: UIViewController {
     super.init(nibName: nil, bundle: nil)
     
     view.frame.size = s
-    
   }
   
   override func viewDidLoad() {
-    let sBIconIndent = (view.frame.width - (3 * foundIcon.frame.width)) * 0.25
-    
     view.addSubview(foundIcon)
     view.addSubview(scoreIcon)
     view.addSubview(perceIcon)
+  }
+  
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    
+    let sBIconIndent = (view.frame.width - (3 * foundIcon.frame.width)) * 0.25
     foundIcon.frame.origin = CGPoint(x: sBIconIndent, y: 0)
     scoreIcon.frame.origin = CGPoint(x: (sBIconIndent * 2) + foundIcon.frame.width, y: 0)
     perceIcon.frame.origin = CGPoint(x: (sBIconIndent * 3) + foundIcon.frame.width * 2, y: 0)
-    
-    addSeperator(xPos: foundIcon.frame.minX)
-    addSeperator(xPos: scoreIcon.frame.minX)
-    addSeperator(xPos: perceIcon.frame.minX)
-
   }
+  
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
   
-  private func addSeperator(xPos: CGFloat) {
-    
-    let sepPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 0, y: foundIcon.frame.height * 0.1), size: CGSize(width: foundIcon.size.width, height: foundIcon.size.height * 0.8)), cornerRadius: 5)
-    let sepLayer = CAShapeLayer()
-    sepLayer.path = sepPath.cgPath
-    sepLayer.fillColor = UIColor.clear.cgColor
-    sepLayer.strokeColor = sepColor.cgColor
-    sepLayer.lineCap = .round
-    sepLayer.lineWidth = 0.5
-    
-    
-    sepLayer.frame.origin = CGPoint(x: xPos, y: 0)
-    
-    view.layer.addSublayer(sepLayer)
-  }
+
   
   
   func updateFound(val: Int16) {
