@@ -19,6 +19,8 @@ class CardStackViewController: UIViewController {
   private let firstCardY: CGFloat
   private let statusBarH: CGFloat
   
+  private var statsBarTapUIGR: UIGestureRecognizer?
+  
   var settCardC: SettingsCardViewController?
   var statCardC: StatsCardViewController?
   var gameCardC: GameCardViewController?
@@ -42,6 +44,8 @@ class CardStackViewController: UIViewController {
     statusBarH = CardVD.statusBarSize.height
     
     super.init(nibName: nil, bundle: nil)
+    
+    statsBarTapUIGR = UITapGestureRecognizer(target: self, action: #selector(statusBarTap))
 
     settCardC = SettingsCardViewController(viewData: CardVD, delegate: self)
     statCardC = StatsCardViewController(viewData: CardVD, delegate: self)
@@ -58,10 +62,8 @@ class CardStackViewController: UIViewController {
     self.embed(gameCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + CardVD.statusBarSize.height * 2))
     gameCardC?.broughtToTop()
     
-    for cV in cardViews {
-      cV.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
-    }
     setIcons()
+    cardShuffleGesutre(enabled: false)
   }
   
   
@@ -101,6 +103,18 @@ class CardStackViewController: UIViewController {
 
 
 extension CardStackViewController: CardStackDelegate {
+  
+  func cardShuffleGesutre(enabled: Bool) {
+    if enabled {
+      for cV in cardViews {
+        cV.removeGesturesFromStatusBar()
+      }
+    } else {
+      for cV in cardViews {
+        cV.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
+      }
+    }
+  }
   
   
   func updateSetting(internalName: String, internalValue: Int16) {

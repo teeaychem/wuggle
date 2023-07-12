@@ -78,6 +78,12 @@ class CardViewController: UIViewController {
     statusBarView.addGestureRecognizer(gesture)
   }
   
+  func removeGesturesFromStatusBar() {
+    for gr in statusBarView.gestureRecognizers! {
+      statusBarView.removeGestureRecognizer(gr)
+    }
+  }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

@@ -77,9 +77,7 @@ class GameCardViewController: CardViewController {
     
     // TODO: Annotate
     if delegate!.currentGame() != nil {
-      // Adjust things if there's a game.      
-      combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!)
-      
+      // Adjust things if there's a game.
       boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
       stopwatchViewController.setHandTo(percent: delegate!.currentGame()!.timeUsedPercent)
       for word in delegate!.currentGame()!.foundWordsList! {
@@ -126,6 +124,15 @@ class GameCardViewController: CardViewController {
   }
   
   
+  override func respondToUpdate() {
+    if delegate?.currentGame() != nil {
+      combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!)
+    } else {
+      combinedScoreViewC.combinedUpdate(found: 0, score: 0, percent: 0)
+    }
+  }
+  
+  
   func stringFromSelectedTiles() -> String {
     var builtString = ""
     
@@ -164,59 +171,6 @@ class GameCardViewController: CardViewController {
   }
   
   
-  func thinkAboutStats(word w: String) {
-    let wordLength = Double(w.count)
-    if wordLength > delegate!.currentStats().topWordLength!.numVal {
-      delegate!.currentStats().topWordLength!.numVal = wordLength
-      delegate!.currentStats().topWordLength!.strVal = w.capitalized
-      delegate!.currentStats().topWordLength!.extraStr = String(w.count) + " characters"
-      delegate!.currentStats().topWordLength!.date = Date()
-    }
-    let wordPoints = Double(getPoints(word: w))
-    if wordPoints > delegate!.currentStats().topWordPoints!.numVal {
-      delegate!.currentStats().topWordPoints!.numVal = wordPoints
-      delegate!.currentStats().topWordPoints!.strVal = w.capitalized
-      delegate!.currentStats().topWordLength!.extraStr = String(wordPoints) + " points"
-      delegate!.currentStats().topWordPoints!.date = Date()
-    }
-    let ratio = wordPoints/wordLength
-    if ratio > delegate!.currentStats().topRatio!.numVal {
-      delegate!.currentStats().topRatio!.numVal = ratio
-      delegate!.currentStats().topRatio!.strVal = w.capitalized
-      delegate!.currentStats().topRatio!.extraStr = String(ratio) + " points per character"
-      delegate!.currentStats().topRatio!.date = Date()
-    }
-  }
-  
-  func thinkingAboutStats(game g: GameInstance) {
-    let foundWordCount = Double(g.foundWordsList!.count)
-    let pointsCollected = Double(g.pointsCount)
-    let percentFound = Double(foundWordCount) / Double(g.allWordsList!.count) * 100
-    
-    if foundWordCount > delegate!.currentStats().topWords!.numVal {
-      delegate!.currentStats().topWords!.numVal = foundWordCount
-      delegate!.currentStats().topWords!.strVal = String(Int(foundWordCount))
-      delegate!.currentStats().topWords!.extraStr = "For " + String(Int(pointsCollected)) + " points"
-      delegate!.currentStats().topWords!.date = Date()
-      delegate!.processUpdate()
-    }
-    
-    if pointsCollected > delegate!.currentStats().topPoints!.numVal {
-      delegate!.currentStats().topPoints!.numVal = pointsCollected
-      delegate!.currentStats().topPoints!.strVal = String(Int(pointsCollected))
-      delegate!.currentStats().topPoints!.extraStr = "In " + String(Int(foundWordCount)) + " words"
-      delegate!.currentStats().topPoints!.date = Date()
-      delegate!.processUpdate()
-    }
-    
-    if percentFound > delegate!.currentStats().topPercent!.numVal {
-      delegate!.currentStats().topPercent!.numVal = percentFound
-      delegate!.currentStats().topPercent!.strVal = String(Int(percentFound))
-      delegate!.currentStats().topPercent!.extraStr = String(Int(foundWordCount)) + " out of " + String(delegate!.currentGame()!.allWordsList!.count) + " words "
-      delegate!.currentStats().topPercent!.date = Date()
-      delegate!.processUpdate()
-    }
-  }
   
   
   required init?(coder: NSCoder) {
@@ -248,6 +202,8 @@ extension GameCardViewController {
     }
     
     playButtonsViewController.playPauseRemoveGesture(gesture: playPauseGR!)
+    
+    delegate!.cardShuffleGesutre(enabled: true)
     
     displayLinkTwo = CADisplayLink(target: self, selector: #selector(newGameWait))
     displayLinkTwo!.add(to: .current, forMode: .common)
@@ -294,6 +250,7 @@ extension GameCardViewController {
        
     if displayLinkTwoTimeElapsed < 1 {
       
+      
       displayLinkTwoTimeElapsed += displayLinkTwo!.targetTimestamp - displayLinkTwo!.timestamp
       
       playButtonsViewController.rotatePlayPauseIcon(percent: displayLinkTwoTimeElapsed)
@@ -313,6 +270,7 @@ extension GameCardViewController {
       playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
       
       boardViewController.displayAllTiles()
+      delegate!.cardShuffleGesutre(enabled: false)
     }
   }
   
@@ -369,6 +327,70 @@ extension GameCardViewController {
     // Add gesture to see board.
     boardViewController.addGestureRecognizer(recogniser: UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBoard)))
   }
+}
+
+// MARK: Checking stats
+extension GameCardViewController {
+  
+  func thinkAboutStats(word w: String) {
+    // Check each stat associated with a single word
+    let wordLength = Double(w.count)
+    let wordPoints = Double(getPoints(word: w))
+    let ratio = wordPoints/wordLength
+    
+    if wordLength > delegate!.currentStats().topWordLength!.numVal {
+      delegate!.currentStats().topWordLength!.numVal = wordLength
+      delegate!.currentStats().topWordLength!.strVal = w.capitalized
+      delegate!.currentStats().topWordLength!.extraStr = String(w.count) + " characters"
+      delegate!.currentStats().topWordLength!.date = Date()
+    }
+    if wordPoints > delegate!.currentStats().topWordPoints!.numVal {
+      delegate!.currentStats().topWordPoints!.numVal = wordPoints
+      delegate!.currentStats().topWordPoints!.strVal = w.capitalized
+      delegate!.currentStats().topWordLength!.extraStr = String(wordPoints) + " points"
+      delegate!.currentStats().topWordPoints!.date = Date()
+    }
+    if ratio > delegate!.currentStats().topRatio!.numVal {
+      delegate!.currentStats().topRatio!.numVal = ratio
+      delegate!.currentStats().topRatio!.strVal = w.capitalized
+      delegate!.currentStats().topRatio!.extraStr = String(ratio) + " points per character"
+      delegate!.currentStats().topRatio!.date = Date()
+    }
+  }
+  
+  
+  func thinkingAboutStats(game g: GameInstance) {
+    // Check each state associated with a game instance
+    let foundWordCount = Double(g.foundWordsList!.count)
+    let pointsCollected = Double(g.pointsCount)
+    let percentFound = Double(foundWordCount) / Double(g.allWordsList!.count) * 100
+    
+    if foundWordCount > delegate!.currentStats().topWords!.numVal {
+      delegate!.currentStats().topWords!.numVal = foundWordCount
+      delegate!.currentStats().topWords!.strVal = String(Int(foundWordCount))
+      delegate!.currentStats().topWords!.extraStr = "For " + String(Int(pointsCollected)) + " points"
+      delegate!.currentStats().topWords!.date = Date()
+      delegate!.processUpdate()
+    }
+    
+    if pointsCollected > delegate!.currentStats().topPoints!.numVal {
+      delegate!.currentStats().topPoints!.numVal = pointsCollected
+      delegate!.currentStats().topPoints!.strVal = String(Int(pointsCollected))
+      delegate!.currentStats().topPoints!.extraStr = "In " + String(Int(foundWordCount)) + " words"
+      delegate!.currentStats().topPoints!.date = Date()
+      delegate!.processUpdate()
+    }
+    
+    if percentFound > delegate!.currentStats().topPercent!.numVal {
+      delegate!.currentStats().topPercent!.numVal = percentFound
+      delegate!.currentStats().topPercent!.strVal = String(Int(percentFound))
+      delegate!.currentStats().topPercent!.extraStr = String(Int(foundWordCount)) + " out of " + String(delegate!.currentGame()!.allWordsList!.count) + " words "
+      delegate!.currentStats().topPercent!.date = Date()
+      delegate!.processUpdate()
+    }
+  }
+
+  
 }
 
 

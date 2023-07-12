@@ -12,6 +12,8 @@ protocol CardStackDelegate: AnyObject {
   // This allows each individual card to make a request to the cardStack controller.
   // And, then the cardStackController processes the request.
   
+  func cardShuffleGesutre(enabled: Bool)
+  
   // Used to request some UI update, such as updating the longest word or most points.
   func processUpdate()
   
