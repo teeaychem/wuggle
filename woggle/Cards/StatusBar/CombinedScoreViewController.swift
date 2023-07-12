@@ -88,11 +88,7 @@ class CombinedScoreViewController: UIViewController {
   func gameInstanceUpdate(instance: GameInstance) {
     updateFound(val: instance.foundWordCount)
     updateScore(val: instance.pointsCount)
-    print("fwc: ", instance.foundWordCount)
-    print("awc: ", instance.allWordsList!.count)
-    
     let percent = (Double(instance.foundWordCount) / Double(instance.allWordsList!.count)) * 100
-    
     updatePercent(val: Int16(percent))
   }
   

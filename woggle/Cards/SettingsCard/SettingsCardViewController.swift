@@ -121,7 +121,6 @@ class SettingsCardViewController: CardViewController {
     
   override func broughtToTop() {
     super.broughtToTop()
-    print(optionViews.values)
     
     for optionView in optionViews.values {
       view.addSubview(optionView)

@@ -181,7 +181,7 @@ class GameCardViewController: CardViewController {
     }
     let ratio = wordPoints/wordLength
     if ratio > delegate!.currentStats().topRatio!.numVal {
-      delegate!.currentStats().topRatio!.numVal = wordPoints
+      delegate!.currentStats().topRatio!.numVal = ratio
       delegate!.currentStats().topRatio!.strVal = w.capitalized
       delegate!.currentStats().topRatio!.extraStr = String(ratio) + " points per character"
       delegate!.currentStats().topRatio!.date = Date()
@@ -211,7 +211,7 @@ class GameCardViewController: CardViewController {
     
     if percentFound > delegate!.currentStats().topPercent!.numVal {
       delegate!.currentStats().topPercent!.numVal = percentFound
-      delegate!.currentStats().topPercent!.strVal = String(Int(percentFound * 100))
+      delegate!.currentStats().topPercent!.strVal = String(Int(percentFound))
       delegate!.currentStats().topPercent!.extraStr = String(Int(foundWordCount)) + " out of " + String(delegate!.currentGame()!.allWordsList!.count) + " words "
       delegate!.currentStats().topPercent!.date = Date()
       delegate!.processUpdate()
@@ -338,11 +338,23 @@ extension GameCardViewController {
   
   
   func endGameMain() {
-    boardViewController.gameboardView.setOpacity(to: 0.25)
+    
+    endGameDisplay()
+    
     // Cancel timer, pause and end game
     displayLinkOne?.invalidate()
     gameInProgess = false
     delegate!.currentGame()?.viable = false
+    
+    
+    
+    
+    thinkingAboutStats(game: delegate!.currentGame()!)
+  }
+  
+  
+  func endGameDisplay() {
+    boardViewController.gameboardView.setOpacity(to: 0.25)
     // Update buttons
     playButtonsViewController.hideStopIcon()
     playButtonsViewController.paintNewGameIcon()
@@ -356,8 +368,6 @@ extension GameCardViewController {
     finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate!.currentGame()!.allWordsList!), seeWords: delegate!.currentGame()!.foundWordsList!)
     // Add gesture to see board.
     boardViewController.addGestureRecognizer(recogniser: UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBoard)))
-    
-    thinkingAboutStats(game: delegate!.currentGame()!)
   }
 }
 
@@ -444,7 +454,7 @@ extension GameCardViewController {
       }
     } else {
       // Game is over
-      endGameMain()
+      endGameDisplay()
     }
   }
   
