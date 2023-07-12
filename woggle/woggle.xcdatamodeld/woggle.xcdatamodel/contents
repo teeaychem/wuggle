@@ -3,7 +3,6 @@
     <entity name="Board" representedClassName="Board" syncable="YES" codeGenerationType="class">
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="settings" maxCount="1" deletionRule="Nullify" destinationEntity="GameInstance" inverseName="board" inverseEntity="GameInstance"/>
-        <relationship name="stat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stat" inverseName="board" inverseEntity="Stat"/>
         <relationship name="tiles" toMany="YES" deletionRule="Cascade" destinationEntity="Tile" inverseName="board" inverseEntity="Tile"/>
     </entity>
     <entity name="GameInstance" representedClassName="GameInstance" syncable="YES" codeGenerationType="class">
@@ -13,7 +12,7 @@
         <attribute name="pointsCount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeUsedPercent" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" customClassName="NSSet&lt;String&gt;"/>
         <attribute name="viable" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
+        <relationship name="board" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Board" inverseName="settings" inverseEntity="Board"/>
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="currentGame" inverseEntity="Settings"/>
     </entity>
     <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
@@ -23,23 +22,22 @@
         <attribute name="tileSqrt" attributeType="Integer 16" defaultValueString="5" usesScalarValueType="YES"/>
         <attribute name="time" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
         <relationship name="currentGame" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GameInstance" inverseName="settings" inverseEntity="GameInstance"/>
-        <relationship name="stats" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StatsCollection" inverseName="settings" inverseEntity="StatsCollection"/>
+        <relationship name="stats" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StatsCollection" inverseName="forSettings" inverseEntity="StatsCollection"/>
     </entity>
     <entity name="Stat" representedClassName="Stat" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="extraStr" attributeType="String" defaultValueString=""/>
         <attribute name="numVal" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="strVal" attributeType="String" defaultValueString=""/>
-        <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="stat" inverseEntity="Board"/>
-        <relationship name="inCollection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StatsCollection"/>
+        <relationship name="inCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StatsCollection" inverseName="topWordPoints" inverseEntity="StatsCollection"/>
     </entity>
     <entity name="StatsCollection" representedClassName="StatsCollection" syncable="YES" codeGenerationType="class">
-        <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="stats" inverseEntity="Settings"/>
+        <relationship name="forSettings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="stats" inverseEntity="Settings"/>
         <relationship name="topPercent" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Stat"/>
         <relationship name="topPoints" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Stat"/>
         <relationship name="topRatio" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Stat"/>
         <relationship name="topWordLength" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Stat"/>
-        <relationship name="topWordPoints" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stat"/>
+        <relationship name="topWordPoints" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stat" inverseName="inCollection" inverseEntity="Stat"/>
         <relationship name="topWords" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Stat"/>
     </entity>
     <entity name="Tile" representedClassName="Tile" syncable="YES" codeGenerationType="class">

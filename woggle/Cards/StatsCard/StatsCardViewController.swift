@@ -11,12 +11,9 @@ import UIKit
 class StatsCardViewController: CardViewController {
   
   var combinedScoreViewC: CombinedScoreViewController
-  var mostPointsSVC: StatViewController
-  var mostPercentSVC: StatViewController
-  var mostWordsFoundSVC: StatViewController
-  var highWordSVC: StatViewController
-  var longestWordSVC: StatViewController
-  var bestPLRationSVC: StatViewController
+  
+  var statVCs = [String: StatViewController]()
+
   let statVSep: CGFloat
   let statXOrigin: CGFloat
   
@@ -26,12 +23,12 @@ class StatsCardViewController: CardViewController {
     statXOrigin = vD.width * 0.025
     
     combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD)
-    mostPointsSVC = StatViewController(stat: d.currentStats().topPoints!, displayName: "Most Words Found", viewData: vD)
-    mostPercentSVC = StatViewController(stat: d.currentStats().topPercent!, displayName: "Most Points Collected", viewData: vD)
-    mostWordsFoundSVC = StatViewController(stat: d.currentStats().topWords!, displayName: "Highest % Found", viewData: vD)
-    highWordSVC = StatViewController(stat: d.currentStats().topWordPoints!, displayName: "Top Scoring Word", viewData: vD)
-    longestWordSVC = StatViewController(stat: d.currentStats().topWordLength!, displayName: "Longest Word", viewData: vD)
-    bestPLRationSVC = StatViewController(stat: d.currentStats().topRatio!, displayName: "Best Points-Length Ratio", viewData: vD)
+    statVCs["mostWordsFound"] = StatViewController(stat: d.currentStats().topWords!, displayName: "Most Words Found", viewData: vD)
+    statVCs["mostPoints"] = StatViewController(stat: d.currentStats().topPoints!, displayName: "Most Points Collected", viewData: vD)
+    statVCs["mostPercent"] = StatViewController(stat: d.currentStats().topPercent!, displayName: "Highest % Found", viewData: vD)
+    statVCs["highWord"] = StatViewController(stat: d.currentStats().topWordPoints!, displayName: "Top Scoring Word", viewData: vD)
+    statVCs["longestWord"] = StatViewController(stat: d.currentStats().topWordLength!, displayName: "Longest Word", viewData: vD)
+    statVCs["bestPLRation"] = StatViewController(stat: d.currentStats().topRatio!, displayName: "Best Points-Length Ratio", viewData: vD)
     
     
     super.init(viewData: vD, delegate: d)
@@ -47,29 +44,24 @@ class StatsCardViewController: CardViewController {
   override func broughtToTop() {
     super.broughtToTop()
 
-    mostPointsSVC.updateWith(stat: delegate!.currentStats().topPoints!)
-    mostPercentSVC.updateWith(stat: delegate!.currentStats().topPercent!)
-    mostWordsFoundSVC.updateWith(stat: delegate!.currentStats().topWords!)
-    highWordSVC.updateWith(stat: delegate!.currentStats().topWordPoints!)
-    longestWordSVC.updateWith(stat: delegate!.currentStats().topWordLength!)
-    bestPLRationSVC.updateWith(stat: delegate!.currentStats().topRatio!)
+    statVCs["mostPoints"]!.updateWith(stat: delegate!.currentStats().topPoints!)
+    statVCs["mostPercent"]!.updateWith(stat: delegate!.currentStats().topPercent!)
+    statVCs["mostWordsFound"]!.updateWith(stat: delegate!.currentStats().topWords!)
+    statVCs["highWord"]!.updateWith(stat: delegate!.currentStats().topWordPoints!)
+    statVCs["longestWord"]!.updateWith(stat: delegate!.currentStats().topWordLength!)
+    statVCs["bestPLRation"]!.updateWith(stat: delegate!.currentStats().topRatio!)
     
-    embed(mostPointsSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVSep))
-    embed(mostPercentSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: mostPointsSVC.view.frame.maxY + statVSep))
-    embed(mostWordsFoundSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: mostPercentSVC.view.frame.maxY + statVSep))
-    embed(highWordSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: mostWordsFoundSVC.view.frame.maxY + statVSep))
-    embed(longestWordSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: highWordSVC.view.frame.maxY + statVSep))
-    embed(bestPLRationSVC, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: longestWordSVC.view.frame.maxY + statVSep))
+    embed(statVCs["mostWordsFound"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVSep))
+    embed(statVCs["mostPoints"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVCs["mostWordsFound"]!.view.frame.maxY + statVSep))
+    embed(statVCs["mostPercent"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVCs["mostPoints"]!.view.frame.maxY + statVSep))
+    embed(statVCs["highWord"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVCs["mostPercent"]!.view.frame.maxY + statVSep))
+    embed(statVCs["longestWord"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVCs["highWordSVC"]!.view.frame.maxY + statVSep))
+    embed(statVCs["bestPLRation"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVCs["longestWord"]!.view.frame.maxY + statVSep))
   }
   
-  
   override func shuffledToDeck() {
-    unembed(mostPointsSVC, inView: self.mainView)
-    unembed(mostPercentSVC, inView: self.mainView)
-    unembed(mostWordsFoundSVC, inView: self.mainView)
-    unembed(highWordSVC, inView: self.mainView)
-    unembed(longestWordSVC, inView: self.mainView)
-    unembed(bestPLRationSVC, inView: self.mainView)
+    for viewC in statVCs.values { unembed(viewC, inView: self.mainView) }
+    super.shuffledToDeck()
   }
   
   required init?(coder: NSCoder) {
