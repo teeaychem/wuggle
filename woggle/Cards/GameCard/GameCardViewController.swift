@@ -43,7 +43,7 @@ class GameCardViewController: CardViewController {
     combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD, gameCard: true)
     
     // Fix controllers  for the current views
-    boardViewController = GameboardViewController(boardSize: vD.gameBoardSize, viewData: vD, tilePadding: vD.tilePadding)
+    boardViewController = GameboardViewController(viewData: vD, tilePadding: vD.tilePadding)
     stopwatchViewController = StopwatchViewController(viewData: vD)
     playButtonsViewController = PlayButtonsViewController(viewData: vD)
     foundWordsViewController = FoundWordsViewController(viewData: vD)
@@ -296,14 +296,12 @@ extension GameCardViewController {
   
   
   func endGameMain() {
-    
     endGameDisplay()
     // Cancel timer, pause and end game
     displayLinkOne?.invalidate()
     gameInProgess = false
     delegate!.currentGame()?.viable = false
     boardViewController.displayTileCharacterAll(animated: false)
-
     thinkingAboutStats(game: delegate!.currentGame()!)
   }
   

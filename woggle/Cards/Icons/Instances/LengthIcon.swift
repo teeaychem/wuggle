@@ -37,7 +37,11 @@ class LengthIcon: IconView {
   
   private func paintBackground() {
     
-    let boardPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size.width*0.1, y: size.height*0.1), size: CGSize(width: size.width*0.8, height: size.height*0.8)), cornerRadius: radius)
+    let boardPath = UIBezierPath(
+      roundedRect: CGRect(
+        origin: CGPoint(x: size.width*0.1, y: size.height*0.1),
+        size: CGSize(width: size.width*0.8, height: size.height*0.8)),
+      cornerRadius: radius)
     
     boardLayer.path = boardPath.cgPath
     
@@ -51,7 +55,12 @@ class LengthIcon: IconView {
     
     let radius2 = size.width * 0.05
     
-    let highlightedTilePath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size.width - (tileIndent + tilePadding + tileSize), y: size.height - (tileIndent + tilePadding + tileSize)), size: CGSize(width: tileSize, height: tileSize)), cornerRadius: radius2)
+    let combinedIndent = (tileIndent + tilePadding + tileSize)
+    let highlightedTilePath = UIBezierPath(
+      roundedRect: CGRect(
+        origin: CGPoint(x: size.width - combinedIndent, y: size.height - combinedIndent),
+        size: CGSize(width: tileSize, height: tileSize)),
+      cornerRadius: radius2)
 
 
     highlightedTileLayer.path = highlightedTilePath.cgPath

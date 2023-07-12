@@ -63,7 +63,11 @@ class LexiconIcon: IconView {
   
   private func addBook() {
     // Overlap three square to create something which looks bookish
-    let bookFrontPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: coverWidth, height: coverWidth)), cornerRadius: radius)
+    let bookFrontPath = UIBezierPath(
+      roundedRect: CGRect(
+        origin: CGPoint(x: 0, y: 0),
+        size: CGSize(width: coverWidth, height: coverWidth)),
+      cornerRadius: radius)
     
     bookFrontLayer.path = bookFrontPath.cgPath
     bookFrontLayer.frame = bookFrontPath.cgPath.boundingBox
@@ -72,11 +76,19 @@ class LexiconIcon: IconView {
     bookFrontLayer.lineWidth = 0.5
     bookFrontLayer.strokeColor = UIColor.black.cgColor
     
-    let bookMiddlePath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: frame.width - (coverWidth + indent * 1.5), y: indent * 1.5), size: CGSize(width: coverWidth, height: coverWidth)), cornerRadius: radius)
+    let bookMiddlePath = UIBezierPath(
+      roundedRect: CGRect(
+        origin: CGPoint(x: frame.width - (coverWidth + indent * 1.5), y: indent * 1.5),
+        size: CGSize(width: coverWidth, height: coverWidth)),
+      cornerRadius: radius)
     
     bookMiddleLayer.path = bookMiddlePath.cgPath
     
-    let bookBackPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: frame.width - (coverWidth + indent), y: indent), size: CGSize(width: coverWidth, height: coverWidth)), cornerRadius: radius)
+    let bookBackPath = UIBezierPath(
+      roundedRect: CGRect(
+        origin: CGPoint(x: frame.width - (coverWidth + indent), y: indent),
+        size: CGSize(width: coverWidth, height: coverWidth)),
+      cornerRadius: radius)
     
     bookBackLayer.path = bookBackPath.cgPath
     bookBackLayer.lineWidth = 0.5

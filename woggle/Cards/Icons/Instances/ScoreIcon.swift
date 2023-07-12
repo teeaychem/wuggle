@@ -69,7 +69,12 @@ class ScoreIcon: IconView {
   
   private func getBorderPath() -> CGPath {
     
-    return UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 0, y: frame.height * 0.1), size: CGSize(width: size.width, height: size.height * 0.8)), cornerRadius: 5).cgPath
+    return UIBezierPath(
+      roundedRect: CGRect(
+        origin: CGPoint(x: 0, y: frame.height * 0.1),
+        size: CGSize(width: size.width, height: size.height * 0.8)),
+      cornerRadius: 5)
+    .cgPath
   }
   
   

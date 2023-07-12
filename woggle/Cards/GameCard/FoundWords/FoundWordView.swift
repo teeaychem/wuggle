@@ -44,7 +44,7 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
     // Trying to reuse a cell
     let cellIdentifier = word.0
     let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
-    ?? UITableViewWordCell(style: .default, word: word.0, found: word.1, width: listDimensions.width, height: rowHeight)
+    ?? UITableViewWordCell(style: .default, word: word.0, found: word.1, size: CGSize(width: listDimensions.width, height: rowHeight))
     // To disable highlighting cell when tapped.
     cell.selectionStyle = .none
     return cell

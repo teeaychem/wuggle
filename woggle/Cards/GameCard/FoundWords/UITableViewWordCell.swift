@@ -10,9 +10,9 @@ import UIKit
 
 class UITableViewWordCell : UITableViewCell {
   
-  init(style s : UITableViewCell.CellStyle, word w: String, found f: Bool, width gw: CGFloat, height h: CGFloat) {
+  init(style sty : UITableViewCell.CellStyle, word w: String, found f: Bool, size s: CGSize) {
     
-    super.init(style: s, reuseIdentifier: w)
+    super.init(style: sty, reuseIdentifier: w)
     
     backgroundColor = UIColor.clear
     
@@ -23,7 +23,7 @@ class UITableViewWordCell : UITableViewCell {
         NSAttributedString.Key.strokeColor : UIColor.darkGray.cgColor,
         NSAttributedString.Key.foregroundColor : UIColor.darkGray.cgColor,
         NSAttributedString.Key.strokeWidth : 0,
-        NSAttributedString.Key.font : UIFont(name: uiFontName, size: getFontFor(height: h))!
+        NSAttributedString.Key.font : UIFont(name: uiFontName, size: getFontFor(height: s.height))!
         ]
     } else {
       
@@ -31,16 +31,16 @@ class UITableViewWordCell : UITableViewCell {
       NSAttributedString.Key.strokeColor : UIColor.darkGray.cgColor,
       NSAttributedString.Key.foregroundColor : UIColor.darkGray.cgColor,
       NSAttributedString.Key.strokeWidth : 0,
-      NSAttributedString.Key.font : UIFont(name: textFontName, size: getFontFor(height: h))!
+      NSAttributedString.Key.font : UIFont(name: textFontName, size: getFontFor(height: s.height))!
       ]
     }
     
-    let WordTextLabel = UILabel(frame: CGRect(origin: CGPoint(x: gw * 0.05, y: 0), size: CGSize(width: gw * 0.8, height: h)))
+    let WordTextLabel = UILabel(frame: CGRect(origin: CGPoint(x: s.width * 0.05, y: 0), size: CGSize(width: s.width * 0.8, height: s.height)))
     let NSwordText = NSMutableAttributedString(string: w.capitalized, attributes: wordTextAttributes)
     WordTextLabel.attributedText = NSwordText
     
     let NSLabelText = NSMutableAttributedString(string: String(getPoints(word: w)), attributes: wordTextAttributes)
-    let PointsLabel = UILabel(frame: CGRect(origin: CGPoint(x: gw - (gw * 0.15), y: 0)  , size: CGSize(width: gw * 0.10, height: h)))
+    let PointsLabel = UILabel(frame: CGRect(origin: CGPoint(x: s.width - (s.width * 0.15), y: 0)  , size: CGSize(width: s.width * 0.10, height: s.height)))
     
     PointsLabel.attributedText = NSLabelText
     // Sees to align nicely.

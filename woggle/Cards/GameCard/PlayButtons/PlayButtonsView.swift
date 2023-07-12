@@ -90,7 +90,13 @@ class PlayButtonsView: UIView {
   
   
   func makeStopIconPath(forView: UIView) -> CGPath {
-    return UIBezierPath(roundedRect: CGRect(x: forView.frame.width * 0.2, y: forView.frame.height * 0.2, width: forView.frame.width * 0.6, height: forView.frame.height * 0.6), cornerRadius: forView.layer.cornerRadius / 2).cgPath
+    return UIBezierPath(
+      roundedRect:
+        CGRect(
+          origin: CGPoint(x: forView.frame.width * 0.2, y: forView.frame.height * 0.2),
+          size: CGSize(width: forView.frame.width * 0.6, height: forView.frame.height * 0.6)),
+      cornerRadius: forView.layer.cornerRadius / 2)
+    .cgPath
   }
   
   
@@ -136,9 +142,24 @@ class PlayButtonsView: UIView {
     
     let angleIncrement = (2/3) * Double.pi
     
-    playIconPath.addArc(withCenter: CGPoint(x: iconCornerRadius, y:  iconCornerRadius), radius: iconCornerRadius, startAngle: Double.pi, endAngle: Double.pi + angleIncrement, clockwise: true)
-    playIconPath.addArc(withCenter: CGPoint(x: forView.frame.width * 0.6 - iconCornerRadius, y: forView.frame.height * 0.3), radius: iconCornerRadius, startAngle: Double.pi + angleIncrement, endAngle: Double.pi - angleIncrement, clockwise: true)
-    playIconPath.addArc(withCenter: CGPoint(x: iconCornerRadius, y: forView.frame.height * 0.6 - iconCornerRadius), radius: iconCornerRadius, startAngle: Double.pi - angleIncrement, endAngle: Double.pi, clockwise: true)
+    playIconPath.addArc(
+      withCenter: CGPoint(x: iconCornerRadius, y:  iconCornerRadius),
+      radius: iconCornerRadius,
+      startAngle: Double.pi,
+      endAngle: Double.pi + angleIncrement,
+      clockwise: true)
+    playIconPath.addArc(
+      withCenter: CGPoint(x: forView.frame.width * 0.6 - iconCornerRadius, y: forView.frame.height * 0.3),
+      radius: iconCornerRadius,
+      startAngle: Double.pi + angleIncrement,
+      endAngle: Double.pi - angleIncrement,
+      clockwise: true)
+    playIconPath.addArc(
+      withCenter: CGPoint(x: iconCornerRadius, y: forView.frame.height * 0.6 - iconCornerRadius),
+      radius: iconCornerRadius,
+      startAngle: Double.pi - angleIncrement,
+      endAngle: Double.pi,
+      clockwise: true)
     playIconPath.close()
     
     return playIconPath.cgPath
@@ -157,8 +178,16 @@ class PlayButtonsView: UIView {
     let pauseIconPath = CGMutablePath()
     let pauseSegmentWidth = forView.frame.width * 0.25
     
-    let pauseIconLeft = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: pauseSegmentWidth, height: forView.frame.height * 0.6), cornerRadius: iconCornerRadius)
-    let pauseIconRight = UIBezierPath(roundedRect: CGRect(x: forView.frame.width * 0.35, y: 0, width: pauseSegmentWidth, height: forView.frame.height * 0.6), cornerRadius: iconCornerRadius)
+    let pauseIconLeft = UIBezierPath(
+      roundedRect: CGRect(
+          origin: CGPoint(x: 0, y: 0),
+          size: CGSize(width: pauseSegmentWidth, height: forView.frame.height * 0.6)),
+      cornerRadius: iconCornerRadius)
+    let pauseIconRight = UIBezierPath(
+      roundedRect: CGRect(
+        origin: CGPoint(x: forView.frame.width * 0.35, y: 0),
+        size: CGSize(width: pauseSegmentWidth, height: forView.frame.height * 0.6)),
+      cornerRadius: iconCornerRadius)
     
     pauseIconPath.addPath(pauseIconLeft.cgPath)
     pauseIconPath.addPath(pauseIconRight.cgPath)

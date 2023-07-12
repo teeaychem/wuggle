@@ -22,27 +22,25 @@ import UIKit
 
 class GameboardViewController: UIViewController {
   
-  private let boardSize: CGFloat
   let gameboardView: GameboardView
   let viewData: ViewData
   
-  init(boardSize bS: CGFloat, viewData vD: ViewData, tilePadding tP: CGFloat) {
+  init(viewData vD: ViewData, tilePadding tP: CGFloat) {
     
     // Constants for placing elements
-    boardSize = bS
     viewData = vD
 
     // Setup the view
-    gameboardView = GameboardView(boardSize: bS)
+    gameboardView = GameboardView(boardSize: vD.gameBoardSize)
     gameboardView.backgroundColor = vD.colourD
-    gameboardView.layer.cornerRadius = getCornerRadius(width: boardSize)
+    gameboardView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
     
     super.init(nibName: nil, bundle: nil)
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.frame.size = CGSize(width: boardSize, height: boardSize)
+    view.frame.size = CGSize(width: viewData.gameBoardSize, height: viewData.gameBoardSize)
     view.addSubview(gameboardView)
   }
   
@@ -73,8 +71,8 @@ class GameboardViewController: UIViewController {
     removeAllTileViews()
     
     let tileSqrtFloat = sqrt(Double(board.tiles!.count))
-    let tilePadding = boardSize * 0.01
-    let tileWidth = (boardSize - (tilePadding * (tileSqrtFloat + 1))) / tileSqrtFloat
+    let tilePadding = viewData.gameBoardSize * 0.01
+    let tileWidth = (viewData.gameBoardSize - (tilePadding * (tileSqrtFloat + 1))) / tileSqrtFloat
     
     for tile in board.tiles! {
       let tileTrueForm = tile as! Tile
@@ -128,7 +126,7 @@ class GameboardViewController: UIViewController {
     let xPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.col - 1)
     let yPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.row - 1)
     let tPosition = CGPoint(x: xPosition, y: yPosition)
-    return TileView(position: tPosition, size: tileWidth, boardSize: boardSize, text: tile.value ?? "Qr", viewData: viewData)
+    return TileView(position: tPosition, size: tileWidth, boardSize: viewData.gameBoardSize, text: tile.value ?? "Qr", viewData: viewData)
   }
   
   
@@ -155,8 +153,8 @@ class GameboardViewController: UIViewController {
     // 1. Going going outside the board.
     // 2. Indeterminate points between two tiles.
     
-    let xPercent = point.x/boardSize
-    let yPercent = point.y/boardSize
+    let xPercent = point.x/viewData.gameBoardSize
+    let yPercent = point.y/viewData.gameBoardSize
     
     guard (0 < xPercent && xPercent < 1 && 0 < yPercent && yPercent < 1) else {
       // Guard against going outside the board
@@ -168,7 +166,7 @@ class GameboardViewController: UIViewController {
     let xRemainder = xVal.truncatingRemainder(dividingBy: 1)
     let yRemainder = yVal.truncatingRemainder(dividingBy: 1)
     
-    guard (0.1 < xRemainder && xRemainder < 0.9 && 0.1 < yRemainder && yRemainder < 0.9) else {
+    guard (0.25 < xRemainder && xRemainder < 0.75 && 0.25 < yRemainder && yRemainder < 0.75) else {
       // Guard against indeterminate points
       return nil
     }

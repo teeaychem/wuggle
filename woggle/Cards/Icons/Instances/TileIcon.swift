@@ -38,7 +38,11 @@ class TileIcon: IconView {
   
   
   private func addTile() {
-    let tile = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: size.width * 0.1, y: size.height * 0.1), size: CGSize(width: size.width * 0.8, height: size.height * 0.8)), cornerRadius: radius)
+    let tile = UIBezierPath(
+      roundedRect: CGRect(
+        origin: CGPoint(x: size.width * 0.1, y: size.height * 0.1),
+        size: CGSize(width: size.width * 0.8, height: size.height * 0.8)),
+      cornerRadius: radius)
     
     tileLayer.path = tile.cgPath
     tileLayer.strokeColor = UIColor.black.cgColor

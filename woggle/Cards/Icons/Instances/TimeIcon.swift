@@ -43,7 +43,12 @@ class TimeIcon : IconView {
   
   
   private func addFace() {
-    let face = UIBezierPath(arcCenter: centerPoint, radius: size.width * 0.4, startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+    let face = UIBezierPath(
+      arcCenter: centerPoint,
+      radius: size.width * 0.4,
+      startAngle: CGFloat(0),
+      endAngle:CGFloat(Double.pi * 2),
+      clockwise: true)
     
     let faceLayer = CAShapeLayer()
     faceLayer.path = face.cgPath
