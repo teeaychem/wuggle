@@ -41,7 +41,6 @@ class CardViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     // So, subviews need to be added after viewDidLoad.
     // If this doesn't happen, then gestures are broken.
     view.addSubview(cardView)
@@ -67,6 +66,11 @@ class CardViewController: UIViewController {
     for subview in mainView.subviews {
       subview.removeFromSuperview()
     }
+  }
+  
+  
+  func respondToUpdate() {
+    // Called by StackVC when some card has called StackVC for an update.
   }
   
   

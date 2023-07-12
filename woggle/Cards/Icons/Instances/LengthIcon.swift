@@ -45,8 +45,6 @@ class LengthIcon: IconView {
     boardLayer.strokeColor = UIColor.black.cgColor
     boardLayer.lineWidth = 0.5
     
-    
-    
     let tileIndent: CGFloat = size.width * 0.1
     let tilePadding: CGFloat = size.width * 0.05
     let tileSize: CGFloat = size.width * 0.25

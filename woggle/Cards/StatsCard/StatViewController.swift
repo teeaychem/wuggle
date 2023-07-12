@@ -21,7 +21,6 @@ class StatViewController: UIViewController {
   let dateLabel: UILabel
   let extraLabel: UILabel
   
-  
   init(stat s: Stat, displayName dN: String, viewData vD: ViewData) {
     
     statDisplayName = dN
@@ -42,7 +41,6 @@ class StatViewController: UIViewController {
     view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize * 0.5)
     
     nameLabel.attributedText = NSMutableAttributedString(string: statDisplayName, attributes: vD.getSettingsTextAttribute(height: vD.statSize.height * 0.64, colour: vD.colourL.cgColor))
-    
     
     updateWith(stat: s)
     

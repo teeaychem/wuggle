@@ -32,7 +32,7 @@ class CardStackViewController: UIViewController {
     
     settings = s
     
-    width = min(((UIScreen.main.bounds.size.height)/1.4/1.16)*0.9, UIScreen.main.bounds.size.width)
+    width = min(((UIScreen.main.bounds.size.height) / 1.4 / 1.16 ) * 0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
     
     let CardVD = ViewData(name: "sett", width: width, colour: UIColor.lightGray.cgColor)
@@ -120,6 +120,7 @@ extension CardStackViewController: CardStackDelegate {
   
   func processUpdate() {
     print("Asked to process update")
+    statCardC!.respondToUpdate()
   }
   
   

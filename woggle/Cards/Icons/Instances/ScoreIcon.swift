@@ -13,11 +13,9 @@ class ScoreIcon: IconView {
   let gameCard: Bool
   
   let borderLayer = CAShapeLayer()
-  var scoreLayer: CAShapeLayer?
   let scoreFont: UIFont
   let scoreLabel: UILabel
   var textAttributes: [NSAttributedString.Key : Any]?
-  
   
   init(viewData vD: ViewData, abv: String, gameCard g: Bool) {
     
@@ -48,7 +46,6 @@ class ScoreIcon: IconView {
     addSubview(scoreLabel)
     
     setAbv(abv: abv)
-    updateIcon(value: "0")
   }
   
   required init?(coder aDecoder: NSCoder) {

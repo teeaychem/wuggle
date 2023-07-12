@@ -22,7 +22,6 @@ class CombinedScoreViewController: UIViewController {
     
     gameCard = g
     
-    
     if gameCard {
       scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
       sepColor = vD.colourL

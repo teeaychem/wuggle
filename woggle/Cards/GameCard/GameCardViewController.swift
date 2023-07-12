@@ -194,13 +194,14 @@ class GameCardViewController: CardViewController {
   func thinkingAboutStats(game g: GameInstance) {
     let foundWordCount = Double(g.foundWordsList!.count)
     let pointsCollected = Double(g.pointsCount)
-    let percentFound = foundWordCount / Double(g.allWordsList!.count)
+    let percentFound = Double(foundWordCount) / Double(g.allWordsList!.count) * 100
     
     if foundWordCount > delegate!.currentStats().topWords!.numVal {
       delegate!.currentStats().topWords!.numVal = foundWordCount
       delegate!.currentStats().topWords!.strVal = String(Int(foundWordCount))
       delegate!.currentStats().topWords!.extraStr = "For " + String(Int(pointsCollected)) + " points"
       delegate!.currentStats().topWords!.date = Date()
+      delegate!.processUpdate()
     }
     
     if pointsCollected > delegate!.currentStats().topPoints!.numVal {
@@ -208,6 +209,7 @@ class GameCardViewController: CardViewController {
       delegate!.currentStats().topPoints!.strVal = String(Int(pointsCollected))
       delegate!.currentStats().topPoints!.extraStr = "In " + String(Int(foundWordCount)) + " words"
       delegate!.currentStats().topPoints!.date = Date()
+      delegate!.processUpdate()
     }
     
     if percentFound > delegate!.currentStats().topPercent!.numVal {
@@ -215,8 +217,7 @@ class GameCardViewController: CardViewController {
       delegate!.currentStats().topPercent!.strVal = String(Int(percentFound * 100))
       delegate!.currentStats().topPercent!.extraStr = String(Int(foundWordCount)) + " out of " + String(delegate!.currentGame()!.allWordsList!.count) + " words "
       delegate!.currentStats().topPercent!.date = Date()
-      
-      
+      delegate!.processUpdate()
     }
   }
   
