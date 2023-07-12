@@ -21,10 +21,6 @@
         <attribute name="primary" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="tileSqrt" attributeType="Integer 16" defaultValueString="5" usesScalarValueType="YES"/>
         <attribute name="time" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
-        <attribute name="uiColour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="uiImpact" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="uiLeftSide" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="uiShowPercent" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <relationship name="currentGame" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GameInstance" inverseName="settings" inverseEntity="GameInstance"/>
         <relationship name="stats" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StatsCollection" inverseName="forSettings" inverseEntity="StatsCollection"/>
     </entity>
@@ -56,5 +52,11 @@
         <attribute name="value" attributeType="String" defaultValueString=""/>
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrieNode" inverseName="parent" inverseEntity="TrieNode"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrieNode" inverseName="children" inverseEntity="TrieNode"/>
+    </entity>
+    <entity name="UISettings" representedClassName="UISettings" syncable="YES" codeGenerationType="class">
+        <attribute name="colour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="impact" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="leftSide" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="showPercent" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
     </entity>
 </model>

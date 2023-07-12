@@ -8,6 +8,7 @@
 // This class controls the display of the cards.
 
 import UIKit
+import CoreData
 
 class CardStackViewController: UIViewController {
   
@@ -103,17 +104,58 @@ extension CardStackViewController: CardStackDelegate {
   
   
   func updateSetting(internalName: String, internalValue: Int16) {
+    print("Ah, to change")
+    // TODO: Need to load or change a setting.
+    
+    print("Current settings:")
+    print(settings)
+    
+    // First, get the values of the current settings.
+    // Use these to perform a search.
+    var lexiconVal = settings.lexicon
+    var minWordVal = settings.minWordLength
+    var tileSqrtVal = settings.tileSqrt
+    var timeVal = settings.time
+    
+    // Update the relevant predicate
     switch internalName {
     case "time":
-      settings.time = internalValue
+      print("O: ", timeVal)
+      timeVal = internalValue
+      print("N: ", timeVal)
     case "lexicon":
-      settings.lexicon = internalValue
+      print("O: ", lexiconVal)
+      print(type(of: lexiconVal))
+      lexiconVal = internalValue
+      print("N: ", lexiconVal)
+      print(type(of: lexiconVal))
     case "length":
-      settings.minWordLength = internalValue
+      minWordVal = internalValue
     case "tiles":
-      settings.tileSqrt = internalValue
+      tileSqrtVal = internalValue
     default:
       return
+    }
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let settingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+    settingsFetchRequest.predicate = NSPredicate(
+      format: "time == %i AND lexicon == %i AND minWordLength == %i AND tileSqrt == %i",
+      timeVal, lexiconVal, minWordVal, tileSqrtVal)
+    do {
+      let result = try context.fetch(settingsFetchRequest)
+      
+      if result.count == 1 {
+        print("One found")
+      } else if result.count > 1 {
+        print(result.count)
+        print("Extra settings found")
+        // TODO: Delete other instances.
+      } else {
+        print("Search okay, no setting found")
+      }
+    } catch {
+      print("Search failed")
     }
   }
   
