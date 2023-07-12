@@ -11,25 +11,18 @@ class CardView: UIView {
   
   let cardWidth: CGFloat
   let cardHeight: CGFloat
-  var cardColour: CGColor
     
   // displayViews collects the views which should only be shown when the card is displayed.
   var displayViews = [UIView]()
   
   
-  init(cardWidth width: CGFloat, cardColour color: CGColor) {
+  init(cardWidth width: CGFloat) {
     cardWidth = width
-    cardHeight = width*1.4
-    cardColour = color
+    cardHeight = width * 1.4
     
     super.init(frame: CGRect(x: 0, y: 0, width: cardWidth, height: cardHeight))
     
     layer.cornerRadius = getCornerRadius(width: cardWidth)
-    layer.backgroundColor = cardColour
-//    layer.borderColor = UIColor.black.cgColor
-//    layer.borderWidth = 1
-    
-//    addSubview(statusBar)
   }
   
   required init(coder: NSCoder) {

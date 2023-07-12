@@ -38,7 +38,7 @@ class CardStackViewController: UIViewController {
     width = min(((UIScreen.main.bounds.size.height) / 1.4 / 1.16 ) * 0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
     
-    let CardVD = ViewData(name: "sett", width: width, colour: UIColor.lightGray.cgColor)
+    let CardVD = ViewData(name: "sett", width: width, colourOption: 0)
     
     firstCardY = (UIScreen.main.bounds.height - (CardVD.height + CardVD.statusBarSize.height * 2)) * 0.5
     statusBarH = CardVD.statusBarSize.height

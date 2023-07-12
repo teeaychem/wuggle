@@ -45,7 +45,7 @@ class TileIcon: IconView {
       cornerRadius: radius)
     
     tileLayer.path = tile.cgPath
-    tileLayer.strokeColor = UIColor.black.cgColor
+    tileLayer.strokeColor = viewData.tileBorderColour.cgColor
     tileLayer.lineWidth = 0.5
     
     layer.addSublayer(tileLayer)

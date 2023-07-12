@@ -29,14 +29,14 @@ class FoundWordsViewController: UIViewController {
     foundWordView.backgroundColor = vD.colourD
     self.view.layer.backgroundColor = vD.colourD.cgColor
     foundWordView.layer.backgroundColor = vD.colourL.cgColor
-
+    foundWordView.layer.borderColor = vD.iconBorderColour.cgColor
   }
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.addSubview(foundWordView)
-    foundWordView.layer.borderColor = UIColor.black.cgColor
+    
     foundWordView.layer.borderWidth = 1
   }
   

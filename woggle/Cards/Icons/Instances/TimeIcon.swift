@@ -54,7 +54,7 @@ class TimeIcon : IconView {
     faceLayer.path = face.cgPath
     
     faceLayer.fillColor = faceColour
-    faceLayer.strokeColor = UIColor.black.cgColor
+    faceLayer.strokeColor = viewData.tileBorderColour.cgColor
     faceLayer.lineWidth = 0.5
     
     layer.addSublayer(faceLayer)

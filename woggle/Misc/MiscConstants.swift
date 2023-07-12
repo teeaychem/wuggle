@@ -7,8 +7,6 @@
 
 import UIKit
 
-let regularText = UIColor.darkGray
-let reguardTextShaded = UIColor.black
 
 let tileAnimDuration = 1.0
 

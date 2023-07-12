@@ -9,6 +9,8 @@ import UIKit
 
 class StopwatchView: UIView {
   
+  let viewData : ViewData
+  
   private let secondsLayer = CAShapeLayer()
   let highLightLayer = CAShapeLayer()
   let outerFaceLayer = CAShapeLayer()
@@ -26,6 +28,8 @@ class StopwatchView: UIView {
   private var secondsAngle = Double.pi
   
   init(viewData vD: ViewData) {
+    
+    viewData = vD
     
     watchSize = vD.stopWatchSize
     indent = vD.tilePadding
@@ -90,7 +94,7 @@ extension StopwatchView {
 
 
     highLightLayer.cornerRadius = cornerRadius
-    highLightLayer.borderColor = UIColor.black.cgColor
+    highLightLayer.borderColor = viewData.tileBorderColour.cgColor
     highLightLayer.borderWidth = 1
     
     layer.addSublayer(highLightLayer)
@@ -109,7 +113,7 @@ extension StopwatchView {
       clockwise: true)
     
     outerFaceLayer.path = outerFacePath.cgPath
-    outerFaceLayer.strokeColor = UIColor.black.cgColor
+    outerFaceLayer.strokeColor = viewData.tileBorderColour.cgColor
     outerFaceLayer.lineWidth = 1
     
     let innerFacePath = UIBezierPath(
@@ -120,7 +124,7 @@ extension StopwatchView {
       clockwise: true)
     
     innerFaceLayer.path = innerFacePath.cgPath
-    innerFaceLayer.strokeColor = UIColor.black.cgColor
+    innerFaceLayer.strokeColor = viewData.tileBorderColour.cgColor
     innerFaceLayer.lineWidth = 1
     
     layer.addSublayer(outerFaceLayer)
@@ -135,7 +139,7 @@ extension StopwatchView {
 
     secondsLayer.lineCap = .round
     secondsLayer.path = secondsHand.cgPath
-    secondsLayer.strokeColor = UIColor.black.cgColor
+    secondsLayer.strokeColor = viewData.tileBorderColour.cgColor
     secondsLayer.lineWidth = 1
     
     layer.addSublayer(secondsLayer)

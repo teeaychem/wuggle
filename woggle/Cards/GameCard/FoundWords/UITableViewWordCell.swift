@@ -10,9 +10,9 @@ import UIKit
 
 class UITableViewWordCell : UITableViewCell {
   
-  init(style sty : UITableViewCell.CellStyle, word w: String, found f: Bool, size s: CGSize) {
+  init(cellStyle cS : UITableViewCell.CellStyle, word w: String, found f: Bool, size s: CGSize) {
     
-    super.init(style: sty, reuseIdentifier: w)
+    super.init(style: cS, reuseIdentifier: w)
     
     backgroundColor = UIColor.clear
     

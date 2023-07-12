@@ -44,24 +44,24 @@ class PlayButtonsView: UIView {
     stopView.layer.cornerRadius = getCornerRadius(width: vD.width)
     
     
-    stopLayer.strokeColor = UIColor.black.cgColor
+    stopLayer.strokeColor = vD.iconBorderColour.cgColor
     stopLayer.lineWidth = 1
     stopLayer.fillColor = vD.colourM.cgColor
     
-    playPauseLayer.strokeColor = UIColor.black.cgColor
+    playPauseLayer.strokeColor = vD.iconBorderColour.cgColor
     playPauseLayer.lineWidth = 1
     playPauseLayer.fillColor = vD.colourM.cgColor
     
-    NewGameLayer.strokeColor = UIColor.black.cgColor
+    NewGameLayer.strokeColor = vD.iconBorderColour.cgColor
     NewGameLayer.lineWidth = 1
     NewGameLayer.fillColor = vD.colourM.cgColor
     
     playPauseView.backgroundColor = vD.colourL
-    playPauseView.layer.borderColor = UIColor.black.cgColor
+    playPauseView.layer.borderColor = vD.iconBorderColour.cgColor
     playPauseView.layer.borderWidth = 1
     
     stopView.backgroundColor = vD.colourL
-    stopView.layer.borderColor = UIColor.black.cgColor
+    stopView.layer.borderColor = vD.iconBorderColour.cgColor
     stopView.layer.borderWidth = 1
 
     

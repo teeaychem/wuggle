@@ -12,13 +12,18 @@ class ViewData {
     
   let name: String
   let width: CGFloat
-  var colour: CGColor
+  var colourOption: Int16
   
   let colourL: UIColor
   let colourM: UIColor
   var colourD: UIColor
   
+  let tileHighlightColour = UIColor.white.cgColor
   let textHighlightColour = UIColor.darkGray.cgColor
+  
+  let iconBorderColour: UIColor
+  
+  let tileBorderColour: UIColor
   
   let height: CGFloat
   let cardSize: CGSize
@@ -35,14 +40,17 @@ class ViewData {
   let foundWordViewWidth: CGFloat
   
   
-  init(name n: String, width w: CGFloat, colour c: CGColor) {
+  init(name n: String, width w: CGFloat, colourOption cO: Int16) {
     name = n
     width = w
-    colour = c
+    colourOption = cO
     
     colourL = UIColor.lightGray
     colourM = UIColor.gray
     colourD = UIColor.darkGray
+    
+    tileBorderColour = UIColor.black
+    iconBorderColour = UIColor.black
     
     height = width * 1.4
 

@@ -13,6 +13,7 @@ class SettingsCardViewController: CardViewController {
   let lexiconIcon: IconView
   let tileIcon: IconView
   let timeIcon: IconView
+
   
   var optionViews = [String: OptionView]()
   
@@ -126,7 +127,7 @@ class SettingsCardViewController: CardViewController {
       view.addSubview(optionView)
       optionView.addAndEnableChoiceLabels()
       let sep = UIView(frame: CGRect(x: viewData.gameBoardPadding, y: optionView.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.height * 0.005))
-      sep.layer.backgroundColor = UIColor.darkGray.cgColor
+      sep.layer.backgroundColor = viewData.colourD.cgColor
       view.addSubview(sep)
     }
 

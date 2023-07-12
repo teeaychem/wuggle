@@ -58,7 +58,7 @@ class ScoreIcon: IconView {
     let abvLabel = UILabel(frame: CGRect(origin: CGPoint(x: size.width * 0, y: size.height * 0.175), size: CGSize(width: size.width * 0.3, height: size.height * 0.6)))
 //    abvLabel.text = abv
     abvLabel.font = scoreFont
-    abvLabel.textColor = UIColor.darkGray
+    abvLabel.textColor = viewData.colourD
     abvLabel.textAlignment = .center
     
     abvLabel.attributedText = NSMutableAttributedString(string: abv, attributes: textAttributes)
