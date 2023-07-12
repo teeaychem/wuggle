@@ -31,6 +31,8 @@ class StatViewController: UIViewController {
   
   let nameLabel: UILabel
   let valueLabel: UILabel
+  let dateLabel: UILabel
+  let extraLabel: UILabel
   
   init(stat s: Stat, displayName dN: String, viewData vD: ViewData) {
     
@@ -40,22 +42,30 @@ class StatViewController: UIViewController {
     
     nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
     valueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
+    dateLabel = UILabel(frame: CGRect(x: 0, y: vD.statSize.height * 0.6, width: vD.statSize.width, height: vD.statSize.height * 0.4))
+    extraLabel = UILabel(frame: CGRect(x: 0, y: vD.statSize.height * 0.6, width: vD.statSize.width, height: vD.statSize.height * 0.4))
     
     super.init(nibName: nil, bundle: nil)
+    
+    valueLabel.textAlignment = .right
+    extraLabel.textAlignment = .right
+
 
     view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize * 0.5)
     
     nameLabel.attributedText = NSMutableAttributedString(string: statDisplayName, attributes: vD.getSettingsTextAttribute(height: vD.statSize.height * 0.64, colour: vD.colourL.cgColor))
     
     
-    valueLabel.attributedText = NSMutableAttributedString(string: s.strVal!, attributes: vD.getSettingsTextAttribute(height: vD.statSize.height * 0.64, colour: vD.colourL.cgColor))
-    valueLabel.textAlignment = .right
+    updateWith(stat: s)
+    
   }
   
   
   
   func updateWith(stat: Stat) {
     valueLabel.attributedText = NSMutableAttributedString(string: stat.strVal!, attributes: viewData.getSettingsTextAttribute(height: viewData.statSize.height * 0.64, colour: viewData.colourL.cgColor))
+    dateLabel.attributedText = NSMutableAttributedString(string: stat.date?.formatted(date: .abbreviated, time: .shortened).description ?? "", attributes: viewData.getSettingsTextAttribute(height: viewData.statSize.height * 0.44, colour: viewData.colourL.cgColor))
+    extraLabel.attributedText = NSMutableAttributedString(string: stat.extraStr!, attributes: viewData.getSettingsTextAttribute(height: viewData.statSize.height * 0.44, colour: viewData.colourL.cgColor))
   }
   
   
@@ -70,6 +80,12 @@ class StatViewController: UIViewController {
     view.frame.size = statSize
     view.addSubview(nameLabel)
     view.addSubview(valueLabel)
+    view.addSubview(dateLabel)
+    view.addSubview(extraLabel)
+    
+    let sep = UIView(frame: CGRect(x: 0, y: view.frame.maxY, width: statSize.width, height: statSize.height * 0.05))
+    sep.layer.backgroundColor = UIColor.lightGray.cgColor
+    view.addSubview(sep)
   }
 
   

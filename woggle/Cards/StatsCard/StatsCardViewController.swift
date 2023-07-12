@@ -55,7 +55,7 @@ class StatsCardViewController: CardViewController {
     embed(statVCs["mostPoints"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVCs["mostWordsFound"]!.view.frame.maxY + statVSep))
     embed(statVCs["mostPercent"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVCs["mostPoints"]!.view.frame.maxY + statVSep))
     embed(statVCs["highWord"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVCs["mostPercent"]!.view.frame.maxY + statVSep))
-    embed(statVCs["longestWord"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVCs["highWordSVC"]!.view.frame.maxY + statVSep))
+    embed(statVCs["longestWord"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVCs["highWord"]!.view.frame.maxY + statVSep))
     embed(statVCs["bestPLRation"]!, inView: self.mainView, origin: CGPoint(x: statXOrigin, y: statVCs["longestWord"]!.view.frame.maxY + statVSep))
   }
   
