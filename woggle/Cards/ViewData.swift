@@ -20,6 +20,7 @@ class ViewData {
   
   let tileHighlightColour = UIColor.white.cgColor
   let textHighlightColour = UIColor.darkGray.cgColor
+  let animateHighlightColour = UIColor.white.cgColor
   
   let iconBorderColour: UIColor
   
@@ -72,7 +73,6 @@ class ViewData {
   
   func getSettingsTextAttribute(height: CGFloat, colour: CGColor) -> [NSAttributedString.Key : Any] {
     return [
-      NSAttributedString.Key.strokeColor : UIColor.black,
       NSAttributedString.Key.strokeWidth : 0,
       NSAttributedString.Key.foregroundColor : colour,
       NSAttributedString.Key.font : UIFont(name: uiFontName, size: getFontFor(height: height))!

@@ -63,7 +63,7 @@ class StatViewController: UIViewController {
     view.addSubview(extraLabel)
     
     let sep = UIView(frame: CGRect(x: 0, y: view.frame.maxY, width: statSize.width, height: statSize.height * 0.05))
-    sep.layer.backgroundColor = UIColor.lightGray.cgColor
+    sep.layer.backgroundColor = viewData.colourL.cgColor
     view.addSubview(sep)
   }
 

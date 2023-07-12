@@ -9,11 +9,13 @@ import UIKit
 
 class FoundWordView: UITableView {
   
+  let viewData: ViewData
   private var wordList = [(String, Bool)]()
   private let listDimensions: CGSize
   
-  init(listDimensions lD: CGSize, rowHieght rH: CGFloat) {
+  init(viewData vD: ViewData, listDimensions lD: CGSize, rowHieght rH: CGFloat) {
     
+    viewData = vD
     listDimensions = lD
     
     super.init(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: listDimensions), style: .plain)
@@ -44,7 +46,7 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
     // Trying to reuse a cell
     let cellIdentifier = word.0
     let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
-    ?? UITableViewWordCell(cellStyle: .default, word: word.0, found: word.1, size: CGSize(width: listDimensions.width, height: rowHeight))
+    ?? UITableViewWordCell(viewData: viewData, cellStyle: .default, word: word.0, found: word.1, size: CGSize(width: listDimensions.width, height: rowHeight))
     // To disable highlighting cell when tapped.
     cell.selectionStyle = .none
     return cell

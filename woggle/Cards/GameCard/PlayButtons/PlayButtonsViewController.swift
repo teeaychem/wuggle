@@ -8,7 +8,7 @@
 import UIKit
 
 class PlayButtonsViewController: UIViewController {
-  
+
   private let playButtonsView: PlayButtonsView
   private let highlightLayer = CAShapeLayer()
 
@@ -16,6 +16,7 @@ class PlayButtonsViewController: UIViewController {
   init(viewData vD: ViewData) {
     
     playButtonsView = PlayButtonsView(viewData: vD)
+    highlightLayer.strokeColor = vD.animateHighlightColour
    
     super.init(nibName: nil, bundle: nil)
     
@@ -88,7 +89,6 @@ class PlayButtonsViewController: UIViewController {
     borderPath.lineWidth = 4
     
     highlightLayer.path = borderPath.cgPath
-    highlightLayer.strokeColor = UIColor.white.cgColor
     highlightLayer.fillColor = UIColor.clear.cgColor
     
     view.layer.addSublayer(highlightLayer)

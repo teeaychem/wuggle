@@ -24,7 +24,7 @@ class FinalFoundWordsViewController: UIViewController {
     wordViewSize = CGSize(width: wordViewWidth, height: wordViewHeight)
     fontSize = vD.stopWatchSize * 0.2
     
-    foundWordView = FoundWordView(listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight), rowHieght: fontSize)
+    foundWordView = FoundWordView(viewData: vD, listDimensions: CGSize(width: wordViewWidth, height: wordViewHeight), rowHieght: fontSize)
     foundWordView.frame.origin = CGPoint(x: vD.tilePadding, y: vD.tilePadding)
     
     foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
