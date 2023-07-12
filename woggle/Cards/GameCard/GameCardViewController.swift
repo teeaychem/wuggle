@@ -81,7 +81,7 @@ class GameCardViewController: CardViewController {
       boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
       stopwatchViewController.setHandTo(percent: delegate!.currentGame()!.timeUsedPercent)
       for word in delegate!.currentGame()!.foundWordsList! {
-        foundWordsViewController.update(word: word)
+        foundWordsViewController.update(word: word, found: true)
       }
       boardViewController.displayTileFoundationAll()
       
@@ -95,7 +95,7 @@ class GameCardViewController: CardViewController {
       }
     } else {
       // Otherwise, let the user start a game.
-      playButtonsViewController.paintNewGameIcon()
+      playButtonsViewController.displayNewGameIcon()
     }
   }
   
@@ -154,7 +154,7 @@ class GameCardViewController: CardViewController {
   
   
   func processWord(word w: String) {
-    foundWordsViewController.update(word: w)
+    foundWordsViewController.update(word: w, found: true)
     if delegate?.currentGame()?.foundWordsList == nil {
       delegate?.currentGame()?.foundWordsList = [w]
     } else {
@@ -298,7 +298,6 @@ extension GameCardViewController {
   func endGameMain() {
     
     endGameDisplay()
-    
     // Cancel timer, pause and end game
     displayLinkOne?.invalidate()
     gameInProgess = false
@@ -312,14 +311,13 @@ extension GameCardViewController {
     boardViewController.setOpacity(to: 0.25)
     // Update buttons
     playButtonsViewController.hideStopIcon()
-    playButtonsViewController.paintNewGameIcon()
+    playButtonsViewController.displayNewGameIcon()
     // Remove gestures
     boardViewController.removeGestureRecognizer(recogniser: boardPanGR!)
     stopwatchViewController.view.removeGestureRecognizer(watchGestureRecognizer!)
     // Display final words
     finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
     self.embed(finalWordsViewController!, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding + viewData.gameBoardSize * 0.075, y: viewData.height - viewData.gameBoardSize * 0.925 - viewData.gameBoardPadding))
-    finalWordsViewController?.addWordsAsFound(words: delegate!.currentGame()!.foundWordsList!)
     finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate!.currentGame()!.allWordsList!), seeWords: delegate!.currentGame()!.foundWordsList!)
     // Add gesture to see board.
     boardViewController.addGestureRecognizer(recogniser: UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBoard)))

@@ -46,8 +46,8 @@ class FoundWordsViewController: UIViewController {
   }
     
   
-  func update(word: String) {
-    foundWordView.updateAndScroll(word: word)
+  func update(word w: String, found f: Bool) {
+    foundWordView.updateAndScroll(word: w, found: f)
   }
   
   

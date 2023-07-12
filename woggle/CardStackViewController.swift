@@ -155,6 +155,8 @@ extension CardStackViewController: CardStackDelegate {
         print(result.count)
         print("Extra settings found")
         // TODO: Delete other instances.
+        // 1. Check for stats. Keep stats.
+        // 2. Check for most recent date on stats.
       } else {
         // No settings found, so make default
         let freshSettings = Settings(context: context)

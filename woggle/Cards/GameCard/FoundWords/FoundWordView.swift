@@ -9,8 +9,7 @@ import UIKit
 
 class FoundWordView: UITableView {
   
-  var wordList =  [String]()
-  
+  private var wordList = [(String, Bool)]()
   private let listDimensions: CGSize
   
   init(listDimensions lD: CGSize, rowHieght rH: CGFloat) {
@@ -33,19 +32,19 @@ class FoundWordView: UITableView {
 
 extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return wordList.count
   }
   
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     // Getting the right element
     let word = wordList[indexPath.row]
     
     // Trying to reuse a cell
-    let cellIdentifier = word
+    let cellIdentifier = word.0
     let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
-    ?? UITableViewWordCell(style: .default, reuseIdentifier: cellIdentifier, word: word, width: listDimensions.width, height: rowHeight, shadeWords: false)
+    ?? UITableViewWordCell(style: .default, word: word.0, found: word.1, width: listDimensions.width, height: rowHeight)
     // To disable highlighting cell when tapped.
     cell.selectionStyle = .none
     return cell
@@ -57,29 +56,39 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
   }
   
 
-  public func updateNoScroll(word: String) {
-    wordList.append(word)
+  public func updateNoScroll(word: String, found: Bool) {
+    wordList.append((word, found))
     reloadData()
   }
   
   
-  public func updateAndScroll(word: String) {
+  public func maybeOverWrite(word: String, found: Bool) {
+    // Check to see if word is in list.
+    // If so, overwrite with found arg.
+    // Else, add as usual.
+    if (wordList.first(where: { $0.0 == word}) != nil) {
+      wordList[wordList.firstIndex(where: { $0.0 == word})!] = (word, found)
+    } else {
+      wordList.append((word, found))
+    }
+  }
+  
+  
+  public func updateAndScroll(word: String, found: Bool) {
     var wordIndex: Int
     
-    let first = wordList.first(where: { $0 == word})
-    
-    if (first != nil) {
-      wordIndex = wordList.firstIndex(of: first!)!
+    if (wordList.first(where: { $0.0 == word}) != nil) {
+      wordIndex = wordList.firstIndex(where: { $0.0 == word})!
     } else {
       wordIndex = wordList.count
-      wordList.append(word)
+      wordList.append((word, found))
       reloadData()
     }
       scrollToRow(at: [0, wordIndex], at: .middle, animated: true)
     // TODO: Add some visial flair, at the moment it's not clear what this is doing.
   }
   
-  public func listUpdateAndScroll(updateList: [String]) {
+  public func listUpdateAndScroll(updateList: [(String, Bool)]) {
     for word in updateList { wordList.append(word) }
     reloadData()
     if (wordList.count > 0) { scrollToRow(at: [0, wordList.count - 1], at: .bottom, animated: false) } // Count is total, etc.

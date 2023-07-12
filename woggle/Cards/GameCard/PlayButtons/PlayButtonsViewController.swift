@@ -51,7 +51,7 @@ class PlayButtonsViewController: UIViewController {
   }
   
   
-  func paintNewGameIcon() {
+  func displayNewGameIcon() {
     playButtonsView.removePlayPauseIcon()
     playButtonsView.addNewGameIcon()
   }

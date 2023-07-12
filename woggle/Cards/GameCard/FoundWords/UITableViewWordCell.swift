@@ -10,29 +10,29 @@ import UIKit
 
 class UITableViewWordCell : UITableViewCell {
   
-  init(style s : UITableViewCell.CellStyle, reuseIdentifier r: String?, word w: String, width gw: CGFloat, height h: CGFloat, shadeWords sh: Bool) {
+  init(style s : UITableViewCell.CellStyle, word w: String, found f: Bool, width gw: CGFloat, height h: CGFloat) {
     
-    super.init(style: s, reuseIdentifier: r)
+    super.init(style: s, reuseIdentifier: w)
     
     backgroundColor = UIColor.clear
     
     var wordTextAttributes: [NSAttributedString.Key : Any]
     
-//    if sh && w.found {
-//      wordTextAttributes = [
-//        NSAttributedString.Key.strokeColor : reguardTextShaded,
-//        NSAttributedString.Key.foregroundColor : reguardTextShaded,
-//        NSAttributedString.Key.strokeWidth : -1,
-//        NSAttributedString.Key.font : UIFont(name: textFontName, size: getFontFor(height: h))!
-//        ] as [NSAttributedString.Key : Any]
-//    } else {
+    if f {
       wordTextAttributes = [
-        NSAttributedString.Key.strokeColor : regularText,
-        NSAttributedString.Key.foregroundColor : regularText,
+        NSAttributedString.Key.strokeColor : reguardTextShaded,
+        NSAttributedString.Key.foregroundColor : reguardTextShaded,
         NSAttributedString.Key.strokeWidth : -1,
         NSAttributedString.Key.font : UIFont(name: textFontName, size: getFontFor(height: h))!
         ] as [NSAttributedString.Key : Any]
-//    }
+    } else {
+      wordTextAttributes = [
+//        NSAttributedString.Key.strokeColor : regularText,
+        NSAttributedString.Key.foregroundColor : regularText,
+        NSAttributedString.Key.strokeWidth : 0,
+        NSAttributedString.Key.font : UIFont(name: textFontName, size: getFontFor(height: h))!
+        ] as [NSAttributedString.Key : Any]
+    }
     
     let WordTextLabel = UILabel(frame: CGRect(origin: CGPoint(x: gw * 0.05, y: 0), size: CGSize(width: gw * 0.8, height: h)))
     let NSwordText = NSMutableAttributedString(string: w.capitalized, attributes: wordTextAttributes)
