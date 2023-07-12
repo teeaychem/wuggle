@@ -83,7 +83,7 @@ class GameCardViewController: CardViewController {
       for word in delegate!.currentGame()!.foundWordsList! {
         foundWordsViewController.update(word: word)
       }
-      boardViewController.displayAllTiles()
+      boardViewController.displayTileFoundationAll()
       
       if delegate!.currentGame()!.viable {
         // If there's already a game, set things with stored data.
@@ -118,7 +118,7 @@ class GameCardViewController: CardViewController {
     playButtonsViewController.removeAllGestureRecognizers()
     
     foundWordsViewController.clear()
-    boardViewController.gameboardView.removeAllTileViews()
+    boardViewController.removeAllTileViews()
     
     super.shuffledToDeck()
   }
@@ -269,14 +269,14 @@ extension GameCardViewController {
       stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
       playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
       
-      boardViewController.displayAllTiles()
+      boardViewController.displayTileFoundationAll()
       delegate!.cardShuffleGesutre(enabled: false)
     }
   }
   
   
   func resumeGameMain() {
-    boardViewController.gameboardView.displayTileViews()
+    boardViewController.displayTileCharacterAll(animated: true)
     displayLinkOne = CADisplayLink(target: self, selector: #selector(Counting))
     displayLinkOne!.add(to: .current, forMode: .common)
     boardViewController.removeAllGestureRecognizers()
@@ -288,7 +288,7 @@ extension GameCardViewController {
   
   func pauseGameMain(animated a: Bool) {
     displayLinkOne?.invalidate()
-    boardViewController.gameboardView.hideTileViews(animated: a)
+    boardViewController.hideAllTiles(animated: a)
     playButtonsViewController.paintPlayIcon()
     boardViewController.removeAllGestureRecognizers()
     gameInProgess = false
@@ -303,16 +303,13 @@ extension GameCardViewController {
     displayLinkOne?.invalidate()
     gameInProgess = false
     delegate!.currentGame()?.viable = false
-    
-    
-    
-    
+
     thinkingAboutStats(game: delegate!.currentGame()!)
   }
   
   
   func endGameDisplay() {
-    boardViewController.gameboardView.setOpacity(to: 0.25)
+    boardViewController.setOpacity(to: 0.25)
     // Update buttons
     playButtonsViewController.hideStopIcon()
     playButtonsViewController.paintNewGameIcon()
@@ -530,10 +527,10 @@ extension GameCardViewController {
       
     case .began:
       finalWordsViewController!.view.layer.opacity = 0
-      boardViewController.gameboardView.setOpacity(to: 1)
+      boardViewController.setOpacity(to: 1)
     case .ended, .cancelled:
       finalWordsViewController!.view.layer.opacity = 1
-      boardViewController.gameboardView.setOpacity(to: 0.25)
+      boardViewController.setOpacity(to: 0.25)
     default:
       break
     }

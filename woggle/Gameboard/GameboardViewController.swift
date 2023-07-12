@@ -22,7 +22,7 @@ import UIKit
 
 class GameboardViewController: UIViewController {
   
-  let boardSize: CGFloat
+  private let boardSize: CGFloat
   let gameboardView: GameboardView
   let viewData: ViewData
   
@@ -85,15 +85,41 @@ class GameboardViewController: UIViewController {
   }
   
   
-  func displayAllTiles() {
+  func displayTileFoundationAll() {
     for tile in gameboardView.tiles.values {
       tile.displayTile()
     }
   }
   
   
+  func displayTileCharacterAll(animated a: Bool) {
+    for tile in gameboardView.tiles.values {
+      tile.displayLetter(animated: a)
+    }
+  }
+  
+  
   func removeAllTileViews() {
-    gameboardView.removeAllTileViews()
+    for tile in gameboardView.tiles.values {
+        tile.disappear(animated: false)
+        tile.removeFromSuperview()
+      }
+    gameboardView.tiles.removeAll()
+  }
+  
+  
+  func hideAllTiles(animated a: Bool) {
+    for tile in gameboardView.tiles.values {
+      tile.disappear(animated: a)
+    }
+  }
+  
+  
+  func setOpacity(to: Float) {
+//    view.layer.opacity = to
+    for v in gameboardView.subviews {
+      v.layer.opacity = to
+    }
   }
   
   

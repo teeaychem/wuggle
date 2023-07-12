@@ -22,39 +22,9 @@ class GameboardView: UIView {
   }
   
   
-  func setOpacity(to: Float) {
-    for v in subviews {
-      v.layer.opacity = to
-    }
-  }
-  
-  
   func addTileSubview(tileKey: Int16, tileView: TileView) {
     tiles.updateValue(tileView, forKey: tileKey)
     self.addSubview(tileView)
-  }
-  
-  
-  func removeAllTileViews() {
-    for tile in tiles.values {
-      tile.disappear(animated: false)
-      tile.removeFromSuperview()
-    }
-    tiles.removeAll()
-  }
-  
-  
-  func displayTileViews() {
-    for tile in tiles.values {
-      tile.displayLetter(animated: true)
-    }
-  }
-  
-  
-  func hideTileViews(animated a: Bool) {
-    for tile in tiles.values {
-      tile.disappear(animated: a)
-    }
   }
   
 }
