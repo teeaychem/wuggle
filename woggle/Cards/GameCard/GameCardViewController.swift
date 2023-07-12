@@ -82,18 +82,18 @@ class GameCardViewController: CardViewController {
     stopwatchViewController.paintSeconds()
     
     // TODO: Annotate
-    if delegate!.currentGameInstance() != nil {
+    if delegate!.currentGame() != nil {
       // Adjust things if there's a game.
-      combinedScoreViewC.combinedUpdate(found: delegate!.currentGameInstance()!.foundWordCount, score: delegate!.currentGameInstance()!.pointsCount, percent: 0)
+      combinedScoreViewC.combinedUpdate(found: delegate!.currentGame()!.foundWordCount, score: delegate!.currentGame()!.pointsCount, percent: 0)
       
-      boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
-      stopwatchViewController.setHandTo(percent: delegate!.currentGameInstance()!.timeUsedPercent)
-      for word in delegate!.currentGameInstance()!.foundWordsList! {
+      boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
+      stopwatchViewController.setHandTo(percent: delegate!.currentGame()!.timeUsedPercent)
+      for word in delegate!.currentGame()!.foundWordsList! {
         foundWordsViewController.update(word: word)
       }
       boardViewController.displayAllTiles()
       
-      if delegate!.currentGameInstance()!.viable {
+      if delegate!.currentGame()!.viable {
         // If there's already a game, set things with stored data.
         playButtonsViewController.paintStopIcon()
         playButtonsViewController.stopAddGesture(gesture: stopGR!)
@@ -151,16 +151,16 @@ class GameCardViewController: CardViewController {
   
   func processWord(word w: String) {
     foundWordsViewController.update(word: w)
-    if delegate?.currentGameInstance()?.foundWordsList == nil {
-      delegate?.currentGameInstance()?.foundWordsList = [w]
+    if delegate?.currentGame()?.foundWordsList == nil {
+      delegate?.currentGame()?.foundWordsList = [w]
     } else {
-      if delegate!.currentGameInstance()!.foundWordsList!.contains(w) {
+      if delegate!.currentGame()!.foundWordsList!.contains(w) {
         return
       } else {
-        delegate!.currentGameInstance()?.foundWordsList!.append(w)
-        delegate!.currentGameInstance()?.foundWordCount += 1
-        delegate!.currentGameInstance()?.pointsCount += Int16(getPoints(word: w))
-        combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGameInstance()!)
+        delegate!.currentGame()?.foundWordsList!.append(w)
+        delegate!.currentGame()?.foundWordCount += 1
+        delegate!.currentGame()?.pointsCount += Int16(getPoints(word: w))
+        combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!)
         thinkAboutStats(word: w)
       }
     }
@@ -230,7 +230,7 @@ extension GameCardViewController {
     foundWordsViewController.clear()
     // Fix stopwatch
     stopwatchViewController.resetHand()
-    boardViewController.createAllTileViews(board: delegate!.currentGameInstance()!.board!)
+    boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
         
     if (finalWordsViewController != nil) {
       self.unembed(finalWordsViewController!, inView: self.cardView)
@@ -321,7 +321,7 @@ extension GameCardViewController {
     // Cancel timer, pause and end game
     displayLinkOne?.invalidate()
     gameInProgess = false
-    delegate!.currentGameInstance()?.viable = false
+    delegate!.currentGame()?.viable = false
     // Update buttons
     playButtonsViewController.hideStopIcon()
     playButtonsViewController.paintNewGameIcon()
@@ -331,12 +331,12 @@ extension GameCardViewController {
     // Display final words
     finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
     self.embed(finalWordsViewController!, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding + viewData.gameBoardSize * 0.075, y: viewData.height - viewData.gameBoardSize * 0.925 - viewData.gameBoardPadding))
-    finalWordsViewController?.addWordsAsFound(words: delegate!.currentGameInstance()!.foundWordsList!)
-    finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate!.currentGameInstance()!.allWordsList!), seeWords: delegate!.currentGameInstance()!.foundWordsList!)
+    finalWordsViewController?.addWordsAsFound(words: delegate!.currentGame()!.foundWordsList!)
+    finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate!.currentGame()!.allWordsList!), seeWords: delegate!.currentGame()!.foundWordsList!)
     // Add gesture to see board.
     boardViewController.addGestureRecognizer(recogniser: UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBoard)))
     
-    thinkingAboutStats(game: delegate!.currentGameInstance()!)
+    thinkingAboutStats(game: delegate!.currentGame()!)
   }
 }
 
@@ -411,11 +411,11 @@ extension GameCardViewController {
   
   
   @objc func didTapOnTime(_ sender: UITapGestureRecognizer) {
-    guard delegate!.currentGameInstance() != nil else { return }
+    guard delegate!.currentGame() != nil else { return }
     // Stopwatch tap only works for controlling a gamme.
     // Does not create a new game, etc.
     
-    if (delegate!.currentGameInstance()!.viable) {
+    if (delegate!.currentGame()!.viable) {
       if (gameInProgess) {
         pauseGameMain(animated: true)
       } else {
@@ -431,7 +431,7 @@ extension GameCardViewController {
   @objc func didTapOnPlayPause(_ sender: UITapGestureRecognizer) {
     if gameInProgess {
       pauseGameMain(animated: true)
-    } else if (delegate!.currentGameInstance() != nil && delegate!.currentGameInstance()!.viable) {
+    } else if (delegate!.currentGame() != nil && delegate!.currentGame()!.viable) {
         resumeGameMain()
     } else {
       newGameMain()
@@ -497,9 +497,9 @@ extension GameCardViewController {
     let usedPercent = estimate/(Double(delegate!.currentSettings().time) * 60)
     
     displayLinkOneTimeElapsed += estimate
-    delegate!.currentGameInstance()!.timeUsedPercent += usedPercent
+    delegate!.currentGame()!.timeUsedPercent += usedPercent
     stopwatchViewController.incrementHandBy(percent: usedPercent)
-    if (delegate!.currentGameInstance()!.timeUsedPercent >= 1) {
+    if (delegate!.currentGame()!.timeUsedPercent >= 1) {
       endGameMain()
     }
   }

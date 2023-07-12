@@ -128,16 +128,12 @@ extension CardStackViewController: CardStackDelegate {
   }
   
   
-  func currentGameInstance() -> GameInstance? {
+  func currentGame() -> GameInstance? {
     return settings.currentGame
   }
   
   
   func currentStats() -> StatsCollection {
-    print("called")
-    if settings.stats == nil {
-      
-    }
     return settings.stats!
   }
 }

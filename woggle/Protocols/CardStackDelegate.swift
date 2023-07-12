@@ -23,7 +23,7 @@ protocol CardStackDelegate: AnyObject {
   func currentSettings() -> Settings
   
   // Allow cards to request current gameInstance.
-  func currentGameInstance() -> GameInstance?
+  func currentGame() -> GameInstance?
   
   func currentStats() -> StatsCollection
    
