@@ -20,18 +20,19 @@ class UITableViewWordCell : UITableViewCell {
     
     if f {
       wordTextAttributes = [
-        NSAttributedString.Key.strokeColor : reguardTextShaded,
-        NSAttributedString.Key.foregroundColor : reguardTextShaded,
-        NSAttributedString.Key.strokeWidth : -1,
-        NSAttributedString.Key.font : UIFont(name: textFontName, size: getFontFor(height: h))!
-        ] as [NSAttributedString.Key : Any]
-    } else {
-      wordTextAttributes = [
-//        NSAttributedString.Key.strokeColor : regularText,
-        NSAttributedString.Key.foregroundColor : regularText,
+        NSAttributedString.Key.strokeColor : UIColor.darkGray.cgColor,
+        NSAttributedString.Key.foregroundColor : UIColor.darkGray.cgColor,
         NSAttributedString.Key.strokeWidth : 0,
-        NSAttributedString.Key.font : UIFont(name: textFontName, size: getFontFor(height: h))!
-        ] as [NSAttributedString.Key : Any]
+        NSAttributedString.Key.font : UIFont(name: uiFontName, size: getFontFor(height: h))!
+        ]
+    } else {
+      
+    wordTextAttributes = [
+      NSAttributedString.Key.strokeColor : UIColor.darkGray.cgColor,
+      NSAttributedString.Key.foregroundColor : UIColor.darkGray.cgColor,
+      NSAttributedString.Key.strokeWidth : 0,
+      NSAttributedString.Key.font : UIFont(name: textFontName, size: getFontFor(height: h))!
+      ]
     }
     
     let WordTextLabel = UILabel(frame: CGRect(origin: CGPoint(x: gw * 0.05, y: 0), size: CGSize(width: gw * 0.8, height: h)))

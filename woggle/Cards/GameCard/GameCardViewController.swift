@@ -302,6 +302,7 @@ extension GameCardViewController {
     displayLinkOne?.invalidate()
     gameInProgess = false
     delegate!.currentGame()?.viable = false
+    boardViewController.displayTileCharacterAll(animated: false)
 
     thinkingAboutStats(game: delegate!.currentGame()!)
   }
