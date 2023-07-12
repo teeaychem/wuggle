@@ -46,7 +46,7 @@ class GameCardViewController: CardViewController {
     rootTrie = d.currentSettings().getTrieRoot()
     
     // Icons
-    combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD)
+    combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD, gameCard: true)
     
     // Fix controllers  for the current views
     boardViewController = GameboardViewController(boardSize: vD.gameBoardSize, viewData: vD, tilePadding: vD.tilePadding)
@@ -83,8 +83,8 @@ class GameCardViewController: CardViewController {
     
     // TODO: Annotate
     if delegate!.currentGame() != nil {
-      // Adjust things if there's a game.
-      combinedScoreViewC.combinedUpdate(found: delegate!.currentGame()!.foundWordCount, score: delegate!.currentGame()!.pointsCount, percent: 0)
+      // Adjust things if there's a game.      
+      combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!)
       
       boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
       stopwatchViewController.setHandTo(percent: delegate!.currentGame()!.timeUsedPercent)
@@ -213,7 +213,7 @@ class GameCardViewController: CardViewController {
     if percentFound > delegate!.currentStats().topPercent!.numVal {
       delegate!.currentStats().topPercent!.numVal = percentFound
       delegate!.currentStats().topPercent!.strVal = String(Int(percentFound * 100))
-      delegate!.currentStats().topPercent!.extraStr = String(Int(foundWordCount)) + " out of " + String(delegate!.currentGame()!.allWordsList!.count) + " words"
+      delegate!.currentStats().topPercent!.extraStr = String(Int(foundWordCount)) + " out of " + String(delegate!.currentGame()!.allWordsList!.count) + " words "
       delegate!.currentStats().topPercent!.date = Date()
       
       

@@ -9,6 +9,7 @@ import UIKit
 
 class CombinedScoreViewController: UIViewController {
   
+  let gameCard: Bool
   let scoreFont: UIFont
   var textAttributes: [NSAttributedString.Key : Any]?
   let sepColor: UIColor
@@ -17,14 +18,22 @@ class CombinedScoreViewController: UIViewController {
   let scoreIcon: IconView
   let perceIcon: IconView
   
-  init(size s: CGSize, viewData vD: ViewData) {
+  init(size s: CGSize, viewData vD: ViewData, gameCard g: Bool) {
     
-    scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
-    sepColor = vD.colourL
+    gameCard = g
     
-    foundIcon = ScoreIcon(size: vD.scoreIconSize, viewData: vD, abv: "W")
-    scoreIcon = ScoreIcon(size: vD.scoreIconSize, viewData: vD, abv: "P")
-    perceIcon = ScoreIcon(size: vD.scoreIconSize, viewData: vD, abv: "%")
+    
+    if gameCard {
+      scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
+      sepColor = vD.colourL
+    } else {
+      scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
+      sepColor = vD.colourM
+    }
+    
+    foundIcon = ScoreIcon(viewData: vD, abv: "W", gameCard: g)
+    scoreIcon = ScoreIcon(viewData: vD, abv: "P", gameCard: g)
+    perceIcon = ScoreIcon(viewData: vD, abv: "%", gameCard: g)
     
     super.init(nibName: nil, bundle: nil)
     
@@ -55,9 +64,6 @@ class CombinedScoreViewController: UIViewController {
   }
   
   
-
-  
-  
   func updateFound(val: Int16) {
     foundIcon.updateIcon(value: String(val))
   }
@@ -83,7 +89,8 @@ class CombinedScoreViewController: UIViewController {
   func gameInstanceUpdate(instance: GameInstance) {
     updateFound(val: instance.foundWordCount)
     updateScore(val: instance.pointsCount)
-    updatePercent(val: 0)
+    let percent =  (Double(instance.foundWordCount) / Double(instance.allWordsList!.count)) * 100
+    updatePercent(val: Int16(percent))
   }
   
   

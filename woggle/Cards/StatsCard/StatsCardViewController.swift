@@ -22,7 +22,7 @@ class StatsCardViewController: CardViewController {
     statVSep = (vD.height - (vD.statusBarSize.height + vD.statSize.height * 6)) / 7
     statXOrigin = vD.width * 0.025
     
-    combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD)
+    combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD, gameCard: false)
     statVCs["mostWordsFound"] = StatViewController(stat: d.currentStats().topWords!, displayName: "Most Words Found", viewData: vD)
     statVCs["mostPoints"] = StatViewController(stat: d.currentStats().topPoints!, displayName: "Most Points Collected", viewData: vD)
     statVCs["mostPercent"] = StatViewController(stat: d.currentStats().topPercent!, displayName: "Highest % Found", viewData: vD)
@@ -34,6 +34,7 @@ class StatsCardViewController: CardViewController {
     super.init(viewData: vD, delegate: d)
       
     embed(combinedScoreViewC, inView: self.statusBarView, origin: CGPoint(x: 0, y: 0))
+    combinedScoreViewC.combinedUpdate(found: Int16(d.currentStats().topWords!.numVal), score: Int16(d.currentStats().topPoints!.numVal), percent: Int16(d.currentStats().topPercent!.numVal))
   }
   
   override func viewDidLayoutSubviews() {

@@ -14,14 +14,14 @@ class TileIcon: IconView {
   let tileLayer = CAShapeLayer()
   let letterLayer = CAShapeLayer()
   
-  override init(size s: CGSize, viewData vD: ViewData) {
+  init(viewData vD: ViewData) {
     
     tileLayer.fillColor = vD.colourM.cgColor
     
     letterLayer.fillColor = vD.colourL.cgColor
     textLayer.fillColor = vD.colourL.cgColor
     
-    super.init(size: s, viewData: vD)
+    super.init(size: vD.squareIconSize, viewData: vD)
 
     addTile()
     addSquare()

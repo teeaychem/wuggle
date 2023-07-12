@@ -10,20 +10,7 @@ import UIKit
 
 class StatViewController: UIViewController {
   
-  // TODO: Instead of stat + board, I want to have just stat, and when this is selected, show a large board.
-  // This way, the board should be large enough to easily see.
-  // Half the size of the main board might work.
-  // But, then there's a lot of empty space.
-  // Alternatively, hold down on the stat and see the board.
-  // This works, except I only have maybe half.
-  // And, double line doesn't feel good.
-  // Instead, for longest word, implement shrink to width.
-  // So, heterogram.
-  // Highest Points/length ratio.
-  // Lowest points/length ratio.
-  // Oh, I can double and add the date.
-  // So, with these suggestions, I have 8 + date.
-  // This, then, is the plan.
+  // TODO: Board associated with stat on long press
   
   let statDisplayName: String
   let statSize: CGSize
@@ -33,6 +20,7 @@ class StatViewController: UIViewController {
   let valueLabel: UILabel
   let dateLabel: UILabel
   let extraLabel: UILabel
+  
   
   init(stat s: Stat, displayName dN: String, viewData vD: ViewData) {
     
@@ -61,17 +49,10 @@ class StatViewController: UIViewController {
   }
   
   
-  
   func updateWith(stat: Stat) {
     valueLabel.attributedText = NSMutableAttributedString(string: stat.strVal!, attributes: viewData.getSettingsTextAttribute(height: viewData.statSize.height * 0.64, colour: viewData.colourL.cgColor))
     dateLabel.attributedText = NSMutableAttributedString(string: stat.date?.formatted(date: .abbreviated, time: .shortened).description ?? "", attributes: viewData.getSettingsTextAttribute(height: viewData.statSize.height * 0.44, colour: viewData.colourL.cgColor))
     extraLabel.attributedText = NSMutableAttributedString(string: stat.extraStr!, attributes: viewData.getSettingsTextAttribute(height: viewData.statSize.height * 0.44, colour: viewData.colourL.cgColor))
-  }
-  
-  
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
   }
   
   

@@ -10,7 +10,6 @@ import UIKit
 
 class TimeIcon : IconView {
   
-  
   let faceColour: CGColor
   let handColour: CGColor
   
@@ -20,14 +19,14 @@ class TimeIcon : IconView {
   var handLayer: CAShapeLayer?
   
   
-  override init(size s: CGSize, viewData vD: ViewData) {
+  init(viewData vD: ViewData) {
     
-    handStrokeWidth = CGFloat(s.height)/12
-    centerPoint = CGPoint(x: s.width * 0.5, y: s.height * 0.5)
+    handStrokeWidth = CGFloat(vD.squareIconSize.height)/12
+    centerPoint = CGPoint(x: vD.squareIconSize.width * 0.5, y: vD.squareIconSize.height * 0.5)
     faceColour = vD.colourM.cgColor
     handColour = vD.colourL.cgColor
     
-    super.init(size: s, viewData: vD)
+    super.init(size: vD.squareIconSize, viewData: vD)
     
     addFace()
     addHand(angle: Double.pi/4)

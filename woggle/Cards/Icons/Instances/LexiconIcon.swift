@@ -19,16 +19,16 @@ class LexiconIcon: IconView {
   
   let coverWidth: CGFloat
     
-  override init(size s: CGSize, viewData vD: ViewData) {
+  init(viewData vD: ViewData) {
     
-    coverWidth = s.width * 0.7
+    coverWidth = vD.squareIconSize.width * 0.7
     
     bookFrontLayer.fillColor = vD.colourM.cgColor
     bookMiddleLayer.fillColor = vD.colourL.cgColor
     bookBackLayer.fillColor = vD.colourM.cgColor
     letterLayer.fillColor = vD.colourL.cgColor
     
-    super.init(size: s, viewData: vD)
+    super.init(size: vD.squareIconSize, viewData: vD)
     
     layer.addSublayer(bookBackLayer)
     layer.addSublayer(bookMiddleLayer)

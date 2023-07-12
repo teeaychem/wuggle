@@ -247,8 +247,8 @@
 		57E2F37B2A54E58D0097D1D2 /* Instances */ = {
 			isa = PBXGroup;
 			children = (
-				57E2F37E2A54E59D0097D1D2 /* LengthIcon.swift */,
 				57E758B82A5A164400823989 /* ScoreIcon.swift */,
+				57E2F37E2A54E59D0097D1D2 /* LengthIcon.swift */,
 				57E2F37F2A54E59D0097D1D2 /* LexiconIcon.swift */,
 				57E2F37D2A54E59D0097D1D2 /* TileIcon.swift */,
 				57E2F37C2A54E59D0097D1D2 /* TimeIcon.swift */,

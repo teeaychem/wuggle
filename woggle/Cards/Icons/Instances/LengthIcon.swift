@@ -16,9 +16,9 @@ class LengthIcon: IconView {
   let plusLayer = CAShapeLayer()
   let numberLayer = CAShapeLayer()
   
-  override init(size s: CGSize, viewData vD: ViewData) {
+  init(viewData vD: ViewData) {
     
-    super.init(size: s, viewData: vD)
+    super.init(size: vD.squareIconSize, viewData: vD)
     
     boardLayer.fillColor = vD.colourM.cgColor
     highlightedTileLayer.fillColor = vD.colourL.cgColor

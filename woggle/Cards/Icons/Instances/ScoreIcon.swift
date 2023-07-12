@@ -10,6 +10,8 @@ import UIKit
 
 class ScoreIcon: IconView {
   
+  let gameCard: Bool
+  
   let borderLayer = CAShapeLayer()
   var scoreLayer: CAShapeLayer?
   let scoreFont: UIFont
@@ -17,23 +19,28 @@ class ScoreIcon: IconView {
   var textAttributes: [NSAttributedString.Key : Any]?
   
   
-  init(size s: CGSize, viewData vD: ViewData, abv: String) {
+  init(viewData vD: ViewData, abv: String, gameCard g: Bool) {
     
-    scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
+    gameCard = g
     
-    scoreLabel = UILabel(frame: CGRect(origin: CGPoint(x: s.width * 0.3, y: s.height * 0.175), size: CGSize(width: s.width * 0.6, height: s.height * 0.6)))
+    scoreFont = UIFont(name: uiFontName, size: getFontFor(height: vD.scoreIconSize.height * 0.7))!
+    
+    scoreLabel = UILabel(frame: CGRect(origin: CGPoint(x: vD.scoreIconSize.width * 0.3, y: vD.scoreIconSize.height * 0.175), size: CGSize(width: vD.scoreIconSize.width * 0.6, height: vD.scoreIconSize.height * 0.6)))
     
     
-    super.init(size: s, viewData: vD)
-    
+    super.init(size: vD.scoreIconSize, viewData: vD)
     
     borderLayer.path = getBorderPath()
     borderLayer.fillColor = UIColor.clear.cgColor
-    borderLayer.strokeColor = UIColor.white.cgColor
     borderLayer.lineWidth = 0.5
-
     
-    textAttributes = vD.getSettingsTextAttribute(height: size.height * 0.8, colour: vD.colourD.cgColor)
+    if gameCard {
+      borderLayer.strokeColor = vD.colourD.cgColor
+      textAttributes = vD.getSettingsTextAttribute(height: size.height * 0.8, colour: vD.colourD.cgColor)
+    } else {
+      borderLayer.strokeColor = vD.colourM.cgColor
+      textAttributes = vD.getSettingsTextAttribute(height: size.height * 0.8, colour: vD.colourM.cgColor)
+    }
     scoreLabel.attributedText = NSMutableAttributedString(string: "0", attributes: textAttributes)
     scoreLabel.textAlignment = .center
     
