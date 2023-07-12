@@ -105,12 +105,8 @@ extension CardStackViewController: CardStackDelegate {
   
   func updateSetting(internalName: String, internalValue: Int16) {
     print("Ah, to change")
-    // TODO: Need to load or change a setting.
-    
-    print("Current settings:")
-    print(settings.id)
-    
     // First, get the values of the current settings.
+    // There's always *a* settings file, so these are fine to get.
     // Use these to perform a search.
     var lexiconVal = settings.lexicon
     var minWordVal = settings.minWordLength
@@ -120,15 +116,9 @@ extension CardStackViewController: CardStackDelegate {
     // Update the relevant predicate
     switch internalName {
     case "time":
-      print("O: ", timeVal)
       timeVal = internalValue
-      print("N: ", timeVal)
     case "lexicon":
-      print("O: ", lexiconVal)
-      print(type(of: lexiconVal))
       lexiconVal = internalValue
-      print("N: ", lexiconVal)
-      print(type(of: lexiconVal))
     case "length":
       minWordVal = internalValue
     case "tiles":
@@ -146,33 +136,25 @@ extension CardStackViewController: CardStackDelegate {
       let result = try context.fetch(settingsFetchRequest)
       
       if result.count == 1 {
-        settings.primary = false
         settings = result.first as! Settings
-        settings.primary = true
-        print("One found")
       } else if result.count > 1 {
         print(result.count)
         print("Extra settings found")
         // TODO: Delete other instances.
       } else {
+        // No settings found, so make default
         let freshSettings = Settings(context: context)
         freshSettings.time = timeVal
         freshSettings.lexicon = lexiconVal
         freshSettings.minWordLength = minWordVal
         freshSettings.tileSqrt = tileSqrtVal
-        settings.primary = false
         settings = freshSettings
-        settings.primary = true
         settings.ensureDefaults()
         print("Search okay, no setting found")
       }
     } catch {
       print("Search failed")
     }
-    
-    print("New settings:")
-    print(settings.id)
-
   }
   
   

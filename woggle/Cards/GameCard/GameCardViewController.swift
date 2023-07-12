@@ -4,13 +4,7 @@
 //
 //  Created by sparkes on 2023/06/24.
 //
-// Displays a card with the gameview.
-// Primary settings are given by the card stack controller.
-// On first run, request current game instance from settings.
-// Load the board from the gameInstance, populate found words, fix timer.
-
-// TODO: Timer
-// TODO: Found words
+// Card for the gameview.
 
 import UIKit
 import CoreData
@@ -124,6 +118,9 @@ class GameCardViewController: CardViewController {
     boardViewController.removeAllGestureRecognizers()
     stopwatchViewController.removeAllGestureRecognizers()
     playButtonsViewController.removeAllGestureRecognizers()
+    
+    foundWordsViewController.clear()
+    boardViewController.gameboardView.removeAllTileViews()
     
     super.shuffledToDeck()
   }
