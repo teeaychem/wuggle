@@ -233,6 +233,7 @@ class GameCardViewController: CardViewController {
 extension GameCardViewController {
   
   func newGameMain() {
+    print("New game!")
     UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
     // Remove all the tiles from the previous game.
     boardViewController.removeAllTileViews()
@@ -266,6 +267,17 @@ extension GameCardViewController {
       }()
             
       let settingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+    
+    // TODO: This is a hack for now.
+    // Processing possible words on background thread.
+    // So, need current settings.
+    // At the moment, uniquely identified by combination of settings.
+    // But, is there a better way?
+    
+    settingsFetchRequest.predicate = NSPredicate(
+      format: "time == %i AND lexicon == %i AND minWordLength == %i AND tileSqrt == %i",
+      (delegate?.currentSettings().time)!, (delegate?.currentSettings().lexicon)!, (delegate?.currentSettings().minWordLength)!, (delegate?.currentSettings().tileSqrt)!)
+    
       settingsFetchRequest.fetchLimit = 1
       if let result = try? privateManagedObjectContext.fetch(settingsFetchRequest) {
         let settings = result.first as! Settings

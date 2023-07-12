@@ -15,7 +15,6 @@ class SettingsCardViewController: CardViewController {
   let timeIcon: IconView
   
   var optionViews = [String: OptionView]()
-  var tempViews = [UIView]()
   
   override init(viewData vD: ViewData, delegate d: CardStackDelegate) {
     
@@ -39,15 +38,6 @@ class SettingsCardViewController: CardViewController {
     lengthIcon.frame.origin.x = (iconPadding * 3) + (iconSize.width * 2)
     statusBarView.addSubview(tileIcon)
     tileIcon.frame.origin.x = (iconPadding * 4) + (iconSize.width * 3)
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-  
-    
-  override func broughtToTop() {
-    super.broughtToTop()
     
     let flatStatSize = CGSize(width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarSize.height)
     
@@ -122,6 +112,16 @@ class SettingsCardViewController: CardViewController {
      vertical: false,
      delegate: self
     )
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+  
+    
+  override func broughtToTop() {
+    super.broughtToTop()
+    print(optionViews.values)
     
     for optionView in optionViews.values {
       view.addSubview(optionView)
@@ -143,11 +143,6 @@ class SettingsCardViewController: CardViewController {
     for optionView in optionViews.values {
       optionView.removeFromSuperview()
     }
-    optionViews.removeAll(keepingCapacity: true)
-    for tempView in tempViews {
-      tempView.removeFromSuperview()
-    }
-    tempViews.removeAll(keepingCapacity: true)
   }
   
   
@@ -158,6 +153,13 @@ class SettingsCardViewController: CardViewController {
 //    optionViews["length"]?.highlightChoice(internalOption: delegate!.currentSettings().minWordLength)
 //    optionViews["tiles"]?.highlightChoice(internalOption: delegate!.currentSettings().tileSqrt)
 //  }
+  
+  override func respondToUpdate() {
+    optionViews["time"]?.highlightChoice(internalOption: delegate!.currentSettings().time)
+    optionViews["lexicon"]?.highlightChoice(internalOption: delegate!.currentSettings().lexicon)
+    optionViews["length"]?.highlightChoice(internalOption: delegate!.currentSettings().minWordLength)
+    optionViews["tiles"]?.highlightChoice(internalOption: delegate!.currentSettings().tileSqrt)
+  }
   
     
   required init?(coder: NSCoder) {
