@@ -9,26 +9,11 @@ import UIKit
 
 class CombinedScoreViewController: UIViewController {
   
-  let gameCard: Bool
-  let scoreFont: UIFont
-  var textAttributes: [NSAttributedString.Key : Any]?
-  let sepColor: UIColor
-  
-  let foundIcon: IconView
-  let scoreIcon: IconView
-  let perceIcon: IconView
+  private let foundIcon: IconView
+  private let scoreIcon: IconView
+  private let perceIcon: IconView
   
   init(size s: CGSize, viewData vD: ViewData, gameCard g: Bool) {
-    
-    gameCard = g
-    
-    if gameCard {
-      scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
-      sepColor = vD.colourL
-    } else {
-      scoreFont = UIFont(name: uiFontName, size: getFontFor(height: s.height * 0.7))!
-      sepColor = vD.colourM
-    }
     
     foundIcon = ScoreIcon(viewData: vD, abv: "W", gameCard: g)
     scoreIcon = ScoreIcon(viewData: vD, abv: "P", gameCard: g)

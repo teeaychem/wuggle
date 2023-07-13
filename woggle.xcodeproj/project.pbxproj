@@ -20,7 +20,6 @@
 		57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */; };
 		57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155122A5579D000A802C9 /* ChoiceLabel.swift */; };
 		57D155162A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */; };
-		57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3732A5481150097D1D2 /* StatusBarView.swift */; };
 		57E2F3772A54E1420097D1D2 /* SettingsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */; };
 		57E2F37A2A54E5850097D1D2 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F3792A54E5850097D1D2 /* IconView.swift */; };
 		57E2F3802A54E59D0097D1D2 /* TimeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2F37C2A54E59D0097D1D2 /* TimeIcon.swift */; };
@@ -99,7 +98,6 @@
 		57BADD852A4A4D10009074DF /* UITableViewWordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewWordCell.swift; sourceTree = "<group>"; };
 		57D155122A5579D000A802C9 /* ChoiceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceLabel.swift; sourceTree = "<group>"; };
 		57D155152A557D6400A802C9 /* SettingsCardViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewControllerDelegate.swift; sourceTree = "<group>"; };
-		57E2F3732A5481150097D1D2 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		57E2F3762A54E1420097D1D2 /* SettingsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCardViewController.swift; sourceTree = "<group>"; };
 		57E2F3792A54E5850097D1D2 /* IconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		57E2F37C2A54E59D0097D1D2 /* TimeIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeIcon.swift; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 			isa = PBXGroup;
 			children = (
 				57E758BF2A5C2A0B00823989 /* CombinedScoreViewController.swift */,
-				57E2F3732A5481150097D1D2 /* StatusBarView.swift */,
 			);
 			path = StatusBar;
 			sourceTree = "<group>";
@@ -557,7 +554,6 @@
 				57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */,
 				57AC997C2A558F0300B2E892 /* OptionViewDelegate.swift in Sources */,
 				57E758B92A5A164400823989 /* ScoreIcon.swift in Sources */,
-				57E2F3742A5481150097D1D2 /* StatusBarView.swift in Sources */,
 				57EB7A4F2A479C2D00BCA44B /* ViewData.swift in Sources */,
 				57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */,
 				5735DD3F2A4E4B560071B29B /* FoundWordsViewController.swift in Sources */,

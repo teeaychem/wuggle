@@ -16,7 +16,7 @@ class CardViewController: UIViewController {
   let viewData: ViewData
   let cardView: CardView
   
-  let statusBarView: StatusBarView
+  let statusBarView: UIView
   let mainView: UIView
   
   
@@ -25,7 +25,7 @@ class CardViewController: UIViewController {
     viewData = vD
     cardView = CardView(iName: iN, cardWidth: viewData.width)
     delegate = d
-    statusBarView = StatusBarView(frame:
+    statusBarView = UIView(frame:
                                     CGRect(
                                       origin: CGPoint(x: 0, y: 0),
                                       size: CGSize(width: viewData.width, height: viewData.statusBarSize.height)))
