@@ -12,6 +12,8 @@ import CoreData
 
 class CardStackViewController: UIViewController {
   
+  
+  let CardVD: ViewData
   // Controls the main UI
   
   private let width: CGFloat
@@ -27,6 +29,7 @@ class CardStackViewController: UIViewController {
   
   private var cardViews: [CardViewController] = []
   private var cardOrigin: CGFloat = 0.0
+  private var topCardIndex: Int
   
   // TODO: Think about whether to accept settings as an argument, or load/create with this controller.
   unowned var settings: Settings
@@ -38,15 +41,24 @@ class CardStackViewController: UIViewController {
     width = min(((UIScreen.main.bounds.size.height) / 1.4 / 1.16 ) * 0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
     
-    let CardVD = ViewData(name: "sett", width: width, colourOption: 0)
+    CardVD = ViewData(name: "sett", width: width, colourOption: 0)
     
     firstCardY = (UIScreen.main.bounds.height - (CardVD.height + CardVD.statusBarSize.height * 2)) * 0.5
     statusBarH = CardVD.statusBarSize.height
+    
+    topCardIndex = 2
     
     super.init(nibName: nil, bundle: nil)
     
     statsBarTapUIGR = UITapGestureRecognizer(target: self, action: #selector(statusBarTap))
 
+    makeAndEmbedCards()
+    setIcons()
+    cardShuffleGesutre(enabled: false)
+  }
+  
+  
+  func makeAndEmbedCards() {
     settCardC = SettingsCardViewController(viewData: CardVD, delegate: self)
     statCardC = StatsCardViewController(viewData: CardVD, delegate: self)
     gameCardC = GameCardViewController(viewData: CardVD, delegate: self)
@@ -61,9 +73,13 @@ class CardStackViewController: UIViewController {
     self.embed(settCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + CardVD.statusBarSize.height))
     self.embed(gameCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + CardVD.statusBarSize.height * 2))
     gameCardC?.broughtToTop()
-    
-    setIcons()
-    cardShuffleGesutre(enabled: false)
+  }
+  
+  func deleteCards() {
+    for card in cardViews {
+      unembed(card, inView: self.view)
+    }
+    cardViews.removeAll()
   }
   
   
@@ -75,22 +91,65 @@ class CardStackViewController: UIViewController {
   }
   
   
-  func reorderCardsByList() {
-    for i in 0...cardViews.count - 1 {
-      view.bringSubviewToFront(cardViews[i].view)
-      cardViews[i].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(i) * statusBarH))
+  func reorderCardsByIndex(index i: Int) {
+    // TODO: Adjust this so card order is natural.
+    // Then, simplify.
+    
+    switch i {
+    case 0:
+      cardViews[1].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
+      cardViews[2].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
+      cardViews[0].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
+      cardViews[1].shuffledToDeck()
+      cardViews[2].shuffledToDeck()
+      cardViews[0].broughtToTop()
+      view.bringSubviewToFront(cardViews[1].view)
+      view.bringSubviewToFront(cardViews[2].view)
+      view.bringSubviewToFront(cardViews[0].view)
+    case 1:
+      cardViews[0].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
+      cardViews[2].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
+      cardViews[1].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
+      cardViews[0].shuffledToDeck()
+      cardViews[2].shuffledToDeck()
+      cardViews[1].broughtToTop()
+      view.bringSubviewToFront(cardViews[0].view)
+      view.bringSubviewToFront(cardViews[2].view)
+      view.bringSubviewToFront(cardViews[1].view)
+    case 2:
+      cardViews[0].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
+      cardViews[1].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
+      cardViews[2].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
+      cardViews[0].shuffledToDeck()
+      cardViews[1].shuffledToDeck()
+      cardViews[2].broughtToTop()
+      view.bringSubviewToFront(cardViews[0].view)
+      view.bringSubviewToFront(cardViews[1].view)
+      view.bringSubviewToFront(cardViews[2].view)
+    default:
+      return
     }
+    
+    
+//    for i in 0...cardViews.count - 1 {
+//      view.bringSubviewToFront(cardViews[i].view)
+//      cardViews[i].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(i) * statusBarH))
+//    }
   }
   
   
   @objc func statusBarTap(_ r: UIGestureRecognizer) {
+    print("tap")
     let cardIndex = cardViews.firstIndex(where: {r.view?.superview as! CardView == $0.cardView})
-    if (cardIndex != nil && cardIndex != cardViews.count - 1) {
-      cardViews.last!.shuffledToDeck()
-      cardViews.append(cardViews[cardIndex!])
-      cardViews.remove(at: cardIndex!)
-      reorderCardsByList()
-      cardViews.last!.broughtToTop()
+    print("card index ", cardIndex)
+    if (cardIndex != nil && cardIndex != topCardIndex) {
+      topCardIndex = cardIndex!
+      
+//      cardViews.last!.shuffledToDeck()
+//      cardViews.append(cardViews[cardIndex!])
+//      cardViews.remove(at: cardIndex!)
+      reorderCardsByIndex(index: topCardIndex)
+//      cardViews.last!.broughtToTop()
     }
   }
   
@@ -177,6 +236,19 @@ extension CardStackViewController: CardStackDelegate {
   func processUpdate() {
     print("Asked to process update")
     statCardC!.respondToUpdate()
+    
+    // Okay, so whenever somethign is redrawn, I get updated colours.
+//    CardVD.colourD = UIColor(red: 150/255, green: 126/255, blue: 118/255, alpha: 1) // UIColor.darkGray
+//    CardVD.colourM =  UIColor(red: 215/255, green: 192/255, blue: 174/255, alpha: 1) // UIColor.gray
+//    CardVD.colourL = UIColor(red: 238/255, green: 227/255, blue: 203/255, alpha: 1) // UIColor.lightGray
+//    
+//    CardVD.userInteractionColour = UIColor(red: 155/255, green: 171/255, blue: 184/255, alpha: 1) // UIColor.white
+//    CardVD.iconBorderColour = UIColor.black
+//    
+//    deleteCards()
+//    makeAndEmbedCards()
+//    cardShuffleGesutre(enabled: false)
+//    reorderCardsByIndex(index: topCardIndex)
   }
   
   
