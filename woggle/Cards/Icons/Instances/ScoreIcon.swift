@@ -17,7 +17,7 @@ class ScoreIcon: IconView {
   private let scoreLabel: UILabel
   private var textAttributes: [NSAttributedString.Key : Any]?
   
-  init(viewData vD: ViewData, abv: String, gameCard g: Bool) {
+  init(viewData vD: UIData, abv: String, gameCard g: Bool) {
     
     gameCard = g
     

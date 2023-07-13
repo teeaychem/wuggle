@@ -16,7 +16,7 @@ class SettingsCardViewController: CardViewController {
 
   private var optionViews = [String: OptionView]()
   
-  override init(iName iN: String, viewData vD: ViewData, delegate d: CardStackDelegate) {
+  override init(iName iN: String, viewData vD: UIData, delegate d: CardStackDelegate) {
     
     let iconSize = vD.squareIconSize
     
@@ -27,7 +27,7 @@ class SettingsCardViewController: CardViewController {
     
     super.init(iName: iN, viewData: vD, delegate: d)
     
-    let iconPadding = (vD.width - (vD.squareIconSize.width * 4)) * 0.2
+    let iconPadding = (vD.cardSize.width - (vD.squareIconSize.width * 4)) * 0.2
     
     // Set up the icons
     statusBarView.addSubview(timeIcon)
@@ -39,7 +39,7 @@ class SettingsCardViewController: CardViewController {
     statusBarView.addSubview(tileIcon)
     tileIcon.frame.origin.x = (iconPadding * 4) + (iconSize.width * 3)
     
-    let flatStatSize = CGSize(width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.statusBarSize.height)
+    let flatStatSize = CGSize(width: viewData.cardSize.width - viewData.gameBoardPadding * 2, height: viewData.statusBarSize.height)
     
     optionViews["time"] = OptionView(
       frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.statusBarSize.height * 1.25), size: flatStatSize),
@@ -102,7 +102,7 @@ class SettingsCardViewController: CardViewController {
     for optionView in optionViews.values {
       view.addSubview(optionView)
       optionView.addAndEnableChoiceLabels()
-      let sep = UIView(frame: CGRect(x: viewData.gameBoardPadding, y: optionView.frame.maxY, width: viewData.width - viewData.gameBoardPadding * 2, height: viewData.height * 0.005))
+      let sep = UIView(frame: CGRect(x: viewData.gameBoardPadding, y: optionView.frame.maxY, width: viewData.cardSize.width - viewData.gameBoardPadding * 2, height: viewData.cardSize.height * 0.005))
       sep.layer.backgroundColor = viewData.colourD.cgColor
       view.addSubview(sep)
     }
@@ -163,7 +163,7 @@ extension SettingsCardViewController: SettingsCardViewControllerDelegate {
   }
   
   
-  func getViewData() -> ViewData {
+  func getViewData() -> UIData {
     return viewData
   }
 }

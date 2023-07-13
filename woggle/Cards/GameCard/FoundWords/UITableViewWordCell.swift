@@ -10,7 +10,7 @@ import UIKit
 
 class UITableViewWordCell : UITableViewCell {
   
-  init(viewData vD: ViewData, cellStyle cS : UITableViewCell.CellStyle, word w: String, found f: Bool, size s: CGSize) {
+  init(viewData vD: UIData, cellStyle cS : UITableViewCell.CellStyle, word w: String, found f: Bool, size s: CGSize) {
     
     super.init(style: cS, reuseIdentifier: w)
     

@@ -31,7 +31,7 @@ struct cardViewsStruct {
 class CardStackViewController: UIViewController {
   
   
-  let CardVD: ViewData
+  let CardVD: UIData
   // Controls the main UI
   
   private let width: CGFloat
@@ -55,9 +55,10 @@ class CardStackViewController: UIViewController {
     width = min(((UIScreen.main.bounds.size.height) / 1.4 / 1.16 ) * 0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
     
-    CardVD = ViewData(name: "sett", width: width, colourOption: 0)
+    CardVD = UIData(name: "sett", width: width, colourOption: 0)
+    CardVD.updateColour(profile: 4)
     
-    firstCardY = (UIScreen.main.bounds.height - (CardVD.height + CardVD.statusBarSize.height * 2)) * 0.5
+    firstCardY = (UIScreen.main.bounds.height - (CardVD.cardSize.height + CardVD.statusBarSize.height * 2)) * 0.5
     statusBarH = CardVD.statusBarSize.height
     
     topCardIndex = 2

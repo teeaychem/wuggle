@@ -13,7 +13,7 @@ class CombinedScoreViewController: UIViewController {
   private let scoreIcon: IconView
   private let perceIcon: IconView
   
-  init(size s: CGSize, viewData vD: ViewData, gameCard g: Bool) {
+  init(size s: CGSize, viewData vD: UIData, gameCard g: Bool) {
     
     foundIcon = ScoreIcon(viewData: vD, abv: "W", gameCard: g)
     scoreIcon = ScoreIcon(viewData: vD, abv: "P", gameCard: g)

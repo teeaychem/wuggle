@@ -17,9 +17,9 @@ class IconView : UIView {
   let size: CGSize
   let indent: CGFloat
   let radius: CGFloat
-  let viewData: ViewData
+  let viewData: UIData
   
-  init(size s: CGSize, viewData vD: ViewData) {
+  init(size s: CGSize, viewData vD: UIData) {
     
     size = s
     indent = size.height * 0.1

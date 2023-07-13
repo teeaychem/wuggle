@@ -13,22 +13,22 @@ class CardViewController: UIViewController {
   
   let iName: String
   
-  let viewData: ViewData
+  let viewData: UIData
   let cardView: CardView
   
   let statusBarView: UIView
   let mainView: UIView
   
   
-  init(iName iN: String, viewData vD: ViewData, delegate d: CardStackDelegate) {
+  init(iName iN: String, viewData vD: UIData, delegate d: CardStackDelegate) {
     iName = iN
     viewData = vD
-    cardView = CardView(iName: iN, cardWidth: viewData.width)
+    cardView = CardView(iName: iN, cardWidth: viewData.cardSize.width)
     delegate = d
     statusBarView = UIView(frame:
                                     CGRect(
                                       origin: CGPoint(x: 0, y: 0),
-                                      size: CGSize(width: viewData.width, height: viewData.statusBarSize.height)))
+                                      size: CGSize(width: viewData.cardSize.width, height: viewData.statusBarSize.height)))
     mainView = UIView(frame:
                         CGRect(
                           origin: CGPoint(x: 0, y: vD.statusBarSize.height),

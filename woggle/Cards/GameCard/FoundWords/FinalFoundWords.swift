@@ -15,7 +15,7 @@ class FinalFoundWordsViewController: UIViewController {
   private let fontSize: CGFloat
   private let foundWordView: FoundWordView
   
-  init(viewData vD: ViewData) {
+  init(viewData vD: UIData) {
     
     // TODO: Fix this
     wordViewWidth = (vD.gameBoardSize * 0.85 - (2 * vD.tilePadding))

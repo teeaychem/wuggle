@@ -19,9 +19,9 @@ class TileView: UIView {
   let tileBackgroundColor: CGColor
   let tileFillColour: CGColor
   let tileSelectedColour: CGColor
-  let viewData: ViewData
+  let viewData: UIData
     
-  init(position p: CGPoint, size s: CGFloat, boardSize bS: CGFloat, text t: String, viewData vD: ViewData) {
+  init(position p: CGPoint, size s: CGFloat, boardSize bS: CGFloat, text t: String, viewData vD: UIData) {
 
     size = s
     borderWidth = s * 0.02

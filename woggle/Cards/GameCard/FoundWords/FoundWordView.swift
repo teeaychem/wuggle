@@ -9,11 +9,11 @@ import UIKit
 
 class FoundWordView: UITableView {
   
-  let viewData: ViewData
+  let viewData: UIData
   private var wordList = [(String, Bool)]()
   private let listDimensions: CGSize
   
-  init(viewData vD: ViewData, listDimensions lD: CGSize, rowHieght rH: CGFloat) {
+  init(viewData vD: UIData, listDimensions lD: CGSize, rowHieght rH: CGFloat) {
     
     viewData = vD
     listDimensions = lD

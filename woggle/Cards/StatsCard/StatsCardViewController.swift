@@ -17,10 +17,10 @@ class StatsCardViewController: CardViewController {
   let statVSep: CGFloat
   let statXOrigin: CGFloat
   
-  override init(iName iN: String, viewData vD: ViewData, delegate d: CardStackDelegate) {
+  override init(iName iN: String, viewData vD: UIData, delegate d: CardStackDelegate) {
     
-    statVSep = (vD.height - (vD.statusBarSize.height + vD.statSize.height * 6)) / 7
-    statXOrigin = vD.width * 0.025
+    statVSep = (vD.cardSize.height - (vD.statusBarSize.height + vD.statSize.height * 6)) / 7
+    statXOrigin = vD.cardSize.width * 0.025
     
     combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD, gameCard: false)
     statVCs["mostWordsFound"] = StatViewController(stat: d.currentStats().topWords!, displayName: "Most Words Found", viewData: vD)

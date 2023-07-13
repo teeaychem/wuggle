@@ -10,7 +10,7 @@ import Foundation
 
 protocol ViewDelegate: AnyObject {
   
-  func viewData() -> ViewData
+  func viewData() -> UIData
   // Return viewData
   
   

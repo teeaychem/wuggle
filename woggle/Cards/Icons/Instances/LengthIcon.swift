@@ -16,7 +16,7 @@ class LengthIcon: IconView {
   private let plusLayer = CAShapeLayer()
   private let numberLayer = CAShapeLayer()
   
-  init(viewData vD: ViewData) {
+  init(viewData vD: UIData) {
     
     super.init(size: vD.squareIconSize, viewData: vD)
     

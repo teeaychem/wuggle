@@ -9,7 +9,7 @@ import UIKit
 
 class StopwatchView: UIView {
   
-  let viewData : ViewData
+  let viewData : UIData
   
   private let secondsLayer = CAShapeLayer()
   let highLightLayer = CAShapeLayer()
@@ -27,7 +27,7 @@ class StopwatchView: UIView {
   
   private var secondsAngle = Double.pi
   
-  init(viewData vD: ViewData) {
+  init(viewData vD: UIData) {
     
     viewData = vD
     

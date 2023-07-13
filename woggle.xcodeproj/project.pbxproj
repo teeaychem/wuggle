@@ -42,7 +42,7 @@
 		57EB7A492A478BF500BCA44B /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A482A478BF500BCA44B /* CardViewController.swift */; };
 		57EB7A4B2A478CF000BCA44B /* GameCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A4A2A478CF000BCA44B /* GameCardViewController.swift */; };
 		57EB7A4D2A47950500BCA44B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A4C2A47950500BCA44B /* UIViewControllerExtension.swift */; };
-		57EB7A4F2A479C2D00BCA44B /* ViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A4E2A479C2D00BCA44B /* ViewData.swift */; };
+		57EB7A4F2A479C2D00BCA44B /* UIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A4E2A479C2D00BCA44B /* UIData.swift */; };
 		57EB7A512A47A65000BCA44B /* GameInstanceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A502A47A65000BCA44B /* GameInstanceExtension.swift */; };
 		57EB7A542A47A7FC00BCA44B /* tileText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A532A47A7FC00BCA44B /* tileText.swift */; };
 		57EB7A562A47A83900BCA44B /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB7A552A47A83900BCA44B /* TileView.swift */; };
@@ -120,7 +120,7 @@
 		57EB7A482A478BF500BCA44B /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		57EB7A4A2A478CF000BCA44B /* GameCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardViewController.swift; sourceTree = "<group>"; };
 		57EB7A4C2A47950500BCA44B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
-		57EB7A4E2A479C2D00BCA44B /* ViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewData.swift; sourceTree = "<group>"; };
+		57EB7A4E2A479C2D00BCA44B /* UIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIData.swift; sourceTree = "<group>"; };
 		57EB7A502A47A65000BCA44B /* GameInstanceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstanceExtension.swift; sourceTree = "<group>"; };
 		57EB7A532A47A7FC00BCA44B /* tileText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tileText.swift; sourceTree = "<group>"; };
 		57EB7A552A47A83900BCA44B /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
@@ -279,7 +279,6 @@
 			children = (
 				57E2F3782A54E57A0097D1D2 /* Icons */,
 				57E2F3722A54810A0097D1D2 /* StatusBar */,
-				57EB7A4E2A479C2D00BCA44B /* ViewData.swift */,
 				57EB7A482A478BF500BCA44B /* CardViewController.swift */,
 				57EF4B6D2A4665D8008C57FF /* CardView.swift */,
 				57E2F3752A54E12E0097D1D2 /* SettingsCard */,
@@ -358,6 +357,7 @@
 				57EB7A522A47A7F000BCA44B /* Misc */,
 				57EB7A412A47820900BCA44B /* Gameboard */,
 				57EF4B6B2A466528008C57FF /* CardStackViewController.swift */,
+				57EB7A4E2A479C2D00BCA44B /* UIData.swift */,
 				57EB7A3F2A47817C00BCA44B /* Cards */,
 				57EF4B742A466BA4008C57FF /* Extensions */,
 				57EF4B712A466B7B008C57FF /* Resources */,
@@ -554,7 +554,7 @@
 				57EB7A432A47827F00BCA44B /* GameboardViewController.swift in Sources */,
 				57AC997C2A558F0300B2E892 /* OptionViewDelegate.swift in Sources */,
 				57E758B92A5A164400823989 /* ScoreIcon.swift in Sources */,
-				57EB7A4F2A479C2D00BCA44B /* ViewData.swift in Sources */,
+				57EB7A4F2A479C2D00BCA44B /* UIData.swift in Sources */,
 				57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */,
 				5735DD3F2A4E4B560071B29B /* FoundWordsViewController.swift in Sources */,
 				57455B432A4CFFA40019FFB5 /* PlayButtonsView.swift in Sources */,

@@ -23,9 +23,9 @@ import UIKit
 class GameboardViewController: UIViewController {
   
   let gameboardView: GameboardView
-  let viewData: ViewData
+  let viewData: UIData
   
-  init(viewData vD: ViewData, tilePadding tP: CGFloat) {
+  init(viewData vD: UIData, tilePadding tP: CGFloat) {
     
     // Constants for placing elements
     viewData = vD

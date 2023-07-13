@@ -19,7 +19,7 @@ class TimeIcon : IconView {
   private var handLayer: CAShapeLayer?
   
   
-  init(viewData vD: ViewData) {
+  init(viewData vD: UIData) {
     
     handStrokeWidth = CGFloat(vD.squareIconSize.height)/12
     centerPoint = CGPoint(x: vD.squareIconSize.width * 0.5, y: vD.squareIconSize.height * 0.5)

@@ -34,7 +34,7 @@ class GameCardViewController: CardViewController {
   var selectedTiles = [Int16]()
   var rootTrie: TrieNode?
   
-  override init(iName iN: String, viewData vD: ViewData, delegate d: CardStackDelegate) {
+  override init(iName iN: String, viewData vD: UIData, delegate d: CardStackDelegate) {
     
     // Use delegate to pull some general infomration.
     rootTrie = d.currentSettings().getTrieRoot()
@@ -58,7 +58,7 @@ class GameCardViewController: CardViewController {
     super.broughtToTop()
     
     // First set the views.
-    self.embed(boardViewController, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.height - (viewData.gameBoardSize + viewData.gameBoardPadding)))
+    self.embed(boardViewController, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.cardSize.height - (viewData.gameBoardSize + viewData.gameBoardPadding)))
     self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.gameBoardPadding + viewData.statusBarSize.height))
     self.embed(playButtonsViewController, inView: self.cardView, origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.stopWatchSize), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
     self.embed(foundWordsViewController, inView: self.cardView, origin: CGPoint(x: ((3 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
@@ -316,7 +316,7 @@ extension GameCardViewController {
     stopwatchViewController.view.removeGestureRecognizer(watchGestureRecognizer!)
     // Display final words
     finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
-    self.embed(finalWordsViewController!, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding + viewData.gameBoardSize * 0.075, y: viewData.height - viewData.gameBoardSize * 0.925 - viewData.gameBoardPadding))
+    self.embed(finalWordsViewController!, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding + viewData.gameBoardSize * 0.075, y: viewData.cardSize.height - viewData.gameBoardSize * 0.925 - viewData.gameBoardPadding))
     finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate!.currentGame()!.allWordsList!), seeWords: delegate!.currentGame()!.foundWordsList!)
     // Add gesture to see board.
     boardViewController.addGestureRecognizer(recogniser: UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBoard)))

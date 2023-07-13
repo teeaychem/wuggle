@@ -95,7 +95,7 @@ extension OptionView: OptionViewDelegate {
   }
 
   
-  func getViewData() -> ViewData {
+  func getViewData() -> UIData {
     return delegate.getViewData()
   }
 

@@ -14,14 +14,14 @@ class StatViewController: UIViewController {
   
   let statDisplayName: String
   let statSize: CGSize
-  let viewData: ViewData
+  let viewData: UIData
   
   let nameLabel: UILabel
   let valueLabel: UILabel
   let dateLabel: UILabel
   let extraLabel: UILabel
   
-  init(stat s: Stat, displayName dN: String, viewData vD: ViewData) {
+  init(stat s: Stat, displayName dN: String, viewData vD: UIData) {
     
     statDisplayName = dN
     statSize = vD.statSize

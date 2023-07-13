@@ -14,7 +14,7 @@ class TileIcon: IconView {
   private let tileLayer = CAShapeLayer()
   private let letterLayer = CAShapeLayer()
   
-  init(viewData vD: ViewData) {
+  init(viewData vD: UIData) {
     
     tileLayer.fillColor = vD.colourM.cgColor
     

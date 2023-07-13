@@ -18,7 +18,7 @@ class LexiconIcon: IconView {
   
   private let coverWidth: CGFloat
     
-  init(viewData vD: ViewData) {
+  init(viewData vD: UIData) {
     
     coverWidth = vD.squareIconSize.width * 0.7
     

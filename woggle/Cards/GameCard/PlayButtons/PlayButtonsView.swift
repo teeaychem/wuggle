@@ -31,7 +31,7 @@ class PlayButtonsView: UIView {
   
   private var stopLayer = CAShapeLayer()
   
-  init(viewData vD: ViewData) {
+  init(viewData vD: UIData) {
     
     buttonSize = vD.playPauseStopSize
     xPadding = vD.gameBoardPadding * 0.5
@@ -40,8 +40,8 @@ class PlayButtonsView: UIView {
     
     playPauseView = UIView(frame: CGRect(x: xPadding, y: yPadding, width: subButtonWidth, height: subButtonWidth))
     stopView = UIView(frame: CGRect(x: xPadding, y: (2 *  yPadding) + (subButtonWidth), width: subButtonWidth, height: subButtonWidth))
-    playPauseView.layer.cornerRadius = getCornerRadius(width: vD.width)
-    stopView.layer.cornerRadius = getCornerRadius(width: vD.width)
+    playPauseView.layer.cornerRadius = getCornerRadius(width: vD.cardSize.width)
+    stopView.layer.cornerRadius = getCornerRadius(width: vD.cardSize.width)
     
     
     stopLayer.strokeColor = vD.iconBorderColour.cgColor
