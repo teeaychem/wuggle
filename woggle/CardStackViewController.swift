@@ -10,6 +10,24 @@
 import UIKit
 import CoreData
 
+struct cardViewsStruct {
+  var settCardC: SettingsCardViewController?
+  var statCardC: StatsCardViewController?
+  var gameCardC: GameCardViewController?
+  
+  mutating func deleteCards() {
+    settCardC = nil
+    statCardC = nil
+    gameCardC = nil
+  }
+  
+  func removeGesturesFromStatusBar() {
+    settCardC!.removeGesturesFromStatusBar()
+    statCardC!.removeGesturesFromStatusBar()
+    gameCardC!.removeGesturesFromStatusBar()
+  }
+}
+
 class CardStackViewController: UIViewController {
   
   
@@ -23,11 +41,7 @@ class CardStackViewController: UIViewController {
   
   private var statsBarTapUIGR: UIGestureRecognizer?
   
-  var settCardC: SettingsCardViewController?
-  var statCardC: StatsCardViewController?
-  var gameCardC: GameCardViewController?
-  
-  private var cardViews: [CardViewController] = []
+  private var cardViews = cardViewsStruct()
   private var cardOrigin: CGFloat = 0.0
   private var topCardIndex: Int
   
@@ -59,98 +73,79 @@ class CardStackViewController: UIViewController {
   
   
   func makeAndEmbedCards() {
-    settCardC = SettingsCardViewController(viewData: CardVD, delegate: self)
-    statCardC = StatsCardViewController(viewData: CardVD, delegate: self)
-    gameCardC = GameCardViewController(viewData: CardVD, delegate: self)
+    cardViews.gameCardC = GameCardViewController(iName: "gameC", viewData: CardVD, delegate: self)
+    cardViews.settCardC = SettingsCardViewController(iName: "settC", viewData: CardVD, delegate: self)
+    cardViews.statCardC = StatsCardViewController(iName: "statC", viewData: CardVD, delegate: self)
     
-    statCardC?.cardView.backgroundColor = CardVD.colourD
-    settCardC?.cardView.backgroundColor = CardVD.colourL
-    gameCardC?.cardView.backgroundColor = CardVD.colourM
-    
-    cardViews = [statCardC!, settCardC!, gameCardC!]
+    cardViews.statCardC?.cardView.backgroundColor = CardVD.colourD
+    cardViews.settCardC?.cardView.backgroundColor = CardVD.colourL
+    cardViews.gameCardC?.cardView.backgroundColor = CardVD.colourM
 
-    self.embed(statCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY))
-    self.embed(settCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + CardVD.statusBarSize.height))
-    self.embed(gameCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + CardVD.statusBarSize.height * 2))
-    gameCardC?.broughtToTop()
+    self.embed(cardViews.statCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY))
+    self.embed(cardViews.settCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + CardVD.statusBarSize.height))
+    self.embed(cardViews.gameCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + CardVD.statusBarSize.height * 2))
+    cardViews.gameCardC!.broughtToTop()
   }
   
-  func deleteCards() {
-    for card in cardViews {
-      unembed(card, inView: self.view)
-    }
-    cardViews.removeAll()
+  func unembedAndDeleteCards() {
+    self.unembed(cardViews.gameCardC!, inView: self.view)
+    self.unembed(cardViews.settCardC!, inView: self.view)
+    self.unembed(cardViews.statCardC!, inView: self.view)
+    cardViews.deleteCards()
   }
   
   
   func setIcons() {
-    settCardC?.updateIcon(internalName: "time", internalValue: settings.time)
-    settCardC?.updateIcon(internalName: "lexicon", internalValue: settings.lexicon)
-    settCardC?.updateIcon(internalName: "length", internalValue: settings.minWordLength)
-    settCardC?.updateIcon(internalName: "tiles", internalValue: settings.tileSqrt)
+    cardViews.settCardC?.updateIcon(internalName: "time", internalValue: settings.time)
+    cardViews.settCardC?.updateIcon(internalName: "lexicon", internalValue: settings.lexicon)
+    cardViews.settCardC?.updateIcon(internalName: "length", internalValue: settings.minWordLength)
+    cardViews.settCardC?.updateIcon(internalName: "tiles", internalValue: settings.tileSqrt)
   }
   
   
-  func reorderCardsByIndex(index i: Int) {
-    // TODO: Adjust this so card order is natural.
-    // Then, simplify.
+  func reorderCardsByIndex(iName iN: String) {
+    // TODO: Simplify.
     
-    switch i {
-    case 0:
-      cardViews[1].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
-      cardViews[2].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
-      cardViews[0].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
-      cardViews[1].shuffledToDeck()
-      cardViews[2].shuffledToDeck()
-      cardViews[0].broughtToTop()
-      view.bringSubviewToFront(cardViews[1].view)
-      view.bringSubviewToFront(cardViews[2].view)
-      view.bringSubviewToFront(cardViews[0].view)
-    case 1:
-      cardViews[0].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
-      cardViews[2].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
-      cardViews[1].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
-      cardViews[0].shuffledToDeck()
-      cardViews[2].shuffledToDeck()
-      cardViews[1].broughtToTop()
-      view.bringSubviewToFront(cardViews[0].view)
-      view.bringSubviewToFront(cardViews[2].view)
-      view.bringSubviewToFront(cardViews[1].view)
-    case 2:
-      cardViews[0].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
-      cardViews[1].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
-      cardViews[2].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
-      cardViews[0].shuffledToDeck()
-      cardViews[1].shuffledToDeck()
-      cardViews[2].broughtToTop()
-      view.bringSubviewToFront(cardViews[0].view)
-      view.bringSubviewToFront(cardViews[1].view)
-      view.bringSubviewToFront(cardViews[2].view)
+    switch iN {
+    case "gameC":
+      cardViews.statCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
+      cardViews.settCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
+      cardViews.gameCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
+      cardViews.statCardC!.shuffledToDeck()
+      cardViews.settCardC!.shuffledToDeck()
+      cardViews.gameCardC!.broughtToTop()
+      view.bringSubviewToFront(cardViews.statCardC!.view)
+      view.bringSubviewToFront(cardViews.settCardC!.view)
+      view.bringSubviewToFront(cardViews.gameCardC!.view)
+    case "statC":
+      cardViews.gameCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
+      cardViews.settCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
+      cardViews.statCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
+      cardViews.gameCardC!.shuffledToDeck()
+      cardViews.settCardC!.shuffledToDeck()
+      cardViews.statCardC!.broughtToTop()
+      view.bringSubviewToFront(cardViews.gameCardC!.view)
+      view.bringSubviewToFront(cardViews.settCardC!.view)
+      view.bringSubviewToFront(cardViews.statCardC!.view)
+    case "settC":
+      cardViews.statCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
+      cardViews.gameCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
+      cardViews.settCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
+      cardViews.statCardC!.shuffledToDeck()
+      cardViews.gameCardC!.shuffledToDeck()
+      cardViews.settCardC!.broughtToTop()
+      view.bringSubviewToFront(cardViews.statCardC!.view)
+      view.bringSubviewToFront(cardViews.gameCardC!.view)
+      view.bringSubviewToFront(cardViews.settCardC!.view)
     default:
       return
     }
-    
-    
-//    for i in 0...cardViews.count - 1 {
-//      view.bringSubviewToFront(cardViews[i].view)
-//      cardViews[i].view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(i) * statusBarH))
-//    }
   }
   
   
   @objc func statusBarTap(_ r: UIGestureRecognizer) {
-    print("tap")
-    let cardIndex = cardViews.firstIndex(where: {r.view?.superview as! CardView == $0.cardView})
-    print("card index ", cardIndex)
-    if (cardIndex != nil && cardIndex != topCardIndex) {
-      topCardIndex = cardIndex!
-      
-//      cardViews.last!.shuffledToDeck()
-//      cardViews.append(cardViews[cardIndex!])
-//      cardViews.remove(at: cardIndex!)
-      reorderCardsByIndex(index: topCardIndex)
-//      cardViews.last!.broughtToTop()
-    }
+    let card = r.view?.superview as! CardView
+    reorderCardsByIndex(iName: card.iName)
   }
   
   
@@ -165,13 +160,11 @@ extension CardStackViewController: CardStackDelegate {
   
   func cardShuffleGesutre(enabled: Bool) {
     if enabled {
-      for cV in cardViews {
-        cV.removeGesturesFromStatusBar()
-      }
+      cardViews.removeGesturesFromStatusBar()
     } else {
-      for cV in cardViews {
-        cV.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
-      }
+      cardViews.settCardC!.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
+      cardViews.statCardC!.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
+      cardViews.gameCardC!.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
     }
   }
   
@@ -235,20 +228,20 @@ extension CardStackViewController: CardStackDelegate {
   
   func processUpdate() {
     print("Asked to process update")
-    statCardC!.respondToUpdate()
+    cardViews.statCardC!.respondToUpdate()
     
-    // Okay, so whenever somethign is redrawn, I get updated colours.
-//    CardVD.colourD = UIColor(red: 150/255, green: 126/255, blue: 118/255, alpha: 1) // UIColor.darkGray
-//    CardVD.colourM =  UIColor(red: 215/255, green: 192/255, blue: 174/255, alpha: 1) // UIColor.gray
-//    CardVD.colourL = UIColor(red: 238/255, green: 227/255, blue: 203/255, alpha: 1) // UIColor.lightGray
-//    
-//    CardVD.userInteractionColour = UIColor(red: 155/255, green: 171/255, blue: 184/255, alpha: 1) // UIColor.white
-//    CardVD.iconBorderColour = UIColor.black
-//    
-//    deleteCards()
-//    makeAndEmbedCards()
-//    cardShuffleGesutre(enabled: false)
-//    reorderCardsByIndex(index: topCardIndex)
+//     Okay, so whenever somethign is redrawn, I get updated colours.
+    CardVD.colourD = UIColor(red: 150/255, green: 126/255, blue: 118/255, alpha: 1) // UIColor.darkGray
+    CardVD.colourM =  UIColor(red: 215/255, green: 192/255, blue: 174/255, alpha: 1) // UIColor.gray
+    CardVD.colourL = UIColor(red: 238/255, green: 227/255, blue: 203/255, alpha: 1) // UIColor.lightGray
+
+    CardVD.userInteractionColour = UIColor(red: 155/255, green: 171/255, blue: 184/255, alpha: 1) // UIColor.white
+    CardVD.iconBorderColour = UIColor.black
+
+    unembedAndDeleteCards()
+    makeAndEmbedCards()
+    cardShuffleGesutre(enabled: false)
+    reorderCardsByIndex(iName: "settC")
   }
   
   

@@ -17,7 +17,7 @@ class SettingsCardViewController: CardViewController {
   
   var optionViews = [String: OptionView]()
   
-  override init(viewData vD: ViewData, delegate d: CardStackDelegate) {
+  override init(iName iN: String, viewData vD: ViewData, delegate d: CardStackDelegate) {
     
     let iconSize = vD.squareIconSize
     
@@ -26,7 +26,7 @@ class SettingsCardViewController: CardViewController {
     tileIcon = TileIcon(viewData: vD)
     timeIcon = TimeIcon(viewData: vD)
     
-    super.init(viewData: vD, delegate: d)
+    super.init(iName: iN, viewData: vD, delegate: d)
     
     let iconPadding = (vD.width - (vD.squareIconSize.width * 4)) * 0.2
     

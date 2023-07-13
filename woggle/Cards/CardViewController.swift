@@ -11,8 +11,12 @@ class CardViewController: UIViewController {
   
   weak var delegate: CardStackDelegate?
   
+  let iName: String
+  
   let viewData: ViewData
+  
   let cardView: CardView
+  
   let statusBarView: StatusBarView
   let mainView: UIView
   
@@ -20,9 +24,10 @@ class CardViewController: UIViewController {
   var displayViews = [UIView]()
   
   
-  init(viewData vD: ViewData, delegate d: CardStackDelegate) {
+  init(iName iN: String, viewData vD: ViewData, delegate d: CardStackDelegate) {
+    iName = iN
     viewData = vD
-    cardView = CardView(cardWidth: viewData.width)
+    cardView = CardView(iName: iN, cardWidth: viewData.width)
     delegate = d
     statusBarView = StatusBarView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: viewData.width, height: viewData.statusBarSize.height)))
     mainView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: vD.statusBarSize.height), size: CGSize(width: vD.cardSize.width, height: vD.cardSize.height - vD.statusBarSize.height)))

@@ -17,7 +17,7 @@ class StatsCardViewController: CardViewController {
   let statVSep: CGFloat
   let statXOrigin: CGFloat
   
-  override init(viewData vD: ViewData, delegate d: CardStackDelegate) {
+  override init(iName iN: String, viewData vD: ViewData, delegate d: CardStackDelegate) {
     
     statVSep = (vD.height - (vD.statusBarSize.height + vD.statSize.height * 6)) / 7
     statXOrigin = vD.width * 0.025
@@ -31,7 +31,7 @@ class StatsCardViewController: CardViewController {
     statVCs["bestPLRation"] = StatViewController(stat: d.currentStats().topRatio!, displayName: "Best Points-Length Ratio", viewData: vD)
     
     
-    super.init(viewData: vD, delegate: d)
+    super.init(iName: iN, viewData: vD, delegate: d)
       
     embed(combinedScoreViewC, inView: self.statusBarView, origin: CGPoint(x: 0, y: 0))
     combinedScoreViewC.combinedUpdate(found: Int16(d.currentStats().topWords!.numVal), score: Int16(d.currentStats().topPoints!.numVal), percent: Int16(d.currentStats().topPercent!.numVal))

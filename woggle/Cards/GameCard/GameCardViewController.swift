@@ -34,7 +34,7 @@ class GameCardViewController: CardViewController {
   var selectedTiles = [Int16]()
   var rootTrie: TrieNode?
   
-  override init(viewData vD: ViewData, delegate d: CardStackDelegate) {
+  override init(iName iN: String, viewData vD: ViewData, delegate d: CardStackDelegate) {
     
     // Use delegate to pull some general infomration.
     rootTrie = d.currentSettings().getTrieRoot()
@@ -48,7 +48,7 @@ class GameCardViewController: CardViewController {
     playButtonsViewController = PlayButtonsViewController(viewData: vD)
     foundWordsViewController = FoundWordsViewController(viewData: vD)
     
-    super.init(viewData: vD, delegate: d)
+    super.init(iName: iN, viewData: vD, delegate: d)
     
     embed(combinedScoreViewC, inView: self.statusBarView, origin: CGPoint(x: 0, y: 0))
   }

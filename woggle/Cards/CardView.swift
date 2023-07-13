@@ -9,6 +9,7 @@ import UIKit
 
 class CardView: UIView {
   
+  let iName: String
   let cardWidth: CGFloat
   let cardHeight: CGFloat
     
@@ -16,7 +17,8 @@ class CardView: UIView {
   var displayViews = [UIView]()
   
   
-  init(cardWidth width: CGFloat) {
+  init(iName iN: String, cardWidth width: CGFloat) {
+    iName = iN
     cardWidth = width
     cardHeight = width * 1.4
     
