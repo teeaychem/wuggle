@@ -111,6 +111,8 @@ class SettingsCardViewController: CardViewController {
     optionViews["lexicon"]?.highlightChoice(internalOption: delegate!.currentSettings().lexicon)
     optionViews["length"]?.highlightChoice(internalOption: delegate!.currentSettings().minWordLength)
     optionViews["tiles"]?.highlightChoice(internalOption: delegate!.currentSettings().tileSqrt)
+    optionViews["side"]?.highlightChoice(internalOption: viewData.leftSide ? 1 : 0)
+    optionViews["impact"]?.highlightChoice(internalOption: viewData.impact ? 1 : 0)
   }
   
   
@@ -123,10 +125,13 @@ class SettingsCardViewController: CardViewController {
   
   
   override func respondToUpdate() {
+    print("Settings responding to update")
     optionViews["time"]?.highlightChoice(internalOption: delegate!.currentSettings().time)
     optionViews["lexicon"]?.highlightChoice(internalOption: delegate!.currentSettings().lexicon)
     optionViews["length"]?.highlightChoice(internalOption: delegate!.currentSettings().minWordLength)
     optionViews["tiles"]?.highlightChoice(internalOption: delegate!.currentSettings().tileSqrt)
+    print("impact arg", viewData.impact ? 1 : 0)
+    optionViews["impact"]?.highlightChoice(internalOption: viewData.impact ? 1 : 0)
   }
   
     
@@ -139,7 +144,15 @@ class SettingsCardViewController: CardViewController {
 extension SettingsCardViewController: SettingsCardViewControllerDelegate {
   
   func updateSetting(internalName: String, internalValue: Int16) {
-    updateIcon(internalName: internalName, internalValue: internalValue)
+    
+    switch internalName {
+    case "time", "lexicon", "length", "tiles":
+      updateIcon(internalName: internalName, internalValue: internalValue)
+    default:
+      print("Default update")
+    }
+    
+    
     delegate!.updateSetting(internalName: internalName, internalValue: internalValue)
     // Update the card delegate, which will then update the stored settings and other cards.
     // Update the settings on the card?

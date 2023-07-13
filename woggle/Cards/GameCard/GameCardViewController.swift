@@ -59,9 +59,16 @@ class GameCardViewController: CardViewController {
     
     // First set the views.
     self.embed(boardViewController, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.cardSize.height - (viewData.gameBoardSize + viewData.gameBoardPadding)))
-    self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.gameBoardPadding + viewData.statusBarSize.height))
-    self.embed(playButtonsViewController, inView: self.cardView, origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.stopWatchSize), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
-    self.embed(foundWordsViewController, inView: self.cardView, origin: CGPoint(x: ((3 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
+    
+    if viewData.leftSide {
+      self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.gameBoardPadding + viewData.statusBarSize.height))
+      self.embed(playButtonsViewController, inView: self.cardView, origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.stopWatchSize), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
+      self.embed(foundWordsViewController, inView: self.cardView, origin: CGPoint(x: ((3 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
+    } else {
+      self.embed(foundWordsViewController, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding, y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
+      self.embed(playButtonsViewController, inView: self.cardView, origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.foundWordViewWidth), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
+      self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: 3 * viewData.gameBoardPadding + viewData.foundWordViewWidth + viewData.stopWatchSize * 0.5, y: viewData.gameBoardPadding + viewData.statusBarSize.height))
+    }
     
     // TODO: Check these
     // Add gesture recognisers
@@ -185,7 +192,9 @@ extension GameCardViewController {
   
   func newGameMain() {
     print("New game!")
-    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+    if viewData.impact {
+      UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+    }
     // Remove all the tiles from the previous game.
     boardViewController.removeAllTileViews()
     // Get a new game.
@@ -405,7 +414,7 @@ extension GameCardViewController {
       if (tilePosition != nil) {
         boardViewController.selectTile(tileIndex: tilePosition!)
         selectedTiles.append(tilePosition!)
-        UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+        if viewData.impact { UIImpactFeedbackGenerator(style: .rigid).impactOccurred() }
       }
       
     case .changed:

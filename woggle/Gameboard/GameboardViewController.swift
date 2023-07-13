@@ -132,13 +132,13 @@ class GameboardViewController: UIViewController {
   
   func selectTile(tileIndex: Int16) {
     gameboardView.tiles[tileIndex]?.tileSelected()
-    UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+    if viewData.impact { UIImpactFeedbackGenerator(style: .rigid).impactOccurred() }
   }
 
   
   func deselectTile(tileIndex: Int16) {
     gameboardView.tiles[tileIndex]?.tileDeselected()
-    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+    if viewData.impact { UIImpactFeedbackGenerator(style: .soft).impactOccurred() }
   }
   
   

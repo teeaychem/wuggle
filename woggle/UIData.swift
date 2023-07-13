@@ -11,9 +11,12 @@ import UIKit
 class UIData {
   
   var impact: Bool
+  var leftSide: Bool
+  var showPercent: Bool
     
   let name: String
   var colourOption: Int16
+
   
   var colourL: UIColor
   var colourM: UIColor
@@ -40,6 +43,8 @@ class UIData {
     colourOption = cO
     
     impact = true
+    leftSide = true
+    showPercent = true
     
     colourD =  UIColor.darkGray
     colourM =   UIColor.gray
@@ -95,6 +100,12 @@ class UIData {
       colourM =  UIColor(red: 164/255, green: 144/255, blue: 124/255, alpha: 1)
       colourL = UIColor(red: 200/255, green: 182/255, blue: 166/255, alpha: 1)
       userInteractionColour = UIColor(red: 241/255, green: 222/255, blue: 201/255, alpha: 1)
+      iconBorderColour = UIColor.black
+    case 5:
+      colourD = UIColor(red: 150/255, green: 126/255, blue: 118/255, alpha: 1)
+      colourM =  UIColor(red: 215/255, green: 192/255, blue: 174/255, alpha: 1)
+      colourL = UIColor(red: 238/255, green: 227/255, blue: 203/255, alpha: 1)
+      userInteractionColour = UIColor(red: 155/255, green: 171/255, blue: 184/255, alpha: 1)
       iconBorderColour = UIColor.black
     default:
       colourD =  UIColor.darkGray

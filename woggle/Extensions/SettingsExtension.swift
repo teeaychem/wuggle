@@ -100,12 +100,12 @@ extension Settings {
   
   
   func impactOptionBlob() -> OptionBlob {
-    return OptionBlob(internalName: "impact", displayName: "Impact", internalOptions: [0, 1], displayOptions: ["On", "Off"])
+    return OptionBlob(internalName: "impact", displayName: "Impact", internalOptions: [1, 0], displayOptions: ["On", "Off"])
   }
   
   
   func sideOptionBlob() -> OptionBlob {
-    return OptionBlob(internalName: "side", displayName: "Side", internalOptions: [0, 1], displayOptions: ["Left", "Right"])
+    return OptionBlob(internalName: "side", displayName: "Side", internalOptions: [1, 0], displayOptions: ["Left", "Right"])
   }
   
   

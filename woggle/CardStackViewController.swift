@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 
 struct cardViewsStruct {
+  
   var settCardC: SettingsCardViewController?
   var statCardC: StatsCardViewController?
   var gameCardC: GameCardViewController?
@@ -31,7 +32,7 @@ struct cardViewsStruct {
 class CardStackViewController: UIViewController {
   
   
-  let CardVD: UIData
+  let uiData: UIData
   // Controls the main UI
   
   private let width: CGFloat
@@ -55,11 +56,11 @@ class CardStackViewController: UIViewController {
     width = min(((UIScreen.main.bounds.size.height) / 1.4 / 1.16 ) * 0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
     
-    CardVD = UIData(name: "sett", width: width, colourOption: 0)
-    CardVD.updateColour(profile: 4)
+    uiData = UIData(name: "sett", width: width, colourOption: 0)
+    uiData.updateColour(profile: 4)
     
-    firstCardY = (UIScreen.main.bounds.height - (CardVD.cardSize.height + CardVD.statusBarSize.height * 2)) * 0.5
-    statusBarH = CardVD.statusBarSize.height
+    firstCardY = (UIScreen.main.bounds.height - (uiData.cardSize.height + uiData.statusBarSize.height * 2)) * 0.5
+    statusBarH = uiData.statusBarSize.height
     
     topCardIndex = 2
     
@@ -74,17 +75,17 @@ class CardStackViewController: UIViewController {
   
   
   func makeAndEmbedCards() {
-    cardViews.gameCardC = GameCardViewController(iName: "gameC", viewData: CardVD, delegate: self)
-    cardViews.settCardC = SettingsCardViewController(iName: "settC", viewData: CardVD, delegate: self)
-    cardViews.statCardC = StatsCardViewController(iName: "statC", viewData: CardVD, delegate: self)
+    cardViews.gameCardC = GameCardViewController(iName: "gameC", viewData: uiData, delegate: self)
+    cardViews.settCardC = SettingsCardViewController(iName: "settC", viewData: uiData, delegate: self)
+    cardViews.statCardC = StatsCardViewController(iName: "statC", viewData: uiData, delegate: self)
     
-    cardViews.statCardC?.cardView.backgroundColor = CardVD.colourD
-    cardViews.settCardC?.cardView.backgroundColor = CardVD.colourL
-    cardViews.gameCardC?.cardView.backgroundColor = CardVD.colourM
+    cardViews.statCardC?.cardView.backgroundColor = uiData.colourD
+    cardViews.settCardC?.cardView.backgroundColor = uiData.colourL
+    cardViews.gameCardC?.cardView.backgroundColor = uiData.colourM
 
     self.embed(cardViews.statCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY))
-    self.embed(cardViews.settCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + CardVD.statusBarSize.height))
-    self.embed(cardViews.gameCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + CardVD.statusBarSize.height * 2))
+    self.embed(cardViews.settCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + uiData.statusBarSize.height))
+    self.embed(cardViews.gameCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + uiData.statusBarSize.height * 2))
     cardViews.gameCardC!.broughtToTop()
   }
   
@@ -150,6 +151,15 @@ class CardStackViewController: UIViewController {
   }
   
   
+  func rebuildStack() {
+    unembedAndDeleteCards()
+    makeAndEmbedCards()
+    setIcons()
+    cardShuffleGesutre(enabled: false)
+    reorderCardsByIndex(iName: "settC")
+  }
+  
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -172,6 +182,56 @@ extension CardStackViewController: CardStackDelegate {
   
   func updateSetting(internalName: String, internalValue: Int16) {
     print("Ah, to change")
+    
+    switch internalName {
+      
+    case "impact":
+      uiData.impact = (internalValue == 1) ?  true : false
+    case "side":
+      uiData.leftSide = (internalValue == 1) ?  true : false
+      rebuildStack()
+    case "colour":
+      print("whoa, colour")
+      rebuildStack()
+      
+    case "time", "lexicon", "length", "tiles":
+      
+      updateNonMutatingSetting(internalName: internalName, internalValue: internalValue)
+      
+    default:
+      break
+    }
+  }
+  
+  
+  func processUpdate() {
+    print("Asked to process update")
+    cardViews.statCardC!.respondToUpdate()
+  }
+  
+  
+  func currentSettings() -> Settings {
+    return settings!
+  }
+  
+  
+  func currentGame() -> GameInstance? {
+    return settings!.currentGame
+  }
+  
+  
+  func currentStats() -> StatsCollection {
+    return settings!.stats!
+  }
+}
+
+
+extension CardStackViewController {
+  
+  func updateNonMutatingSetting(internalName: String, internalValue: Int16) {
+    // Nonmutating means loading or creating settings which match chnage to internalName.
+    
+    
     // First, get the values of the current settings.
     // There's always *a* settings file, so these are fine to get.
     // Use these to perform a search.
@@ -205,7 +265,8 @@ extension CardStackViewController: CardStackDelegate {
         let result = try context.fetch(settingsFetchRequest)
         
         if result.count == 1 {
-          settings = result.first as! Settings
+          settings = nil
+          settings = (result.first as! Settings)
         } else if result.count > 1 {
           print(result.count)
           print("Extra settings found")
@@ -219,6 +280,7 @@ extension CardStackViewController: CardStackDelegate {
           freshSettings.lexicon = lexiconVal
           freshSettings.minWordLength = minWordVal
           freshSettings.tileSqrt = tileSqrtVal
+          settings = nil
           settings = freshSettings
           settings!.ensureDefaults()
           print("Search okay, no setting found")
@@ -229,40 +291,9 @@ extension CardStackViewController: CardStackDelegate {
     } else {
       print("Woooow")
     }
-  }
-  
-  
-  func processUpdate() {
-    print("Asked to process update")
-    cardViews.statCardC!.respondToUpdate()
-    
-//     Okay, so whenever somethign is redrawn, I get updated colours.
-//    CardVD.colourD = UIColor(red: 150/255, green: 126/255, blue: 118/255, alpha: 1) // UIColor.darkGray
-//    CardVD.colourM =  UIColor(red: 215/255, green: 192/255, blue: 174/255, alpha: 1) // UIColor.gray
-//    CardVD.colourL = UIColor(red: 238/255, green: 227/255, blue: 203/255, alpha: 1) // UIColor.lightGray
-//
-//    CardVD.userInteractionColour = UIColor(red: 155/255, green: 171/255, blue: 184/255, alpha: 1) // UIColor.white
-//    CardVD.iconBorderColour = UIColor.black
-
-    unembedAndDeleteCards()
-    makeAndEmbedCards()
     setIcons()
-    cardShuffleGesutre(enabled: false)
-    reorderCardsByIndex(iName: "settC")
   }
   
   
-  func currentSettings() -> Settings {
-    return settings!
-  }
   
-  
-  func currentGame() -> GameInstance? {
-    return settings!.currentGame
-  }
-  
-  
-  func currentStats() -> StatsCollection {
-    return settings!.stats!
-  }
 }
