@@ -113,6 +113,7 @@ class SettingsCardViewController: CardViewController {
     optionViews["tiles"]?.highlightChoice(internalOption: delegate!.currentSettings().tileSqrt)
     optionViews["side"]?.highlightChoice(internalOption: viewData.leftSide ? 1 : 0)
     optionViews["impact"]?.highlightChoice(internalOption: viewData.impact ? 1 : 0)
+    optionViews["colour"]?.highlightChoice(internalOption: viewData.colourOption)
   }
   
   
@@ -130,7 +131,6 @@ class SettingsCardViewController: CardViewController {
     optionViews["lexicon"]?.highlightChoice(internalOption: delegate!.currentSettings().lexicon)
     optionViews["length"]?.highlightChoice(internalOption: delegate!.currentSettings().minWordLength)
     optionViews["tiles"]?.highlightChoice(internalOption: delegate!.currentSettings().tileSqrt)
-    print("impact arg", viewData.impact ? 1 : 0)
     optionViews["impact"]?.highlightChoice(internalOption: viewData.impact ? 1 : 0)
   }
   

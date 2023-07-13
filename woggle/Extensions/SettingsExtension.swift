@@ -110,7 +110,7 @@ extension Settings {
   
   
   func colourOptionBlob() -> OptionBlob {
-    return OptionBlob(internalName: "colour", displayName: "Colour", internalOptions: [0, 1, 2], displayOptions: ["Gray", "Red", "Blue"])
+    return OptionBlob(internalName: "colour", displayName: "Colour", internalOptions: [0, 1, 2, 3, 4, 5], displayOptions: ["A", "B", "C", "D", "E", "F"])
   }
   
   

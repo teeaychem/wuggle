@@ -56,7 +56,7 @@ class CardStackViewController: UIViewController {
     width = min(((UIScreen.main.bounds.size.height) / 1.4 / 1.16 ) * 0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
     
-    uiData = UIData(name: "sett", width: width, colourOption: 0)
+    uiData = UIData(width: width)
     uiData.updateColour(profile: 4)
     
     firstCardY = (UIScreen.main.bounds.height - (uiData.cardSize.height + uiData.statusBarSize.height * 2)) * 0.5
@@ -191,7 +191,7 @@ extension CardStackViewController: CardStackDelegate {
       uiData.leftSide = (internalValue == 1) ?  true : false
       rebuildStack()
     case "colour":
-      print("whoa, colour")
+      uiData.updateColour(profile: internalValue)
       rebuildStack()
       
     case "time", "lexicon", "length", "tiles":

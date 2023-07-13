@@ -13,8 +13,7 @@ class UIData {
   var impact: Bool
   var leftSide: Bool
   var showPercent: Bool
-    
-  let name: String
+
   var colourOption: Int16
 
   
@@ -38,10 +37,9 @@ class UIData {
   let foundWordViewWidth: CGFloat
   
   
-  init(name n: String, width w: CGFloat, colourOption cO: Int16) {
-    name = n
-    colourOption = cO
-    
+  init(width w: CGFloat) {
+
+    colourOption = 0
     impact = true
     leftSide = true
     showPercent = true
@@ -76,6 +74,10 @@ class UIData {
   
   
   func updateColour(profile: Int16) {
+    
+    // TODO: B and F are the same. Both look bad.
+    
+    colourOption = profile
     
     switch profile {
     case 1:
