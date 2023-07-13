@@ -29,7 +29,7 @@ class IconView : UIView {
     super.init(frame: CGRect(x: 0, y: 0, width: s.width, height: s.height))
   }
   
-  func updateIcon(value v: String) {
+  func updateIcon(value v: Int16) {
     fatalError("updateIcon must be overriden")
   }
   

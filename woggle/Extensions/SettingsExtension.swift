@@ -74,6 +74,46 @@ extension Settings {
   }
   
   
+  func timeOptionBlob() -> OptionBlob {
+    return OptionBlob(internalName: "time", displayName: "Time", internalOptions: [1, 2, 3, 5, 7, 0], displayOptions: ["1", "2", "3", "5", "7", "∞"])
+  }
+  
+  
+  func lexiconOptionBlob() -> OptionBlob {
+    return OptionBlob(internalName: "lexicon", displayName: "Lexicon", internalOptions: [0, 1, 2, 3, 4], displayOptions: ["Classic (12dicts 3of6)", "Odgen's Basic", "Jane Austen", "King James Bible", "Shakespeare"])
+  }
+  
+  
+  func lengthOptionBlob() -> OptionBlob {
+    return OptionBlob(internalName: "length", displayName: "Word length", internalOptions: [3, 4, 5, 6], displayOptions: ["3+", "4+", "5+", "6+"])
+  }
+  
+  
+  func tilesOptionBlob() -> OptionBlob {
+    return OptionBlob(internalName: "tiles", displayName: "Tiles", internalOptions: [3, 4, 5, 6, 7, 8], displayOptions: ["3²", "4²", "5²", "6²", "7²", "8²"])
+  }
+  
+  
+  func pFoundOptionBlob() -> OptionBlob {
+    return OptionBlob(internalName: "pfound", displayName: "Show % of words found", internalOptions: [0, 1], displayOptions: ["Yes", "No"])
+  }
+  
+  
+  func impactOptionBlob() -> OptionBlob {
+    return OptionBlob(internalName: "impact", displayName: "Impact", internalOptions: [0, 1], displayOptions: ["On", "Off"])
+  }
+  
+  
+  func sideOptionBlob() -> OptionBlob {
+    return OptionBlob(internalName: "side", displayName: "Side", internalOptions: [0, 1], displayOptions: ["Left", "Right"])
+  }
+  
+  
+  func colourOptionBlob() -> OptionBlob {
+    return OptionBlob(internalName: "colour", displayName: "Colour", internalOptions: [0, 1, 2], displayOptions: ["Gray", "Red", "Blue"])
+  }
+  
+  
   
   
   

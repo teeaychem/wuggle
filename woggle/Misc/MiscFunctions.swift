@@ -58,25 +58,7 @@ func getPoints(word: String) -> Int {
   return points
   
 //  Kind of boring
-//  return max(0, word.count - 2)
-  
-//  Not sure where this is inspired from
-//  guard (word == "") else {return 0}
-//
-//  switch word.count {
-//  case 3:
-//    return 1
-//  case 4:
-//    return 1
-//  case 5:
-//    return 2
-//  case 6:
-//    return 3
-//  case 7:
-//    return 5
-//  default:
-//    return 11
-//  }
+//  return max(1, word.count - 4)
 }
 
 

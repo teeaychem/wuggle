@@ -10,9 +10,9 @@ import UIKit
 
 class TileIcon: IconView {
         
-  let textLayer = CAShapeLayer()
-  let tileLayer = CAShapeLayer()
-  let letterLayer = CAShapeLayer()
+  private let textLayer = CAShapeLayer()
+  private let tileLayer = CAShapeLayer()
+  private let letterLayer = CAShapeLayer()
   
   init(viewData vD: ViewData) {
     
@@ -32,8 +32,8 @@ class TileIcon: IconView {
     
   
   
-  override func updateIcon(value v: String) {
-    addText(text: v)
+  override func updateIcon(value v: Int16) {
+    addText(text: String(v))
   }
   
   

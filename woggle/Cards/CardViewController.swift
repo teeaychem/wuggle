@@ -14,14 +14,10 @@ class CardViewController: UIViewController {
   let iName: String
   
   let viewData: ViewData
-  
   let cardView: CardView
   
   let statusBarView: StatusBarView
   let mainView: UIView
-  
-  // displayViews collects the views which should only be shown when the card is displayed.
-  var displayViews = [UIView]()
   
   
   init(iName iN: String, viewData vD: ViewData, delegate d: CardStackDelegate) {
@@ -29,8 +25,14 @@ class CardViewController: UIViewController {
     viewData = vD
     cardView = CardView(iName: iN, cardWidth: viewData.width)
     delegate = d
-    statusBarView = StatusBarView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: viewData.width, height: viewData.statusBarSize.height)))
-    mainView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: vD.statusBarSize.height), size: CGSize(width: vD.cardSize.width, height: vD.cardSize.height - vD.statusBarSize.height)))
+    statusBarView = StatusBarView(frame:
+                                    CGRect(
+                                      origin: CGPoint(x: 0, y: 0),
+                                      size: CGSize(width: viewData.width, height: viewData.statusBarSize.height)))
+    mainView = UIView(frame:
+                        CGRect(
+                          origin: CGPoint(x: 0, y: vD.statusBarSize.height),
+                          size: CGSize(width: vD.cardSize.width, height: vD.cardSize.height - vD.statusBarSize.height)))
     
     super.init(nibName: nil, bundle: nil)
     

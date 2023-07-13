@@ -11,10 +11,10 @@ import UIKit
 
 class LengthIcon: IconView {
   
-  let boardLayer = CAShapeLayer()
-  let highlightedTileLayer = CAShapeLayer()
-  let plusLayer = CAShapeLayer()
-  let numberLayer = CAShapeLayer()
+  private let boardLayer = CAShapeLayer()
+  private let highlightedTileLayer = CAShapeLayer()
+  private let plusLayer = CAShapeLayer()
+  private let numberLayer = CAShapeLayer()
   
   init(viewData vD: ViewData) {
     
@@ -26,11 +26,10 @@ class LengthIcon: IconView {
     numberLayer.fillColor = vD.colourL.cgColor
     
     paintBackground()
-    updateIcon(value: "4")
   }
   
   
-  override func updateIcon(value v: String) {
+  override func updateIcon(value v: Int16) {
     paintNumber(num: v)
   }
   
@@ -80,10 +79,10 @@ class LengthIcon: IconView {
   }
   
   
-  private func paintNumber(num: String) {
+  private func paintNumber(num: Int16) {
 
     
-    numberLayer.path = getStringPaths(text: num, font: UIFont(name: uiFontName, size: getFontFor(height: size.height * 0.9))!).first!
+    numberLayer.path = getStringPaths(text: String(num), font: UIFont(name: uiFontName, size: getFontFor(height: size.height * 0.9))!).first!
     numberLayer.bounds = numberLayer.path!.boundingBox
         
     numberLayer.frame.origin = CGPoint(x: indent * 1.5, y: indent * 1.5)

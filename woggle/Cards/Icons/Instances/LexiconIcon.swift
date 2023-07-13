@@ -11,13 +11,12 @@ import UIKit
 
 class LexiconIcon: IconView {
   
-  let letterLayer = CAShapeLayer()
+  private let letterLayer = CAShapeLayer()
+  private let bookFrontLayer = CAShapeLayer()
+  private let bookMiddleLayer = CAShapeLayer()
+  private let bookBackLayer = CAShapeLayer()
   
-  let bookFrontLayer = CAShapeLayer()
-  let bookMiddleLayer = CAShapeLayer()
-  let bookBackLayer = CAShapeLayer()
-  
-  let coverWidth: CGFloat
+  private let coverWidth: CGFloat
     
   init(viewData vD: ViewData) {
     
@@ -43,17 +42,17 @@ class LexiconIcon: IconView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  override func updateIcon(value v: String) {
+  override func updateIcon(value v: Int16) {
     switch v {
-    case "0":
-      addLetter(letter: "M")
-    case "1":
+    case 0:
+      addLetter(letter: "C")
+    case 1:
+      addLetter(letter: "O")
+    case 2:
       addLetter(letter: "A")
-    case "2":
-      addLetter(letter: "W")
-    case "3":
+    case 3:
       addLetter(letter: "B")
-    case "4":
+    case 4:
       addLetter(letter: "S")
     default:
       return
@@ -100,7 +99,6 @@ class LexiconIcon: IconView {
     
     letterLayer.path = getStringPaths(text: letter, font: UIFont(name: uiFontName, size: getFontFor(height: size.height * 0.9))!).first!
     letterLayer.bounds = letterLayer.path!.boundingBox
-
     
     letterLayer.frame.origin = CGPoint(x: bookFrontLayer.frame.minX +  (coverWidth - letterLayer.frame.width) * 0.5, y: bookFrontLayer.frame.minY + (coverWidth - letterLayer.frame.height) * 0.5)
   }

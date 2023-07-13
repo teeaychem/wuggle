@@ -10,13 +10,13 @@ import UIKit
 
 class TimeIcon : IconView {
   
-  let faceColour: CGColor
-  let handColour: CGColor
+  private let faceColour: CGColor
+  private let handColour: CGColor
   
-  let handStrokeWidth: CGFloat
-  let centerPoint: CGPoint
+  private let handStrokeWidth: CGFloat
+  private let centerPoint: CGPoint
   
-  var handLayer: CAShapeLayer?
+  private var handLayer: CAShapeLayer?
   
   
   init(viewData vD: ViewData) {
@@ -33,9 +33,9 @@ class TimeIcon : IconView {
   }
   
   
-  override func updateIcon(value v: String) {
+  override func updateIcon(value v: Int16) {
     
-    let valPercent = (Double(v) ?? 0)/12
+    let valPercent = Double(v)/12
     let radians = (Double.pi * 0.5) - (2 * Double.pi * valPercent)
     
     addHand(angle: radians)

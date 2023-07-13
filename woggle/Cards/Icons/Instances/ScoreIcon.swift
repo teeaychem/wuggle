@@ -10,12 +10,12 @@ import UIKit
 
 class ScoreIcon: IconView {
   
-  let gameCard: Bool
+  private let gameCard: Bool
   
-  let borderLayer = CAShapeLayer()
-  let scoreFont: UIFont
-  let scoreLabel: UILabel
-  var textAttributes: [NSAttributedString.Key : Any]?
+  private let borderLayer = CAShapeLayer()
+  private let scoreFont: UIFont
+  private let scoreLabel: UILabel
+  private var textAttributes: [NSAttributedString.Key : Any]?
   
   init(viewData vD: ViewData, abv: String, gameCard g: Bool) {
     
@@ -78,8 +78,8 @@ class ScoreIcon: IconView {
   }
   
   
-  override func updateIcon(value v: String) {
-    scoreLabel.attributedText = NSMutableAttributedString(string: v, attributes: textAttributes)
+  override func updateIcon(value v: Int16) {
+    scoreLabel.attributedText = NSMutableAttributedString(string: String(v), attributes: textAttributes)
   }
   
 }

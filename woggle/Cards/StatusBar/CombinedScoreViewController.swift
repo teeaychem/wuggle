@@ -64,17 +64,17 @@ class CombinedScoreViewController: UIViewController {
   
   
   func updateFound(val: Int16) {
-    foundIcon.updateIcon(value: String(val))
+    foundIcon.updateIcon(value: val)
   }
   
   
   func updateScore(val: Int16) {
-    scoreIcon.updateIcon(value: String(val))
+    scoreIcon.updateIcon(value: val)
   }
   
   
   func updatePercent(val: Int16) {
-    perceIcon.updateIcon(value: String(val))
+    perceIcon.updateIcon(value: val)
   }
   
   

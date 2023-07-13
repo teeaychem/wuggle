@@ -9,13 +9,12 @@ import UIKit
 
 class SettingsCardViewController: CardViewController {
    
-  let lengthIcon: IconView
-  let lexiconIcon: IconView
-  let tileIcon: IconView
-  let timeIcon: IconView
+  private let lengthIcon: IconView
+  private let lexiconIcon: IconView
+  private let tileIcon: IconView
+  private let timeIcon: IconView
 
-  
-  var optionViews = [String: OptionView]()
+  private var optionViews = [String: OptionView]()
   
   override init(iName iN: String, viewData vD: ViewData, delegate d: CardStackDelegate) {
     
@@ -44,81 +43,58 @@ class SettingsCardViewController: CardViewController {
     
     optionViews["time"] = OptionView(
       frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.statusBarSize.height * 1.25), size: flatStatSize),
-      displayName: "Time",
-      displayOptions: ["1", "2", "3", "5", "7", "∞"], internalName: "time",
-      internalOptions: [1, 2, 3, 5, 7, 0],
+      optionBlob: delegate!.currentSettings().timeOptionBlob(),
       vertical: false,
       delegate: self
     )
     optionViews["lexicon"] = OptionView(
       frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["time"]!.layer.frame.maxY), size: flatStatSize),
-      displayName: "Lexicon",
-      displayOptions: ["12dicts 3of6", "Odgen's Basic", "Jane Austen", "King James Bible", "Shakespeare"],
-      internalName: "lexicon",
-      internalOptions: [0, 1, 2, 3, 4],
+      optionBlob: delegate!.currentSettings().lexiconOptionBlob(),
       vertical: true,
       delegate: self
     )
     optionViews["length"] = OptionView(
       frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["lexicon"]!.layer.frame.maxY), size: flatStatSize),
-      displayName: "Word length",
-      displayOptions: ["3+", "4+", "5+", "6+"],
-      internalName: "length",
-      internalOptions: [3, 4, 5, 6],
+      optionBlob: delegate!.currentSettings().lengthOptionBlob(),
       vertical: false,
       delegate: self
     )
     optionViews["tiles"] = OptionView(
       frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["length"]!.layer.frame.maxY), size: flatStatSize),
-      displayName: "Tiles",
-      displayOptions: ["3²", "4²", "5²", "6²", "7²", "8²"],
-      internalName: "tiles",
-      internalOptions: [3, 4, 5, 6, 7, 8],
+      optionBlob: delegate!.currentSettings().tilesOptionBlob(),
       vertical: false,
       delegate: self
     )
     optionViews["pfound"] = OptionView(
       frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["tiles"]!.layer.frame.maxY), size: flatStatSize),
-      displayName: "Show % of words found",
-      displayOptions: ["Yes", "No"],
-      internalName: "pfound",
-      internalOptions: [0, 1], vertical: false,
+      optionBlob: delegate!.currentSettings().pFoundOptionBlob(),
+      vertical: false,
       delegate: self
     )
     // TODO: Make impact when on is pressed.
     optionViews["impact"] = OptionView(
       frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["pfound"]!.layer.frame.maxY), size: flatStatSize),
-      displayName: "Impact",
-      displayOptions: ["On", "Off"],
-      internalName: "impact",
-      internalOptions: [0, 1],
+      optionBlob: delegate!.currentSettings().impactOptionBlob(),
       vertical: false,
       delegate: self
     )
     optionViews["side"] = OptionView(
       frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["impact"]!.layer.frame.maxY), size: flatStatSize),
-      displayName: "Side",
-      displayOptions: ["Left", "Right"],
-      internalName: "side",
-      internalOptions: [0, 1],
+      optionBlob: delegate!.currentSettings().sideOptionBlob(),
       vertical: false,
       delegate: self
     )
     optionViews["colour"] = OptionView(
       frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["side"]!.layer.frame.maxY), size: flatStatSize),
-      displayName: "Colour",
-     displayOptions: ["Gray", "Red", "Blue"],
-     internalName: "colour",
-     internalOptions: [0, 1, 2],
-     vertical: false,
-     delegate: self
+      optionBlob: delegate!.currentSettings().colourOptionBlob(),
+      vertical: false,
+      delegate: self
     )
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
   }
-  
     
   override func broughtToTop() {
     super.broughtToTop()
@@ -145,14 +121,6 @@ class SettingsCardViewController: CardViewController {
     }
   }
   
-  
-//  override func respondToUpdate() {
-//    // Reset the stats shown
-//    optionViews["time"]?.highlightChoice(internalOption: delegate!.currentSettings().time)
-//    optionViews["lexicon"]?.highlightChoice(internalOption: delegate!.currentSettings().lexicon)
-//    optionViews["length"]?.highlightChoice(internalOption: delegate!.currentSettings().minWordLength)
-//    optionViews["tiles"]?.highlightChoice(internalOption: delegate!.currentSettings().tileSqrt)
-//  }
   
   override func respondToUpdate() {
     optionViews["time"]?.highlightChoice(internalOption: delegate!.currentSettings().time)
@@ -182,13 +150,13 @@ extension SettingsCardViewController: SettingsCardViewControllerDelegate {
   func updateIcon(internalName: String, internalValue: Int16) {
     switch internalName {
     case "time":
-      timeIcon.updateIcon(value: String(internalValue))
+      timeIcon.updateIcon(value: internalValue)
     case "lexicon":
-      lexiconIcon.updateIcon(value: String(internalValue))
+      lexiconIcon.updateIcon(value: internalValue)
     case "length":
-      lengthIcon.updateIcon(value: String(internalValue))
+      lengthIcon.updateIcon(value: internalValue)
     case "tiles":
-      tileIcon.updateIcon(value: String(internalValue))
+      tileIcon.updateIcon(value: internalValue)
     default:
       return
     }
