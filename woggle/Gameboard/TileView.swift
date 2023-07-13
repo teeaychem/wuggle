@@ -30,7 +30,7 @@ class TileView: UIView {
     letterOutlineColour = vD.colourD.cgColor
     tileBackgroundColor = vD.colourL.cgColor
     tileFillColour = vD.colourM.cgColor
-    tileSelectedColour = vD.tileHighlightColour
+    tileSelectedColour = vD.userInteractionColour.cgColor
     
     if (t == "!") {
       text = "Qu"
@@ -89,7 +89,7 @@ class TileView: UIView {
     let borderPath = randomStartRoundedUIBeizerPath(width: frame.width, height: frame.height, cornerRadius: layer.cornerRadius)
     borderLayer.path = borderPath.cgPath
     borderLayer.lineWidth = 1
-    borderLayer.strokeColor = viewData.tileBorderColour.cgColor
+    borderLayer.strokeColor = viewData.iconBorderColour.cgColor
     borderLayer.fillColor = UIColor.clear.cgColor
     
     layer.addSublayer(borderLayer)
@@ -165,7 +165,7 @@ class TileView: UIView {
     for layer in letterLayers {
       layer.fillColor = tileFillColour
     }
-    layer.borderColor = viewData.tileBorderColour.cgColor
+    layer.borderColor = viewData.iconBorderColour.cgColor
   }
   
   

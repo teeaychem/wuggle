@@ -74,7 +74,7 @@ class LexiconIcon: IconView {
     bookFrontLayer.frame.origin = CGPoint(x: indent, y: size.height - (coverWidth + indent))
 
     bookFrontLayer.lineWidth = 0.5
-    bookFrontLayer.strokeColor = viewData.tileBorderColour.cgColor
+    bookFrontLayer.strokeColor = viewData.iconBorderColour.cgColor
     
     let bookMiddlePath = UIBezierPath(
       roundedRect: CGRect(
@@ -92,7 +92,7 @@ class LexiconIcon: IconView {
     
     bookBackLayer.path = bookBackPath.cgPath
     bookBackLayer.lineWidth = 0.5
-    bookBackLayer.strokeColor = viewData.tileBorderColour.cgColor
+    bookBackLayer.strokeColor = viewData.iconBorderColour.cgColor
   }
   
   

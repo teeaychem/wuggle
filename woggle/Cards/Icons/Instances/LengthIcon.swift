@@ -46,7 +46,7 @@ class LengthIcon: IconView {
     boardLayer.path = boardPath.cgPath
     
     
-    boardLayer.strokeColor = viewData.tileBorderColour.cgColor
+    boardLayer.strokeColor = viewData.iconBorderColour.cgColor
     boardLayer.lineWidth = 0.5
     
     let tileIndent: CGFloat = size.width * 0.1
@@ -64,7 +64,7 @@ class LengthIcon: IconView {
 
 
     highlightedTileLayer.path = highlightedTilePath.cgPath
-    highlightedTileLayer.strokeColor = viewData.tileHighlightColour
+    highlightedTileLayer.strokeColor = viewData.userInteractionColour.cgColor
     highlightedTileLayer.lineWidth = 0.5
     
     

@@ -94,7 +94,7 @@ extension StopwatchView {
 
 
     highLightLayer.cornerRadius = cornerRadius
-    highLightLayer.borderColor = viewData.tileBorderColour.cgColor
+    highLightLayer.borderColor = viewData.iconBorderColour.cgColor
     highLightLayer.borderWidth = 1
     
     layer.addSublayer(highLightLayer)
@@ -113,7 +113,7 @@ extension StopwatchView {
       clockwise: true)
     
     outerFaceLayer.path = outerFacePath.cgPath
-    outerFaceLayer.strokeColor = viewData.tileBorderColour.cgColor
+    outerFaceLayer.strokeColor = viewData.iconBorderColour.cgColor
     outerFaceLayer.lineWidth = 1
     
     let innerFacePath = UIBezierPath(
@@ -124,7 +124,7 @@ extension StopwatchView {
       clockwise: true)
     
     innerFaceLayer.path = innerFacePath.cgPath
-    innerFaceLayer.strokeColor = viewData.tileBorderColour.cgColor
+    innerFaceLayer.strokeColor = viewData.iconBorderColour.cgColor
     innerFaceLayer.lineWidth = 1
     
     layer.addSublayer(outerFaceLayer)
@@ -139,7 +139,7 @@ extension StopwatchView {
 
     secondsLayer.lineCap = .round
     secondsLayer.path = secondsHand.cgPath
-    secondsLayer.strokeColor = viewData.tileBorderColour.cgColor
+    secondsLayer.strokeColor = viewData.iconBorderColour.cgColor
     secondsLayer.lineWidth = 1
     
     layer.addSublayer(secondsLayer)

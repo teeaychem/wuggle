@@ -16,7 +16,7 @@ class PlayButtonsViewController: UIViewController {
   init(viewData vD: ViewData) {
     
     playButtonsView = PlayButtonsView(viewData: vD)
-    highlightLayer.strokeColor = vD.animateHighlightColour
+    highlightLayer.strokeColor = vD.userInteractionColour.cgColor
    
     super.init(nibName: nil, bundle: nil)
     
