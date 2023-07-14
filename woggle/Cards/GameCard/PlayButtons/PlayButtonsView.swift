@@ -5,11 +5,14 @@
 //  Created by sparkes on 2023/06/28.
 //
 
-// TODO: A few things to implement.
-// 1. For the newGameIcon, this should be animated in some way to draw attention when available.
-// 2. All icons should have animations for initial paint.
-// 3. Rework the iconIndent constant. Icons are drawn relative to a view, so ideally the indent is fixed relative to the view.
-// 4. Along these lines, 
+// This is a little funky.
+// New game icon is animated and overwrite play and pause icons.
+// However, animations don't stop as expected.
+// So, new game icon is on a different layer to play and pause icons.
+// Switching between these layers means play/pause icons are always static.
+// New game is design to make a full spin.
+// But, in some cases this may be exceeded.
+// So, when switching between the layers, the new game icon rotation is reset.
 
 import UIKit
 
@@ -86,6 +89,7 @@ class PlayButtonsView: UIView {
   
   func removePlayPauseIcon() {
     playPauseView.layer.sublayers?.removeAll()
+    NewGameLayer.transform = CATransform3DMakeRotation(2 * Double.pi, 0.0, 0.0, 1.0)
   }
   
   
