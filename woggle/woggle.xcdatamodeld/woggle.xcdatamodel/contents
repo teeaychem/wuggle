@@ -6,6 +6,7 @@
         <relationship name="tiles" toMany="YES" deletionRule="Cascade" destinationEntity="Tile" inverseName="board" inverseEntity="Tile"/>
     </entity>
     <entity name="GameInstance" representedClassName="GameInstance" syncable="YES" codeGenerationType="class">
+        <attribute name="allWordsComplete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="allWordsList" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="foundWordCount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="foundWordsList" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>

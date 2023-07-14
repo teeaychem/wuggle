@@ -36,14 +36,14 @@ class OptionView: UIView {
     addSubview(nameLabel)
     
     if vertical {
-      let choiceLabelWidth = (f.width)
+      let choiceLabelWidth = f.width
       for i in 0 ..< oB.displayOptions.count {
         let choiceLabel = ChoiceLabel(frame: CGRect(origin: CGPoint(x: (f.width - choiceLabelWidth), y: CGFloat(i) * f.height), size: CGSize(width: choiceLabelWidth, height: f.height)), displayText: oB.displayOptions[i], internalValue: oB.internalOptions[i], delegate: self)
         choiceLabel.textAlignment = .right
         choiceLabels[oB.internalOptions[i]] = choiceLabel
       }
     } else {
-      let choiceLabelWidth =  f.height * 1 // (f.width * 0.6) / CGFloat(displayOptions.count)
+      let choiceLabelWidth =  f.height
       for i in 0 ..< oB.displayOptions.count {
         let choiceLabel = ChoiceLabel(frame: CGRect(origin: CGPoint(x: f.width - choiceLabelWidth * CGFloat(oB.displayOptions.count - i), y: 0), size: CGSize(width: choiceLabelWidth, height: f.height)), displayText: oB.displayOptions[i], internalValue: oB.internalOptions[i], delegate: self)
         choiceLabel.textAlignment = .center

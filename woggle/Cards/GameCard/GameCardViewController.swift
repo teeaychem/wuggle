@@ -297,7 +297,13 @@ extension GameCardViewController {
   
   
   func endGameMain(fresh: Bool) {
-        
+    
+    if (!delegate!.currentGame()!.allWordsComplete) {
+      print("Words not done")
+      delegate!.currentGame()?.findPossibleWords()
+    } else {
+      print("already have words")
+    }
     endGameDisplay()
     // Cancel timer, pause and end game
     displayLinkOne?.invalidate()

@@ -45,6 +45,7 @@ extension GameInstance {
   func findPossibleWords() {
     guard self.settings?.currentGame != nil else { return }
     self.settings!.currentGame!.allWordsList = findAllWords()?.sorted()
+    self.settings!.currentGame!.allWordsComplete = true
   }
   
   func findAllWords() -> Set<String>? {

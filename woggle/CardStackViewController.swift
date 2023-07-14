@@ -38,6 +38,7 @@ class CardStackViewController: UIViewController {
   private let width: CGFloat
   private let cardIndent: CGFloat
   private let firstCardY: CGFloat
+  private let cardX: CGFloat
   private let statusBarH: CGFloat
   
   private var statsBarTapUIGR: UIGestureRecognizer?
@@ -66,6 +67,7 @@ class CardStackViewController: UIViewController {
     uiData.loadFromCore()
     
     firstCardY = (UIScreen.main.bounds.height - (uiData.cardSize.height + uiData.statusBarSize.height * 2)) * 0.5
+    cardX = (UIScreen.main.bounds.width - uiData.cardSize.width) * 0.5
     statusBarH = uiData.statusBarSize.height
     
     topCardIndex = 2
@@ -116,9 +118,9 @@ class CardStackViewController: UIViewController {
     cardViews.settCardC?.cardView.backgroundColor = uiData.colourL
     cardViews.gameCardC?.cardView.backgroundColor = uiData.colourM
 
-    self.embed(cardViews.statCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY))
-    self.embed(cardViews.settCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + uiData.statusBarSize.height))
-    self.embed(cardViews.gameCardC!, inView: self.view, origin: CGPoint(x: 0, y: firstCardY + uiData.statusBarSize.height * 2))
+    self.embed(cardViews.statCardC!, inView: self.view, origin: CGPoint(x: cardX, y: firstCardY))
+    self.embed(cardViews.settCardC!, inView: self.view, origin: CGPoint(x: cardX, y: firstCardY + uiData.statusBarSize.height))
+    self.embed(cardViews.gameCardC!, inView: self.view, origin: CGPoint(x: cardX, y: firstCardY + uiData.statusBarSize.height * 2))
     cardViews.gameCardC!.broughtToTop()
   }
   
@@ -145,9 +147,9 @@ class CardStackViewController: UIViewController {
     
     switch iN {
     case "gameC":
-      cardViews.statCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
-      cardViews.settCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
-      cardViews.gameCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
+      cardViews.statCardC!.view.frame.origin = CGPoint(x: cardX, y: firstCardY + (CGFloat(0) * statusBarH))
+      cardViews.settCardC!.view.frame.origin = CGPoint(x: cardX, y: firstCardY + (CGFloat(1) * statusBarH))
+      cardViews.gameCardC!.view.frame.origin = CGPoint(x: cardX, y: firstCardY + (CGFloat(2) * statusBarH))
       cardViews.statCardC!.shuffledToDeck()
       cardViews.settCardC!.shuffledToDeck()
       cardViews.gameCardC!.broughtToTop()
@@ -155,9 +157,9 @@ class CardStackViewController: UIViewController {
       view.bringSubviewToFront(cardViews.settCardC!.view)
       view.bringSubviewToFront(cardViews.gameCardC!.view)
     case "statC":
-      cardViews.gameCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
-      cardViews.settCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
-      cardViews.statCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
+      cardViews.gameCardC!.view.frame.origin = CGPoint(x: cardX, y: firstCardY + (CGFloat(0) * statusBarH))
+      cardViews.settCardC!.view.frame.origin = CGPoint(x: cardX, y: firstCardY + (CGFloat(1) * statusBarH))
+      cardViews.statCardC!.view.frame.origin = CGPoint(x: cardX, y: firstCardY + (CGFloat(2) * statusBarH))
       cardViews.gameCardC!.shuffledToDeck()
       cardViews.settCardC!.shuffledToDeck()
       cardViews.statCardC!.broughtToTop()
@@ -165,9 +167,9 @@ class CardStackViewController: UIViewController {
       view.bringSubviewToFront(cardViews.settCardC!.view)
       view.bringSubviewToFront(cardViews.statCardC!.view)
     case "settC":
-      cardViews.statCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(0) * statusBarH))
-      cardViews.gameCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(1) * statusBarH))
-      cardViews.settCardC!.view.frame.origin = CGPoint(x: 0, y: firstCardY + (CGFloat(2) * statusBarH))
+      cardViews.statCardC!.view.frame.origin = CGPoint(x: cardX, y: firstCardY + (CGFloat(0) * statusBarH))
+      cardViews.gameCardC!.view.frame.origin = CGPoint(x: cardX, y: firstCardY + (CGFloat(1) * statusBarH))
+      cardViews.settCardC!.view.frame.origin = CGPoint(x: cardX, y: firstCardY + (CGFloat(2) * statusBarH))
       cardViews.statCardC!.shuffledToDeck()
       cardViews.gameCardC!.shuffledToDeck()
       cardViews.settCardC!.broughtToTop()
