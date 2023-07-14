@@ -85,8 +85,8 @@ class UIData {
       colourD = UIColor(red: 150/255, green: 126/255, blue: 118/255, alpha: 1)
       colourM =  UIColor(red: 215/255, green: 192/255, blue: 174/255, alpha: 1)
       colourL = UIColor(red: 238/255, green: 227/255, blue: 203/255, alpha: 1)
-      userInteractionColour = UIColor(red: 155/255, green: 171/255, blue: 184/255, alpha: 1)
-      iconBorderColour = UIColor.black
+      userInteractionColour = UIColor(red: 255/255, green: 248/255, blue: 235/255, alpha: 1)
+      iconBorderColour = UIColor(red: 89/255, green: 19/255, blue: 23/255, alpha: 1)
     case 2:
       colourD = UIColor(red: 44/255, green: 33/255, blue: 41/255, alpha: 1)
       colourM =  UIColor(red: 68/255, green: 57/255, blue: 65/255, alpha: 1)
@@ -94,10 +94,10 @@ class UIData {
       userInteractionColour = UIColor(red: 115/255, green: 107/255, blue: 112/255, alpha: 1)
       iconBorderColour = UIColor(red: 21/255, green: 8/255, blue: 17/255, alpha: 1)
     case 3:
-      colourD = UIColor(red: 35/255, green: 57/255, blue: 93/255, alpha: 1)
-      colourM =  UIColor(red: 57/255, green: 77/255, blue: 109/255, alpha: 1)
-      colourL = UIColor(red: 79/255, green: 97/255, blue: 125/255, alpha: 1)
-      userInteractionColour = UIColor(red: 123/255, green: 136/255, blue: 158/255, alpha: 1)
+      colourD = UIColor(red: 255/255, green: 246/255, blue: 235/255, alpha: 1)
+      colourM =  UIColor(red: 254/255, green: 96/255, blue: 91/255, alpha: 1)
+      colourL = UIColor(red: 46/255, green: 95/255, blue: 179/255, alpha: 1)
+      userInteractionColour = UIColor(red: 52/255, green: 53/255, blue: 71/255, alpha: 1)
     case 4:
       colourD = UIColor(red: 141/255, green: 123/255, blue: 104/255, alpha: 1)
       colourM =  UIColor(red: 164/255, green: 144/255, blue: 124/255, alpha: 1)
@@ -105,11 +105,11 @@ class UIData {
       userInteractionColour = UIColor(red: 241/255, green: 222/255, blue: 201/255, alpha: 1)
       iconBorderColour = UIColor.black
     case 5:
-      colourD = UIColor(red: 150/255, green: 126/255, blue: 118/255, alpha: 1)
-      colourM =  UIColor(red: 215/255, green: 192/255, blue: 174/255, alpha: 1)
-      colourL = UIColor(red: 238/255, green: 227/255, blue: 203/255, alpha: 1)
-      userInteractionColour = UIColor(red: 155/255, green: 171/255, blue: 184/255, alpha: 1)
-      iconBorderColour = UIColor.black
+      colourD = UIColor(red: 55/255, green: 66/255, blue: 89/255, alpha: 1)
+      colourM =  UIColor(red: 92/255, green: 137/255, blue: 132/255, alpha: 1)
+      colourL = UIColor(red: 186/255, green: 144/255, blue: 166/255, alpha: 1)
+      userInteractionColour = UIColor(red: 223/255, green: 246/255, blue: 255/255, alpha: 1)
+      iconBorderColour = UIColor(red: 21/255, green: 8/255, blue: 17/255, alpha: 1)
     default:
       colourD =  UIColor.darkGray
       colourM =   UIColor.gray
@@ -143,10 +143,8 @@ class UIData {
   
   
   func saveToCore() {
-    print("savinf to cre")
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let UISettingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UISettings")
-    
     do {
       let result = try context.fetch(UISettingsFetchRequest)
       
@@ -163,7 +161,6 @@ class UIData {
         newSave.impact = impact
         newSave.leftSide = leftSide
         newSave.showPercent = showPercent
-        
       }
       
       do {
