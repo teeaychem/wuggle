@@ -129,9 +129,9 @@ class GameCardViewController: CardViewController {
   
   override func respondToUpdate() {
     if delegate?.currentGame() != nil {
-      combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!)
+      combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
     } else {
-      combinedScoreViewC.combinedUpdate(found: 0, score: 0, percent: 0)
+      combinedScoreViewC.combinedUpdate(found: 0, score: 0, percent: 0, obeySP: true)
     }
   }
   
@@ -167,7 +167,7 @@ class GameCardViewController: CardViewController {
         delegate!.currentGame()?.foundWordsList!.append(w)
         delegate!.currentGame()?.foundWordCount += 1
         delegate!.currentGame()?.pointsCount += Int16(getPoints(word: w))
-        combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!)
+        combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
         thinkAboutStats(word: w)
       }
     }
@@ -347,7 +347,7 @@ extension GameCardViewController {
     if wordPoints > delegate!.currentStats().topWordPoints!.numVal {
       delegate!.currentStats().topWordPoints!.numVal = wordPoints
       delegate!.currentStats().topWordPoints!.strVal = w.capitalized
-      delegate!.currentStats().topWordLength!.extraStr = String(wordPoints) + " points"
+      delegate!.currentStats().topWordPoints!.extraStr = String(Int(wordPoints)) + " points"
       delegate!.currentStats().topWordPoints!.date = Date()
     }
     if ratio > delegate!.currentStats().topRatio!.numVal {

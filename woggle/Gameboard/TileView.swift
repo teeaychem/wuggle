@@ -10,6 +10,7 @@ import UIKit
 
 class TileView: UIView {
   
+  let tileAnimDuration = 0.5
   let text: String
   var letterLayers: [CAShapeLayer] = []
   let size: CGFloat

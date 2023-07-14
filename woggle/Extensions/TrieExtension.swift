@@ -9,6 +9,7 @@ import CoreData
 
 
 extension TrieNode  {
+  
   func getChildVals() -> String {
     
     var vals = ""

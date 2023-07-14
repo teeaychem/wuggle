@@ -65,18 +65,18 @@ class CombinedScoreViewController: UIViewController {
   }
   
   
-  func combinedUpdate(found: Int16, score: Int16, percent: Int16) {
+  func combinedUpdate(found: Int16, score: Int16, percent: Int16, obeySP: Bool) {
     updateFound(val: found)
     updateScore(val: score)
-    updatePercent(val: percent)
+    (obeySP && !uiData.showPercent) ? updatePercent(val: -1) : updatePercent(val: percent)
   }
   
   
-  func gameInstanceUpdate(instance: GameInstance) {
+  func gameInstanceUpdate(instance: GameInstance, obeySP: Bool) {
     updateFound(val: instance.foundWordCount)
     updateScore(val: instance.pointsCount)
     
-    if uiData.showPercent {
+    if (obeySP && uiData.showPercent) {
       let percent = (Double(instance.foundWordCount) / Double(instance.allWordsList!.count)) * 100
       updatePercent(val: Int16(percent))
     } else {

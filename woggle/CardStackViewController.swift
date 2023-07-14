@@ -222,29 +222,30 @@ extension CardStackViewController: CardStackDelegate {
       
     case "impact":
       uiData.impact = (internalValue == 1) ?  true : false
-      uiData.saveToCore()
     case "side":
       uiData.leftSide = (internalValue == 1) ?  true : false
-      uiData.saveToCore()
       rebuildStack()
     case "colour":
       uiData.updateColour(profile: internalValue)
-      uiData.saveToCore()
       rebuildStack()
-      
+    case "pfound":
+      uiData.showPercent = (internalValue == 1) ?  true : false
+      if (currentGame() != nil) {
+        cardViews.gameCardC!.combinedScoreViewC.gameInstanceUpdate(instance: currentGame()!, obeySP: true)
+      }
     case "time", "lexicon", "length", "tiles":
-      
       updateNonMutatingSetting(internalName: internalName, internalValue: internalValue)
-      
     default:
       break
     }
+    uiData.saveToCore()
   }
   
   
   func processUpdate() {
     print("Asked to process update")
     cardViews.statCardC!.respondToUpdate()
+    cardViews.gameCardC!.respondToUpdate()
   }
   
   

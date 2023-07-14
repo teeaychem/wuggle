@@ -7,9 +7,6 @@
 
 import UIKit
 
-
-let tileAnimDuration = 1.0
-
 let tileFontName = "K2D-ExtraBold"
 let uiFontName = "K2D-ExtraBold"
 let textFontName = "K2D-Regular"

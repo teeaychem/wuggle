@@ -34,7 +34,7 @@ class StatsCardViewController: CardViewController {
     super.init(iName: iN, viewData: vD, delegate: d)
       
     embed(combinedScoreViewC, inView: self.statusBarView, origin: CGPoint(x: 0, y: 0))
-    combinedScoreViewC.combinedUpdate(found: Int16(d.currentStats().topWords!.numVal), score: Int16(d.currentStats().topPoints!.numVal), percent: Int16(d.currentStats().topPercent!.numVal))
+    combinedScoreViewC.combinedUpdate(found: Int16(d.currentStats().topWords!.numVal), score: Int16(d.currentStats().topPoints!.numVal), percent: Int16(d.currentStats().topPercent!.numVal), obeySP: false)
   }
   
   override func viewDidLayoutSubviews() {
@@ -70,7 +70,7 @@ class StatsCardViewController: CardViewController {
     combinedScoreViewC.combinedUpdate(
       found: Int16(delegate!.currentStats().topWords!.numVal),
       score: Int16(delegate!.currentStats().topPoints!.numVal),
-      percent: Int16(delegate!.currentStats().topPercent!.numVal))
+      percent: Int16(delegate!.currentStats().topPercent!.numVal), obeySP: false)
   }
   
   required init?(coder: NSCoder) {

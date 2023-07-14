@@ -143,6 +143,7 @@ class UIData {
   
   
   func saveToCore() {
+    print("savinf to cre")
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let UISettingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UISettings")
     

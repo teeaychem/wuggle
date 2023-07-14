@@ -79,7 +79,11 @@ class ScoreIcon: IconView {
   
   
   override func updateIcon(value v: Int16) {
-    scoreLabel.attributedText = NSMutableAttributedString(string: String(v), attributes: textAttributes)
+    if v > -1 {
+      scoreLabel.attributedText = NSMutableAttributedString(string: String(v), attributes: textAttributes)
+    } else {
+      scoreLabel.attributedText = NSMutableAttributedString(string: "~", attributes: textAttributes)
+    }
   }
   
 }
