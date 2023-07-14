@@ -299,10 +299,9 @@ extension GameCardViewController {
   func endGameMain(fresh: Bool) {
     
     if (!delegate!.currentGame()!.allWordsComplete) {
-      print("Words not done")
+      // There a chance possible words failed to complete.
+      // If so, pause the game here to fill everything in.
       delegate!.currentGame()?.findPossibleWords()
-    } else {
-      print("already have words")
     }
     endGameDisplay()
     // Cancel timer, pause and end game
