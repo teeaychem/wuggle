@@ -81,7 +81,8 @@ class StopwatchView: UIView {
       //    // There's no need to truncate.
       secondsLayer.transform = CATransform3DMakeRotation(secondsAngle, 0.0, 0.0, 1.0)
     } else {
-      secondsLayer.path = UIBezierPath(roundedRect: CGRect(x: -0.5 * lineWidth, y: -0.5  * secondsLength, width: lineWidth, height: secondsLength), cornerRadius: lineWidth * 0.5).cgPath
+      secondsLayer.path = UIBezierPath(roundedRect: CGRect(x: -2.95 * lineWidth, y: lineWidth * -0.5, width: secondsLength, height: lineWidth), cornerRadius: lineWidth * 0.5).cgPath
+//      -3 * linewidth as secondslength is indented this much. Then adjusted for width.
     }
   }
   
