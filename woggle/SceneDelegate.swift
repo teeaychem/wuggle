@@ -11,8 +11,6 @@ import CoreData
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
-  // Store a general reference to the settings.
-  var settingsToUse: Settings?
   var stackViewController: CardStackViewController?
 
 
@@ -24,40 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     let window = UIWindow(windowScene: w)
     
-    // See if there's already some settings to pull from!
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let settingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
-    do {
-      let result = try context.fetch(settingsFetchRequest)
-      
-      if result.count > 0 {
-        settingsToUse = (result.first as! Settings)
-        // TODO: Delete other instances.
-      } else {
-        // If nothing found, default settings.
-        settingsToUse = getDefaultSettings(context: context)
-      }
-    } catch {
-      // If load fails, things should be fine with default settings.
-      settingsToUse = getDefaultSettings(context: context)
-    }
-    settingsToUse!.ensureDefaults()
-    stackViewController = CardStackViewController(settings: settingsToUse!)
+    stackViewController = CardStackViewController()
 
     window.rootViewController = stackViewController!
     self.window = window
     window.makeKeyAndVisible()
   }
-  
-  
-  func getDefaultSettings(context c: NSManagedObjectContext) -> Settings {
-    let dSettings = Settings(context: c)
-    dSettings.stats = StatsCollection(context: c)
-    
-    
-    return dSettings
-  }
-  
 
   func sceneDidDisconnect(_ scene: UIScene) {
     print("Ouch")

@@ -12,12 +12,14 @@ class CombinedScoreViewController: UIViewController {
   private let foundIcon: IconView
   private let scoreIcon: IconView
   private let perceIcon: IconView
+  private let uiData: UIData
   
   init(size s: CGSize, viewData vD: UIData, gameCard g: Bool) {
     
     foundIcon = ScoreIcon(viewData: vD, abv: "W", gameCard: g)
     scoreIcon = ScoreIcon(viewData: vD, abv: "P", gameCard: g)
     perceIcon = ScoreIcon(viewData: vD, abv: "%", gameCard: g)
+    uiData = vD
     
     super.init(nibName: nil, bundle: nil)
     
@@ -73,8 +75,13 @@ class CombinedScoreViewController: UIViewController {
   func gameInstanceUpdate(instance: GameInstance) {
     updateFound(val: instance.foundWordCount)
     updateScore(val: instance.pointsCount)
-    let percent = (Double(instance.foundWordCount) / Double(instance.allWordsList!.count)) * 100
-    updatePercent(val: Int16(percent))
+    
+    if uiData.showPercent {
+      let percent = (Double(instance.foundWordCount) / Double(instance.allWordsList!.count)) * 100
+      updatePercent(val: Int16(percent))
+    } else {
+      updatePercent(val: -1)
+    }
   }
   
   

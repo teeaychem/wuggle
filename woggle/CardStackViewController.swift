@@ -46,12 +46,18 @@ class CardStackViewController: UIViewController {
   private var cardOrigin: CGFloat = 0.0
   private var topCardIndex: Int
   
-  // TODO: Think about whether to accept settings as an argument, or load/create with this controller.
-  unowned var settings: Settings?
+  // TODO: Understand what happens with this.
+  // If settings is initialised on SceneDelegate, this is an unowned var.
+  // So, it's possible reference to settings fails.
+  // This makes sense.
+  // But, at no point should the reference fail, unless settings as stored on unowned var is distinct from settings as stored on var in SceneDelegate.
+  // So, perhaps this is the case.
+  // And, when unowned var is changed, this doesn't lead to an immediate change with original var.
+  var settings: Settings?
   
-  init(settings s: Settings) {
+  init() {
     
-    settings = s
+
     
     width = min(((UIScreen.main.bounds.size.height) / 1.4 / 1.16 ) * 0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
@@ -66,11 +72,38 @@ class CardStackViewController: UIViewController {
     
     super.init(nibName: nil, bundle: nil)
     
+    settings = loadOrMakeSettings()
+    settings!.ensureDefaults()
+    
     statsBarTapUIGR = UITapGestureRecognizer(target: self, action: #selector(statusBarTap))
 
     makeAndEmbedCards()
     setIcons()
     cardShuffleGesutre(enabled: false)
+  }
+  
+  
+  func loadOrMakeSettings() -> Settings {
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let settingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+    do {
+      let result = try context.fetch(settingsFetchRequest)
+      
+      if result.count > 0 {
+        return (result.first as! Settings)
+        // TODO: Delete other instances.
+      } else {
+        // If nothing found, default settings.
+        let dSettings = Settings(context: context)
+        dSettings.stats = StatsCollection(context: context)
+        return dSettings
+      }
+    } catch {
+      // If load fails, things should be fine with default settings.
+      let dSettings = Settings(context: context)
+      dSettings.stats = StatsCollection(context: context)
+      return dSettings
+    }
   }
   
   
@@ -183,7 +216,7 @@ extension CardStackViewController: CardStackDelegate {
   
   
   func updateSetting(internalName: String, internalValue: Int16) {
-    print("Ah, to change")
+    print("Ah, to change: ", internalName)
     
     switch internalName {
       
@@ -221,6 +254,11 @@ extension CardStackViewController: CardStackDelegate {
   
   
   func currentGame() -> GameInstance? {
+    guard settings != nil else {
+      print("Settings not found")
+      return GameInstance(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+    }
+    
     return settings!.currentGame
   }
   
@@ -234,18 +272,20 @@ extension CardStackViewController: CardStackDelegate {
 extension CardStackViewController {
   
   func updateNonMutatingSetting(internalName: String, internalValue: Int16) {
+    print("updateNonMutatingSetting")
     // Nonmutating means loading or creating settings which match chnage to internalName.
     
     
     // First, get the values of the current settings.
     // There's always *a* settings file, so these are fine to get.
     // Use these to perform a search.
-    if let currentSetitngs = settings {
+    if let currentSettings = settings {
+      print("found current settings")
       
-      var lexiconVal = currentSetitngs.lexicon
-      var minWordVal = currentSetitngs.minWordLength
-      var tileSqrtVal = currentSetitngs.tileSqrt
-      var timeVal = currentSetitngs.time
+      var lexiconVal = currentSettings.lexicon
+      var minWordVal = currentSettings.minWordLength
+      var tileSqrtVal = currentSettings.tileSqrt
+      var timeVal = currentSettings.time
       
       // Update the relevant predicate
       switch internalName {
@@ -270,7 +310,6 @@ extension CardStackViewController {
         let result = try context.fetch(settingsFetchRequest)
         
         if result.count == 1 {
-          settings = nil
           settings = (result.first as! Settings)
         } else if result.count > 1 {
           print(result.count)
@@ -285,7 +324,6 @@ extension CardStackViewController {
           freshSettings.lexicon = lexiconVal
           freshSettings.minWordLength = minWordVal
           freshSettings.tileSqrt = tileSqrtVal
-          settings = nil
           settings = freshSettings
           settings!.ensureDefaults()
           print("Search okay, no setting found")

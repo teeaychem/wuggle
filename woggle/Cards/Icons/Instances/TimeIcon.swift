@@ -34,11 +34,13 @@ class TimeIcon : IconView {
   
   
   override func updateIcon(value v: Int16) {
-    
-    let valPercent = Double(v)/12
-    let radians = (Double.pi * 0.5) - (2 * Double.pi * valPercent)
-    
-    addHand(angle: radians)
+    // Division is 60 * 12 * 0.5.
+    // 60 for minutes, 12 so each position is a minute. * 0.5 so Double.pi is functionally 2 * Double.pi
+    if v > 0 {
+      addHand(angle: (Double.pi * 0.5) - (Double.pi * (Double(v) / 360)))
+    } else {
+      // TODO: Inf case
+    }
   }
   
   

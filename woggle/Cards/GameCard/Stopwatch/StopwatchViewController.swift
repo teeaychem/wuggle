@@ -28,7 +28,6 @@ class StopwatchViewController: UIViewController {
     super.viewDidLoad()
     
     self.view.addSubview(watchView)
-    paintStatic()
   }
   
   
@@ -43,31 +42,22 @@ class StopwatchViewController: UIViewController {
   }
   
   
-  func paintStatic() {
-    watchView.paintWatchBackground()
-    watchView.paintFaceLayer()
-  }
-  
-  
-  func paintSeconds() {
-    watchView.addSeconds()
-  }
-  
   func setHandTo(percent: Double) {
     // Argument is %, so angle is % of 2pi.
-    watchView.setSecondTo(angle: percent * (2 * Double.pi))
+    watchView.makeSecondHandTo(angle: percent * (2 * Double.pi))
   }
   
   
   func incrementHandBy(percent: Double) {
     // Argument is %, so angle is % of 2pi.
-    watchView.incrementSeconds(updateAngleIncrement: percent * (2 * Double.pi))
+    if percent > 0 {
+      watchView.incrementSecondHand(toAngleIncrement: percent * (2 * Double.pi))
+    } else {
+      // Rotate once per minute.
+      watchView.incrementSecondHand(toAngleIncrement: percent * 1/60 * (2 * Double.pi))
+    }
   }
-  
-  
-  func resetHand() {
-    watchView.resetSeconds()
-  }
+
   
   
   func removeAllGestureRecognizers() {

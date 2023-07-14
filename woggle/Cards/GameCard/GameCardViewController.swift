@@ -80,7 +80,6 @@ class GameCardViewController: CardViewController {
     stopGR?.minimumPressDuration = 0.1
     watchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnTime(_:)))
     stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
-    stopwatchViewController.paintSeconds()
     
     // TODO: Annotate
     if delegate!.currentGame() != nil {
@@ -177,9 +176,6 @@ class GameCardViewController: CardViewController {
     }
   }
   
-  
-  
-  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -202,7 +198,7 @@ extension GameCardViewController {
     // Clear foundWords
     foundWordsViewController.clear()
     // Fix stopwatch
-    stopwatchViewController.resetHand()
+    stopwatchViewController.setHandTo(percent: delegate!.currentSettings().time > 0 ? 0 : -1)
     boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
         
     if (finalWordsViewController != nil) {
@@ -550,7 +546,7 @@ extension GameCardViewController {
     // As the timer for counting is tied to the refresh rate, updating the stopwatch is
     // done by calculating how much time has passed.
     let estimate = (displayLinkOne!.targetTimestamp - displayLinkOne!.timestamp)
-    let usedPercent = estimate/(Double(delegate!.currentSettings().time) * 60)
+    let usedPercent = estimate/(Double(delegate!.currentSettings().time))
     
     displayLinkOneTimeElapsed += estimate
     delegate!.currentGame()!.timeUsedPercent += usedPercent

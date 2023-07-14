@@ -67,7 +67,10 @@ class StatsCardViewController: CardViewController {
   
   
   override func respondToUpdate() {
-    combinedScoreViewC.combinedUpdate(found: Int16(delegate!.currentStats().topWords!.numVal), score: Int16(delegate!.currentStats().topPoints!.numVal), percent: Int16(delegate!.currentStats().topPercent!.numVal))
+    combinedScoreViewC.combinedUpdate(
+      found: Int16(delegate!.currentStats().topWords!.numVal),
+      score: Int16(delegate!.currentStats().topPoints!.numVal),
+      percent: Int16(delegate!.currentStats().topPercent!.numVal))
   }
   
   required init?(coder: NSCoder) {

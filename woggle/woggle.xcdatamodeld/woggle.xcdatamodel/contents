@@ -19,7 +19,7 @@
         <attribute name="lexicon" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="minWordLength" attributeType="Integer 16" defaultValueString="3" usesScalarValueType="YES"/>
         <attribute name="tileSqrt" attributeType="Integer 16" defaultValueString="5" usesScalarValueType="YES"/>
-        <attribute name="time" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="time" attributeType="Integer 16" defaultValueString="180" usesScalarValueType="YES"/>
         <relationship name="currentGame" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GameInstance" inverseName="settings" inverseEntity="GameInstance"/>
         <relationship name="stats" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StatsCollection" inverseName="forSettings" inverseEntity="StatsCollection"/>
     </entity>

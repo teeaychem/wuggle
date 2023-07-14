@@ -75,7 +75,7 @@ extension Settings {
   
   
   func timeOptionBlob() -> OptionBlob {
-    return OptionBlob(internalName: "time", displayName: "Time", internalOptions: [1, 2, 3, 5, 7, 0], displayOptions: ["1", "2", "3", "5", "7", "∞"])
+    return OptionBlob(internalName: "time", displayName: "Minutes", internalOptions: [60, 120, 180, 300, 420, -1], displayOptions: ["1", "2", "3", "5", "7", "∞"])
   }
   
   
@@ -95,7 +95,7 @@ extension Settings {
   
   
   func pFoundOptionBlob() -> OptionBlob {
-    return OptionBlob(internalName: "pfound", displayName: "Show % of words found", internalOptions: [0, 1], displayOptions: ["Yes", "No"])
+    return OptionBlob(internalName: "pfound", displayName: "Show % of words found", internalOptions: [1, 0], displayOptions: ["Yes", "No"])
   }
   
   
