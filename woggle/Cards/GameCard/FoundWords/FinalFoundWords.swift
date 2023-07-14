@@ -29,6 +29,8 @@ class FinalFoundWordsViewController: UIViewController {
     
     foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
     foundWordView.backgroundColor = vD.colourL
+    foundWordView.layer.borderColor = vD.iconBorderColour.cgColor
+    foundWordView.layer.borderWidth = 1
     
     super.init(nibName: nil, bundle: nil)
     

@@ -57,7 +57,7 @@ class CardStackViewController: UIViewController {
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
     
     uiData = UIData(width: width)
-    uiData.updateColour(profile: 4)
+    uiData.loadFromCore()
     
     firstCardY = (UIScreen.main.bounds.height - (uiData.cardSize.height + uiData.statusBarSize.height * 2)) * 0.5
     statusBarH = uiData.statusBarSize.height
@@ -107,6 +107,8 @@ class CardStackViewController: UIViewController {
   
   func reorderCardsByIndex(iName iN: String) {
     // TODO: Simplify.
+    // There's a lot of repitation here.
+    // In short, settings card is centre unless, settings is chosen, then stats > game > settings.
     
     switch iN {
     case "gameC":
@@ -187,11 +189,14 @@ extension CardStackViewController: CardStackDelegate {
       
     case "impact":
       uiData.impact = (internalValue == 1) ?  true : false
+      uiData.saveToCore()
     case "side":
       uiData.leftSide = (internalValue == 1) ?  true : false
+      uiData.saveToCore()
       rebuildStack()
     case "colour":
       uiData.updateColour(profile: internalValue)
+      uiData.saveToCore()
       rebuildStack()
       
     case "time", "lexicon", "length", "tiles":

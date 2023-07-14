@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 class UIData {
@@ -41,7 +42,7 @@ class UIData {
 
     colourOption = 0
     impact = true
-    leftSide = true
+    leftSide = false
     showPercent = true
     
     colourD =  UIColor.darkGray
@@ -116,7 +117,63 @@ class UIData {
       userInteractionColour =  UIColor.white
       iconBorderColour = UIColor.black
     }
+  }
+  
+  
+  func loadFromCore() {
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let UISettingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UISettings")
     
+    do {
+      let result = try context.fetch(UISettingsFetchRequest)
+      
+      if result.count > 0 {
+        let savedUIData = result.first as! UISettings
+        updateColour(profile: savedUIData.colour)
+        impact = savedUIData.impact
+        leftSide = savedUIData.leftSide
+        showPercent = savedUIData.showPercent
+      }
+    } catch {
+      // If there's an issue loading, don't do anything.
+      // Nothing important depends on having these present.
+      return
+    }
+  }
+  
+  
+  func saveToCore() {
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let UISettingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UISettings")
     
+    do {
+      let result = try context.fetch(UISettingsFetchRequest)
+      
+      if result.count > 0 {
+        let savedUIData = result.first as! UISettings
+        savedUIData.colour = colourOption
+        savedUIData.impact = impact
+        savedUIData.leftSide = leftSide
+        savedUIData.showPercent = showPercent
+        
+      } else {
+        let newSave = UISettings(context: context)
+        newSave.colour = colourOption
+        newSave.impact = impact
+        newSave.leftSide = leftSide
+        newSave.showPercent = showPercent
+        
+      }
+      
+      do {
+        try context.save()
+      } catch {
+        return
+      }
+    } catch {
+      // If there's an issue loading, don't do anything.
+      // Nothing important depends on having these present.
+      return
+    }
   }
 }
