@@ -74,19 +74,20 @@ class StopwatchView: UIView {
   
   
   func makeSecondHandTo(angle: Double) {
-    
+    // if negative, then make for inf game.
     if (angle >= 0) {
       secondsLayer.path = UIBezierPath(roundedRect: CGRect(x: -0.5 * lineWidth, y: 0, width: lineWidth, height: secondsLength), cornerRadius: lineWidth * 0.5).cgPath
       secondsAngle = (Double.pi - angle) //.truncatingRemainder(dividingBy: 2 * Double.pi)
       //    // There's no need to truncate.
       secondsLayer.transform = CATransform3DMakeRotation(secondsAngle, 0.0, 0.0, 1.0)
     } else {
+      // Rotating is animated, so to avoid dealing with this, draw the hand 'rotated'.
       secondsLayer.path = UIBezierPath(roundedRect: CGRect(x: -2.95 * lineWidth, y: lineWidth * -0.5, width: secondsLength, height: lineWidth), cornerRadius: lineWidth * 0.5).cgPath
 //      -3 * linewidth as secondslength is indented this much. Then adjusted for width.
+        // Likewise, y is shifted.
     }
   }
   
-
   
   func incrementSecondHand(toAngleIncrement: Double) {
     secondsAngle = (secondsAngle - toAngleIncrement)
@@ -120,17 +121,5 @@ extension StopwatchView {
       endAngle: CGFloat(3 * (Double.pi / 2)),
       clockwise: true).cgPath
   }
-  
-}
-
-
-//MARK: Functions to create layers
-extension StopwatchView {
-  
-}
-
-
-//MARK: Misc helper functions
-extension StopwatchView {
   
 }

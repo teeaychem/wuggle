@@ -38,9 +38,7 @@ class TimeIcon : IconView {
     layer.addSublayer(handLayer)
     
     setFacePath()
-    setHandPath(value: 0)
   }
-  
   
   override func updateIcon(value v: Int16) {
       setHandPath(value: v)
@@ -58,8 +56,6 @@ class TimeIcon : IconView {
   
   
   private func setHandPath(value: Int16) {
-    print(value)
-    
     if value > 0 {
       handLayer.path = UIBezierPath(roundedRect:
                                       CGRect(origin: CGPoint(x: -0.5 * handWidth, y: 0),
@@ -69,7 +65,8 @@ class TimeIcon : IconView {
       // Division is 60 * 12 * 0.5.
       // 60 for minutes, 12 so each position is a minute. * 0.5 so Double.pi is functionally 2 * Double.pi
     } else {
-      let handLength = size.height * 0.36 - handWidth * 0.5
+      let handLength = (size.height * 0.36) - (handWidth * 0.5)
+      // Follows the same size as stopWatch.
       handLayer.path = UIBezierPath(roundedRect:
                                       CGRect(origin: CGPoint(x: -0.5 * handWidth, y: -0.5  * handLength),
                                              size: CGSize(width: handWidth, height: handLength)),
