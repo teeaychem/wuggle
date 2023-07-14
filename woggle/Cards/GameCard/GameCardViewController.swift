@@ -69,21 +69,11 @@ class GameCardViewController: CardViewController {
       self.embed(playButtonsViewController, inView: self.cardView, origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.foundWordViewWidth), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
       self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: 3 * viewData.gameBoardPadding + viewData.foundWordViewWidth + viewData.stopWatchSize * 0.5, y: viewData.gameBoardPadding + viewData.statusBarSize.height))
     }
+    // Always want play/pause GR
+    addPlayPauseGR()
     
-    // TODO: Check these
-    // Add gesture recognisers
-    boardPanGR = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
-    boardPanGR!.maximumNumberOfTouches = 1
-    playPauseGR = UITapGestureRecognizer(target: self, action: #selector(didTapOnPlayPause(_:)))
-    stopGR = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressStop(_:)))
-    playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
-    stopGR?.minimumPressDuration = 0.1
-    watchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnTime(_:)))
-    stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
-    
-    // TODO: Annotate
     if delegate!.currentGame() != nil {
-      // Adjust things if there's a game.
+      // There's a game.
       boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
       stopwatchViewController.setHandTo(percent: delegate!.currentGame()!.timeUsedPercent)
       for word in delegate!.currentGame()!.foundWordsList! {
@@ -92,15 +82,22 @@ class GameCardViewController: CardViewController {
       boardViewController.displayTileFoundationAll()
       
       if delegate!.currentGame()!.viable {
-        // If there's already a game, set things with stored data.
+        // Game is viable
+        // Play/pause via watch
+        addWatchGR()
+        // Stop is possible.
         playButtonsViewController.paintStopIcon()
-        playButtonsViewController.stopAddGesture(gesture: stopGR!)
+        // Game is viable so watch and stop gr
+        addStopGR()
+        // Play pause isn't new game.
         playButtonsViewController.paintPlayIcon()
       } else {
-        endGameMain()
+        // Else, set things as if the game had just ended.
+        endGameMain(fresh: false)
       }
     } else {
-      // Otherwise, let the user start a game.
+      // There's no game.
+      // playPause GR is active, so just display newGame icon.
       playButtonsViewController.displayNewGameIcon()
     }
   }
@@ -187,33 +184,30 @@ class GameCardViewController: CardViewController {
 extension GameCardViewController {
   
   func newGameMain() {
-    print("New game!")
     if viewData.impact {
       UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
     }
-    // Remove all the tiles from the previous game.
+    // Remove things from previous game.
     boardViewController.removeAllTileViews()
-    // Get a new game.
-    delegate?.currentSettings().setNewGame()
-    // Clear foundWords
     foundWordsViewController.clear()
-    // Fix stopwatch
-    stopwatchViewController.setHandTo(percent: delegate!.currentSettings().time > 0 ? 0 : -1)
-    boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
-        
     if (finalWordsViewController != nil) {
       self.unembed(finalWordsViewController!, inView: self.cardView)
       finalWordsViewController = nil
     }
-    
-    playButtonsViewController.playPauseRemoveGesture(gesture: playPauseGR!)
-    
-    delegate!.cardShuffleGesutre(enabled: true)
-    
+    // Pause interaction while setting up a new game
+    removePlayPauseGR()
+    delegate!.cardShuffleGesutre(enabled: false)
+    // Get a new game.
+    delegate?.currentSettings().setNewGame()
+    boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
+    // Set a timer and call a wait function.
+    // In part for finding possible words, and in part for good feels.
     displayLinkTwo = CADisplayLink(target: self, selector: #selector(newGameWait))
     displayLinkTwo!.add(to: .current, forMode: .common)
+    // Most UI stuff is updated after waiting, but watch looks good immediate.
+    stopwatchViewController.setHandTo(percent: delegate!.currentSettings().time > 0 ? 0 : -1)
     
-    // So, basically, as part of this function we load up a private managed context which runs on a different thread.
+    // As part of this function we load up a private managed context which runs on a different thread.
     // This then works on the settings file separately from the settings in use on the main thread.
     // Perform means that we don't wait around for what is requested.
     // Saving then merges the two contexts.
@@ -226,7 +220,7 @@ extension GameCardViewController {
             
       let settingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
     
-    // TODO: This is a hack for now.
+    // TODO: Maybe ease get current settings.
     // Processing possible words on background thread.
     // So, need current settings.
     // At the moment, uniquely identified by combination of settings.
@@ -254,8 +248,7 @@ extension GameCardViewController {
   @objc func newGameWait() {
        
     if displayLinkTwoTimeElapsed < 1 {
-      
-      
+      // Count up while animating the new game icon
       displayLinkTwoTimeElapsed += displayLinkTwo!.targetTimestamp - displayLinkTwo!.timestamp
       
       playButtonsViewController.rotatePlayPauseIcon(percent: displayLinkTwoTimeElapsed)
@@ -263,19 +256,22 @@ extension GameCardViewController {
         tile.partialDiplayTile(percent: displayLinkTwoTimeElapsed)
       }
     } else {
-      
+      // Clear the timer
       displayLinkTwo?.invalidate()
       displayLinkTwoTimeElapsed = 0
       // Fix the icons.
-      playButtonsViewController.paintStopIcon()
-      playButtonsViewController.stopAddGesture(gesture: stopGR!)
       playButtonsViewController.paintPlayIcon()
-      
-      stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
-      playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
+      playButtonsViewController.paintStopIcon()
+      // Add gesture recognisers
+      addWatchGR()
+      addPlayPauseGR()
+      addStopGR()
       
       boardViewController.displayTileFoundationAll()
-      delegate!.cardShuffleGesutre(enabled: false)
+      delegate!.cardShuffleGesutre(enabled: true)
+      
+      // Go straight into the new game
+      resumeGameMain()
     }
   }
   
@@ -285,7 +281,7 @@ extension GameCardViewController {
     displayLinkOne = CADisplayLink(target: self, selector: #selector(Counting))
     displayLinkOne!.add(to: .current, forMode: .common)
     boardViewController.removeAllGestureRecognizers()
-    boardViewController.addGestureRecognizer(recogniser: boardPanGR!)
+    addBoardPanGR()
     playButtonsViewController.paintPauseIcon()
     gameInProgess = true
   }
@@ -300,14 +296,19 @@ extension GameCardViewController {
   }
   
   
-  func endGameMain() {
+  func endGameMain(fresh: Bool) {
+        
     endGameDisplay()
     // Cancel timer, pause and end game
     displayLinkOne?.invalidate()
     gameInProgess = false
-    delegate!.currentGame()?.viable = false
     boardViewController.displayTileCharacterAll(animated: false)
-    thinkingAboutStats(game: delegate!.currentGame()!)
+    
+    if fresh {
+      // Only interact with coreData is fresh game over
+      thinkingAboutStats(game: delegate!.currentGame()!)
+      delegate!.currentGame()?.viable = false
+    }
   }
   
   
@@ -317,8 +318,8 @@ extension GameCardViewController {
     playButtonsViewController.hideStopIcon()
     playButtonsViewController.displayNewGameIcon()
     // Remove gestures
-    boardViewController.removeGestureRecognizer(recogniser: boardPanGR!)
-    stopwatchViewController.view.removeGestureRecognizer(watchGestureRecognizer!)
+    boardViewController.removeAllGestureRecognizers()
+    removeWatchGR()
     // Display final words
     finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
     self.embed(finalWordsViewController!, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding + viewData.gameBoardSize * 0.075, y: viewData.cardSize.height - viewData.gameBoardSize * 0.925 - viewData.gameBoardPadding))
@@ -388,13 +389,59 @@ extension GameCardViewController {
       delegate!.processUpdate()
     }
   }
-
   
 }
 
 
 // MARK: GestureRecognisers
 extension GameCardViewController {
+  
+  
+  func addPlayPauseGR() {
+    if (playPauseGR == nil) {
+      playPauseGR = UITapGestureRecognizer(target: self, action: #selector(didTapOnPlayPause(_:)))
+    }
+    playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
+  }
+  
+  func removePlayPauseGR() {
+    if (playPauseGR != nil) {
+      playButtonsViewController.playPauseRemoveGesture(gesture: playPauseGR!)
+    }
+  }
+  
+  
+  func addStopGR() {
+    if (stopGR == nil) {
+      stopGR = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressStop(_:)))
+      stopGR!.minimumPressDuration = 0.05
+    }
+    playButtonsViewController.stopAddGesture(gesture: stopGR!)
+  }
+  
+  
+  func addWatchGR() {
+    if (watchGestureRecognizer == nil) {
+      watchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnTime(_:)))
+    }
+    stopwatchViewController.view.addGestureRecognizer(watchGestureRecognizer!)
+  }
+  
+  
+  func removeWatchGR() {
+    if (watchGestureRecognizer != nil) {
+      stopwatchViewController.view.removeGestureRecognizer(watchGestureRecognizer!)
+    }
+  }
+  
+  
+  func addBoardPanGR() {
+    if (boardPanGR == nil) {
+      boardPanGR = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
+      boardPanGR!.maximumNumberOfTouches = 1
+    }
+    boardViewController.addGestureRecognizer(recogniser: boardPanGR!)
+  }
   
   
   @objc func didPanOnBoard(_ sender: UIPanGestureRecognizer) {
@@ -511,8 +558,8 @@ extension GameCardViewController {
     case .ended, .cancelled:
       displayLinkTwo?.invalidate()
       playButtonsViewController.removeHighlight()
-      if (displayLinkTwoTimeElapsed > 0.125) {
-        endGameMain()
+      if (displayLinkTwoTimeElapsed > 0.25) {
+        endGameMain(fresh: true)
         playButtonsViewController.stopRemoveGesture(gesture: stopGR!)
       }
       displayLinkTwoTimeElapsed = 0
@@ -552,7 +599,7 @@ extension GameCardViewController {
     delegate!.currentGame()!.timeUsedPercent += usedPercent
     stopwatchViewController.incrementHandBy(percent: usedPercent)
     if (delegate!.currentGame()!.timeUsedPercent >= 1) {
-      endGameMain()
+      endGameMain(fresh: true)
     }
   }
   

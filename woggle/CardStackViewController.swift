@@ -79,7 +79,7 @@ class CardStackViewController: UIViewController {
 
     makeAndEmbedCards()
     setIcons()
-    cardShuffleGesutre(enabled: false)
+    cardShuffleGesutre(enabled: true)
   }
   
   
@@ -190,7 +190,7 @@ class CardStackViewController: UIViewController {
     unembedAndDeleteCards()
     makeAndEmbedCards()
     setIcons()
-    cardShuffleGesutre(enabled: false)
+    cardShuffleGesutre(enabled: true)
     reorderCardsByIndex(iName: "settC")
   }
   
@@ -206,11 +206,11 @@ extension CardStackViewController: CardStackDelegate {
   
   func cardShuffleGesutre(enabled: Bool) {
     if enabled {
-      cardViews.removeGesturesFromStatusBar()
-    } else {
       cardViews.settCardC!.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
       cardViews.statCardC!.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
       cardViews.gameCardC!.addGestureToStatusBar(gesture: UITapGestureRecognizer(target: self, action: #selector(statusBarTap)))
+    } else {
+      cardViews.removeGesturesFromStatusBar()
     }
   }
   

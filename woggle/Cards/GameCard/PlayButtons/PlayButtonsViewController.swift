@@ -98,7 +98,7 @@ class PlayButtonsViewController: UIViewController {
     end.toValue = 1
     
     CATransaction.begin()
-    CATransaction.setAnimationDuration(0.5)
+    CATransaction.setAnimationDuration(0.25)
     
     highlightLayer.add(end, forKey: end.keyPath)
 
