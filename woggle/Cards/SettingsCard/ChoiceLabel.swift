@@ -31,6 +31,9 @@ class ChoiceLabel: UILabel {
   
   
   func select() {
+    if delegate.getViewData().impact {
+      UIImpactFeedbackGenerator(style: .light).impactOccurred(intensity: 0.75)
+    }
     attributedText = NSMutableAttributedString(string: displayText, attributes: delegate.getViewData().getSettingsTextAttribute(height: frame.height * 0.8, colour: delegate.getViewData().colourD.cgColor))
   }
   

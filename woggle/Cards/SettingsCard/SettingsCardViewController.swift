@@ -65,31 +65,38 @@ class SettingsCardViewController: CardViewController {
       vertical: false,
       delegate: self
     )
-    optionViews["pfound"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["tiles"]!.layer.frame.maxY), size: flatStatSize),
-      optionBlob: delegate!.currentSettings().pFoundOptionBlob(),
-      vertical: false,
-      delegate: self
-    )
-    // TODO: Make impact when on is pressed.
-    optionViews["impact"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["pfound"]!.layer.frame.maxY), size: flatStatSize),
-      optionBlob: delegate!.currentSettings().impactOptionBlob(),
-      vertical: false,
-      delegate: self
-    )
-    optionViews["side"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["impact"]!.layer.frame.maxY), size: flatStatSize),
-      optionBlob: delegate!.currentSettings().sideOptionBlob(),
-      vertical: false,
-      delegate: self
-    )
+    
+    
+    // Now reverse order from bottom
     optionViews["colour"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["side"]!.layer.frame.maxY), size: flatStatSize),
+      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.cardSize.height * 0.98 - flatStatSize.height), size: flatStatSize),
       optionBlob: delegate!.currentSettings().colourOptionBlob(),
       vertical: false,
       delegate: self
     )
+    optionViews["side"] = OptionView(
+      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["colour"]!.layer.frame.minY - flatStatSize.height), size: flatStatSize),
+      optionBlob: delegate!.currentSettings().sideOptionBlob(),
+      vertical: false,
+      delegate: self
+    )
+    optionViews["impact"] = OptionView(
+      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["side"]!.layer.frame.minY - flatStatSize.height), size: flatStatSize),
+      optionBlob: delegate!.currentSettings().impactOptionBlob(),
+      vertical: false,
+      delegate: self
+    )
+    optionViews["pfound"] = OptionView(
+      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["impact"]!.layer.frame.minY - flatStatSize.height), size: flatStatSize),
+      optionBlob: delegate!.currentSettings().pFoundOptionBlob(),
+      vertical: false,
+      delegate: self
+    )
+    
+    // TODO: Make impact when on is pressed.
+    
+
+    
   }
   
   override func viewDidLoad() {
