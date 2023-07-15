@@ -81,7 +81,6 @@ class PlayButtonsView: UIView {
   }
   
   
-  
   func removeStopIcon() {
     stopView.layer.sublayers?.removeAll()
   }

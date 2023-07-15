@@ -144,18 +144,14 @@ extension SettingsCardViewController: SettingsCardViewControllerDelegate {
   
   func updateSetting(internalName: String, internalValue: Int16) {
     
-    switch internalName {
-    case "time", "lexicon", "length", "tiles":
+    if internalName.first == "t" || internalName.first == "l" {
+      // time, tiles, lexicon, length. Other settings don't start with t/l and don't have icon.
       updateIcon(internalName: internalName, internalValue: internalValue)
-    default:
-      print("Default update")
     }
-    
-    print("asked to update setting")
+
     delegate!.updateSetting(internalName: internalName, internalValue: internalValue)
     // Update the card delegate, which will then update the stored settings and other cards.
     // Update the settings on the card?
-    print("asked to process update")
     delegate!.processUpdate()
   }
   

@@ -58,8 +58,6 @@ class CardStackViewController: UIViewController {
   
   init() {
     
-
-    
     width = min(((UIScreen.main.bounds.size.height) / 1.4 / 1.16 ) * 0.9, UIScreen.main.bounds.size.width)
     cardIndent = (UIScreen.main.bounds.size.width - width)/2
     
@@ -203,6 +201,7 @@ class CardStackViewController: UIViewController {
 }
 
 
+// MARK: CardStackDelegate
 
 extension CardStackViewController: CardStackDelegate {
   
@@ -218,14 +217,13 @@ extension CardStackViewController: CardStackDelegate {
   
   
   func updateSetting(internalName: String, internalValue: Int16) {
-    print("Ah, to change: ", internalName)
     
     switch internalName {
-      
     case "impact":
       uiData.impact = (internalValue == 1) ?  true : false
     case "side":
       uiData.leftSide = (internalValue == 1) ?  true : false
+      // TODO: Maybe. Only need to redo gameCard here, rather than everything.
       rebuildStack()
     case "colour":
       uiData.updateColour(profile: internalValue)
@@ -237,6 +235,7 @@ extension CardStackViewController: CardStackDelegate {
       }
     case "time", "lexicon", "length", "tiles":
       updateNonMutatingSetting(internalName: internalName, internalValue: internalValue)
+      setIcons()
     default:
       break
     }
@@ -258,10 +257,8 @@ extension CardStackViewController: CardStackDelegate {
   
   func currentGame() -> GameInstance? {
     guard settings != nil else {
-      print("Settings not found")
       return GameInstance(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
     }
-    
     return settings!.currentGame
   }
   
@@ -274,22 +271,17 @@ extension CardStackViewController: CardStackDelegate {
 
 extension CardStackViewController {
   
-  func updateNonMutatingSetting(internalName: String, internalValue: Int16) {
-    print("updateNonMutatingSetting")
+  private func updateNonMutatingSetting(internalName: String, internalValue: Int16) {
     // Nonmutating means loading or creating settings which match chnage to internalName.
-    
     
     // First, get the values of the current settings.
     // There's always *a* settings file, so these are fine to get.
     // Use these to perform a search.
     if let currentSettings = settings {
-      print("found current settings")
-      
       var lexiconVal = currentSettings.lexicon
       var minWordVal = currentSettings.minWordLength
       var tileSqrtVal = currentSettings.tileSqrt
       var timeVal = currentSettings.time
-      
       // Update the relevant predicate
       switch internalName {
       case "time":
@@ -329,16 +321,13 @@ extension CardStackViewController {
           freshSettings.tileSqrt = tileSqrtVal
           settings = freshSettings
           settings!.ensureDefaults()
-          print("Search okay, no setting found")
         }
-      } catch {
-        print("Search failed")
-      }
-    } else {
-      print("Woooow")
+      } catch { }
     }
-    setIcons()
   }
+  
+  
+  
   
   
   

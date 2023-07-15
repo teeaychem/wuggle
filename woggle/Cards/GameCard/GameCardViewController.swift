@@ -214,7 +214,7 @@ extension GameCardViewController {
     
       let privateManagedObjectContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        managedObjectContext.parent = self.delegate?.currentSettings().managedObjectContext
+        managedObjectContext.parent = self.delegate!.currentSettings().managedObjectContext
         return managedObjectContext
       }()
             
@@ -228,13 +228,13 @@ extension GameCardViewController {
     
     settingsFetchRequest.predicate = NSPredicate(
       format: "time == %i AND lexicon == %i AND minWordLength == %i AND tileSqrt == %i",
-      (delegate?.currentSettings().time)!, (delegate?.currentSettings().lexicon)!, (delegate?.currentSettings().minWordLength)!, (delegate?.currentSettings().tileSqrt)!)
+      delegate!.currentSettings().time, delegate!.currentSettings().lexicon, delegate!.currentSettings().minWordLength, delegate!.currentSettings().tileSqrt)
     
       settingsFetchRequest.fetchLimit = 1
       if let result = try? privateManagedObjectContext.fetch(settingsFetchRequest) {
         let settings = result.first as! Settings
         privateManagedObjectContext.perform {
-          settings.currentGame?.findPossibleWords()
+          settings.currentGame!.findPossibleWords()
           do {
             try privateManagedObjectContext.save()
           } catch {
