@@ -77,22 +77,14 @@ class CardStackViewController: UIViewController {
     
     statsBarTapUIGR = UITapGestureRecognizer(target: self, action: #selector(statusBarTap))
 
-    self.makeAndEmbedCards()
-    self.setIcons()
-    self.cardShuffleGesutre(enabled: true)
+//    self.makeAndEmbedCards()
+//    self.setIcons()
+//    self.cardShuffleGesutre(enabled: true)
   }
   
   
   override func viewDidLoad() {
-    
-    let serialQueue = DispatchQueue(label: "swiftlee.serial.queue")
-    
-    serialQueue.sync {
-      print("why not")
-    }
-    serialQueue.sync {
       self.ensureTrie()
-    }
   }
   
   
@@ -342,36 +334,64 @@ extension CardStackViewController {
   
   func ensureTrie() {
     
-    let privateManagedObjectContext: NSManagedObjectContext = {
-      let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-      managedObjectContext.parent = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-      return managedObjectContext
-    }()
-
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
-    fetchRequest.fetchLimit = 1
-    
-    if let result = try? privateManagedObjectContext.fetch(fetchRequest) {
-      if result.count < 1 {
-        print("making tries")
-        privateManagedObjectContext.perform {
-          let newTrie = TrieNode(context: privateManagedObjectContext)
-          newTrie.completeTrieFromFile(fName: "3of6game", lexiconIndex: 0, context: privateManagedObjectContext)
-          newTrie.completeTrieFromFile(fName: "Odgen", lexiconIndex: 1, context: privateManagedObjectContext)
-          newTrie.completeTrieFromFile(fName: "Austen", lexiconIndex: 2, context: privateManagedObjectContext)
-          newTrie.completeTrieFromFile(fName: "KJB", lexiconIndex: 3, context: privateManagedObjectContext)
-          newTrie.completeTrieFromFile(fName: "Shakespeare", lexiconIndex: 4, context: privateManagedObjectContext)
-          print("done making tries")
-          do {
-            try privateManagedObjectContext.parent!.save()
-          } catch {
-            print("heck")
+      
+      let privateManagedObjectContext: NSManagedObjectContext = {
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        managedObjectContext.parent = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        return managedObjectContext
+      }()
+      
+      let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
+      fetchRequest.fetchLimit = 1
+      
+      if let result = try? privateManagedObjectContext.fetch(fetchRequest) {
+        if result.count < 1 {
+          print("making tries")
+          privateManagedObjectContext.perform {
+            let newTrie = TrieNode(context: privateManagedObjectContext)
+            newTrie.completeTrieFromFile(fName: "3of6game", lexiconIndex: 0, context: privateManagedObjectContext)
+            do {
+              try privateManagedObjectContext.parent!.save()
+            } catch {
+              print("heck")
+            }
+            newTrie.completeTrieFromFile(fName: "Odgen", lexiconIndex: 1, context: privateManagedObjectContext)
+            do {
+              try privateManagedObjectContext.parent!.save()
+            } catch {
+              print("heck")
+            }
+            newTrie.completeTrieFromFile(fName: "Austen", lexiconIndex: 2, context: privateManagedObjectContext)
+            do {
+              try privateManagedObjectContext.parent!.save()
+            } catch {
+              print("heck")
+            }
+            newTrie.completeTrieFromFile(fName: "KJB", lexiconIndex: 3, context: privateManagedObjectContext)
+            do {
+              try privateManagedObjectContext.parent!.save()
+            } catch {
+              print("heck")
+            }
+            newTrie.completeTrieFromFile(fName: "Shakespeare", lexiconIndex: 4, context: privateManagedObjectContext)
+            print("done making tries")
+            do {
+              try privateManagedObjectContext.parent!.save()
+            } catch {
+              print("heck")
+            }
+            print("done")
+            self.performSelector(onMainThread: #selector(self.trieSuccess), with: nil, waitUntilDone: true)
           }
         }
       }
-    }
   }
   
   
-  
+  @objc func trieSuccess(){
+    print("notified")
+    self.makeAndEmbedCards()
+    self.setIcons()
+    self.cardShuffleGesutre(enabled: true)
+  }
 }
