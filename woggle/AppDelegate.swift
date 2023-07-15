@@ -15,30 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
-    fetchRequest.fetchLimit = 1
-    
-    do {
-      let result = try context.fetch(fetchRequest)
-      
-      if result.count > 0 {
-        print("Tries found")
-        
-      } else {
-        print("New trie created")
-        let newTrie = TrieNode(context: context)
-        newTrie.completeTrieFromFile(fName: "3of6game", lexiconIndex: 0, context: context)
-        newTrie.completeTrieFromFile(fName: "Odgen", lexiconIndex: 1, context: context)
-        newTrie.completeTrieFromFile(fName: "Austen", lexiconIndex: 2, context: context)
-        newTrie.completeTrieFromFile(fName: "KJB", lexiconIndex: 3, context: context)
-        newTrie.completeTrieFromFile(fName: "Shakespeare", lexiconIndex: 4, context: context)
-      }
-    } catch {
-      print("Error")
-    }
+
     return true
   }
 

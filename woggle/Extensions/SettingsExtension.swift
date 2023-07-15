@@ -57,7 +57,7 @@ extension Settings {
   }
   
   
-  func getTrieRoot() -> TrieNode {
+  func getTrieRoot() -> TrieNode? {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
     fetchRequest.fetchLimit = 1
     do {
@@ -70,7 +70,7 @@ extension Settings {
     } catch {
       print("error")
     }
-    return TrieNode(context: self.managedObjectContext!)
+    return nil
   }
   
   

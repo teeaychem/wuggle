@@ -11,7 +11,7 @@ import CoreData
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
-  var stackViewController: CardStackViewController?
+  let stackViewController = CardStackViewController()
 
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -21,10 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let w = (scene as? UIWindowScene) else { return }
     
     let window = UIWindow(windowScene: w)
-    
-    stackViewController = CardStackViewController()
+  
 
-    window.rootViewController = stackViewController!
+    window.rootViewController = stackViewController
     self.window = window
     window.makeKeyAndVisible()
   }

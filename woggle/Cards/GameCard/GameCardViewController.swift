@@ -36,9 +36,6 @@ class GameCardViewController: CardViewController {
   
   override init(iName iN: String, viewData vD: UIData, delegate d: CardStackDelegate) {
     
-    // Use delegate to pull some general infomration.
-    rootTrie = d.currentSettings().getTrieRoot()
-    
     // Icons
     combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD, gameCard: true)
     
@@ -56,6 +53,10 @@ class GameCardViewController: CardViewController {
   
   override func broughtToTop() {
     super.broughtToTop()
+    
+    // Use delegate to fix root trie.
+    // This means it should be possible to init the controller before tries have been built, so long as the card is not pulled to the top.
+    rootTrie = delegate!.currentSettings().getTrieRoot()
     
     // First set the views.
     self.embed(boardViewController, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.cardSize.height - (viewData.gameBoardSize + viewData.gameBoardPadding)))
@@ -496,6 +497,7 @@ extension GameCardViewController {
     case .ended, .cancelled:
       // Check to see if current trie node is a word.
       let wordAttempt = stringFromSelectedTiles()
+      guard rootTrie != nil else { return }
       let endTrie = rootTrie!.traceString(word: wordAttempt)
       if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)]) {
         processWord(word: wordAttempt.replacingOccurrences(of: "!", with: "Qu"))

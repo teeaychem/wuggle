@@ -65,5 +65,4 @@ class setupViewController: UIViewController {
     counter += 1
     if counter == 120 { counter = 0 }
     }
-
 }
