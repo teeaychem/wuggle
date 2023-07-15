@@ -235,7 +235,7 @@ extension GameCardViewController {
       if let result = try? privateManagedObjectContext.fetch(settingsFetchRequest) {
         let settings = result.first as! Settings
         privateManagedObjectContext.perform {
-          settings.currentGame!.findPossibleWords()
+          settings.currentGame!.findPossibleWords(minLength: Int(self.delegate!.currentSettings().minWordLength))
           do {
             try privateManagedObjectContext.save()
           } catch {
@@ -302,7 +302,7 @@ extension GameCardViewController {
     if (!delegate!.currentGame()!.allWordsComplete) {
       // There a chance possible words failed to complete.
       // If so, pause the game here to fill everything in.
-      delegate!.currentGame()?.findPossibleWords()
+      delegate!.currentGame()?.findPossibleWords(minLength: Int(delegate!.currentSettings().minWordLength))
     }
     endGameDisplay()
     // Cancel timer, pause and end game
@@ -499,7 +499,7 @@ extension GameCardViewController {
       let wordAttempt = stringFromSelectedTiles()
       guard rootTrie != nil else { return }
       let endTrie = rootTrie!.traceString(word: wordAttempt)
-      if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)]) {
+      if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)] && wordAttempt.count >= delegate!.currentSettings().minWordLength) {
         processWord(word: wordAttempt.replacingOccurrences(of: "!", with: "Qu"))
       }
       

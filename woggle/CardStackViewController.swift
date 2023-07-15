@@ -338,20 +338,16 @@ extension CardStackViewController {
   
   
   func ensureTrie() {
-    
-      
+    // Build the tries on background thread then notify main thread to move to main UI
       let privateManagedObjectContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.parent = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         return managedObjectContext
       }()
-      
       let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
       fetchRequest.fetchLimit = 1
-      
       if let result = try? privateManagedObjectContext.fetch(fetchRequest) {
         if result.count < 1 {
-          print("making tries")
           privateManagedObjectContext.perform {
             let newTrie = TrieNode(context: privateManagedObjectContext)
             newTrie.completeTrieFromFile(fName: "3of6game", lexiconIndex: 0, context: privateManagedObjectContext)
@@ -379,13 +375,11 @@ extension CardStackViewController {
               print("heck")
             }
             newTrie.completeTrieFromFile(fName: "Shakespeare", lexiconIndex: 4, context: privateManagedObjectContext)
-            print("done making tries")
             do {
               try privateManagedObjectContext.parent!.save()
             } catch {
               print("heck")
             }
-            print("done")
             self.performSelector(onMainThread: #selector(self.trieSuccess), with: nil, waitUntilDone: true)
           }
         } else {
@@ -396,7 +390,6 @@ extension CardStackViewController {
   
   
   @objc func trieSuccess(){
-    print("notified")
     for sv in view.subviews {
       sv.removeFromSuperview()
     }

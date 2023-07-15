@@ -42,13 +42,13 @@ extension GameInstance {
   }
   
   
-  func findPossibleWords() {
+  func findPossibleWords(minLength mL: Int) {
     guard self.settings?.currentGame != nil else { return }
-    self.settings!.currentGame!.allWordsList = findAllWords()?.sorted()
+    self.settings!.currentGame!.allWordsList = findAllWords(minLength: mL)?.sorted()
     self.settings!.currentGame!.allWordsComplete = true
   }
   
-  func findAllWords() -> Set<String>? {
+  func findAllWords(minLength mL: Int) -> Set<String>? {
     // Call exploreTileWithList with helper variables.
     //
     guard (self.board != nil) else { print("no board"); return nil }
@@ -68,7 +68,7 @@ extension GameInstance {
         var wordSet = Set<String>()
         var wordString = ""
         for tile in allTiles {
-          exploreTileWithList(tile: tile, availableTiles: &allTiles, trieNode: &node, wordString: &wordString, wordSet: &wordSet)
+          exploreTileWithList(tile: tile, availableTiles: &allTiles, trieNode: &node, wordString: &wordString, wordSet: &wordSet, minLength: mL)
         }
         return wordSet
       }
@@ -78,7 +78,7 @@ extension GameInstance {
     return nil
   }
   
-  func exploreTileWithList(tile: Tile, availableTiles: inout Set<Tile>, trieNode: inout TrieNode, wordString: inout String, wordSet: inout Set<String>) {
+  func exploreTileWithList(tile: Tile, availableTiles: inout Set<Tile>, trieNode: inout TrieNode, wordString: inout String, wordSet: inout Set<String>, minLength mL: Int) {
     // Recusive function to explore a tile when finding words.
     // It's assumed the trieNode corresponds with the used tiles.
     // Starting from root, so always looking a trieNode ahead
@@ -96,7 +96,7 @@ extension GameInstance {
       wordString += tile.value!
       
       // If this is a word, update the word list.
-      if trieNode.isWord && trieNode.lexiconList![Int(settings!.lexicon)] {
+      if trieNode.isWord && trieNode.lexiconList![Int(settings!.lexicon)] && wordString.count >= mL {
         wordSet.insert(wordString.replacingOccurrences(of: "!", with: "Qu"))
       }
       
@@ -105,7 +105,7 @@ extension GameInstance {
       let tilesToSearch = availableTiles.intersection(getSurroundingTilesInclusive(tile: tile))
       
       for choiceTile in tilesToSearch {
-        exploreTileWithList(tile: choiceTile, availableTiles: &availableTiles, trieNode: &trieNode, wordString: &wordString, wordSet: &wordSet)
+        exploreTileWithList(tile: choiceTile, availableTiles: &availableTiles, trieNode: &trieNode, wordString: &wordString, wordSet: &wordSet, minLength: mL)
       }
       
       // We're done exploring, so make the tile available again
