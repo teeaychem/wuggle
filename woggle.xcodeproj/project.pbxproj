@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		570A572D2A4B83BA006129FD /* CardStackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570A572C2A4B83BA006129FD /* CardStackDelegate.swift */; };
 		5735DD3F2A4E4B560071B29B /* FoundWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735DD3E2A4E4B560071B29B /* FoundWordsViewController.swift */; };
-		5741D2882A621229002BEEF9 /* setupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5741D2872A621229002BEEF9 /* setupViewController.swift */; };
 		5741FA292A53782E00B4164D /* FinalFoundWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5741FA282A53782E00B4164D /* FinalFoundWords.swift */; };
 		57455B412A4CFF8C0019FFB5 /* PlayButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57455B402A4CFF8C0019FFB5 /* PlayButtonsViewController.swift */; };
 		57455B432A4CFFA40019FFB5 /* PlayButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57455B422A4CFFA40019FFB5 /* PlayButtonsView.swift */; };
@@ -88,7 +87,6 @@
 /* Begin PBXFileReference section */
 		570A572C2A4B83BA006129FD /* CardStackDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackDelegate.swift; sourceTree = "<group>"; };
 		5735DD3E2A4E4B560071B29B /* FoundWordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundWordsViewController.swift; sourceTree = "<group>"; };
-		5741D2872A621229002BEEF9 /* setupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setupViewController.swift; sourceTree = "<group>"; };
 		5741FA282A53782E00B4164D /* FinalFoundWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalFoundWords.swift; sourceTree = "<group>"; };
 		57455B402A4CFF8C0019FFB5 /* PlayButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonsViewController.swift; sourceTree = "<group>"; };
 		57455B422A4CFFA40019FFB5 /* PlayButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonsView.swift; sourceTree = "<group>"; };
@@ -358,7 +356,6 @@
 				57D155142A557D4D00A802C9 /* Protocols */,
 				57EB7A522A47A7F000BCA44B /* Misc */,
 				57EB7A412A47820900BCA44B /* Gameboard */,
-				5741D2872A621229002BEEF9 /* setupViewController.swift */,
 				57EF4B6B2A466528008C57FF /* CardStackViewController.swift */,
 				57EB7A4E2A479C2D00BCA44B /* UIData.swift */,
 				57EB7A3F2A47817C00BCA44B /* Cards */,
@@ -561,7 +558,6 @@
 				57D155132A5579D000A802C9 /* ChoiceLabel.swift in Sources */,
 				5735DD3F2A4E4B560071B29B /* FoundWordsViewController.swift in Sources */,
 				57455B432A4CFFA40019FFB5 /* PlayButtonsView.swift in Sources */,
-				5741D2882A621229002BEEF9 /* setupViewController.swift in Sources */,
 				57BADD862A4A4D10009074DF /* UITableViewWordCell.swift in Sources */,
 				5741FA292A53782E00B4164D /* FinalFoundWords.swift in Sources */,
 				57EB7A512A47A65000BCA44B /* GameInstanceExtension.swift in Sources */,
