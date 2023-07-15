@@ -88,6 +88,18 @@ class CardStackViewController: UIViewController {
     tileLayer.path = randomStartRoundedUIBeizerPath(width: tileSize.width, height: tileSize.height, cornerRadius: tileSize.width * 0.25).cgPath
     tileView.layer.addSublayer(tileLayer)
     view.addSubview(tileView)
+    let blockingLayer = CAShapeLayer()
+    blockingLayer.strokeColor = UIColor.black.cgColor
+    blockingLayer.path = UIBezierPath(ovalIn: CGRect(origin: CGPoint(x: tileView.frame.width * 0.1, y: tileView.frame.height * 0.1), size: CGSize(width: tileView.frame.width * 0.75, height: tileView.frame.width * 0.75))).cgPath
+    blockingLayer.frame.origin = CGPoint(x: tileView.frame.width * 0.5, y: tileView.frame.height * 0.5)
+    tileView.layer.addSublayer(blockingLayer)
+    
+    let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
+    rotation.toValue = -Double.pi * 2
+    rotation.duration = 8
+    rotation.isCumulative = false
+    rotation.repeatCount = MAXFLOAT
+    blockingLayer.add(rotation, forKey: "rotationAnimation")
     
     self.ensureTrie()
   }
@@ -393,6 +405,7 @@ extension CardStackViewController {
   
   @objc func trieSuccess(){
     for sv in view.subviews {
+      sv.layer.removeAllAnimations()
       sv.removeFromSuperview()
     }
     self.makeAndEmbedCards()

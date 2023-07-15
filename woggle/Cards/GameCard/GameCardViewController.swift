@@ -353,7 +353,7 @@ extension GameCardViewController {
     if ratio > delegate!.currentStats().topRatio!.numVal {
       delegate!.currentStats().topRatio!.numVal = ratio
       delegate!.currentStats().topRatio!.strVal = w.capitalized
-      delegate!.currentStats().topRatio!.extraStr = String(format: "%.2f points average", ratio)
+      delegate!.currentStats().topRatio!.extraStr = String(format: "%.2f on average", ratio)
       delegate!.currentStats().topRatio!.date = Date()
     }
   }
