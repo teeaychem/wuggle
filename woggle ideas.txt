@@ -1,0 +1,31 @@
+Woggle to do:
+
+X. Redo word lists. 
+    1. Uppercase
+    2. I replaced "Q" with "!". This makes no sense.
+
+
+X. Delete redundant coreData stuff
+
+X. Some UI info when new stat is made.
+Clear this after settings change/new game
+
+X. Implement a way to associate and view the board associated with a given stat.
+    Here, saving boards gets a little difficult.
+    At the moment, I have cascade delete on gameInstance.
+    And, with an updated stat I want to keep a copy of the board associated with the gameInstance.
+    So, either I need to avoid cascade delete, or do a deep copy of the board.
+
+X. It would be cool to show 'exhausted' tiles.
+    And, this is kind of easy to do.
+    Maybe.
+    I can get a list of tiles used when searching for possible words.
+    Store these.
+    Well, I kind of want a relation.
+    Which means a matrix.
+    Rows are tiles.
+    Colums are words.
+    When I make a word, I set each cell with the tile to true.
+    When a word is found, all of these are set to false.
+    Then, when a word is made I check each row to see if there's a true cell.
+    If not, then there's no available word which uses the tile.
