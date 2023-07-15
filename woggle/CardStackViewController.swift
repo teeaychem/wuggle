@@ -89,7 +89,7 @@ class CardStackViewController: UIViewController {
     tileView.layer.addSublayer(tileLayer)
     view.addSubview(tileView)
     
-      self.ensureTrie()
+    self.ensureTrie()
   }
   
   
@@ -345,46 +345,50 @@ extension CardStackViewController {
       let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
       fetchRequest.fetchLimit = 1
       if let result = try? privateManagedObjectContext.fetch(fetchRequest) {
-        if result.count < 1 {
+        if result.count > 0 {
+          print("found trie")
           privateManagedObjectContext.perform {
-            let newTrie = TrieNode(context: privateManagedObjectContext)
-            newTrie.completeTrieFromFile(fName: "3of6game", lexiconIndex: 0, context: privateManagedObjectContext)
-            do {
-              try privateManagedObjectContext.parent!.save()
-            } catch {
-              print("heck")
+            let foundTrie = result.first as! TrieNode
+            let rootTrie = foundTrie.getRoot()!
+            if !rootTrie.memoryContainsWord(word: "PROCRASTINATION", lexicon: 0) {
+              self.buildAndSave(rootTrie: rootTrie, fileName: "3of6game", privatecontext: privateManagedObjectContext, index: 0)
             }
-            newTrie.completeTrieFromFile(fName: "Odgen", lexiconIndex: 1, context: privateManagedObjectContext)
-            do {
-              try privateManagedObjectContext.parent!.save()
-            } catch {
-              print("heck")
+            if !rootTrie.memoryContainsWord(word: "GOVERNMENT", lexicon: 1) {
+              self.buildAndSave(rootTrie: rootTrie, fileName: "Odgen", privatecontext: privateManagedObjectContext, index: 1)
             }
-            newTrie.completeTrieFromFile(fName: "Austen", lexiconIndex: 2, context: privateManagedObjectContext)
-            do {
-              try privateManagedObjectContext.parent!.save()
-            } catch {
-              print("heck")
+            if !rootTrie.memoryContainsWord(word: "ZIGZAGS", lexicon: 2) {
+              self.buildAndSave(rootTrie: rootTrie, fileName: "Austen", privatecontext: privateManagedObjectContext, index: 2)
             }
-            newTrie.completeTrieFromFile(fName: "KJB", lexiconIndex: 3, context: privateManagedObjectContext)
-            do {
-              try privateManagedObjectContext.parent!.save()
-            } catch {
-              print("heck")
+            if !rootTrie.memoryContainsWord(word: "HAZO", lexicon: 3) {
+              self.buildAndSave(rootTrie: rootTrie, fileName: "KJB", privatecontext: privateManagedObjectContext, index: 3)
             }
-            newTrie.completeTrieFromFile(fName: "Shakespeare", lexiconIndex: 4, context: privateManagedObjectContext)
-            do {
-              try privateManagedObjectContext.parent!.save()
-            } catch {
-              print("heck")
+            if !rootTrie.memoryContainsWord(word: "EVN", lexicon: 4) {
+              self.buildAndSave(rootTrie: rootTrie, fileName: "Shakespeare", privatecontext: privateManagedObjectContext, index: 4)
             }
             self.performSelector(onMainThread: #selector(self.trieSuccess), with: nil, waitUntilDone: true)
           }
         } else {
-          trieSuccess()
+          privateManagedObjectContext.perform {
+            let newTrie = TrieNode(context: privateManagedObjectContext)
+            self.buildAndSave(rootTrie: newTrie, fileName: "3of6game", privatecontext: privateManagedObjectContext, index: 0)
+            self.buildAndSave(rootTrie: newTrie, fileName: "Odgen", privatecontext: privateManagedObjectContext, index: 1)
+            self.buildAndSave(rootTrie: newTrie, fileName: "Austen", privatecontext: privateManagedObjectContext, index: 2)
+            self.buildAndSave(rootTrie: newTrie, fileName: "KJB", privatecontext: privateManagedObjectContext, index: 3)
+            self.buildAndSave(rootTrie: newTrie, fileName: "Shakespeare", privatecontext: privateManagedObjectContext, index: 4)
+            self.performSelector(onMainThread: #selector(self.trieSuccess), with: nil, waitUntilDone: true)
+          }
         }
       }
   }
+  
+  
+  func buildAndSave(rootTrie: TrieNode, fileName fName: String, privatecontext prC: NSManagedObjectContext, index i: Int) {
+    print("buildAndSave on", fName)
+    rootTrie.completeTrieFromFile(fName: fName, lexiconIndex: i, context: prC)
+    do { try prC.parent!.save() } catch { print("heck") }
+    
+  }
+  
   
   
   @objc func trieSuccess(){

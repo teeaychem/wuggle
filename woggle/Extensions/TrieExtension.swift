@@ -26,9 +26,7 @@ extension TrieNode  {
   func getChild(val: String) -> TrieNode? {
     // Return child of current node with specified value.
     // Else, return nil
-    
     var child: TrieNode?
-    
     let children = self.children?.allObjects as! [TrieNode]
     for c in children {
       if c.value == val {
@@ -45,7 +43,7 @@ extension TrieNode  {
   }
   
   
-  func moveToChild(value: String, context: NSManagedObjectContext) -> TrieNode? {
+  func moveToChild(value: String, context: NSManagedObjectContext) -> TrieNode {
     // Either getChild is present, or create a child.
     
     var child = self.getChild(val: value)
@@ -54,8 +52,7 @@ extension TrieNode  {
       child!.value = value
       child!.parent = self
     }
-    return child
-    
+    return child!
   }
   
   
@@ -81,7 +78,7 @@ extension TrieNode  {
       node = self.getRoot()!
     }
     for char in lword {
-      node = node.moveToChild(value: String(char), context: context)!
+      node = node.moveToChild(value: String(char), context: context)
     }
     node.isWord = true
     if node.lexiconList == nil {
@@ -91,8 +88,13 @@ extension TrieNode  {
   }
   
   
-  func memoryContainsWord(word: String, lexicon: Int) -> Bool {
-    return false
+  func memoryContainsWord(word w: String, lexicon: Int) -> Bool {
+    let endNode = traceString(word: w)
+    if endNode != nil {
+      return endNode!.lexiconList![lexicon]
+    } else {
+      return false
+    }
   }
   
   
@@ -102,7 +104,6 @@ extension TrieNode  {
     for char in word {
       currentNode = currentNode?.getChild(val: String(char)) ?? nil
     }
-    
     return currentNode
   }
   
@@ -133,7 +134,6 @@ extension TrieNode  {
         print("error for", fName)
       }
     }
-    
     print("storing")
     do {
       try context.save()
