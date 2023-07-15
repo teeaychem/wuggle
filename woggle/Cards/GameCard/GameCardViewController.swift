@@ -234,9 +234,7 @@ extension GameCardViewController {
           settings.currentGame!.findPossibleWords(minLength: Int(self.delegate!.currentSettings().minWordLength))
           do {
             try privateManagedObjectContext.save()
-          } catch {
-            print("heck")
-          }
+          } catch {  }
         }
       }
   }

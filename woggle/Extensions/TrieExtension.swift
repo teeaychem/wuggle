@@ -124,23 +124,13 @@ extension TrieNode  {
     if let path = Bundle.main.path(forResource: fName, ofType: "txt") {
       do {
         let data = try String(contentsOfFile: path, encoding: .utf8)
-        print(fName, "got data")
         let myStrings = data.components(separatedBy: .newlines)
-        print(fName, "got strings")
         for word in myStrings {
           self.addWord(word: word, lexiconIndex: lexI, context: context)
         }
-      } catch {
-        print("error for", fName)
-      }
+      } catch {  }
     }
-    print("storing")
-    do {
-      try context.save()
-    } catch {
-      print("fail")
-    }
-    print("trie built using insert")
+    do { try context.save() } catch {  }
   }
   
 

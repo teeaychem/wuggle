@@ -50,8 +50,7 @@ extension GameInstance {
   
   func findAllWords(minLength mL: Int) -> Set<String>? {
     // Call exploreTileWithList with helper variables.
-    //
-    guard (self.board != nil) else { print("no board"); return nil }
+    guard (self.board != nil) else { return nil }
     
     // Get the trie root
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")

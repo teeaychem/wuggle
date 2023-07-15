@@ -396,7 +396,7 @@ extension CardStackViewController {
   
   func buildAndSave(root: TrieNode, fileName fName: String, prvCntxt prC: NSManagedObjectContext, index i: Int) {
     root.completeTrieFromFile(fName: fName, lexiconIndex: i, context: prC)
-    do { try prC.parent!.save() } catch { print("heck") }
+    do { try prC.parent!.save() } catch { }
   }
   
   
@@ -409,5 +409,10 @@ extension CardStackViewController {
     self.makeAndEmbedCards()
     self.setIcons()
     self.cardShuffleGesutre(enabled: true)
+  }
+  
+  
+  func issuePause() {
+    cardViews.gameCardC?.pauseGameMain(animated: false)
   }
 }

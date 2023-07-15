@@ -66,9 +66,7 @@ extension Settings {
         let node = result.last as! TrieNode
         return node.getRoot()!
       }
-    } catch {
-      print("error")
-    }
+    } catch { }
     return nil
   }
   
@@ -116,9 +114,6 @@ extension Settings {
   func makeASave() {
     do {
       try self.managedObjectContext!.save()
-      print("saved via call to settings")
-    } catch {
-      print("fail")
-    }
+    } catch { }
   }
 }
