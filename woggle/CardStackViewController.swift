@@ -76,14 +76,19 @@ class CardStackViewController: UIViewController {
     settings!.ensureDefaults()
     
     statsBarTapUIGR = UITapGestureRecognizer(target: self, action: #selector(statusBarTap))
-
-//    self.makeAndEmbedCards()
-//    self.setIcons()
-//    self.cardShuffleGesutre(enabled: true)
   }
   
   
   override func viewDidLoad() {
+    let sWidth = UIScreen.main.bounds.size.width
+    let tileSize = CGSize(width: sWidth * 0.25, height: sWidth * 0.25)
+    let tileView = UIView(frame: CGRect(origin: CGPoint(x: UIScreen.main.bounds.size.width * 0.5 -  tileSize.width * 0.5, y: UIScreen.main.bounds.size.height * 0.5 - tileSize.height * 0.5), size: tileSize))
+    let tileLayer = CAShapeLayer()
+    tileLayer.strokeColor = UIColor.white.cgColor
+    tileLayer.path = randomStartRoundedUIBeizerPath(width: tileSize.width, height: tileSize.height, cornerRadius: tileSize.width * 0.25).cgPath
+    tileView.layer.addSublayer(tileLayer)
+    view.addSubview(tileView)
+    
       self.ensureTrie()
   }
   
@@ -383,6 +388,8 @@ extension CardStackViewController {
             print("done")
             self.performSelector(onMainThread: #selector(self.trieSuccess), with: nil, waitUntilDone: true)
           }
+        } else {
+          trieSuccess()
         }
       }
   }
@@ -390,6 +397,9 @@ extension CardStackViewController {
   
   @objc func trieSuccess(){
     print("notified")
+    for sv in view.subviews {
+      sv.removeFromSuperview()
+    }
     self.makeAndEmbedCards()
     self.setIcons()
     self.cardShuffleGesutre(enabled: true)
