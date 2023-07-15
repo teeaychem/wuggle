@@ -9,10 +9,6 @@
 // 1. The board played on.
 // 2. Boards recorded with stats.
 
-// TODO: Extend the init with boolean for interactive.
-// If interactive, then hidden by default, and interaction extensions are available.
-// if not, then simply display the board.
-
 // Tiles are stored in coredata with Int16 x and y positions.
 // To help pass this information around, this pair is combined to an Int16 by (x * 10) + y.
 // This is easy to encode and decode.

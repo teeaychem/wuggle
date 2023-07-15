@@ -213,19 +213,13 @@ extension GameCardViewController {
     // Perform means that we don't wait around for what is requested.
     // Saving then merges the two contexts.
     
-      let privateManagedObjectContext: NSManagedObjectContext = {
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        managedObjectContext.parent = self.delegate!.currentSettings().managedObjectContext
-        return managedObjectContext
-      }()
-            
-      let settingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
-    
-    // TODO: Maybe ease get current settings.
-    // Processing possible words on background thread.
-    // So, need current settings.
-    // At the moment, uniquely identified by combination of settings.
-    // But, is there a better way?
+    let privateManagedObjectContext: NSManagedObjectContext = {
+      let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+      managedObjectContext.parent = self.delegate!.currentSettings().managedObjectContext
+      return managedObjectContext
+    }()
+          
+    let settingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
     
     settingsFetchRequest.predicate = NSPredicate(
       format: "time == %i AND lexicon == %i AND minWordLength == %i AND tileSqrt == %i",

@@ -124,13 +124,5 @@ extension GameInstance {
     let areaPredicate = NSPredicate(format: "(row BETWEEN %@) && (col BETWEEN %@)", [(tile.row - 1), (tile.row + 1)], [(tile.col - 1), (tile.col + 1)])
     
     return self.board!.tiles!.filtered(using: areaPredicate) as! Set<Tile>
-  }
-  
-  func processStats() {
-    // TODO: Add methods which check to see if there's a stats file.
-    // If yes, check against current stats and update if needed.
-    // If no, create relevant stats.
-    // So, individual methods for each stat
-  }
-  
+  }  
 }

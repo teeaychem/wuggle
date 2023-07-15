@@ -47,7 +47,6 @@ extension Settings {
   
   func setNewGame() {
     if (self.currentGame != nil) {
-      print("Deleted game")
       self.managedObjectContext?.delete(self.currentGame!)
     }
     self.currentGame = GameInstance(context: self.managedObjectContext!)

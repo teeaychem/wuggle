@@ -92,11 +92,6 @@ class SettingsCardViewController: CardViewController {
       vertical: false,
       delegate: self
     )
-    
-    // TODO: Make impact when on is pressed.
-    
-
-    
   }
   
   override func viewDidLoad() {

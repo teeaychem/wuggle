@@ -149,8 +149,7 @@ class CardStackViewController: UIViewController {
   
   
   func reorderCardsByIndex(iName iN: String) {
-    // TODO: Simplify.
-    // There's a lot of repitation here.
+    // There's a lot of repitation here. May be possible to simplify.
     // In short, settings card is centre unless, settings is chosen, then stats > game > settings.
     
     switch iN {
@@ -254,7 +253,6 @@ extension CardStackViewController: CardStackDelegate {
   
   
   func processUpdate() {
-    print("Asked to process update")
     cardViews.statCardC!.respondToUpdate()
     cardViews.gameCardC!.respondToUpdate()
   }

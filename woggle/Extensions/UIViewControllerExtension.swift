@@ -27,7 +27,7 @@ extension UIViewController {
   // this means there's a reference to the VC view.
   // And, it's final for the VC view to exist even when the VC is gone.
   // So, to get rid of a UIViewController, need to 'unembed'.
-  // TODO: Figure out whether the final willMove call is appropriate
+//   TODO: Figure out whether the final willMove call is appropriate
   func unembed(_ viewController:UIViewController, inView view:UIView) {
     viewController.view.removeFromSuperview()
     viewController.removeFromParent()

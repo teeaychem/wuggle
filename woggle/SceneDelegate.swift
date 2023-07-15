@@ -22,7 +22,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     let window = UIWindow(windowScene: w)
   
-
     window.rootViewController = stackViewController
     self.window = window
     window.makeKeyAndVisible()

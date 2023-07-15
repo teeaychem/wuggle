@@ -75,9 +75,7 @@ class UIData {
   
   
   func updateColour(profile: Int16) {
-    
-    // TODO: B and F are the same. Both look bad.
-    
+    // Some of these look very bad to me. That's the point.
     colourOption = profile
     
     switch profile {
