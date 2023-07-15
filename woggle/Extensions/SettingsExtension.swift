@@ -111,4 +111,14 @@ extension Settings {
   func colourOptionBlob() -> OptionBlob {
     return OptionBlob(internalName: "colour", displayName: "Colour", internalOptions: [0, 1, 2, 3, 4, 5], displayOptions: ["๑", "๒", "๓", "๔", "๕", "๖"])
   }
+  
+  
+  func makeASave() {
+    do {
+      try self.managedObjectContext!.save()
+      print("saved via call to settings")
+    } catch {
+      print("fail")
+    }
+  }
 }

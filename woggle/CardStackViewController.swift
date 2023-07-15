@@ -265,6 +265,7 @@ extension CardStackViewController: CardStackDelegate {
   
   
   func processUpdate() {
+    settings?.makeASave()
     cardViews.statCardC!.respondToUpdate()
     cardViews.gameCardC!.respondToUpdate()
   }
@@ -349,44 +350,43 @@ extension CardStackViewController {
   
   func ensureTrie() {
     // Build the tries on background thread then notify main thread to move to main UI
-      let privateManagedObjectContext: NSManagedObjectContext = {
+      let prvMngdObjCntxt: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.parent = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         return managedObjectContext
       }()
       let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
       fetchRequest.fetchLimit = 1
-      if let result = try? privateManagedObjectContext.fetch(fetchRequest) {
+      if let result = try? prvMngdObjCntxt.fetch(fetchRequest) {
         if result.count > 0 {
-          print("found trie")
-          privateManagedObjectContext.perform {
-            let foundTrie = result.first as! TrieNode
-            let rootTrie = foundTrie.getRoot()!
+          prvMngdObjCntxt.perform {
+            let rootTrie = (result.first as! TrieNode).getRoot()!
+            
             if !rootTrie.memoryContainsWord(word: "PROCRASTINATION", lexicon: 0) {
-              self.buildAndSave(rootTrie: rootTrie, fileName: "3of6game", privatecontext: privateManagedObjectContext, index: 0)
+              self.buildAndSave(root: rootTrie, fileName: "3of6game", prvCntxt: prvMngdObjCntxt, index: 0)
             }
             if !rootTrie.memoryContainsWord(word: "GOVERNMENT", lexicon: 1) {
-              self.buildAndSave(rootTrie: rootTrie, fileName: "Odgen", privatecontext: privateManagedObjectContext, index: 1)
+              self.buildAndSave(root: rootTrie, fileName: "Odgen", prvCntxt: prvMngdObjCntxt, index: 1)
             }
             if !rootTrie.memoryContainsWord(word: "ZIGZAGS", lexicon: 2) {
-              self.buildAndSave(rootTrie: rootTrie, fileName: "Austen", privatecontext: privateManagedObjectContext, index: 2)
+              self.buildAndSave(root: rootTrie, fileName: "Austen", prvCntxt: prvMngdObjCntxt, index: 2)
             }
             if !rootTrie.memoryContainsWord(word: "HAZO", lexicon: 3) {
-              self.buildAndSave(rootTrie: rootTrie, fileName: "KJB", privatecontext: privateManagedObjectContext, index: 3)
+              self.buildAndSave(root: rootTrie, fileName: "KJB", prvCntxt: prvMngdObjCntxt, index: 3)
             }
             if !rootTrie.memoryContainsWord(word: "EVN", lexicon: 4) {
-              self.buildAndSave(rootTrie: rootTrie, fileName: "Shakespeare", privatecontext: privateManagedObjectContext, index: 4)
+              self.buildAndSave(root: rootTrie, fileName: "Shakespeare", prvCntxt: prvMngdObjCntxt, index: 4)
             }
             self.performSelector(onMainThread: #selector(self.trieSuccess), with: nil, waitUntilDone: true)
           }
         } else {
-          privateManagedObjectContext.perform {
-            let newTrie = TrieNode(context: privateManagedObjectContext)
-            self.buildAndSave(rootTrie: newTrie, fileName: "3of6game", privatecontext: privateManagedObjectContext, index: 0)
-            self.buildAndSave(rootTrie: newTrie, fileName: "Odgen", privatecontext: privateManagedObjectContext, index: 1)
-            self.buildAndSave(rootTrie: newTrie, fileName: "Austen", privatecontext: privateManagedObjectContext, index: 2)
-            self.buildAndSave(rootTrie: newTrie, fileName: "KJB", privatecontext: privateManagedObjectContext, index: 3)
-            self.buildAndSave(rootTrie: newTrie, fileName: "Shakespeare", privatecontext: privateManagedObjectContext, index: 4)
+          prvMngdObjCntxt.perform {
+            let newTrie = TrieNode(context: prvMngdObjCntxt)
+            self.buildAndSave(root: newTrie, fileName: "3of6game", prvCntxt: prvMngdObjCntxt, index: 0)
+            self.buildAndSave(root: newTrie, fileName: "Odgen", prvCntxt: prvMngdObjCntxt, index: 1)
+            self.buildAndSave(root: newTrie, fileName: "Austen", prvCntxt: prvMngdObjCntxt, index: 2)
+            self.buildAndSave(root: newTrie, fileName: "KJB", prvCntxt: prvMngdObjCntxt, index: 3)
+            self.buildAndSave(root: newTrie, fileName: "Shakespeare", prvCntxt: prvMngdObjCntxt, index: 4)
             self.performSelector(onMainThread: #selector(self.trieSuccess), with: nil, waitUntilDone: true)
           }
         }
@@ -394,11 +394,9 @@ extension CardStackViewController {
   }
   
   
-  func buildAndSave(rootTrie: TrieNode, fileName fName: String, privatecontext prC: NSManagedObjectContext, index i: Int) {
-    print("buildAndSave on", fName)
-    rootTrie.completeTrieFromFile(fName: fName, lexiconIndex: i, context: prC)
+  func buildAndSave(root: TrieNode, fileName fName: String, prvCntxt prC: NSManagedObjectContext, index i: Int) {
+    root.completeTrieFromFile(fName: fName, lexiconIndex: i, context: prC)
     do { try prC.parent!.save() } catch { print("heck") }
-    
   }
   
   

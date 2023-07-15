@@ -20,7 +20,7 @@ class GameCardViewController: CardViewController {
   var finalWordsViewController: FinalFoundWordsViewController?
   
   var watchGestureRecognizer: UITapGestureRecognizer?
-  var boardPanGR: UIPanGestureRecognizer?
+  var boardPanGR: TouchToPanGestureRecognizer?
   var playPauseGR: UITapGestureRecognizer?
   var stopGR: UILongPressGestureRecognizer?
   
@@ -131,8 +131,10 @@ class GameCardViewController: CardViewController {
   override func respondToUpdate() {
     if delegate?.currentGame() != nil {
       combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
+      stopwatchViewController.setHandTo(percent: delegate!.currentGame()!.timeUsedPercent)
     } else {
       combinedScoreViewC.combinedUpdate(found: 0, score: 0, percent: 0, obeySP: true)
+      stopwatchViewController.setHandTo(percent: 0)
     }
   }
   
@@ -437,16 +439,14 @@ extension GameCardViewController {
   
   func addBoardPanGR() {
     if (boardPanGR == nil) {
-      boardPanGR = UIPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
-      boardPanGR!.maximumNumberOfTouches = 1
+      boardPanGR = TouchToPanGestureRecognizer(target: self, action: #selector(didPanOnBoard(_:)))
+//      boardPanGR!.maximumNumberOfTouches = 1
     }
     boardViewController.addGestureRecognizer(recogniser: boardPanGR!)
   }
   
   
   @objc func didPanOnBoard(_ sender: UIPanGestureRecognizer) {
-    // TODO: Maybe update this with a custom recogniser.
-    // Basically, extend pan to include initial touch.
     
     let tilePosition = boardViewController.basicTilePositionFromCGPoint(point: sender.location(in: boardViewController.gameboardView), tileSqrtFloat: CGFloat((delegate?.currentSettings().tileSqrt)!))
     
