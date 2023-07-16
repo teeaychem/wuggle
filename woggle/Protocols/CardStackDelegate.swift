@@ -18,7 +18,7 @@ protocol CardStackDelegate: AnyObject {
   func processUpdate()
   
   // Used to update particular setting
-  func updateSetting(internalName: String, internalValue: Int16)
+  func updateGeneralSettings(internalName: String, internalValue: Int16)
   
   // Allow cards to request current settings.
   // Cards should not store settings in order to ensure a unique settings file is in use at any given time.

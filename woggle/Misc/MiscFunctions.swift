@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 func getCornerRadius(width w: CGFloat) -> CGFloat {
-  return w * (1/30)
+  return w * 0.025
 }
 
 

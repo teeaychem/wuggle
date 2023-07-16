@@ -108,12 +108,14 @@ class CardStackViewController: UIViewController {
   func loadOrMakeSettings() -> Settings {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let settingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+    settingsFetchRequest.predicate = NSPredicate(format: "inUse == true")
+    // Should only be one inUse
+    settingsFetchRequest.fetchLimit = 1
     do {
       let result = try context.fetch(settingsFetchRequest)
       
       if result.count > 0 {
         return (result.first as! Settings)
-        // TODO: Delete other instances.
       } else {
         // If nothing found, default settings.
         let dSettings = Settings(context: context)
@@ -237,7 +239,7 @@ extension CardStackViewController: CardStackDelegate {
   }
   
   
-  func updateSetting(internalName: String, internalValue: Int16) {
+  func updateGeneralSettings(internalName: String, internalValue: Int16) {
     
     switch internalName {
     case "impact":
@@ -255,7 +257,7 @@ extension CardStackViewController: CardStackDelegate {
         cardViews.gameCardC!.combinedScoreViewC.gameInstanceUpdate(instance: currentGame()!, obeySP: true)
       }
     case "time", "lexicon", "length", "tiles":
-      updateNonMutatingSetting(internalName: internalName, internalValue: internalValue)
+      updateNonUISetting(internalName: internalName, internalValue: internalValue)
       setIcons()
     default:
       break
@@ -292,8 +294,12 @@ extension CardStackViewController: CardStackDelegate {
 
 extension CardStackViewController {
   
-  private func updateNonMutatingSetting(internalName: String, internalValue: Int16) {
-    // Nonmutating means loading or creating settings which match chnage to internalName.
+  private func updateNonUISetting(internalName: String, internalValue: Int16) {
+    // This is more complex.
+    // The update involves switching to a different settings instance, or creating
+    // the appropriate instance as required.
+    // In addition, work needs to be done to ensure there's a unique default settings
+    // file to be loaded with the app.
     
     // First, get the values of the current settings.
     // There's always *a* settings file, so these are fine to get.
@@ -326,13 +332,15 @@ extension CardStackViewController {
         let result = try context.fetch(settingsFetchRequest)
         
         if result.count == 1 {
+          settings?.inUse = false
           settings = (result.first as! Settings)
         } else if result.count > 1 {
-          print(result.count)
-          print("Extra settings found")
-          // TODO: Delete other instances.
-          // 1. Check for stats. Keep stats.
-          // 2. Check for most recent date on stats.
+          // Something went wrong somewhere, so wipe the inUse from all and go with first.
+          for iU in result {
+            let iUS = iU as! Settings
+            iUS.inUse = false
+          }
+          settings = (result.first as! Settings)
         } else {
           // No settings found, so make default
           let freshSettings = Settings(context: context)
@@ -343,6 +351,21 @@ extension CardStackViewController {
           settings = freshSettings
           settings!.ensureDefaults()
         }
+        // Clean things up
+        // We've updated the settings, so now we make sure any other settings
+        // instance in coredata is not in use, then fix the current settings.
+        let inUseSettingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        inUseSettingsFetchRequest.predicate = NSPredicate(format: "inUse == true")
+        do {
+          let inUseResult = try context.fetch(inUseSettingsFetchRequest)
+          if inUseResult.count > 0 {
+            for iU in inUseResult {
+              let iUS = iU as! Settings
+              iUS.inUse = false
+            }
+          }
+        } catch { }
+        settings?.inUse = true
       } catch { }
     }
   }

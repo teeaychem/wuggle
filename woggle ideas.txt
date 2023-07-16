@@ -1,9 +1,11 @@
 Woggle to do:
 
+B. Things aren't saving correctly.
+In particular, settings aren't being saved.
+
 X. Redo word lists. 
     1. Uppercase
     2. I replaced "Q" with "!". This makes no sense.
-
 
 X. Delete redundant coreData stuff
 

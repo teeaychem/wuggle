@@ -84,13 +84,11 @@ class OptionView: UIView {
 extension OptionView: OptionViewDelegate {
   
   func choiceChangedTo(internalValue: Int16) {
-    choiceLabels[internalValue]?.select()
     for k in choiceLabels.keys {
-      if k != internalValue {
         choiceLabels[k]!.deselect()
       }
-      
-    }
+    choiceLabels[internalValue]?.select()
+    
     delegate.updateSetting(internalName: internalName, internalValue: internalValue)
   }
 

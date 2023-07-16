@@ -17,6 +17,7 @@
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="currentGame" inverseEntity="Settings"/>
     </entity>
     <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
+        <attribute name="inUse" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="lexicon" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="minWordLength" attributeType="Integer 16" defaultValueString="3" usesScalarValueType="YES"/>
         <attribute name="tileSqrt" attributeType="Integer 16" defaultValueString="4" usesScalarValueType="YES"/>

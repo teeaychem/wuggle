@@ -144,7 +144,7 @@ extension SettingsCardViewController: SettingsCardViewControllerDelegate {
       updateIcon(internalName: internalName, internalValue: internalValue)
     }
 
-    delegate!.updateSetting(internalName: internalName, internalValue: internalValue)
+    delegate!.updateGeneralSettings(internalName: internalName, internalValue: internalValue)
     // Update the card delegate, which will then update the stored settings and other cards.
     // Update the settings on the card?
     delegate!.processUpdate()

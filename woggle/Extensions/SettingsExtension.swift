@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 extension Settings {
   
@@ -112,8 +113,12 @@ extension Settings {
   
   
   func makeASave() {
-    do {
-      try self.managedObjectContext!.save()
-    } catch { }
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    if context.hasChanges {
+      do {
+        try self.managedObjectContext!.save()
+      } catch { }
+    } else {
+    }
   }
 }

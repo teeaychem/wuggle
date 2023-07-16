@@ -197,6 +197,7 @@ extension GameCardViewController {
       self.unembed(finalWordsViewController!, inView: self.cardView)
       finalWordsViewController = nil
     }
+    combinedScoreViewC.combinedUpdate(found: 0, score: 0, percent: 0, obeySP: true)
     // Pause interaction while setting up a new game
     removePlayPauseGR()
     delegate!.cardShuffleGesutre(enabled: false)
