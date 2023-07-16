@@ -1,7 +1,10 @@
 Woggle to do:
 
-B. Things aren't saving correctly.
-In particular, settings aren't being saved.
+B. Stop icon. Still. Though I don't see how this happens, unless it was to do with settings instances.
+No, but maybe related.
+If a game is running, and I change the settings.
+Perhaps, in the case of a fresh settings instance.
+In this case, gameInstance != nil is going to fail.
 
 X. Redo word lists. 
     1. Uppercase

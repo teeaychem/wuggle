@@ -70,7 +70,7 @@ class OptionView: UIView {
   
   
   func highlightChoice(internalOption: Int16) {
-    choiceLabels[internalOption]?.select()
+    choiceLabels[internalOption]?.select(impact: false)
   }
   
   
@@ -87,7 +87,7 @@ extension OptionView: OptionViewDelegate {
     for k in choiceLabels.keys {
         choiceLabels[k]!.deselect()
       }
-    choiceLabels[internalValue]?.select()
+    choiceLabels[internalValue]?.select(impact: true)
     
     delegate.updateSetting(internalName: internalName, internalValue: internalValue)
   }
