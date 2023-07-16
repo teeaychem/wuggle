@@ -32,7 +32,7 @@ class OptionView: UIView {
     
     // Note, f.height for font size as  as frame.height may has been adjusted if vertical.
     let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: f.width, height: f.height))
-    nameLabel.attributedText = NSMutableAttributedString(string: oB.displayName, attributes: delegate.getViewData().getSettingsTextAttribute(height: f.height * 0.8, colour: delegate.getViewData().colourD.cgColor))
+    nameLabel.attributedText = NSMutableAttributedString(string: oB.displayName, attributes: delegate.getUIData().getSettingsTextAttribute(height: f.height * 0.8, colour: delegate.getUIData().colourD.cgColor))
     addSubview(nameLabel)
     
     if vertical {
@@ -93,8 +93,8 @@ extension OptionView: OptionViewDelegate {
   }
 
   
-  func getViewData() -> UIData {
-    return delegate.getViewData()
+  func getUIData() -> UIData {
+    return delegate.getUIData()
   }
 
 }

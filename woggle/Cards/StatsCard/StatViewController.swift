@@ -10,27 +10,27 @@ import UIKit
 
 class StatViewController: UIViewController {
   
-  // TODO: Board associated with stat on long press
+  // Future: Board associated with stat on long press
   
   let statDisplayName: String
   let statSize: CGSize
-  let viewData: UIData
+  let uiData: UIData
   
   let nameLabel: UILabel
   let valueLabel: UILabel
   let dateLabel: UILabel
   let extraLabel: UILabel
   
-  init(stat s: Stat, displayName dN: String, viewData vD: UIData) {
+  init(stat s: Stat, displayName dN: String, uiData uiD: UIData) {
     
     statDisplayName = dN
-    statSize = vD.statSize
-    viewData = vD
+    statSize = uiD.statSize
+    uiData = uiD
     
-    nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
-    valueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: vD.statSize.width, height: vD.statSize.height * 0.6))
-    dateLabel = UILabel(frame: CGRect(x: 0, y: vD.statSize.height * 0.6, width: vD.statSize.width, height: vD.statSize.height * 0.4))
-    extraLabel = UILabel(frame: CGRect(x: 0, y: vD.statSize.height * 0.6, width: vD.statSize.width, height: vD.statSize.height * 0.4))
+    nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: uiD.statSize.width, height: uiD.statSize.height * 0.6))
+    valueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: uiD.statSize.width, height: uiD.statSize.height * 0.6))
+    dateLabel = UILabel(frame: CGRect(x: 0, y: uiD.statSize.height * 0.6, width: uiD.statSize.width, height: uiD.statSize.height * 0.4))
+    extraLabel = UILabel(frame: CGRect(x: 0, y: uiD.statSize.height * 0.6, width: uiD.statSize.width, height: uiD.statSize.height * 0.4))
     
     super.init(nibName: nil, bundle: nil)
     
@@ -38,9 +38,9 @@ class StatViewController: UIViewController {
     extraLabel.textAlignment = .right
 
 
-    view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize * 0.5)
+    view.layer.cornerRadius = getCornerRadius(width: uiD.gameBoardSize * 0.5)
     
-    nameLabel.attributedText = NSMutableAttributedString(string: statDisplayName, attributes: vD.getSettingsTextAttribute(height: vD.statSize.height * 0.64, colour: vD.colourL.cgColor))
+    nameLabel.attributedText = NSMutableAttributedString(string: statDisplayName, attributes: uiD.getSettingsTextAttribute(height: uiD.statSize.height * 0.64, colour: uiD.colourL.cgColor))
     
     updateWith(stat: s)
     
@@ -48,9 +48,9 @@ class StatViewController: UIViewController {
   
   
   func updateWith(stat: Stat) {
-    valueLabel.attributedText = NSMutableAttributedString(string: stat.strVal!, attributes: viewData.getSettingsTextAttribute(height: viewData.statSize.height * 0.64, colour: viewData.colourL.cgColor))
-    dateLabel.attributedText = NSMutableAttributedString(string: stat.date?.formatted(date: .abbreviated, time: .shortened).description ?? "", attributes: viewData.getSettingsTextAttribute(height: viewData.statSize.height * 0.44, colour: viewData.colourL.cgColor))
-    extraLabel.attributedText = NSMutableAttributedString(string: stat.extraStr!, attributes: viewData.getSettingsTextAttribute(height: viewData.statSize.height * 0.44, colour: viewData.colourL.cgColor))
+    valueLabel.attributedText = NSMutableAttributedString(string: stat.strVal!, attributes: uiData.getSettingsTextAttribute(height: uiData.statSize.height * 0.64, colour: uiData.colourL.cgColor))
+    dateLabel.attributedText = NSMutableAttributedString(string: stat.date?.formatted(date: .abbreviated, time: .shortened).description ?? "", attributes: uiData.getSettingsTextAttribute(height: uiData.statSize.height * 0.44, colour: uiData.colourL.cgColor))
+    extraLabel.attributedText = NSMutableAttributedString(string: stat.extraStr!, attributes: uiData.getSettingsTextAttribute(height: uiData.statSize.height * 0.44, colour: uiData.colourL.cgColor))
   }
   
   
@@ -63,7 +63,7 @@ class StatViewController: UIViewController {
     view.addSubview(extraLabel)
     
     let sep = UIView(frame: CGRect(x: 0, y: view.frame.maxY, width: statSize.width, height: statSize.height * 0.05))
-    sep.layer.backgroundColor = viewData.colourL.cgColor
+    sep.layer.backgroundColor = uiData.colourL.cgColor
     view.addSubview(sep)
   }
 

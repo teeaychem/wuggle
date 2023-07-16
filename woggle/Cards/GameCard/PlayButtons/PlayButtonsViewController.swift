@@ -13,15 +13,15 @@ class PlayButtonsViewController: UIViewController {
   private let highlightLayer = CAShapeLayer()
 
   
-  init(viewData vD: UIData) {
+  init(uiData uiD: UIData) {
     
-    playButtonsView = PlayButtonsView(viewData: vD)
-    highlightLayer.strokeColor = vD.userInteractionColour.cgColor
+    playButtonsView = PlayButtonsView(uiData: uiD)
+    highlightLayer.strokeColor = uiD.userInteractionColour.cgColor
    
     super.init(nibName: nil, bundle: nil)
     
-    view.layer.cornerRadius = getCornerRadius(width: vD.cardSize.width)
-    view.backgroundColor = vD.colourD
+    view.layer.cornerRadius = getCornerRadius(width: uiD.cardSize.width)
+    view.backgroundColor = uiD.colourD
   }
   
   required init?(coder: NSCoder) {

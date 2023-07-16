@@ -47,8 +47,7 @@ class CardStackViewController: UIViewController {
   private var cardOrigin: CGFloat = 0.0
   private var topCardIndex: Int
   
-  // TODO: Understand what happens with this.
-  // If settings is initialised on SceneDelegate, this is an unowned var.
+  // As settings is initialised on SceneDelegate, this is an unowned var.
   // So, it's possible reference to settings fails.
   // This makes sense.
   // But, at no point should the reference fail, unless settings as stored on unowned var is distinct from settings as stored on var in SceneDelegate.
@@ -132,9 +131,9 @@ class CardStackViewController: UIViewController {
   
   
   func makeAndEmbedCards() {
-    cardViews.gameCardC = GameCardViewController(iName: "gameC", viewData: uiData, delegate: self)
-    cardViews.settCardC = SettingsCardViewController(iName: "settC", viewData: uiData, delegate: self)
-    cardViews.statCardC = StatsCardViewController(iName: "statC", viewData: uiData, delegate: self)
+    cardViews.gameCardC = GameCardViewController(iName: "gameC", uiData: uiData, delegate: self)
+    cardViews.settCardC = SettingsCardViewController(iName: "settC", uiData: uiData, delegate: self)
+    cardViews.statCardC = StatsCardViewController(iName: "statC", uiData: uiData, delegate: self)
     
     cardViews.statCardC?.cardView.backgroundColor = uiData.colourD
     cardViews.settCardC?.cardView.backgroundColor = uiData.colourL
@@ -204,6 +203,7 @@ class CardStackViewController: UIViewController {
   
   
   @objc func statusBarTap(_ r: UIGestureRecognizer) {
+    if uiData.impact { UIImpactFeedbackGenerator(style: .rigid).impactOccurred(intensity: 0.5) }
     let card = r.view?.superview as! CardView
     reorderCardsByIndex(iName: card.iName)
   }
@@ -246,7 +246,7 @@ extension CardStackViewController: CardStackDelegate {
       uiData.impact = (internalValue == 1) ?  true : false
     case "side":
       uiData.leftSide = (internalValue == 1) ?  true : false
-      // TODO: Maybe. Only need to redo gameCard here, rather than everything.
+      // Maybe. Only need to redo gameCard here, rather than everything.
       rebuildStack()
     case "colour":
       uiData.updateColour(profile: internalValue)

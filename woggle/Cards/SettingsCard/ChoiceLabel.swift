@@ -26,20 +26,20 @@ class ChoiceLabel: UILabel {
     
     layer.borderColor = UIColor.clear.cgColor
       
-    attributedText = NSMutableAttributedString(string: dT, attributes: delegate.getViewData().getSettingsTextAttribute(height: f.height * 0.8, colour: delegate.getViewData().colourM.cgColor))
+    attributedText = NSMutableAttributedString(string: dT, attributes: delegate.getUIData().getSettingsTextAttribute(height: f.height * 0.8, colour: delegate.getUIData().colourM.cgColor))
   }
   
   
   func select(impact: Bool) {
-    if (impact && delegate.getViewData().impact) {
+    if (impact && delegate.getUIData().impact) {
       UIImpactFeedbackGenerator(style: .light).impactOccurred(intensity: 0.75)
     }
-    attributedText = NSMutableAttributedString(string: displayText, attributes: delegate.getViewData().getSettingsTextAttribute(height: frame.height * 0.8, colour: delegate.getViewData().colourD.cgColor))
+    attributedText = NSMutableAttributedString(string: displayText, attributes: delegate.getUIData().getSettingsTextAttribute(height: frame.height * 0.8, colour: delegate.getUIData().colourD.cgColor))
   }
   
   
   func deselect() {
-    attributedText = NSMutableAttributedString(string: displayText, attributes: delegate.getViewData().getSettingsTextAttribute(height: frame.height * 0.8, colour: delegate.getViewData().colourM.cgColor))
+    attributedText = NSMutableAttributedString(string: displayText, attributes: delegate.getUIData().getSettingsTextAttribute(height: frame.height * 0.8, colour: delegate.getUIData().colourM.cgColor))
   }
   
   

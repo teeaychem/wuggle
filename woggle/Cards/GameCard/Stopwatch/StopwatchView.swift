@@ -24,38 +24,38 @@ class StopwatchView: UIView {
   private let secondsLength: CGFloat
   private var secondsAngle = Double.pi
   
-  init(viewData vD: UIData) {
+  init(uiData uiD: UIData) {
     
-    watchSize = vD.stopWatchSize
-    indent = vD.tilePadding
+    watchSize = uiD.stopWatchSize
+    indent = uiD.tilePadding
     lineWidth = watchSize * 0.05
     centerFLoat = watchSize  * 0.5
     watchRadius = watchSize * 0.4
     secondsLength = (watchRadius * 0.9) - (lineWidth)
-    cornerRadius = getCornerRadius(width: vD.gameBoardSize)
+    cornerRadius = getCornerRadius(width: uiD.gameBoardSize)
     
-    backgroundLayer.backgroundColor = vD.colourL.cgColor
+    backgroundLayer.backgroundColor = uiD.colourL.cgColor
     backgroundLayer.cornerRadius = cornerRadius
-    backgroundLayer.borderColor = vD.iconBorderColour.cgColor
+    backgroundLayer.borderColor = uiD.iconBorderColour.cgColor
     backgroundLayer.borderWidth = 1
 
-    outerFaceLayer.fillColor = vD.colourM.cgColor
-    outerFaceLayer.strokeColor = vD.iconBorderColour.cgColor
+    outerFaceLayer.fillColor = uiD.colourM.cgColor
+    outerFaceLayer.strokeColor = uiD.iconBorderColour.cgColor
     outerFaceLayer.lineWidth = 1
     
-    innerFaceLayer.fillColor = vD.colourL.cgColor
-    innerFaceLayer.strokeColor = vD.iconBorderColour.cgColor
+    innerFaceLayer.fillColor = uiD.colourL.cgColor
+    innerFaceLayer.strokeColor = uiD.iconBorderColour.cgColor
     innerFaceLayer.lineWidth = 1
     
-    secondsLayer.fillColor = vD.colourM.cgColor
+    secondsLayer.fillColor = uiD.colourM.cgColor
     secondsLayer.lineCap = .round
-    secondsLayer.strokeColor = vD.iconBorderColour.cgColor
+    secondsLayer.strokeColor = uiD.iconBorderColour.cgColor
     secondsLayer.lineWidth = 1
     secondsLayer.position = CGPoint(x: centerFLoat, y: centerFLoat)
     
     super.init(frame: CGRect(x: 0, y: 0, width: watchSize, height: watchSize))
     
-    self.backgroundColor = vD.colourD
+    self.backgroundColor = uiD.colourD
     
     layer.addSublayer(backgroundLayer)
     layer.addSublayer(outerFaceLayer)

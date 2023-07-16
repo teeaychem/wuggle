@@ -13,26 +13,26 @@ class CardViewController: UIViewController {
   
   let iName: String
   
-  let viewData: UIData
+  let uiData: UIData
   let cardView: CardView
   
   let statusBarView: UIView
   let mainView: UIView
   
   
-  init(iName iN: String, viewData vD: UIData, delegate d: CardStackDelegate) {
+  init(iName iN: String, uiData uiD: UIData, delegate d: CardStackDelegate) {
     iName = iN
-    viewData = vD
-    cardView = CardView(iName: iN, cardWidth: viewData.cardSize.width)
+    uiData = uiD
+    cardView = CardView(iName: iN, cardWidth: uiData.cardSize.width)
     delegate = d
     statusBarView = UIView(frame:
                                     CGRect(
                                       origin: CGPoint(x: 0, y: 0),
-                                      size: CGSize(width: viewData.cardSize.width, height: viewData.statusBarSize.height)))
+                                      size: CGSize(width: uiData.cardSize.width, height: uiData.statusBarSize.height)))
     mainView = UIView(frame:
                         CGRect(
-                          origin: CGPoint(x: 0, y: vD.statusBarSize.height),
-                          size: CGSize(width: vD.cardSize.width, height: vD.cardSize.height - vD.statusBarSize.height)))
+                          origin: CGPoint(x: 0, y: uiD.statusBarSize.height),
+                          size: CGSize(width: uiD.cardSize.width, height: uiD.cardSize.height - uiD.statusBarSize.height)))
     
     super.init(nibName: nil, bundle: nil)
     

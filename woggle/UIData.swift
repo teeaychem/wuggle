@@ -1,5 +1,5 @@
 //
-//  CardViewData.swift
+//  CardUIData.swift
 //  woggle
 //
 //  Created by sparkes on 2023/06/24.

@@ -10,7 +10,7 @@ import UIKit
 
 class UITableViewWordCell : UITableViewCell {
   
-  init(viewData vD: UIData, cellStyle cS : UITableViewCell.CellStyle, word w: String, found f: Bool, size s: CGSize) {
+  init(uiData uiD: UIData, cellStyle cS : UITableViewCell.CellStyle, word w: String, found f: Bool, size s: CGSize) {
     
     super.init(style: cS, reuseIdentifier: w)
     
@@ -20,16 +20,16 @@ class UITableViewWordCell : UITableViewCell {
     
     if f {
       wordTextAttributes = [
-        NSAttributedString.Key.strokeColor : vD.colourD.cgColor,
-        NSAttributedString.Key.foregroundColor : vD.colourD.cgColor,
+        NSAttributedString.Key.strokeColor : uiD.colourD.cgColor,
+        NSAttributedString.Key.foregroundColor : uiD.colourD.cgColor,
         NSAttributedString.Key.strokeWidth : 0,
         NSAttributedString.Key.font : UIFont(name: uiFontName, size: getFontFor(height: s.height))!
         ]
     } else {
       
     wordTextAttributes = [
-      NSAttributedString.Key.strokeColor : vD.colourD.cgColor,
-      NSAttributedString.Key.foregroundColor : vD.colourD.cgColor,
+      NSAttributedString.Key.strokeColor : uiD.colourD.cgColor,
+      NSAttributedString.Key.foregroundColor : uiD.colourD.cgColor,
       NSAttributedString.Key.strokeWidth : 0,
       NSAttributedString.Key.font : UIFont(name: textFontName, size: getFontFor(height: s.height))!
       ]

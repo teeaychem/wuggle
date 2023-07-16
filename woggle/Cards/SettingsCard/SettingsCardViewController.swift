@@ -16,18 +16,18 @@ class SettingsCardViewController: CardViewController {
 
   private var optionViews = [String: OptionView]()
   
-  override init(iName iN: String, viewData vD: UIData, delegate d: CardStackDelegate) {
+  override init(iName iN: String, uiData uiD: UIData, delegate d: CardStackDelegate) {
     
-    let iconSize = vD.squareIconSize
+    let iconSize = uiD.squareIconSize
     
-    lengthIcon = LengthIcon(viewData: vD)
-    lexiconIcon = LexiconIcon(viewData: vD)
-    tileIcon = TileIcon(viewData: vD)
-    timeIcon = TimeIcon(viewData: vD)
+    lengthIcon = LengthIcon(uiData: uiD)
+    lexiconIcon = LexiconIcon(uiData: uiD)
+    tileIcon = TileIcon(uiData: uiD)
+    timeIcon = TimeIcon(uiData: uiD)
     
-    super.init(iName: iN, viewData: vD, delegate: d)
+    super.init(iName: iN, uiData: uiD, delegate: d)
     
-    let iconPadding = (vD.cardSize.width - (vD.squareIconSize.width * 4)) * 0.2
+    let iconPadding = (uiD.cardSize.width - (uiD.squareIconSize.width * 4)) * 0.2
     
     // Set up the icons
     statusBarView.addSubview(timeIcon)
@@ -39,28 +39,28 @@ class SettingsCardViewController: CardViewController {
     statusBarView.addSubview(tileIcon)
     tileIcon.frame.origin.x = (iconPadding * 4) + (iconSize.width * 3)
     
-    let flatStatSize = CGSize(width: viewData.cardSize.width - viewData.gameBoardPadding * 2, height: viewData.statusBarSize.height)
+    let flatStatSize = CGSize(width: uiData.cardSize.width - uiData.gameBoardPadding * 2, height: uiData.statusBarSize.height)
     
     optionViews["time"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.statusBarSize.height * 1.25), size: flatStatSize),
+      frame: CGRect(origin: CGPoint(x: uiData.gameBoardPadding, y: uiData.statusBarSize.height * 1.25), size: flatStatSize),
       optionBlob: delegate!.currentSettings().timeOptionBlob(),
       vertical: false,
       delegate: self
     )
     optionViews["lexicon"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["time"]!.layer.frame.maxY), size: flatStatSize),
+      frame: CGRect(origin: CGPoint(x: uiData.gameBoardPadding, y: optionViews["time"]!.layer.frame.maxY), size: flatStatSize),
       optionBlob: delegate!.currentSettings().lexiconOptionBlob(),
       vertical: true,
       delegate: self
     )
     optionViews["length"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["lexicon"]!.layer.frame.maxY), size: flatStatSize),
+      frame: CGRect(origin: CGPoint(x: uiData.gameBoardPadding, y: optionViews["lexicon"]!.layer.frame.maxY), size: flatStatSize),
       optionBlob: delegate!.currentSettings().lengthOptionBlob(),
       vertical: false,
       delegate: self
     )
     optionViews["tiles"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["length"]!.layer.frame.maxY), size: flatStatSize),
+      frame: CGRect(origin: CGPoint(x: uiData.gameBoardPadding, y: optionViews["length"]!.layer.frame.maxY), size: flatStatSize),
       optionBlob: delegate!.currentSettings().tilesOptionBlob(),
       vertical: false,
       delegate: self
@@ -69,25 +69,25 @@ class SettingsCardViewController: CardViewController {
     
     // Now reverse order from bottom
     optionViews["colour"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.cardSize.height * 0.98 - flatStatSize.height), size: flatStatSize),
+      frame: CGRect(origin: CGPoint(x: uiData.gameBoardPadding, y: uiData.cardSize.height * 0.98 - flatStatSize.height), size: flatStatSize),
       optionBlob: delegate!.currentSettings().colourOptionBlob(),
       vertical: false,
       delegate: self
     )
     optionViews["side"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["colour"]!.layer.frame.minY - flatStatSize.height), size: flatStatSize),
+      frame: CGRect(origin: CGPoint(x: uiData.gameBoardPadding, y: optionViews["colour"]!.layer.frame.minY - flatStatSize.height), size: flatStatSize),
       optionBlob: delegate!.currentSettings().sideOptionBlob(),
       vertical: false,
       delegate: self
     )
     optionViews["impact"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["side"]!.layer.frame.minY - flatStatSize.height), size: flatStatSize),
+      frame: CGRect(origin: CGPoint(x: uiData.gameBoardPadding, y: optionViews["side"]!.layer.frame.minY - flatStatSize.height), size: flatStatSize),
       optionBlob: delegate!.currentSettings().impactOptionBlob(),
       vertical: false,
       delegate: self
     )
     optionViews["pfound"] = OptionView(
-      frame: CGRect(origin: CGPoint(x: viewData.gameBoardPadding, y: optionViews["impact"]!.layer.frame.minY - flatStatSize.height), size: flatStatSize),
+      frame: CGRect(origin: CGPoint(x: uiData.gameBoardPadding, y: optionViews["impact"]!.layer.frame.minY - flatStatSize.height), size: flatStatSize),
       optionBlob: delegate!.currentSettings().pFoundOptionBlob(),
       vertical: false,
       delegate: self
@@ -104,8 +104,8 @@ class SettingsCardViewController: CardViewController {
     for optionView in optionViews.values {
       view.addSubview(optionView)
       optionView.addAndEnableChoiceLabels()
-      let sep = UIView(frame: CGRect(x: viewData.gameBoardPadding, y: optionView.frame.maxY, width: viewData.cardSize.width - viewData.gameBoardPadding * 2, height: viewData.cardSize.height * 0.005))
-      sep.layer.backgroundColor = viewData.colourD.cgColor
+      let sep = UIView(frame: CGRect(x: uiData.gameBoardPadding, y: optionView.frame.maxY, width: uiData.cardSize.width - uiData.gameBoardPadding * 2, height: uiData.cardSize.height * 0.005))
+      sep.layer.backgroundColor = uiData.colourD.cgColor
       view.addSubview(sep)
     }
 
@@ -114,10 +114,10 @@ class SettingsCardViewController: CardViewController {
     optionViews["length"]?.highlightChoice(internalOption: delegate!.currentSettings().minWordLength)
     optionViews["tiles"]?.highlightChoice(internalOption: delegate!.currentSettings().tileSqrt)
     
-    optionViews["pfound"]?.highlightChoice(internalOption: viewData.showPercent ? 1 : 0)
-    optionViews["side"]?.highlightChoice(internalOption: viewData.leftSide ? 1 : 0)
-    optionViews["impact"]?.highlightChoice(internalOption: viewData.impact ? 1 : 0)
-    optionViews["colour"]?.highlightChoice(internalOption: viewData.colourOption)
+    optionViews["pfound"]?.highlightChoice(internalOption: uiData.showPercent ? 1 : 0)
+    optionViews["side"]?.highlightChoice(internalOption: uiData.leftSide ? 1 : 0)
+    optionViews["impact"]?.highlightChoice(internalOption: uiData.impact ? 1 : 0)
+    optionViews["colour"]?.highlightChoice(internalOption: uiData.colourOption)
   }
   
   
@@ -167,7 +167,7 @@ extension SettingsCardViewController: SettingsCardViewControllerDelegate {
   }
   
   
-  func getViewData() -> UIData {
-    return viewData
+  func getUIData() -> UIData {
+    return uiData
   }
 }

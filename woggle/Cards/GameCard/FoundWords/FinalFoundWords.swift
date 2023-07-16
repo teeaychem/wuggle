@@ -13,25 +13,25 @@ class FinalFoundWordsViewController: UIViewController {
   private let fontSize: CGFloat
   private let foundWordView: FoundWordView
   
-  init(viewData vD: UIData) {
+  init(uiData uiD: UIData) {
   
     
-    wordViewSize = CGSize(width: vD.gameBoardSize * 0.85 - (2 * vD.tilePadding), height: vD.gameBoardSize * 0.85 - (2 * vD.tilePadding))
-    fontSize = vD.stopWatchSize * 0.2
+    wordViewSize = CGSize(width: uiD.gameBoardSize * 0.85 - (2 * uiD.tilePadding), height: uiD.gameBoardSize * 0.85 - (2 * uiD.tilePadding))
+    fontSize = uiD.stopWatchSize * 0.2
     
-    foundWordView = FoundWordView(viewData: vD, listDimensions: CGSize(width: wordViewSize.width, height: wordViewSize.height), rowHieght: fontSize)
-    foundWordView.frame.origin = CGPoint(x: vD.tilePadding, y: vD.tilePadding)
+    foundWordView = FoundWordView(uiData: uiD, listDimensions: CGSize(width: wordViewSize.width, height: wordViewSize.height), rowHieght: fontSize)
+    foundWordView.frame.origin = CGPoint(x: uiD.tilePadding, y: uiD.tilePadding)
     
-    foundWordView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
-    foundWordView.backgroundColor = vD.colourL
-    foundWordView.layer.borderColor = vD.iconBorderColour.cgColor
+    foundWordView.layer.cornerRadius = getCornerRadius(width: uiD.gameBoardSize)
+    foundWordView.backgroundColor = uiD.colourL
+    foundWordView.layer.borderColor = uiD.iconBorderColour.cgColor
     foundWordView.layer.borderWidth = 1
     
     super.init(nibName: nil, bundle: nil)
     
     
-    view.backgroundColor = vD.colourD
-    view.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
+    view.backgroundColor = uiD.colourD
+    view.layer.cornerRadius = getCornerRadius(width: uiD.gameBoardSize)
   }
   
   

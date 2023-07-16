@@ -18,16 +18,16 @@ class LexiconIcon: IconView {
   
   private let coverWidth: CGFloat
     
-  init(viewData vD: UIData) {
+  init(uiData uiD: UIData) {
     
-    coverWidth = vD.squareIconSize.width * 0.7
+    coverWidth = uiD.squareIconSize.width * 0.7
     
-    bookFrontLayer.fillColor = vD.colourM.cgColor
-    bookMiddleLayer.fillColor = vD.colourL.cgColor
-    bookBackLayer.fillColor = vD.colourM.cgColor
-    letterLayer.fillColor = vD.colourL.cgColor
+    bookFrontLayer.fillColor = uiD.colourM.cgColor
+    bookMiddleLayer.fillColor = uiD.colourL.cgColor
+    bookBackLayer.fillColor = uiD.colourM.cgColor
+    letterLayer.fillColor = uiD.colourL.cgColor
     
-    super.init(size: vD.squareIconSize, viewData: vD)
+    super.init(size: uiD.squareIconSize, uiData: uiD)
     
     layer.addSublayer(bookBackLayer)
     layer.addSublayer(bookMiddleLayer)
@@ -73,7 +73,7 @@ class LexiconIcon: IconView {
     bookFrontLayer.frame.origin = CGPoint(x: indent, y: size.height - (coverWidth + indent))
 
     bookFrontLayer.lineWidth = 0.5
-    bookFrontLayer.strokeColor = viewData.iconBorderColour.cgColor
+    bookFrontLayer.strokeColor = uiData.iconBorderColour.cgColor
     
     let bookMiddlePath = UIBezierPath(
       roundedRect: CGRect(
@@ -91,7 +91,7 @@ class LexiconIcon: IconView {
     
     bookBackLayer.path = bookBackPath.cgPath
     bookBackLayer.lineWidth = 0.5
-    bookBackLayer.strokeColor = viewData.iconBorderColour.cgColor
+    bookBackLayer.strokeColor = uiData.iconBorderColour.cgColor
   }
   
   

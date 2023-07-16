@@ -17,20 +17,20 @@ class TimeIcon : IconView {
   private let handLayer = CAShapeLayer()
   
   
-  init(viewData vD: UIData) {
+  init(uiData uiD: UIData) {
     
-    handWidth = vD.squareIconSize.width * 0.1
-    centerPoint = CGPoint(x: vD.squareIconSize.width * 0.5, y: vD.squareIconSize.height * 0.5)
+    handWidth = uiD.squareIconSize.width * 0.1
+    centerPoint = CGPoint(x: uiD.squareIconSize.width * 0.5, y: uiD.squareIconSize.height * 0.5)
     
-    faceLayer.fillColor = vD.colourM.cgColor
-    faceLayer.strokeColor = vD.iconBorderColour.cgColor
+    faceLayer.fillColor = uiD.colourM.cgColor
+    faceLayer.strokeColor = uiD.iconBorderColour.cgColor
     faceLayer.lineWidth = 0.5
     
     handLayer.lineWidth = 0.25
     handLayer.strokeColor = UIColor.black.cgColor
-    handLayer.fillColor = vD.colourL.cgColor
+    handLayer.fillColor = uiD.colourL.cgColor
     
-    super.init(size: vD.squareIconSize, viewData: vD)
+    super.init(size: uiD.squareIconSize, uiData: uiD)
     
     handLayer.position = centerPoint
     

@@ -20,18 +20,18 @@ class TileView: UIView {
   let tileBackgroundColor: CGColor
   let tileFillColour: CGColor
   let tileSelectedColour: CGColor
-  let viewData: UIData
+  let uiData: UIData
     
-  init(position p: CGPoint, size s: CGFloat, boardSize bS: CGFloat, text t: String, viewData vD: UIData) {
+  init(position p: CGPoint, size s: CGFloat, boardSize bS: CGFloat, text t: String, uiData uiD: UIData) {
 
     size = s
     borderWidth = s * 0.02
-    viewData = vD
+    uiData = uiD
     
-    letterOutlineColour = vD.colourD.cgColor
-    tileBackgroundColor = vD.colourL.cgColor
-    tileFillColour = vD.colourM.cgColor
-    tileSelectedColour = vD.userInteractionColour.cgColor
+    letterOutlineColour = uiD.colourD.cgColor
+    tileBackgroundColor = uiD.colourL.cgColor
+    tileFillColour = uiD.colourM.cgColor
+    tileSelectedColour = uiD.userInteractionColour.cgColor
     
     if (t == "!") {
       text = "Qu"
@@ -90,7 +90,7 @@ class TileView: UIView {
     let borderPath = randomStartRoundedUIBeizerPath(width: frame.width, height: frame.height, cornerRadius: layer.cornerRadius)
     borderLayer.path = borderPath.cgPath
     borderLayer.lineWidth = 1
-    borderLayer.strokeColor = viewData.iconBorderColour.cgColor
+    borderLayer.strokeColor = uiData.iconBorderColour.cgColor
     borderLayer.fillColor = UIColor.clear.cgColor
     
     layer.addSublayer(borderLayer)
@@ -166,7 +166,7 @@ class TileView: UIView {
     for layer in letterLayers {
       layer.fillColor = tileFillColour
     }
-    layer.borderColor = viewData.iconBorderColour.cgColor
+    layer.borderColor = uiData.iconBorderColour.cgColor
   }
   
   

@@ -14,16 +14,16 @@ class CombinedScoreViewController: UIViewController {
   private let perceIcon: IconView
   private let uiData: UIData
   
-  init(size s: CGSize, viewData vD: UIData, gameCard g: Bool) {
+  init(uiData uiD: UIData, gameCard g: Bool) {
     
-    foundIcon = ScoreIcon(viewData: vD, abv: "W", gameCard: g)
-    scoreIcon = ScoreIcon(viewData: vD, abv: "P", gameCard: g)
-    perceIcon = ScoreIcon(viewData: vD, abv: "%", gameCard: g)
-    uiData = vD
+    foundIcon = ScoreIcon(uiData: uiD, abv: "W", gameCard: g)
+    scoreIcon = ScoreIcon(uiData: uiD, abv: "P", gameCard: g)
+    perceIcon = ScoreIcon(uiData: uiD, abv: "%", gameCard: g)
+    uiData = uiD
     
     super.init(nibName: nil, bundle: nil)
     
-    view.bounds.size = s
+    view.bounds.size = uiD.statusBarSize
   }
   
   override func viewDidLoad() {

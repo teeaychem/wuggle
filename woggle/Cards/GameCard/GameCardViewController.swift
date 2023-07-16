@@ -34,18 +34,18 @@ class GameCardViewController: CardViewController {
   var selectedTiles = [Int16]()
   var rootTrie: TrieNode?
   
-  override init(iName iN: String, viewData vD: UIData, delegate d: CardStackDelegate) {
+  override init(iName iN: String, uiData uiD: UIData, delegate d: CardStackDelegate) {
     
     // Icons
-    combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD, gameCard: true)
+    combinedScoreViewC = CombinedScoreViewController(uiData: uiD, gameCard: true)
     
     // Fix controllers  for the current views
-    boardViewController = GameboardViewController(viewData: vD, tilePadding: vD.tilePadding)
-    stopwatchViewController = StopwatchViewController(viewData: vD)
-    playButtonsViewController = PlayButtonsViewController(viewData: vD)
-    foundWordsViewController = FoundWordsViewController(viewData: vD)
+    boardViewController = GameboardViewController(uiData: uiD, tilePadding: uiD.tilePadding)
+    stopwatchViewController = StopwatchViewController(uiData: uiD)
+    playButtonsViewController = PlayButtonsViewController(uiData: uiD)
+    foundWordsViewController = FoundWordsViewController(uiData: uiD)
     
-    super.init(iName: iN, viewData: vD, delegate: d)
+    super.init(iName: iN, uiData: uiD, delegate: d)
     
     embed(combinedScoreViewC, inView: self.statusBarView, origin: CGPoint(x: 0, y: 0))
   }
@@ -59,16 +59,16 @@ class GameCardViewController: CardViewController {
     rootTrie = delegate!.currentSettings().getTrieRoot()
     
     // First set the views.
-    self.embed(boardViewController, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.cardSize.height - (viewData.gameBoardSize + viewData.gameBoardPadding)))
+    self.embed(boardViewController, inView: self.cardView, origin: CGPoint(x: uiData.gameBoardPadding, y: uiData.cardSize.height - (uiData.gameBoardSize + uiData.gameBoardPadding)))
     
-    if viewData.leftSide {
-      self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding, y: viewData.gameBoardPadding + viewData.statusBarSize.height))
-      self.embed(playButtonsViewController, inView: self.cardView, origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.stopWatchSize), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
-      self.embed(foundWordsViewController, inView: self.cardView, origin: CGPoint(x: ((3 * viewData.gameBoardPadding) + (1.5 * viewData.stopWatchSize)), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
+    if uiData.leftSide {
+      self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: uiData.gameBoardPadding, y: uiData.gameBoardPadding + uiData.statusBarSize.height))
+      self.embed(playButtonsViewController, inView: self.cardView, origin: CGPoint(x: (2 * uiData.gameBoardPadding + uiData.stopWatchSize), y: (uiData.gameBoardPadding + uiData.statusBarSize.height)))
+      self.embed(foundWordsViewController, inView: self.cardView, origin: CGPoint(x: ((3 * uiData.gameBoardPadding) + (1.5 * uiData.stopWatchSize)), y: (uiData.gameBoardPadding + uiData.statusBarSize.height)))
     } else {
-      self.embed(foundWordsViewController, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding, y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
-      self.embed(playButtonsViewController, inView: self.cardView, origin: CGPoint(x: (2 * viewData.gameBoardPadding + viewData.foundWordViewWidth), y: (viewData.gameBoardPadding + viewData.statusBarSize.height)))
-      self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: 3 * viewData.gameBoardPadding + viewData.foundWordViewWidth + viewData.stopWatchSize * 0.5, y: viewData.gameBoardPadding + viewData.statusBarSize.height))
+      self.embed(foundWordsViewController, inView: self.cardView, origin: CGPoint(x: uiData.gameBoardPadding, y: (uiData.gameBoardPadding + uiData.statusBarSize.height)))
+      self.embed(playButtonsViewController, inView: self.cardView, origin: CGPoint(x: (2 * uiData.gameBoardPadding + uiData.foundWordViewWidth), y: (uiData.gameBoardPadding + uiData.statusBarSize.height)))
+      self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: 3 * uiData.gameBoardPadding + uiData.foundWordViewWidth + uiData.stopWatchSize * 0.5, y: uiData.gameBoardPadding + uiData.statusBarSize.height))
     }
     // Always want play/pause GR
     addPlayPauseGR()
@@ -188,8 +188,8 @@ class GameCardViewController: CardViewController {
 extension GameCardViewController {
   
   func newGameMain() {
-    if viewData.impact {
-      UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+    if uiData.impact {
+      UIImpactFeedbackGenerator(style: .heavy).impactOccurred(intensity: 0.75)
     }
     // Remove things from previous game.
     boardViewController.removeAllTileViews()
@@ -323,8 +323,8 @@ extension GameCardViewController {
     boardViewController.removeAllGestureRecognizers()
     removeWatchGR()
     // Display final words
-    finalWordsViewController = FinalFoundWordsViewController(viewData: viewData)
-    self.embed(finalWordsViewController!, inView: self.cardView, origin: CGPoint(x: viewData.gameBoardPadding + viewData.gameBoardSize * 0.075, y: viewData.cardSize.height - viewData.gameBoardSize * 0.925 - viewData.gameBoardPadding))
+    finalWordsViewController = FinalFoundWordsViewController(uiData: uiData)
+    self.embed(finalWordsViewController!, inView: self.cardView, origin: CGPoint(x: uiData.gameBoardPadding + uiData.gameBoardSize * 0.075, y: uiData.cardSize.height - uiData.gameBoardSize * 0.925 - uiData.gameBoardPadding))
     finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate!.currentGame()!.allWordsList!), seeWords: delegate!.currentGame()!.foundWordsList!)
     // Add gesture to see board.
     boardViewController.addGestureRecognizer(recogniser: UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBoard)))
@@ -457,7 +457,7 @@ extension GameCardViewController {
       if (tilePosition != nil) {
         boardViewController.selectTile(tileIndex: tilePosition!)
         selectedTiles.append(tilePosition!)
-        if viewData.impact { UIImpactFeedbackGenerator(style: .rigid).impactOccurred() }
+        if uiData.impact { UIImpactFeedbackGenerator(style: .rigid).impactOccurred(intensity: 0.75) }
       }
       
     case .changed:
@@ -529,6 +529,7 @@ extension GameCardViewController {
   
   
   @objc func didTapOnPlayPause(_ sender: UITapGestureRecognizer) {
+    if uiData.impact { UIImpactFeedbackGenerator(style: .light).impactOccurred(intensity: 0.5) }
     if gameInProgess {
       pauseGameMain(animated: true)
     } else if (delegate!.currentGame() != nil && delegate!.currentGame()!.viable) {
@@ -549,6 +550,8 @@ extension GameCardViewController {
     switch sender.state {
      
     case .began:
+      if uiData.impact { UIImpactFeedbackGenerator(style: .heavy).impactOccurred(intensity: 0.75) }
+      
       displayLinkTwo = CADisplayLink(target: self, selector: #selector(longPressingStop))
       displayLinkTwo!.add(to: .current, forMode: .common)
       playButtonsViewController.animateHighlight()

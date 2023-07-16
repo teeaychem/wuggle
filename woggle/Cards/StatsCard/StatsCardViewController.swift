@@ -17,21 +17,21 @@ class StatsCardViewController: CardViewController {
   let statVSep: CGFloat
   let statXOrigin: CGFloat
   
-  override init(iName iN: String, viewData vD: UIData, delegate d: CardStackDelegate) {
+  override init(iName iN: String, uiData uiD: UIData, delegate d: CardStackDelegate) {
     
-    statVSep = (vD.cardSize.height - (vD.statusBarSize.height + vD.statSize.height * 6)) / 7
-    statXOrigin = vD.cardSize.width * 0.025
+    statVSep = (uiD.cardSize.height - (uiD.statusBarSize.height + uiD.statSize.height * 6)) / 7
+    statXOrigin = uiD.cardSize.width * 0.025
     
-    combinedScoreViewC = CombinedScoreViewController(size: vD.statusBarSize, viewData: vD, gameCard: false)
-    statVCs["mostWordsFound"] = StatViewController(stat: d.currentStats().topWords!, displayName: "Most Words Found", viewData: vD)
-    statVCs["mostPoints"] = StatViewController(stat: d.currentStats().topPoints!, displayName: "Most Points Collected", viewData: vD)
-    statVCs["mostPercent"] = StatViewController(stat: d.currentStats().topPercent!, displayName: "Highest % Found", viewData: vD)
-    statVCs["highWord"] = StatViewController(stat: d.currentStats().topWordPoints!, displayName: "Top Scoring Word", viewData: vD)
-    statVCs["longestWord"] = StatViewController(stat: d.currentStats().topWordLength!, displayName: "Longest Word", viewData: vD)
-    statVCs["bestPLRation"] = StatViewController(stat: d.currentStats().topRatio!, displayName: "Best Points-Length Ratio", viewData: vD)
+    combinedScoreViewC = CombinedScoreViewController(uiData: uiD, gameCard: false)
+    statVCs["mostWordsFound"] = StatViewController(stat: d.currentStats().topWords!, displayName: "Most Words Found", uiData: uiD)
+    statVCs["mostPoints"] = StatViewController(stat: d.currentStats().topPoints!, displayName: "Most Points Collected", uiData: uiD)
+    statVCs["mostPercent"] = StatViewController(stat: d.currentStats().topPercent!, displayName: "Highest % Found", uiData: uiD)
+    statVCs["highWord"] = StatViewController(stat: d.currentStats().topWordPoints!, displayName: "Top Scoring Word", uiData: uiD)
+    statVCs["longestWord"] = StatViewController(stat: d.currentStats().topWordLength!, displayName: "Longest Word", uiData: uiD)
+    statVCs["bestPLRation"] = StatViewController(stat: d.currentStats().topRatio!, displayName: "Best Points-Length Ratio", uiData: uiD)
     
     
-    super.init(iName: iN, viewData: vD, delegate: d)
+    super.init(iName: iN, uiData: uiD, delegate: d)
       
     embed(combinedScoreViewC, inView: self.statusBarView, origin: CGPoint(x: 0, y: 0))
     combinedScoreViewC.combinedUpdate(found: Int16(d.currentStats().topWords!.numVal), score: Int16(d.currentStats().topPoints!.numVal), percent: Int16(d.currentStats().topPercent!.numVal), obeySP: false)

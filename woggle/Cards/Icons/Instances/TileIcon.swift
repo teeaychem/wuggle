@@ -14,14 +14,14 @@ class TileIcon: IconView {
   private let tileLayer = CAShapeLayer()
   private let letterLayer = CAShapeLayer()
   
-  init(viewData vD: UIData) {
+  init(uiData uiD: UIData) {
     
-    tileLayer.fillColor = vD.colourM.cgColor
+    tileLayer.fillColor = uiD.colourM.cgColor
     
-    letterLayer.fillColor = vD.colourL.cgColor
-    textLayer.fillColor = vD.colourL.cgColor
+    letterLayer.fillColor = uiD.colourL.cgColor
+    textLayer.fillColor = uiD.colourL.cgColor
     
-    super.init(size: vD.squareIconSize, viewData: vD)
+    super.init(size: uiD.squareIconSize, uiData: uiD)
 
     addTile()
     addSquare()
@@ -45,7 +45,7 @@ class TileIcon: IconView {
       cornerRadius: radius)
     
     tileLayer.path = tile.cgPath
-    tileLayer.strokeColor = viewData.iconBorderColour.cgColor
+    tileLayer.strokeColor = uiData.iconBorderColour.cgColor
     tileLayer.lineWidth = 0.5
     
     layer.addSublayer(tileLayer)

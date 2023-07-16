@@ -10,16 +10,16 @@ import UIKit
 class StopwatchViewController: UIViewController {
   
   private let size: CGFloat
-  private let viewData: UIData
+  private let uiData: UIData
   let watchView: StopwatchView
   
-  init(viewData vD: UIData) {
+  init(uiData uiD: UIData) {
     
-    viewData = vD
-    size = vD.stopWatchSize
-    watchView = StopwatchView(viewData: vD)
+    uiData = uiD
+    size = uiD.stopWatchSize
+    watchView = StopwatchView(uiData: uiD)
     
-    watchView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
+    watchView.layer.cornerRadius = getCornerRadius(width: uiD.gameBoardSize)
     
     super.init(nibName: nil, bundle: nil)
   }

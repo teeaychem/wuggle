@@ -10,8 +10,8 @@ import Foundation
 
 protocol ViewDelegate: AnyObject {
   
-  func viewData() -> UIData
-  // Return viewData
+  func getUIData() -> UIData
+  // Return uiData
   
   
   func paintDirect()

@@ -16,14 +16,14 @@ class LengthIcon: IconView {
   private let plusLayer = CAShapeLayer()
   private let numberLayer = CAShapeLayer()
   
-  init(viewData vD: UIData) {
+  init(uiData uiD: UIData) {
     
-    super.init(size: vD.squareIconSize, viewData: vD)
+    super.init(size: uiD.squareIconSize, uiData: uiD)
     
-    boardLayer.fillColor = vD.colourM.cgColor
-    highlightedTileLayer.fillColor = vD.colourL.cgColor
-    plusLayer.fillColor = vD.colourL.cgColor
-    numberLayer.fillColor = vD.colourL.cgColor
+    boardLayer.fillColor = uiD.colourM.cgColor
+    highlightedTileLayer.fillColor = uiD.colourL.cgColor
+    plusLayer.fillColor = uiD.colourL.cgColor
+    numberLayer.fillColor = uiD.colourL.cgColor
     
     paintBackground()
   }
@@ -45,7 +45,7 @@ class LengthIcon: IconView {
     boardLayer.path = boardPath.cgPath
     
     
-    boardLayer.strokeColor = viewData.iconBorderColour.cgColor
+    boardLayer.strokeColor = uiData.iconBorderColour.cgColor
     boardLayer.lineWidth = 0.5
     
     let tileIndent: CGFloat = size.width * 0.1
@@ -63,7 +63,7 @@ class LengthIcon: IconView {
 
 
     highlightedTileLayer.path = highlightedTilePath.cgPath
-    highlightedTileLayer.strokeColor = viewData.userInteractionColour.cgColor
+    highlightedTileLayer.strokeColor = uiData.userInteractionColour.cgColor
     highlightedTileLayer.lineWidth = 0.5
     
     

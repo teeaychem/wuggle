@@ -17,14 +17,14 @@ class IconView : UIView {
   let size: CGSize
   let indent: CGFloat
   let radius: CGFloat
-  let viewData: UIData
+  let uiData: UIData
   
-  init(size s: CGSize, viewData vD: UIData) {
+  init(size s: CGSize, uiData uiD: UIData) {
     
     size = s
     indent = size.height * 0.1
     radius = size.height * 0.1
-    viewData = vD
+    uiData = uiD
     
     super.init(frame: CGRect(x: 0, y: 0, width: s.width, height: s.height))
   }

@@ -28,3 +28,9 @@ X. It would be cool to show 'exhausted' tiles.
     When a word is found, all of these are set to false.
     Then, when a word is made I check each row to see if there's a true cell.
     If not, then there's no available word which uses the tile.
+
+
+
+
+
+init(size s: CGSize, uiData uiD: UIData, gameCard g: Bool)

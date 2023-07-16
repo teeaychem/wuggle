@@ -19,24 +19,24 @@ import UIKit
 class GameboardViewController: UIViewController {
   
   let gameboardView: GameboardView
-  let viewData: UIData
+  let uiData: UIData
   
-  init(viewData vD: UIData, tilePadding tP: CGFloat) {
+  init(uiData uiD: UIData, tilePadding tP: CGFloat) {
     
     // Constants for placing elements
-    viewData = vD
+    uiData = uiD
 
     // Setup the view
-    gameboardView = GameboardView(boardSize: vD.gameBoardSize)
-    gameboardView.backgroundColor = vD.colourD
-    gameboardView.layer.cornerRadius = getCornerRadius(width: vD.gameBoardSize)
+    gameboardView = GameboardView(boardSize: uiD.gameBoardSize)
+    gameboardView.backgroundColor = uiD.colourD
+    gameboardView.layer.cornerRadius = getCornerRadius(width: uiD.gameBoardSize)
     
     super.init(nibName: nil, bundle: nil)
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.frame.size = CGSize(width: viewData.gameBoardSize, height: viewData.gameBoardSize)
+    view.frame.size = CGSize(width: uiData.gameBoardSize, height: uiData.gameBoardSize)
     view.addSubview(gameboardView)
   }
   
@@ -67,8 +67,8 @@ class GameboardViewController: UIViewController {
     removeAllTileViews()
     
     let tileSqrtFloat = sqrt(Double(board.tiles!.count))
-    let tilePadding = viewData.gameBoardSize * 0.01
-    let tileWidth = (viewData.gameBoardSize - (tilePadding * (tileSqrtFloat + 1))) / tileSqrtFloat
+    let tilePadding = uiData.gameBoardSize * 0.01
+    let tileWidth = (uiData.gameBoardSize - (tilePadding * (tileSqrtFloat + 1))) / tileSqrtFloat
     
     for tile in board.tiles! {
       let tileTrueForm = tile as! Tile
@@ -122,19 +122,19 @@ class GameboardViewController: UIViewController {
     let xPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.col - 1)
     let yPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.row - 1)
     let tPosition = CGPoint(x: xPosition, y: yPosition)
-    return TileView(position: tPosition, size: tileWidth, boardSize: viewData.gameBoardSize, text: tile.value ?? "Qr", viewData: viewData)
+    return TileView(position: tPosition, size: tileWidth, boardSize: uiData.gameBoardSize, text: tile.value ?? "Qr", uiData: uiData)
   }
   
   
   func selectTile(tileIndex: Int16) {
     gameboardView.tiles[tileIndex]?.tileSelected()
-    if viewData.impact { UIImpactFeedbackGenerator(style: .rigid).impactOccurred() }
+    if uiData.impact { UIImpactFeedbackGenerator(style: .rigid).impactOccurred(intensity: 0.75) }
   }
 
   
   func deselectTile(tileIndex: Int16) {
     gameboardView.tiles[tileIndex]?.tileDeselected()
-    if viewData.impact { UIImpactFeedbackGenerator(style: .soft).impactOccurred() }
+    if uiData.impact { UIImpactFeedbackGenerator(style: .soft).impactOccurred(intensity: 0.75) }
   }
   
   
@@ -149,8 +149,8 @@ class GameboardViewController: UIViewController {
     // 1. Going going outside the board.
     // 2. Indeterminate points between two tiles.
     
-    let xPercent = point.x/viewData.gameBoardSize
-    let yPercent = point.y/viewData.gameBoardSize
+    let xPercent = point.x/uiData.gameBoardSize
+    let yPercent = point.y/uiData.gameBoardSize
     
     guard (0 < xPercent && xPercent < 1 && 0 < yPercent && yPercent < 1) else {
       // Guard against going outside the board
