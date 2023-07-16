@@ -44,7 +44,12 @@ class StopwatchViewController: UIViewController {
   
   func setHandTo(percent: Double) {
     // Argument is %, so angle is % of 2pi.
-    watchView.makeSecondHandTo(angle: percent * (2 * Double.pi))
+    print(percent)
+    if percent < 0 {
+      watchView.makeSecondHandTo(angle: percent * 1/120 * (2 * Double.pi))
+    } else {
+      watchView.makeSecondHandTo(angle: percent * (2 * Double.pi))
+    }
   }
   
   
@@ -54,7 +59,7 @@ class StopwatchViewController: UIViewController {
       watchView.incrementSecondHand(toAngleIncrement: percent * (2 * Double.pi))
     } else {
       // Rotate once per minute.
-      watchView.incrementSecondHand(toAngleIncrement: percent * 1/60 * (2 * Double.pi))
+      watchView.incrementSecondHand(toAngleIncrement: percent * 1/120 * (2 * Double.pi))
     }
   }
 

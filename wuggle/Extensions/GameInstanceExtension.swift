@@ -35,7 +35,6 @@ extension GameInstance {
     // Check to see if there's time remaning.
     // Then, ensure update to 0 at the lowest.
     // In the case of inf time, self.time > 0 is never satisfied.
-    
     if self.settings!.time > 0 {
       self.timeUsedPercent = max(0, self.timeUsedPercent - dVal)
     }

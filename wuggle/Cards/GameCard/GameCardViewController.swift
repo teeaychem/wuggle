@@ -220,7 +220,9 @@ extension GameCardViewController {
     displayLinkTwo = CADisplayLink(target: self, selector: #selector(newGameWait))
     displayLinkTwo!.add(to: .current, forMode: .common)
     // Most UI stuff is updated after waiting, but watch looks good immediate.
-    stopwatchViewController.setHandTo(percent: delegate!.currentSettings().time > 0 ? 0 : -1)
+    // Setting hand uses - to determine whether hand or inf.
+    // Ideally, -0 for inf, but this doesn't work, so something visually the same.
+    stopwatchViewController.setHandTo(percent: delegate!.currentSettings().time > 0 ? 0 : -0.0001)
     
     // As part of this function we load up a private managed context which runs on a different thread.
     // This then works on the settings file separately from the settings in use on the main thread.
@@ -328,7 +330,9 @@ extension GameCardViewController {
     boardViewController.setOpacity(to: 0.25)
     // Update buttons
     playButtonsViewController.hideStopIcon()
-    playButtonsViewController.stopRemoveGesture(gesture: stopGR!)
+    if stopGR != nil {
+      playButtonsViewController.stopRemoveGesture(gesture: stopGR!)
+    }
     playButtonsViewController.displayNewGameIcon()
     // Remove gestures
     boardViewController.removeAllGestureRecognizers()
