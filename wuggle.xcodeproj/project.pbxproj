@@ -489,7 +489,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 57EF4B302A4664F2008C57FF /* Build configuration list for PBXProject "woggle" */;
+			buildConfigurationList = 57EF4B302A4664F2008C57FF /* Build configuration list for PBXProject "wuggle" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -909,7 +909,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		57EF4B302A4664F2008C57FF /* Build configuration list for PBXProject "woggle" */ = {
+		57EF4B302A4664F2008C57FF /* Build configuration list for PBXProject "wuggle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				57EF4B602A4664F3008C57FF /* Debug */,

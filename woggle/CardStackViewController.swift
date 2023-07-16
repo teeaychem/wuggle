@@ -397,7 +397,7 @@ extension CardStackViewController {
             if !rootTrie.memoryContainsWord(word: "HAZO", lexicon: 3) {
               self.buildAndSave(root: rootTrie, fileName: "KJB", prvCntxt: prvMngdObjCntxt, index: 3)
             }
-            if !rootTrie.memoryContainsWord(word: "EVN", lexicon: 4) {
+            if !rootTrie.memoryContainsWord(word: "NEC", lexicon: 4) {
               self.buildAndSave(root: rootTrie, fileName: "Shakespeare", prvCntxt: prvMngdObjCntxt, index: 4)
             }
             self.performSelector(onMainThread: #selector(self.trieSuccess), with: nil, waitUntilDone: true)
