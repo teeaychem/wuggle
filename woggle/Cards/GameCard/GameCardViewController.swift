@@ -123,6 +123,7 @@ class GameCardViewController: CardViewController {
     
     foundWordsViewController.clear()
     boardViewController.removeAllTileViews()
+    playButtonsViewController.hideStopIcon()
     
     super.shuffledToDeck()
   }
