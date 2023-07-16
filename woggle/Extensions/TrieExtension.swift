@@ -71,7 +71,7 @@ extension TrieNode  {
     // Safely add a word.
     // Got to root, then use moveToChild, which creates child if needed.
     guard !word.isEmpty else { return }
-    let lword = word.uppercased()
+    let lword = word // .uppercased() Files are created uppercase
     
     var node = self
     if self.parent != nil {
@@ -102,6 +102,8 @@ extension TrieNode  {
     var currentNode: TrieNode?
     currentNode = self
     for char in word {
+      // TODO: Here, maybe.
+      //
       currentNode = currentNode?.getChild(val: String(char)) ?? nil
     }
     return currentNode

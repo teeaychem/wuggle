@@ -161,20 +161,30 @@ class GameCardViewController: CardViewController {
   
   
   func processWord(word w: String) {
-    foundWordsViewController.update(word: w, found: true)
-    if delegate?.currentGame()?.foundWordsList == nil {
-      delegate?.currentGame()?.foundWordsList = [w]
-    } else {
-      if delegate!.currentGame()!.foundWordsList!.contains(w) {
-        return
+    
+    guard rootTrie != nil else { return }
+    
+    let endTrie = rootTrie!.traceString(word: w)
+    if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)] && w.count >= delegate!.currentSettings().minWordLength) {
+      
+      let fixedWord = w.replacingOccurrences(of: "!", with: "Qu")
+      
+      foundWordsViewController.update(word: w, found: true)
+      if delegate?.currentGame()?.foundWordsList == nil {
+        delegate?.currentGame()?.foundWordsList = [w]
       } else {
-        delegate!.currentGame()?.foundWordsList!.append(w)
-        delegate!.currentGame()?.foundWordCount += 1
-        delegate!.currentGame()?.pointsCount += Int16(getPoints(word: w))
-        combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
-        thinkAboutStats(word: w)
+        if delegate!.currentGame()!.foundWordsList!.contains(w) {
+          return
+        } else {
+          delegate!.currentGame()?.foundWordsList!.append(w)
+          delegate!.currentGame()?.foundWordCount += 1
+          delegate!.currentGame()?.pointsCount += Int16(getPoints(word: w))
+          combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
+          thinkAboutStats(word: w)
+        }
       }
     }
+    
   }
   
   required init?(coder: NSCoder) {
@@ -491,11 +501,12 @@ extension GameCardViewController {
     case .ended, .cancelled:
       // Check to see if current trie node is a word.
       let wordAttempt = stringFromSelectedTiles()
-      guard rootTrie != nil else { return }
-      let endTrie = rootTrie!.traceString(word: wordAttempt)
-      if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)] && wordAttempt.count >= delegate!.currentSettings().minWordLength) {
-        processWord(word: wordAttempt.replacingOccurrences(of: "!", with: "Qu"))
+      if wordAttempt.contains("!") {
+        // Internally "qu" is ! and as there's no "q", this covers qu and q.
+        processWord(word: wordAttempt.replacingOccurrences(of: "!", with: "q"))
       }
+      processWord(word: wordAttempt)
+
       
       // Clean up the view by deselecting tiles.
       for index in selectedTiles {
@@ -508,6 +519,7 @@ extension GameCardViewController {
       break
     }
   }
+
   
   
   @objc func didTapOnTime(_ sender: UITapGestureRecognizer) {

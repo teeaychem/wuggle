@@ -31,6 +31,15 @@ X. It would be cool to show 'exhausted' tiles.
 
 
 
+Qu in file, as this makes creating the trie very easy.
+Else, I need to look ahead.
+This is an issue.
+As, to preserve q I need two different values.
 
 
-init(size s: CGSize, uiData uiD: UIData, gameCard g: Bool)
+So, qu is !.
+when process word, want to consider ! as < and as >
+Really, I should try both cases.
+There's a chance quX and also qX.
+There's no way for me to tell which of these.
+Ah, so then I can keep ! and q.

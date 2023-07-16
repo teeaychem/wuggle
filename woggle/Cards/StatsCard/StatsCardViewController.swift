@@ -29,8 +29,7 @@ class StatsCardViewController: CardViewController {
     statVCs["highWord"] = StatViewController(stat: d.currentStats().topWordPoints!, displayName: "Top Scoring Word", uiData: uiD)
     statVCs["longestWord"] = StatViewController(stat: d.currentStats().topWordLength!, displayName: "Longest Word", uiData: uiD)
     statVCs["bestPLRation"] = StatViewController(stat: d.currentStats().topRatio!, displayName: "Best Points-Length Ratio", uiData: uiD)
-    
-    
+
     super.init(iName: iN, uiData: uiD, delegate: d)
       
     embed(combinedScoreViewC, inView: self.statusBarView, origin: CGPoint(x: 0, y: 0))
