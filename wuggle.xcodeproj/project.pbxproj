@@ -55,12 +55,12 @@
 		57EF4B3B2A4664F2008C57FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B3A2A4664F2008C57FF /* SceneDelegate.swift */; };
 		57EF4B3D2A4664F2008C57FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B3C2A4664F2008C57FF /* ViewController.swift */; };
 		57EF4B402A4664F2008C57FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57EF4B3E2A4664F2008C57FF /* Main.storyboard */; };
-		57EF4B432A4664F2008C57FF /* woggle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B412A4664F2008C57FF /* woggle.xcdatamodeld */; };
+		57EF4B432A4664F2008C57FF /* wuggle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B412A4664F2008C57FF /* wuggle.xcdatamodeld */; };
 		57EF4B452A4664F3008C57FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57EF4B442A4664F3008C57FF /* Assets.xcassets */; };
 		57EF4B482A4664F3008C57FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57EF4B462A4664F3008C57FF /* LaunchScreen.storyboard */; };
-		57EF4B532A4664F3008C57FF /* woggleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B522A4664F3008C57FF /* woggleTests.swift */; };
-		57EF4B5D2A4664F3008C57FF /* woggleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B5C2A4664F3008C57FF /* woggleUITests.swift */; };
-		57EF4B5F2A4664F3008C57FF /* woggleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B5E2A4664F3008C57FF /* woggleUITestsLaunchTests.swift */; };
+		57EF4B532A4664F3008C57FF /* wuggleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B522A4664F3008C57FF /* wuggleTests.swift */; };
+		57EF4B5D2A4664F3008C57FF /* wuggleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B5C2A4664F3008C57FF /* wuggleUITests.swift */; };
+		57EF4B5F2A4664F3008C57FF /* wuggleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B5E2A4664F3008C57FF /* wuggleUITestsLaunchTests.swift */; };
 		57EF4B6C2A466528008C57FF /* CardStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B6B2A466528008C57FF /* CardStackViewController.swift */; };
 		57EF4B6E2A4665D8008C57FF /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B6D2A4665D8008C57FF /* CardView.swift */; };
 		57EF4B762A466BAE008C57FF /* TrieExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF4B752A466BAE008C57FF /* TrieExtension.swift */; };
@@ -139,10 +139,10 @@
 		57EF4B472A4664F3008C57FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57EF4B492A4664F3008C57FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57EF4B4E2A4664F3008C57FF /* woggleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = woggleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		57EF4B522A4664F3008C57FF /* woggleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = woggleTests.swift; sourceTree = "<group>"; };
+		57EF4B522A4664F3008C57FF /* wuggleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wuggleTests.swift; sourceTree = "<group>"; };
 		57EF4B582A4664F3008C57FF /* woggleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = woggleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		57EF4B5C2A4664F3008C57FF /* woggleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = woggleUITests.swift; sourceTree = "<group>"; };
-		57EF4B5E2A4664F3008C57FF /* woggleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = woggleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		57EF4B5C2A4664F3008C57FF /* wuggleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wuggleUITests.swift; sourceTree = "<group>"; };
+		57EF4B5E2A4664F3008C57FF /* wuggleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wuggleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		57EF4B6B2A466528008C57FF /* CardStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackViewController.swift; sourceTree = "<group>"; };
 		57EF4B6D2A4665D8008C57FF /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		57EF4B752A466BAE008C57FF /* TrieExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrieExtension.swift; sourceTree = "<group>"; };
@@ -333,9 +333,9 @@
 		57EF4B2C2A4664F2008C57FF = {
 			isa = PBXGroup;
 			children = (
-				57EF4B372A4664F2008C57FF /* woggle */,
-				57EF4B512A4664F3008C57FF /* woggleTests */,
-				57EF4B5B2A4664F3008C57FF /* woggleUITests */,
+				57EF4B372A4664F2008C57FF /* wuggle */,
+				57EF4B512A4664F3008C57FF /* wuggleTests */,
+				57EF4B5B2A4664F3008C57FF /* wuggleUITests */,
 				57EF4B362A4664F2008C57FF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -350,7 +350,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		57EF4B372A4664F2008C57FF /* woggle */ = {
+		57EF4B372A4664F2008C57FF /* wuggle */ = {
 			isa = PBXGroup;
 			children = (
 				57D155142A557D4D00A802C9 /* Protocols */,
@@ -368,26 +368,26 @@
 				57EF4B442A4664F3008C57FF /* Assets.xcassets */,
 				57EF4B462A4664F3008C57FF /* LaunchScreen.storyboard */,
 				57EF4B492A4664F3008C57FF /* Info.plist */,
-				57EF4B412A4664F2008C57FF /* woggle.xcdatamodeld */,
+				57EF4B412A4664F2008C57FF /* wuggle.xcdatamodeld */,
 			);
-			path = woggle;
+			path = wuggle;
 			sourceTree = "<group>";
 		};
-		57EF4B512A4664F3008C57FF /* woggleTests */ = {
+		57EF4B512A4664F3008C57FF /* wuggleTests */ = {
 			isa = PBXGroup;
 			children = (
-				57EF4B522A4664F3008C57FF /* woggleTests.swift */,
+				57EF4B522A4664F3008C57FF /* wuggleTests.swift */,
 			);
-			path = woggleTests;
+			path = wuggleTests;
 			sourceTree = "<group>";
 		};
-		57EF4B5B2A4664F3008C57FF /* woggleUITests */ = {
+		57EF4B5B2A4664F3008C57FF /* wuggleUITests */ = {
 			isa = PBXGroup;
 			children = (
-				57EF4B5C2A4664F3008C57FF /* woggleUITests.swift */,
-				57EF4B5E2A4664F3008C57FF /* woggleUITestsLaunchTests.swift */,
+				57EF4B5C2A4664F3008C57FF /* wuggleUITests.swift */,
+				57EF4B5E2A4664F3008C57FF /* wuggleUITestsLaunchTests.swift */,
 			);
-			path = woggleUITests;
+			path = wuggleUITests;
 			sourceTree = "<group>";
 		};
 		57EF4B712A466B7B008C57FF /* Resources */ = {
@@ -575,7 +575,7 @@
 				57E2F37A2A54E5850097D1D2 /* IconView.swift in Sources */,
 				57506C212A48D82900367AE9 /* StopwatchView.swift in Sources */,
 				570A572D2A4B83BA006129FD /* CardStackDelegate.swift in Sources */,
-				57EF4B432A4664F2008C57FF /* woggle.xcdatamodeld in Sources */,
+				57EF4B432A4664F2008C57FF /* wuggle.xcdatamodeld in Sources */,
 				57EF4B3D2A4664F2008C57FF /* ViewController.swift in Sources */,
 				57E758C92A5C940100823989 /* StatViewController.swift in Sources */,
 				57E2F3822A54E59D0097D1D2 /* LengthIcon.swift in Sources */,
@@ -600,7 +600,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57EF4B532A4664F3008C57FF /* woggleTests.swift in Sources */,
+				57EF4B532A4664F3008C57FF /* wuggleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,8 +608,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57EF4B5D2A4664F3008C57FF /* woggleUITests.swift in Sources */,
-				57EF4B5F2A4664F3008C57FF /* woggleUITestsLaunchTests.swift in Sources */,
+				57EF4B5D2A4664F3008C57FF /* wuggleUITests.swift in Sources */,
+				57EF4B5F2A4664F3008C57FF /* wuggleUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,7 +771,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5XCATX3KKA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = woggle/Info.plist;
+				INFOPLIST_FILE = wuggle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = wuggle;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.word-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -805,7 +805,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5XCATX3KKA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = woggle/Info.plist;
+				INFOPLIST_FILE = wuggle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = wuggle;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.word-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -841,12 +841,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sparkes.woggleTests;
+				PRODUCT_BUNDLE_IDENTIFIER = sparkes.wuggleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/woggle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/woggle";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wuggle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/wuggle";
 			};
 			name = Debug;
 		};
@@ -861,12 +861,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sparkes.woggleTests;
+				PRODUCT_BUNDLE_IDENTIFIER = sparkes.wuggleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/woggle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/woggle";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wuggle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/wuggle";
 			};
 			name = Release;
 		};
@@ -879,12 +879,12 @@
 				DEVELOPMENT_TEAM = 5XCATX3KKA;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sparkes.woggleUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = sparkes.wuggleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = woggle;
+				TEST_TARGET_NAME = wuggle;
 			};
 			name = Debug;
 		};
@@ -897,12 +897,12 @@
 				DEVELOPMENT_TEAM = 5XCATX3KKA;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sparkes.woggleUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = sparkes.wuggleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = woggle;
+				TEST_TARGET_NAME = wuggle;
 			};
 			name = Release;
 		};
@@ -948,13 +948,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		57EF4B412A4664F2008C57FF /* woggle.xcdatamodeld */ = {
+		57EF4B412A4664F2008C57FF /* wuggle.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				57EF4B422A4664F2008C57FF /* woggle.xcdatamodel */,
 			);
 			currentVersion = 57EF4B422A4664F2008C57FF /* woggle.xcdatamodel */;
-			path = woggle.xcdatamodeld;
+			path = wuggle.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
