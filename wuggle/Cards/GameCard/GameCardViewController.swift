@@ -328,6 +328,7 @@ extension GameCardViewController {
     boardViewController.setOpacity(to: 0.25)
     // Update buttons
     playButtonsViewController.hideStopIcon()
+    playButtonsViewController.stopRemoveGesture(gesture: stopGR!)
     playButtonsViewController.displayNewGameIcon()
     // Remove gestures
     boardViewController.removeAllGestureRecognizers()
