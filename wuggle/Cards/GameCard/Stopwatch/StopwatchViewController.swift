@@ -44,7 +44,6 @@ class StopwatchViewController: UIViewController {
   
   func setHandTo(percent: Double) {
     // Argument is %, so angle is % of 2pi.
-    print(percent)
     if percent < 0 {
       watchView.makeSecondHandTo(angle: percent * 1/120 * (2 * Double.pi))
     } else {
@@ -63,7 +62,6 @@ class StopwatchViewController: UIViewController {
     }
   }
 
-  
   
   func removeAllGestureRecognizers() {
     if view.gestureRecognizers != nil {

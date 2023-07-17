@@ -1,5 +1,7 @@
 Woggle to do:
 
+X. Below foundwords at end, display found N out of M in T(ime).
+
 X. Delete redundant coreData stuff
 
 X. Some UI info when new stat is made.

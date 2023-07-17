@@ -45,7 +45,7 @@ func getPoints(word: String) -> Int {
       points += 2
     case "K", "W", "Y", "V", "J":
       points += 3
-    case "!", "X", "Z":
+    case "!", "Q", "X", "Z":
       points += 4
     default:
       points += 0
