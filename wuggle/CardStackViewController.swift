@@ -30,7 +30,6 @@ struct cardViewsStruct {
 }
 
 
-
 class CardStackViewController: UIViewController {
   
   
