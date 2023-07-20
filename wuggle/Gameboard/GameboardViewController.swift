@@ -10,7 +10,7 @@
 // 2. Boards recorded with stats.
 
 // Tiles are stored in coredata with Int16 x and y positions.
-// To help pass this information around, this pair is combined to an Int16 by (x * 10) + y.
+// To help pass this information around, this pair is combined to an Int16 by x + (y * 4).
 // This is easy to encode and decode.
 
 import UIKit
@@ -52,13 +52,14 @@ class GameboardViewController: UIViewController {
   }
   
   
-  func tileLocationCombine(x: Int16, y: Int16) -> Int16 {
-    return x * 10 + y
+  func tileLocationCombine(x: Int16, y: Int16, sqrt: Int16) -> Int16 {
+    return x + (y * sqrt)
   }
   
   
-  func tileLocationSplit(combined: Int16) -> (Int16, Int16) {
-    return combined.quotientAndRemainder(dividingBy: 10)
+  func tileLocationSplit(combined: Int16, sqrt: Int16) -> (Int16, Int16) {
+    let qr = combined.quotientAndRemainder(dividingBy: sqrt)
+    return (qr.remainder, qr.quotient)
   }
   
   
@@ -73,7 +74,7 @@ class GameboardViewController: UIViewController {
     for tile in board.tiles! {
       let tileTrueForm = tile as! Tile
       let newTile = createTileView(tile: tileTrueForm, tileWidth: tileWidth, tilePadding: tilePadding)
-      let tileKey = tileLocationCombine(x: tileTrueForm.col, y: tileTrueForm.row)
+      let tileKey = tileLocationCombine(x: tileTrueForm.col, y: tileTrueForm.row, sqrt: board.settings!.settings!.tileSqrt)
       gameboardView.addTileSubview(tileKey: tileKey, tileView: newTile)
     }
   }
@@ -118,9 +119,8 @@ class GameboardViewController: UIViewController {
   
   
   func createTileView(tile: Tile, tileWidth: CGFloat, tilePadding: CGFloat) -> TileView {
-    // Subract 1 as Tile starts count from 1, not 0.
-    let xPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.col - 1)
-    let yPosition = tilePadding + (tileWidth + tilePadding) * CGFloat(tile.row - 1)
+    let xPosition = tilePadding + ((tileWidth + tilePadding) * CGFloat(tile.col))
+    let yPosition = tilePadding + ((tileWidth + tilePadding) * CGFloat(tile.row))
     let tPosition = CGPoint(x: xPosition, y: yPosition)
     return TileView(position: tPosition, size: tileWidth, boardSize: uiData.gameBoardSize, text: tile.value ?? "Qr", uiData: uiData)
   }
@@ -167,7 +167,7 @@ class GameboardViewController: UIViewController {
       return nil
     }
     
-    return Int16(xVal + 1) * 10 + Int16(yVal + 1)
+    return tileLocationCombine(x: Int16(xVal), y: Int16(yVal), sqrt: Int16(tileSqrtFloat))
   }
   
 

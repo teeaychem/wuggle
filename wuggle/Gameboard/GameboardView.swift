@@ -10,6 +10,7 @@ import UIKit
 class GameboardView: UIView {
   
   var tiles = Dictionary<Int16, TileView>()
+  var tileUse = Dictionary<Int16, Int16>()
   
   init(boardSize bS: CGFloat) {
     

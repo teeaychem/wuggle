@@ -145,8 +145,8 @@ class GameCardViewController: CardViewController {
   
   func isAccessibleTile(fromIndex: Int16, toIndex: Int16) -> Bool {
     // Check to see is tile is accessible.
-    let fromTilePair = boardViewController.tileLocationSplit(combined: fromIndex)
-    let toTilePair = boardViewController.tileLocationSplit(combined: toIndex)
+    let fromTilePair = boardViewController.tileLocationSplit(combined: fromIndex, sqrt: delegate!.currentSettings().tileSqrt)
+    let toTilePair = boardViewController.tileLocationSplit(combined: toIndex, sqrt: delegate!.currentSettings().tileSqrt)
     let rowAccess = ((toTilePair.0 - 2) < fromTilePair.0) && (fromTilePair.0 < (toTilePair.0 + 2))
     let colAccess = ((toTilePair.1 - 2) < fromTilePair.1) && (fromTilePair.1 < (toTilePair.1 + 2))
     return rowAccess && colAccess

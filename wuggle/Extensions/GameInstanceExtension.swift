@@ -18,8 +18,8 @@ extension GameInstance {
     let distribtion = [7.8,2,4,3.8,11,1.4,3,2.3,8.6,0.21,0.97,5.3,2.7,7.2,6.1,2.8,0.19,7.3,8.7,6.7,3.3,1,0.91,0.27,1.6,0.44]
     let alph = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "!", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
-    for i in (1 ..< tileNum + 1) {
-      for j in (1 ..< tileNum + 1) {
+    for i in (0 ..< tileNum) {
+      for j in (0 ..< tileNum) {
         let tile = Tile(context: self.managedObjectContext!)
         tile.col = i
         tile.row = j
@@ -43,6 +43,16 @@ extension GameInstance {
   
   func findPossibleWords(minLength mL: Int) {
     guard self.settings?.currentGame != nil else { return }
+    
+    // TODO: Clean up
+    tileUse = Dictionary<Int16, Int16>()
+    for tile in board!.tiles! {
+      let trueForm = tile as! Tile
+      let rep = trueForm.col * 10 + trueForm.row
+      tileUse!.updateValue(0, forKey: rep)
+    }
+    
+    
     self.settings!.currentGame!.allWordsList = findAllWords(minLength: mL)?.sorted()
     self.settings!.currentGame!.allWordsComplete = true
   }
@@ -63,10 +73,11 @@ extension GameInstance {
         var node = results.first as! TrieNode
         node = node.getRoot()!
         var allTiles = self.board!.tiles! as! Set<Tile>
+        var usedTilesSet = [Tile]()
         var wordSet = Set<String>()
         var wordString = ""
         for tile in allTiles {
-          exploreTileWithList(tile: tile, availableTiles: &allTiles, trieNode: &node, wordString: &wordString, wordSet: &wordSet, minLength: mL)
+          exploreTileWithList(tile: tile, availableTiles: &allTiles, usedTiles: &usedTilesSet, trieNode: &node, wordString: &wordString, wordSet: &wordSet, minLength: mL)
         }
         return wordSet
       }
@@ -76,7 +87,7 @@ extension GameInstance {
     return nil
   }
   
-  func exploreTileWithList(tile: Tile, availableTiles: inout Set<Tile>, trieNode: inout TrieNode, wordString: inout String, wordSet: inout Set<String>, minLength mL: Int) {
+  func exploreTileWithList(tile: Tile, availableTiles: inout Set<Tile>, usedTiles: inout [Tile], trieNode: inout TrieNode, wordString: inout String, wordSet: inout Set<String>, minLength mL: Int) {
     // Recusive function to explore a tile when finding words.
     // It's assumed the trieNode corresponds with the used tiles.
     // Starting from root, so always looking a trieNode ahead
@@ -88,6 +99,7 @@ extension GameInstance {
       
       // Remove current tile from available
       availableTiles.remove(tile)
+      usedTiles.append(tile)
       // Go to the appropriate child node
       trieNode = trieNode.getChild(val: tile.value!)!
       // Add the value to the string
@@ -96,7 +108,15 @@ extension GameInstance {
       // If this is a word, update the word list.
       let trueWordString = wordString.replacingOccurrences(of: "!", with: "Qu")
       if trieNode.isWord && trieNode.lexiconList![Int(settings!.lexicon)] && trueWordString.count >= mL {
-        wordSet.insert(trueWordString)
+        if !wordSet.contains(trueWordString) {
+          for tile in usedTiles {
+            let rep = tile.row * 10 + tile.col
+            tileUse!.updateValue(tileUse![rep]! + 1, forKey: rep)
+          }
+          print(usedTiles)
+          wordSet.insert(trueWordString)
+        }
+        
       }
       
       // Restrict tiles to search.
@@ -104,11 +124,12 @@ extension GameInstance {
       let tilesToSearch = availableTiles.intersection(getSurroundingTilesInclusive(tile: tile))
       
       for choiceTile in tilesToSearch {
-        exploreTileWithList(tile: choiceTile, availableTiles: &availableTiles, trieNode: &trieNode, wordString: &wordString, wordSet: &wordSet, minLength: mL)
+        exploreTileWithList(tile: choiceTile, availableTiles: &availableTiles, usedTiles: &usedTiles, trieNode: &trieNode, wordString: &wordString, wordSet: &wordSet, minLength: mL)
       }
       
       // We're done exploring, so make the tile available again
       availableTiles.insert(tile)
+      usedTiles.removeLast()
       // Go to parent trie
       trieNode = trieNode.parent!
       // Remove tile value from wordString
