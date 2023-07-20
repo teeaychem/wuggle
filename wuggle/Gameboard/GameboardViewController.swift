@@ -52,30 +52,27 @@ class GameboardViewController: UIViewController {
   }
   
   
-  func tileLocationCombine(x: Int16, y: Int16, sqrt: Int16) -> Int16 {
+  func tileLocationCombine(x: Int, y: Int, sqrt: Int) -> Int {
     return x + (y * sqrt)
   }
   
   
-  func tileLocationSplit(combined: Int16, sqrt: Int16) -> (Int16, Int16) {
+  func tileLocationSplit(combined: Int, sqrt: Int) -> (Int, Int) {
     let qr = combined.quotientAndRemainder(dividingBy: sqrt)
     return (qr.remainder, qr.quotient)
   }
   
   
-  func createAllTileViews(board: Board) {
+  func createAllTileViews(tileValues: [String], tileSqrt tS: Int) {
     
     removeAllTileViews()
     
-    let tileSqrtFloat = sqrt(Double(board.tiles!.count))
     let tilePadding = uiData.gameBoardSize * 0.01
-    let tileWidth = (uiData.gameBoardSize - (tilePadding * (tileSqrtFloat + 1))) / tileSqrtFloat
+    let tileWidth = (uiData.gameBoardSize - (tilePadding * CGFloat(tS + 1))) / CGFloat(tS)
     
-    for tile in board.tiles! {
-      let tileTrueForm = tile as! Tile
-      let newTile = createTileView(tile: tileTrueForm, tileWidth: tileWidth, tilePadding: tilePadding)
-      let tileKey = tileLocationCombine(x: tileTrueForm.col, y: tileTrueForm.row, sqrt: board.settings!.settings!.tileSqrt)
-      gameboardView.addTileSubview(tileKey: tileKey, tileView: newTile)
+    for i in 0 ..< tileValues.count {
+      let newTile = createTileView(tileIndex: i, tileSqrt: tS, tileValue: tileValues[i], tileWidth: tileWidth, tilePadding: tilePadding)
+      gameboardView.addTileSubview(tileKey: i, tileView: newTile)
     }
   }
   
@@ -118,37 +115,39 @@ class GameboardViewController: UIViewController {
   }
   
   
-  func createTileView(tile: Tile, tileWidth: CGFloat, tilePadding: CGFloat) -> TileView {
-    let xPosition = tilePadding + ((tileWidth + tilePadding) * CGFloat(tile.col))
-    let yPosition = tilePadding + ((tileWidth + tilePadding) * CGFloat(tile.row))
+  func createTileView(tileIndex tI: Int, tileSqrt tS: Int, tileValue: String, tileWidth: CGFloat, tilePadding: CGFloat) -> TileView {
+    let tileSplit = splitTile(index: tI, tileSqrt: tS)
+    
+    let xPosition = tilePadding + ((tileWidth + tilePadding) * CGFloat(tileSplit.0))
+    let yPosition = tilePadding + ((tileWidth + tilePadding) * CGFloat(tileSplit.1))
     let tPosition = CGPoint(x: xPosition, y: yPosition)
-    return TileView(position: tPosition, size: tileWidth, boardSize: uiData.gameBoardSize, text: tile.value ?? "Qr", uiData: uiData)
+    return TileView(position: tPosition, size: tileWidth, boardSize: uiData.gameBoardSize, text:  tileValue, uiData: uiData)
   }
   
   
-  func selectTile(tileIndex: Int16) {
+  func selectTile(tileIndex: Int) {
     gameboardView.tiles[tileIndex]?.tileSelected()
     if uiData.impact { UIImpactFeedbackGenerator(style: .rigid).impactOccurred(intensity: 0.75) }
   }
   
   
-  func dimTile(tileIndex: Int16) {
+  func dimTile(tileIndex: Int) {
     gameboardView.tiles[tileIndex]?.dim()
   }
 
   
-  func deselectTile(tileIndex: Int16) {
+  func deselectTile(tileIndex: Int) {
     gameboardView.tiles[tileIndex]?.tileDeselected()
     if uiData.impact { UIImpactFeedbackGenerator(style: .soft).impactOccurred(intensity: 0.75) }
   }
   
   
-  func getTileValue(tileIndex: Int16) -> String {
+  func getTileValue(tileIndex: Int) -> String {
     return gameboardView.tiles[tileIndex]?.text ?? ""
   }
 
 
-  func basicTilePositionFromCGPoint(point: CGPoint, tileSqrtFloat: CGFloat) -> Int16? {
+  func basicTilePositionFromCGPoint(point: CGPoint, tileSqrtFloat: CGFloat) -> Int? {
     // Transforms a position point to a tile point.
     // Optional, as two checks:
     // 1. Going going outside the board.
@@ -172,7 +171,7 @@ class GameboardViewController: UIViewController {
       return nil
     }
     
-    return tileLocationCombine(x: Int16(xVal), y: Int16(yVal), sqrt: Int16(tileSqrtFloat))
+    return tileLocationCombine(x: Int(xVal), y: Int(yVal), sqrt: Int(tileSqrtFloat))
   }
   
 
@@ -198,4 +197,12 @@ class GameboardViewController: UIViewController {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+}
+
+
+// TODO: Move this somewhere
+
+func splitTile(index: Int, tileSqrt: Int) -> (Int, Int) {
+  let qr = index.quotientAndRemainder(dividingBy: tileSqrt)
+  return (qr.remainder, qr.quotient)
 }

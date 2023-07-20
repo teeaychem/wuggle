@@ -31,7 +31,7 @@ class GameCardViewController: CardViewController {
   
   var gameInProgess = false
     
-  var selectedTiles = [Int16]()
+  var selectedTiles = [Int]()
   var rootTrie: TrieNode?
   
   override init(iName iN: String, uiData uiD: UIData, delegate d: CardStackDelegate) {
@@ -73,7 +73,7 @@ class GameCardViewController: CardViewController {
 
     if delegate!.currentGame() != nil {
       // There's a game.
-      boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
+      boardViewController.createAllTileViews(tileValues: delegate!.currentGame()!.tileValues!, tileSqrt: Int(delegate!.currentSettings().tileSqrt))
       stopwatchViewController.setHandTo(percent: delegate!.currentGame()!.timeUsedPercent)
       for word in delegate!.currentGame()!.foundWordsList! {
         foundWordsViewController.update(word: word, found: true, animated: false)
@@ -143,10 +143,10 @@ class GameCardViewController: CardViewController {
   }
   
   
-  func isAccessibleTile(fromIndex: Int16, toIndex: Int16) -> Bool {
+  func isAccessibleTile(fromIndex: Int, toIndex: Int) -> Bool {
     // Check to see is tile is accessible.
-    let fromTilePair = boardViewController.tileLocationSplit(combined: fromIndex, sqrt: delegate!.currentSettings().tileSqrt)
-    let toTilePair = boardViewController.tileLocationSplit(combined: toIndex, sqrt: delegate!.currentSettings().tileSqrt)
+    let fromTilePair = boardViewController.tileLocationSplit(combined: fromIndex, sqrt: Int(delegate!.currentSettings().tileSqrt))
+    let toTilePair = boardViewController.tileLocationSplit(combined: toIndex, sqrt: Int(delegate!.currentSettings().tileSqrt))
     let rowAccess = ((toTilePair.0 - 2) < fromTilePair.0) && (fromTilePair.0 < (toTilePair.0 + 2))
     let colAccess = ((toTilePair.1 - 2) < fromTilePair.1) && (fromTilePair.1 < (toTilePair.1 + 2))
     return rowAccess && colAccess
@@ -195,7 +195,7 @@ class GameCardViewController: CardViewController {
             }
           }
           if used {
-            boardViewController.selectTile(tileIndex: Int16(i))
+            boardViewController.selectTile(tileIndex: i)
           }
         }
       }
@@ -236,7 +236,7 @@ extension GameCardViewController {
     delegate!.cardShuffleGesutre(enabled: false)
     // Get a new game.
     delegate?.currentSettings().setNewGame()
-    boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
+    boardViewController.createAllTileViews(tileValues: delegate!.currentGame()!.tileValues!, tileSqrt: Int(delegate!.currentSettings().tileSqrt))
     // Set a timer and call a wait function.
     // In part for finding possible words, and in part for good feels.
     displayLinkTwo = CADisplayLink(target: self, selector: #selector(newGameWait))
@@ -560,7 +560,7 @@ extension GameCardViewController {
         }
         
         
-        boardViewController.dimTile(tileIndex: Int16(i))
+        boardViewController.dimTile(tileIndex: i)
       }
     }
           

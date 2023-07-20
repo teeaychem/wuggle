@@ -11,7 +11,7 @@ import CoreData
 extension GameInstance {
   
   func populateBoard() {
-    self.board = Board(context: self.managedObjectContext!)
+    tileValues = Array(repeating: "", count: Int(settings!.tileSqrt * settings!.tileSqrt))
     
     let tileNum = self.settings!.tileSqrt
 
@@ -20,11 +20,8 @@ extension GameInstance {
     
     for i in (0 ..< tileNum) {
       for j in (0 ..< tileNum) {
-        let tile = Tile(context: self.managedObjectContext!)
-        tile.col = i
-        tile.row = j
-        tile.value = alph[distributionSelect(dist: distribtion)]
-        board!.addToTiles(tile)
+        let tileIndex = i + j * settings!.tileSqrt
+        tileValues![Int(tileIndex)] = alph[distributionSelect(dist: distribtion)]
       }
     }
   }
@@ -42,11 +39,12 @@ extension GameInstance {
   
   
   func findPossibleWords(minLength mL: Int, sqrt: Int16) {
+    print("before guard")
     guard self.settings?.currentGame != nil else { return }
     
     // TODO: Clean up
     wordTileUseDict = Dictionary<String, [Bool]>()
-
+    print("made wordTileUseDict")
     
     
     self.settings!.currentGame!.allWordsList = findAllWords(minLength: mL)?.sorted()
@@ -54,8 +52,10 @@ extension GameInstance {
   }
   
   func findAllWords(minLength mL: Int) -> Set<String>? {
+    print("finding")
     // Call exploreTileWithList with helper variables.
-    guard (self.board != nil) else { return nil }
+    guard (self.tileValues != nil) else { return nil }
+    print("passed the guard")
     
     // Get the trie root
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
@@ -68,13 +68,19 @@ extension GameInstance {
       if results.count > 0 {
         var node = results.first as! TrieNode
         node = node.getRoot()!
-        var allTiles = self.board!.tiles! as! Set<Tile>
-        var usedTilesSet = [Tile]()
+        // Not board. Instead, want set of numbers.
+        var allTiles = Set<Int>()
+        for i in 0 ..< Int(settings!.tileSqrt * settings!.tileSqrt) {
+          allTiles.insert(i)
+        }
+        var usedTilesSet = [Int]()
         var wordSet = Set<String>()
         var wordString = ""
         for tile in allTiles {
           exploreTileWithList(tile: tile, availableTiles: &allTiles, usedTiles: &usedTilesSet, trieNode: &node, wordString: &wordString, wordSet: &wordSet, minLength: mL)
         }
+        print("done finding words")
+        print(wordSet)
         return wordSet
       }
     } catch {
@@ -83,34 +89,36 @@ extension GameInstance {
     return nil
   }
   
-  func exploreTileWithList(tile: Tile, availableTiles: inout Set<Tile>, usedTiles: inout [Tile], trieNode: inout TrieNode, wordString: inout String, wordSet: inout Set<String>, minLength mL: Int) {
+  func exploreTileWithList(tile: Int, availableTiles: inout Set<Int>, usedTiles: inout [Int], trieNode: inout TrieNode, wordString: inout String, wordSet: inout Set<String>, minLength mL: Int) {
     // Recusive function to explore a tile when finding words.
     // It's assumed the trieNode corresponds with the used tiles.
     // Starting from root, so always looking a trieNode ahead
     
     // Function is only called given a trie node, so it's safe to unwrap current.
     // However, there may be no child for the value of the tile.
-    if (trieNode.getChild(val: tile.value!) != nil) {
+    let tileValue = tileValues![tile]
+    
+    if (trieNode.getChild(val: tileValue) != nil) {
       // We have a child, so this is worth exploring
       
       // Remove current tile from available
       availableTiles.remove(tile)
       usedTiles.append(tile)
       // Go to the appropriate child node
-      trieNode = trieNode.getChild(val: tile.value!)!
+      trieNode = trieNode.getChild(val: tileValue)!
       // Add the value to the string
-      wordString += tile.value!
+      wordString += tileValue
       
       // If this is a word, update the word list.
       let trueWordString = wordString.replacingOccurrences(of: "!", with: "Qu")
       if trieNode.isWord && trieNode.lexiconList![Int(settings!.lexicon)] && trueWordString.count >= mL {
         if !wordSet.contains(trueWordString) {
-          wordTileUseDict?.updateValue(Array(repeating: false, count: availableTiles.count * usedTiles.count), forKey: trueWordString)
+          print("total tiles ", availableTiles.count + usedTiles.count)
+          wordTileUseDict?.updateValue(Array(repeating: false, count: (availableTiles.count + usedTiles.count)), forKey: trueWordString)
           wordSet.insert(trueWordString)
         }
         for tile in usedTiles {
-          let rep = tile.col + (tile.row * self.settings!.tileSqrt)
-          wordTileUseDict![trueWordString]![Int(rep)] = true
+          wordTileUseDict![trueWordString]![tile] = true
         }
       }
       
@@ -132,12 +140,25 @@ extension GameInstance {
     }
   }
   
-  func getSurroundingTilesInclusive(tile: Tile) -> Set<Tile> {
+  func getSurroundingTilesInclusive(tile: Int) -> Set<Int> {
     // Get all the tiles surrounding a given tile, including the given tile.
-    // To keep the predicate simple, this include the tile given as an argument.
-  
-    let areaPredicate = NSPredicate(format: "(row BETWEEN %@) && (col BETWEEN %@)", [(tile.row - 1), (tile.row + 1)], [(tile.col - 1), (tile.col + 1)])
+    var outSet = Set<Int>()
     
-    return self.board!.tiles!.filtered(using: areaPredicate) as! Set<Tile>
+    let tileSqrtInt = Int(settings!.tileSqrt)
+    let (row, col) = splitTile(index: tile, tileSqrt: tileSqrtInt)
+    print("from", row, col)
+    
+    for r in max(0, row - 1) ..< min(tileSqrtInt, row + 2) {
+      for c in max(0, col - 1) ..< min(tileSqrtInt, col + 2) {
+        // Indexing is from 0, so tileSqrt is one too big. <. This means r/c + 2
+        print(r, c)
+        outSet.insert(r + (c * tileSqrtInt))
+      }
+    }
+    print(tile)
+    print(outSet)
+//    outSet.remove(tile)
+    
+    return outSet
   }  
 }

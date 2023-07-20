@@ -9,7 +9,7 @@ import UIKit
 
 class GameboardView: UIView {
   
-  var tiles = Dictionary<Int16, TileView>()
+  var tiles = Dictionary<Int, TileView>()
   
   init(boardSize bS: CGFloat) {
     
@@ -22,7 +22,7 @@ class GameboardView: UIView {
   }
   
   
-  func addTileSubview(tileKey: Int16, tileView: TileView) {
+  func addTileSubview(tileKey: Int, tileView: TileView) {
     tiles.updateValue(tileView, forKey: tileKey)
     self.addSubview(tileView)
   }
