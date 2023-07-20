@@ -45,12 +45,8 @@ extension GameInstance {
     guard self.settings?.currentGame != nil else { return }
     
     // TODO: Clean up
-    tileUse = Dictionary<String, [Bool]>()
-//    for tile in board!.tiles! {
-//      let trueForm = tile as! Tile
-//      let rep = trueForm.col + (trueForm.row * sqrt)
-//      tileUse!.updateValue(Array(repeating: false, count: Int(sqrt * sqrt)), forKey: )
-//    }
+    wordTileUseDict = Dictionary<String, [Bool]>()
+
     
     
     self.settings!.currentGame!.allWordsList = findAllWords(minLength: mL)?.sorted()
@@ -109,12 +105,12 @@ extension GameInstance {
       let trueWordString = wordString.replacingOccurrences(of: "!", with: "Qu")
       if trieNode.isWord && trieNode.lexiconList![Int(settings!.lexicon)] && trueWordString.count >= mL {
         if !wordSet.contains(trueWordString) {
-          tileUse?.updateValue(Array(repeating: false, count: availableTiles.count + usedTiles.count), forKey: trueWordString)
+          wordTileUseDict?.updateValue(Array(repeating: false, count: availableTiles.count * usedTiles.count), forKey: trueWordString)
           wordSet.insert(trueWordString)
         }
         for tile in usedTiles {
           let rep = tile.col + (tile.row * self.settings!.tileSqrt)
-          tileUse![trueWordString]![Int(rep)] = true
+          wordTileUseDict![trueWordString]![Int(rep)] = true
         }
       }
       

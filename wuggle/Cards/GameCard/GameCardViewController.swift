@@ -161,8 +161,6 @@ class GameCardViewController: CardViewController {
     let fixedWord = w.replacingOccurrences(of: "!", with: "Qu")
     if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)] && fixedWord.count >= delegate!.currentSettings().minWordLength) {
       
-      
-      
       foundWordsViewController.update(word: fixedWord, found: true, animated: true)
       if delegate?.currentGame()?.foundWordsList == nil {
         delegate?.currentGame()?.foundWordsList = [fixedWord]
@@ -177,8 +175,38 @@ class GameCardViewController: CardViewController {
           thinkAboutStats(word: fixedWord)
         }
       }
+      
+      // TODO: Make this optional.
+      // First, make a copy of the tile use data.
+      var tileArray = [Bool]()
+      for cell in delegate!.currentGame()!.wordTileUseDict![fixedWord]! { tileArray.append(cell) }
+      // Cancel out tile use.
+      delegate!.currentGame()!.wordTileUseDict?.updateValue(Array(repeating: false, count: tileArray.count), forKey: fixedWord)
+      // Go through the tiles
+      for i in 0 ..< tileArray.count {
+        // If the tile was used in the word, we check if it's still in use
+        if tileArray[i] == true {
+          // Assume it's not in use.
+          var used = true
+          for k in delegate!.currentGame()!.wordTileUseDict!.keys {
+            // If the index of the tile is true for any word, the tile still has somme use.
+            if delegate!.currentGame()!.wordTileUseDict![k]![i] == true {
+              used = false
+            }
+          }
+          if used {
+            boardViewController.selectTile(tileIndex: Int16(i))
+          }
+        }
+      }
+//      print(delegate!.currentGame()!.tileUse)
+      
+      // So here, I'm always setting only the true to false.
+      // This means, I can get the index of true, and search these.
+      
+      
+      // End found word if condition
     }
-    
   }
   
   required init?(coder: NSCoder) {
@@ -245,6 +273,9 @@ extension GameCardViewController {
           } catch {  }
         }
       }
+    
+    
+
   }
   
   
@@ -326,7 +357,7 @@ extension GameCardViewController {
     // Display final words
     finalWordsViewController = FinalFoundWordsViewController(uiData: uiData)
     self.embed(finalWordsViewController!, inView: self.cardView, origin: CGPoint(x: uiData.gameBoardPadding + uiData.gameBoardSize * 0.075, y: uiData.cardSize.height - uiData.gameBoardSize * 0.925 - uiData.gameBoardPadding))
-    finalWordsViewController?.addNoseeWordsDiff(noseeWords: (delegate!.currentGame()!.allWordsList!), seeWords: delegate!.currentGame()!.foundWordsList!)
+    finalWordsViewController?.addNoseeWordsDiff(noseeWords: (Array(delegate!.currentGame()!.wordTileUseDict!.keys)), seeWords: delegate!.currentGame()!.foundWordsList!)
     // Add gesture to see board.
     boardViewController.addGestureRecognizer(recogniser: UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBoard)))
   }
@@ -494,6 +525,45 @@ extension GameCardViewController {
     guard delegate!.currentGame() != nil else { return }
     // Stopwatch tap only works for controlling a gamme.
     // Does not create a new game, etc.
+    // TODO: Fix this up
+    // Do an initial check on tiles.
+    
+
+
+    // Go through each tile
+    for i in 0 ..< Int(delegate!.currentSettings().tileSqrt * delegate!.currentSettings().tileSqrt) {
+      // Assume the tile is used
+      var used = true
+      // Go through each word
+      for k in delegate!.currentGame()!.wordTileUseDict!.keys {
+        // If word and index is true, the tile is used
+        if delegate!.currentGame()!.wordTileUseDict![k]![i] {
+          used = false
+        }
+      }
+      if used {
+        print("selecting", i)
+        let qr = i.quotientAndRemainder(dividingBy: Int(delegate!.currentSettings().tileSqrt))
+        print(qr)
+        // TODO: Here, I want to set the switch in coreData together with the current tile.
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let tileFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tile")
+        tileFetchRequest.predicate = NSPredicate(format: "col == %i AND row == %i", qr.remainder, qr.quotient)
+        do {
+          let result = try context.fetch(tileFetchRequest)
+          
+          if result.count > 0 {
+            print("Tile found")
+          }
+        } catch {
+          // No tile
+        }
+        
+        
+        boardViewController.dimTile(tileIndex: Int16(i))
+      }
+    }
+          
     
     if (delegate!.currentGame()!.viable) {
       if (gameInProgess) {

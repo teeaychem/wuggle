@@ -130,6 +130,11 @@ class GameboardViewController: UIViewController {
     gameboardView.tiles[tileIndex]?.tileSelected()
     if uiData.impact { UIImpactFeedbackGenerator(style: .rigid).impactOccurred(intensity: 0.75) }
   }
+  
+  
+  func dimTile(tileIndex: Int16) {
+    gameboardView.tiles[tileIndex]?.dim()
+  }
 
   
   func deselectTile(tileIndex: Int16) {
