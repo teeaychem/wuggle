@@ -2,7 +2,6 @@ Woggle to do:
 
 X. Highlighting finished tiles.
     1. Finishing things up only after dictionary complete.
-    2. Replace list with dictionary values: It's the same thing.
     3. Make sure values are ordered in find words.
     4. Build in highlight functions.
 

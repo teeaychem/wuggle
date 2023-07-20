@@ -40,16 +40,7 @@ extension GameInstance {
   
   func findPossibleWords(minLength mL: Int, sqrt: Int16) {
     guard self.settings?.currentGame != nil else { return }
-    
-    // TODO: Clean up
-    // Ensure the dictionary is present
-    
-    print("made wordTileUseDict")
-    
 
-    // Call exploreTileWithList with helper variables.
-    guard (self.tileValues != nil) else { return }
-    
     // Get the trie root
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
     fetchRequest.fetchLimit = 1
@@ -71,6 +62,7 @@ extension GameInstance {
         var usedTilesSet = [Int]()
         var wordString = ""
         for tile in allTiles {
+          // Call exploreTileWithList with helper variables.
           exploreTileWithList(tileIndex: tile,
                               totalTiles: allTileCount,
                               availableTiles: &allTiles,
@@ -79,7 +71,7 @@ extension GameInstance {
                               wordString: &wordString,
                               minLength: mL)
         }
-        self.settings!.currentGame!.allWordsComplete = true
+//        self.settings!.currentGame!.allWordsComplete = true
       }
     } catch {
       print("no found trie via settings")

@@ -59,9 +59,9 @@ class FinalFoundWordsViewController: UIViewController {
     // As both sets are sorted, we'll for sure get to the ith seeSorted in nosee
     // before the ith + 1.
     // However, need an extra element to ensure seeIndex doesn't go out of range.
-//    let seeSorted = (seeWords + ["Z!"]).sorted()
+    let noseeSorted = noseeWords.sorted()
     
-    for noseeWord in noseeWords {
+    for noseeWord in noseeSorted {
       foundWordView.updateNoScroll(word: noseeWord, found: false)
     }
     for seeWord in seeWords {

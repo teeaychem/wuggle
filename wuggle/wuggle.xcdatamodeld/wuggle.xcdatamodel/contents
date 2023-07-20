@@ -46,6 +46,7 @@
     </entity>
     <entity name="UISettings" representedClassName="UISettings" syncable="YES" codeGenerationType="class">
         <attribute name="colour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fadeTiles" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="impact" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="leftSide" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="showPercent" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>

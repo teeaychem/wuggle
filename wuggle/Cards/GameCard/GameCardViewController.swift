@@ -11,8 +11,6 @@ import CoreData
 
 class GameCardViewController: CardViewController {
   
-  var dictioanryDone = false
-  
   let combinedScoreViewC: CombinedScoreViewController
 
   let boardViewController: GameboardViewController
@@ -82,7 +80,6 @@ class GameCardViewController: CardViewController {
       }
       combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
       boardViewController.displayTileFoundationAll()
-      dictioanryDone = true
       
       if delegate!.currentGame()!.viable {
         // Game is viable
@@ -273,15 +270,10 @@ extension GameCardViewController {
           settings.currentGame!.findPossibleWords(minLength: Int(self.delegate!.currentSettings().minWordLength), sqrt: self.delegate!.currentSettings().tileSqrt)
           do {
             try privateManagedObjectContext.save()
-            self.performSelector(onMainThread: #selector(self.dictDone), with: nil, waitUntilDone: true)
+            self.performSelector(onMainThread: #selector(self.newGameWaitOver), with: nil, waitUntilDone: true)
           } catch {  }
         }
       }
-  }
-  
-  
-  @objc func dictDone() {
-    dictioanryDone = true
   }
   
   
@@ -295,21 +287,25 @@ extension GameCardViewController {
       for tile in boardViewController.gameboardView.tiles.values {
         tile.partialDiplayTile(percent: displayLinkTwoTimeElapsed)
       }
-    } else if dictioanryDone {
-      // Clear the timer
-      displayLinkTwo?.invalidate()
-      displayLinkTwoTimeElapsed = 0
-      // Fix the icons.
-      updatePlayPause(state: "ready")
-      // Add gesture recognisers
-      addWatchGR()
-      boardViewController.displayTileFoundationAll()
-      delegate!.cardShuffleGesutre(enabled: true)
-      
-      // Go straight into the new game
-      resumeGameMain()
     }
   }
+  
+  
+  @objc func newGameWaitOver() {
+    // Clear the timer
+    displayLinkTwo?.invalidate()
+    displayLinkTwoTimeElapsed = 0
+    // Fix the icons.
+    updatePlayPause(state: "ready")
+    // Add gesture recognisers
+    addWatchGR()
+    boardViewController.displayTileFoundationAll()
+    delegate!.cardShuffleGesutre(enabled: true)
+    
+    // Go straight into the new game
+    resumeGameMain()
+  }
+  
   
   
   func resumeGameMain() {
