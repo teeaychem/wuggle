@@ -24,6 +24,7 @@ class FoundWordView: UITableView {
     dataSource = self
     delegate = self
     rowHeight = rH
+    showsVerticalScrollIndicator = false
   }
   
   required init?(coder: NSCoder) {
@@ -76,7 +77,7 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
   }
   
   
-  public func updateAndScroll(word: String, found: Bool) {
+  public func updateAndScroll(word: String, found: Bool, animated a: Bool) {
     var wordIndex: Int
     
     if (wordList.first(where: { $0.0 == word}) != nil) {
@@ -86,7 +87,7 @@ extension FoundWordView: UITableViewDataSource, UITableViewDelegate {
       wordList.append((word, found))
       reloadData()
     }
-      scrollToRow(at: [0, wordIndex], at: .middle, animated: true)
+      scrollToRow(at: [0, wordIndex], at: .middle, animated: a)
     // TODO: Add some visial flair, at the moment it's not clear what this is doing.
   }
   

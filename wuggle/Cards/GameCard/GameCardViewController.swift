@@ -76,8 +76,9 @@ class GameCardViewController: CardViewController {
       boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
       stopwatchViewController.setHandTo(percent: delegate!.currentGame()!.timeUsedPercent)
       for word in delegate!.currentGame()!.foundWordsList! {
-        foundWordsViewController.update(word: word, found: true)
+        foundWordsViewController.update(word: word, found: true, animated: false)
       }
+      combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
       boardViewController.displayTileFoundationAll()
       
       if delegate!.currentGame()!.viable {
@@ -162,7 +163,7 @@ class GameCardViewController: CardViewController {
       
       
       
-      foundWordsViewController.update(word: fixedWord, found: true)
+      foundWordsViewController.update(word: fixedWord, found: true, animated: true)
       if delegate?.currentGame()?.foundWordsList == nil {
         delegate?.currentGame()?.foundWordsList = [fixedWord]
       } else {
@@ -399,13 +400,6 @@ extension GameCardViewController {
 extension GameCardViewController {
   
   
-  func removePlayPauseGR() {
-    if (playPauseGR != nil) {
-      playButtonsViewController.playPauseRemoveGesture(gesture: playPauseGR!)
-    }
-  }
-  
-  
   func addWatchGR() {
     if (watchGestureRecognizer == nil) {
       watchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnTime(_:)))
@@ -598,6 +592,13 @@ extension GameCardViewController {
 // MARK: PlayPause Stuff
 
 extension GameCardViewController {
+  
+  
+  func removePlayPauseGR() {
+    if (playPauseGR != nil) {
+      playButtonsViewController.playPauseRemoveGesture(gesture: playPauseGR!)
+    }
+  }
   
   func updatePlayPause(state: String) {
     
