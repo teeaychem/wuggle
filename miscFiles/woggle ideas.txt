@@ -1,5 +1,9 @@
 Woggle to do:
 
+B. There's still a way to get stop and new game.
+It's in part due to my bad abstraction.
+I just talk to the icon, 
+
 X. Below foundwords at end, display found N out of M in T(ime).
 
 X. Delete redundant coreData stuff

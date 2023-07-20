@@ -70,9 +70,7 @@ class GameCardViewController: CardViewController {
       self.embed(playButtonsViewController, inView: self.cardView, origin: CGPoint(x: (2 * uiData.gameBoardPadding + uiData.foundWordViewWidth), y: (uiData.gameBoardPadding + uiData.statusBarSize.height)))
       self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: 3 * uiData.gameBoardPadding + uiData.foundWordViewWidth + uiData.stopWatchSize * 0.5, y: uiData.gameBoardPadding + uiData.statusBarSize.height))
     }
-    // Always want play/pause GR
-    addPlayPauseGR()
-    
+
     if delegate!.currentGame() != nil {
       // There's a game.
       boardViewController.createAllTileViews(board: delegate!.currentGame()!.board!)
@@ -84,14 +82,8 @@ class GameCardViewController: CardViewController {
       
       if delegate!.currentGame()!.viable {
         // Game is viable
-        // Play/pause via watch
+        updatePlayPause(state: "ready")
         addWatchGR()
-        // Stop is possible.
-        playButtonsViewController.paintStopIcon()
-        // Game is viable so watch and stop gr
-        addStopGR()
-        // Play pause isn't new game.
-        playButtonsViewController.paintPlayIcon()
       } else {
         // Else, set things as if the game had just ended.
         endGameMain(fresh: false)
@@ -99,7 +91,7 @@ class GameCardViewController: CardViewController {
     } else {
       // There's no game.
       // playPause GR is active, so just display newGame icon.
-      playButtonsViewController.displayNewGameIcon()
+      updatePlayPause(state: "newGame")
     }
   }
   
@@ -270,13 +262,9 @@ extension GameCardViewController {
       displayLinkTwo?.invalidate()
       displayLinkTwoTimeElapsed = 0
       // Fix the icons.
-      playButtonsViewController.paintPlayIcon()
-      playButtonsViewController.paintStopIcon()
+      updatePlayPause(state: "ready")
       // Add gesture recognisers
       addWatchGR()
-      addPlayPauseGR()
-      addStopGR()
-      
       boardViewController.displayTileFoundationAll()
       delegate!.cardShuffleGesutre(enabled: true)
       
@@ -292,7 +280,7 @@ extension GameCardViewController {
     displayLinkOne!.add(to: .current, forMode: .common)
     boardViewController.removeAllGestureRecognizers()
     addBoardPanGR()
-    playButtonsViewController.paintPauseIcon()
+    updatePlayPause(state: "play")
     gameInProgess = true
   }
   
@@ -300,7 +288,7 @@ extension GameCardViewController {
   func pauseGameMain(animated a: Bool) {
     displayLinkOne?.invalidate()
     boardViewController.hideAllTiles(animated: a)
-    playButtonsViewController.paintPlayIcon()
+    updatePlayPause(state: "pause")
     boardViewController.removeAllGestureRecognizers()
     gameInProgess = false
   }
@@ -308,7 +296,7 @@ extension GameCardViewController {
   
   func endGameMain(fresh: Bool) {
     
-    if (!delegate!.currentGame()!.allWordsComplete) {
+    if (delegate!.currentGame() != nil && !delegate!.currentGame()!.allWordsComplete) {
       // There a chance possible words failed to complete.
       // If so, pause the game here to fill everything in.
       delegate!.currentGame()?.findPossibleWords(minLength: Int(delegate!.currentSettings().minWordLength))
@@ -330,11 +318,7 @@ extension GameCardViewController {
   func endGameDisplay() {
     boardViewController.setOpacity(to: 0.25)
     // Update buttons
-    playButtonsViewController.hideStopIcon()
-    if stopGR != nil {
-      playButtonsViewController.stopRemoveGesture(gesture: stopGR!)
-    }
-    playButtonsViewController.displayNewGameIcon()
+    updatePlayPause(state: "newGame")
     // Remove gestures
     boardViewController.removeAllGestureRecognizers()
     removeWatchGR()
@@ -415,26 +399,10 @@ extension GameCardViewController {
 extension GameCardViewController {
   
   
-  func addPlayPauseGR() {
-    if (playPauseGR == nil) {
-      playPauseGR = UITapGestureRecognizer(target: self, action: #selector(didTapOnPlayPause(_:)))
-    }
-    playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
-  }
-  
   func removePlayPauseGR() {
     if (playPauseGR != nil) {
       playButtonsViewController.playPauseRemoveGesture(gesture: playPauseGR!)
     }
-  }
-  
-  
-  func addStopGR() {
-    if (stopGR == nil) {
-      stopGR = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressStop(_:)))
-      stopGR!.minimumPressDuration = 0.05
-    }
-    playButtonsViewController.stopAddGesture(gesture: stopGR!)
   }
   
   
@@ -625,4 +593,51 @@ extension GameCardViewController {
     }
   }
   
+}
+
+// MARK: PlayPause Stuff
+
+extension GameCardViewController {
+  
+  func updatePlayPause(state: String) {
+    
+    switch state {
+    case "ready":
+      playButtonsViewController.paintStopIcon()
+      // Game is viable so watch and stop gr
+      // Play pause isn't new game.
+      playButtonsViewController.paintPlayIcon()
+      
+      // Add play pause GR
+      if (playPauseGR == nil) {
+        playPauseGR = UITapGestureRecognizer(target: self, action: #selector(didTapOnPlayPause(_:)))
+      }
+      playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
+      
+      // Add stop GR
+      if (stopGR == nil) {
+        stopGR = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressStop(_:)))
+        stopGR!.minimumPressDuration = 0.05
+      }
+      playButtonsViewController.stopAddGesture(gesture: stopGR!)
+    case "play":
+      playButtonsViewController.paintPauseIcon()
+    case "pause":
+      playButtonsViewController.paintPlayIcon()
+    case "newGame":
+      playButtonsViewController.hideStopIcon()
+      // Remove stop GR
+      if stopGR != nil {
+        playButtonsViewController.stopRemoveGesture(gesture: stopGR!)
+      }
+      // Add play pause GR
+      if (playPauseGR == nil) {
+        playPauseGR = UITapGestureRecognizer(target: self, action: #selector(didTapOnPlayPause(_:)))
+      }
+      playButtonsViewController.playPauseAddGesture(gesture: playPauseGR!)
+      playButtonsViewController.displayNewGameIcon()
+    default:
+      return
+    }
+  }
 }
