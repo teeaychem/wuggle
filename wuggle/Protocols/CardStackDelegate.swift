@@ -28,5 +28,4 @@ protocol CardStackDelegate: AnyObject {
   func currentGame() -> GameInstance?
   
   func currentStats() -> StatsCollection
-   
 }

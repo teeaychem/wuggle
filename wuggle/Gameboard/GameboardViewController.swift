@@ -120,8 +120,8 @@ class GameboardViewController: UIViewController {
   }
   
   
-  func dimTile(tileIndex: Int) {
-    gameboardView.tiles[tileIndex]?.dim()
+  func fadeTile(tileIndex: Int, andUpdate aU: Bool) {
+    gameboardView.tiles[tileIndex]?.fade(andUpdate: aU)
   }
 
   

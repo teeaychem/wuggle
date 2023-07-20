@@ -154,8 +154,9 @@ class TileView: UIView {
     }
   }
   
-  func dim() {
+  func fade(andUpdate: Bool) {
     inUse = false
+    if andUpdate { for lay in letterLayers { lay.opacity = dimOpacity } }
   }
   
   
