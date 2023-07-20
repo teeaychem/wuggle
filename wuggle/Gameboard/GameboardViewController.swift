@@ -52,17 +52,6 @@ class GameboardViewController: UIViewController {
   }
   
   
-  func tileLocationCombine(x: Int, y: Int, sqrt: Int) -> Int {
-    return x + (y * sqrt)
-  }
-  
-  
-  func tileLocationSplit(combined: Int, sqrt: Int) -> (Int, Int) {
-    let qr = combined.quotientAndRemainder(dividingBy: sqrt)
-    return (qr.remainder, qr.quotient)
-  }
-  
-  
   func createAllTileViews(tileValues: [String], tileSqrt tS: Int) {
     
     removeAllTileViews()
@@ -116,7 +105,7 @@ class GameboardViewController: UIViewController {
   
   
   func createTileView(tileIndex tI: Int, tileSqrt tS: Int, tileValue: String, tileWidth: CGFloat, tilePadding: CGFloat) -> TileView {
-    let tileSplit = splitTile(index: tI, tileSqrt: tS)
+    let tileSplit = splitTileRowCol(index: tI, tileSqrt: tS)
     
     let xPosition = tilePadding + ((tileWidth + tilePadding) * CGFloat(tileSplit.0))
     let yPosition = tilePadding + ((tileWidth + tilePadding) * CGFloat(tileSplit.1))
@@ -171,7 +160,7 @@ class GameboardViewController: UIViewController {
       return nil
     }
     
-    return tileLocationCombine(x: Int(xVal), y: Int(yVal), sqrt: Int(tileSqrtFloat))
+    return combineRowColTile(row: Int(xVal), col: Int(yVal), sqrt: Int(tileSqrtFloat))
   }
   
 
@@ -200,9 +189,3 @@ class GameboardViewController: UIViewController {
 }
 
 
-// TODO: Move this somewhere
-
-func splitTile(index: Int, tileSqrt: Int) -> (Int, Int) {
-  let qr = index.quotientAndRemainder(dividingBy: tileSqrt)
-  return (qr.remainder, qr.quotient)
-}

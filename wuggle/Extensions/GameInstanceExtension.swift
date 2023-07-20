@@ -39,29 +39,22 @@ extension GameInstance {
   
   
   func findPossibleWords(minLength mL: Int, sqrt: Int16) {
-    print("before guard")
     guard self.settings?.currentGame != nil else { return }
     
     // TODO: Clean up
-    wordTileUseDict = Dictionary<String, [Bool]>()
+    // Ensure the dictionary is present
+    
     print("made wordTileUseDict")
     
-    
-    self.settings!.currentGame!.allWordsList = findAllWords(minLength: mL)?.sorted()
-    self.settings!.currentGame!.allWordsComplete = true
-  }
-  
-  func findAllWords(minLength mL: Int) -> Set<String>? {
-    print("finding")
+
     // Call exploreTileWithList with helper variables.
-    guard (self.tileValues != nil) else { return nil }
-    print("passed the guard")
+    guard (self.tileValues != nil) else { return }
     
     // Get the trie root
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TrieNode")
     fetchRequest.fetchLimit = 1
     do {
-      guard (self.managedObjectContext != nil) else { return nil }
+      guard (self.managedObjectContext != nil) else { return }
       
       let results = try self.managedObjectContext!.fetch(fetchRequest)
       
@@ -70,40 +63,51 @@ extension GameInstance {
         node = node.getRoot()!
         // Not board. Instead, want set of numbers.
         var allTiles = Set<Int>()
-        for i in 0 ..< Int(settings!.tileSqrt * settings!.tileSqrt) {
+        let allTileCount = Int(settings!.tileSqrt * settings!.tileSqrt)
+        for i in 0 ..< allTileCount {
           allTiles.insert(i)
         }
+        
         var usedTilesSet = [Int]()
-        var wordSet = Set<String>()
         var wordString = ""
         for tile in allTiles {
-          exploreTileWithList(tile: tile, availableTiles: &allTiles, usedTiles: &usedTilesSet, trieNode: &node, wordString: &wordString, wordSet: &wordSet, minLength: mL)
+          exploreTileWithList(tileIndex: tile,
+                              totalTiles: allTileCount,
+                              availableTiles: &allTiles,
+                              usedTiles: &usedTilesSet,
+                              trieNode: &node,
+                              wordString: &wordString,
+                              minLength: mL)
         }
-        print("done finding words")
-        print(wordSet)
-        return wordSet
+        self.settings!.currentGame!.allWordsComplete = true
       }
     } catch {
       print("no found trie via settings")
     }
-    return nil
+//    return nil
   }
   
-  func exploreTileWithList(tile: Int, availableTiles: inout Set<Int>, usedTiles: inout [Int], trieNode: inout TrieNode, wordString: inout String, wordSet: inout Set<String>, minLength mL: Int) {
+  func exploreTileWithList(tileIndex: Int,
+                           totalTiles: Int,
+                           availableTiles: inout Set<Int>,
+                           usedTiles: inout [Int],
+                           trieNode: inout TrieNode,
+                           wordString: inout String,
+                           minLength mL: Int) {
     // Recusive function to explore a tile when finding words.
     // It's assumed the trieNode corresponds with the used tiles.
     // Starting from root, so always looking a trieNode ahead
     
     // Function is only called given a trie node, so it's safe to unwrap current.
     // However, there may be no child for the value of the tile.
-    let tileValue = tileValues![tile]
+    let tileValue = tileValues![tileIndex]
     
     if (trieNode.getChild(val: tileValue) != nil) {
       // We have a child, so this is worth exploring
       
       // Remove current tile from available
-      availableTiles.remove(tile)
-      usedTiles.append(tile)
+      availableTiles.remove(tileIndex)
+      usedTiles.append(tileIndex)
       // Go to the appropriate child node
       trieNode = trieNode.getChild(val: tileValue)!
       // Add the value to the string
@@ -112,26 +116,29 @@ extension GameInstance {
       // If this is a word, update the word list.
       let trueWordString = wordString.replacingOccurrences(of: "!", with: "Qu")
       if trieNode.isWord && trieNode.lexiconList![Int(settings!.lexicon)] && trueWordString.count >= mL {
-        if !wordSet.contains(trueWordString) {
-          print("total tiles ", availableTiles.count + usedTiles.count)
-          wordTileUseDict?.updateValue(Array(repeating: false, count: (availableTiles.count + usedTiles.count)), forKey: trueWordString)
-          wordSet.insert(trueWordString)
+        if !wordTileUseDict!.keys.contains(trueWordString) {
+          wordTileUseDict!.updateValue(Array(repeating: false, count: totalTiles), forKey: trueWordString)
         }
         for tile in usedTiles {
           wordTileUseDict![trueWordString]![tile] = true
         }
       }
-      
       // Restrict tiles to search.
       // Note: Current tile has been removed from available, so there's no need to exclude from surrounding tiles.
-      let tilesToSearch = availableTiles.intersection(getSurroundingTilesInclusive(tile: tile))
+      let tilesToSearch = availableTiles.intersection(getSurroundingTilesInclusive(tile: tileIndex))
       
       for choiceTile in tilesToSearch {
-        exploreTileWithList(tile: choiceTile, availableTiles: &availableTiles, usedTiles: &usedTiles, trieNode: &trieNode, wordString: &wordString, wordSet: &wordSet, minLength: mL)
+        exploreTileWithList(tileIndex: choiceTile,
+                            totalTiles: totalTiles,
+                            availableTiles: &availableTiles,
+                            usedTiles: &usedTiles,
+                            trieNode: &trieNode,
+                            wordString: &wordString,
+                            minLength: mL)
       }
       
       // We're done exploring, so make the tile available again
-      availableTiles.insert(tile)
+      availableTiles.insert(tileIndex)
       usedTiles.removeLast()
       // Go to parent trie
       trieNode = trieNode.parent!
@@ -145,20 +152,14 @@ extension GameInstance {
     var outSet = Set<Int>()
     
     let tileSqrtInt = Int(settings!.tileSqrt)
-    let (row, col) = splitTile(index: tile, tileSqrt: tileSqrtInt)
-    print("from", row, col)
-    
+    let (row, col) = splitTileRowCol(index: tile, tileSqrt: tileSqrtInt)
+
     for r in max(0, row - 1) ..< min(tileSqrtInt, row + 2) {
       for c in max(0, col - 1) ..< min(tileSqrtInt, col + 2) {
         // Indexing is from 0, so tileSqrt is one too big. <. This means r/c + 2
-        print(r, c)
         outSet.insert(r + (c * tileSqrtInt))
       }
     }
-    print(tile)
-    print(outSet)
-//    outSet.remove(tile)
-    
     return outSet
   }  
 }

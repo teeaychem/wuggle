@@ -77,7 +77,7 @@ class CombinedScoreViewController: UIViewController {
     updateScore(val: instance.pointsCount)
     
     if (obeySP && uiData.showPercent) {
-      let percent = (Double(instance.foundWordCount) / Double(instance.allWordsList!.count)) * 100
+      let percent = (Double(instance.foundWordCount) / Double(instance.wordTileUseDict!.keys.count)) * 100
       updatePercent(val: Int16((200 > percent && percent > 0) ? percent : 0))
     } else {
       updatePercent(val: -1)

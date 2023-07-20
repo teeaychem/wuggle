@@ -12,7 +12,7 @@ func getCornerRadius(width w: CGFloat) -> CGFloat {
   return w * 0.025
 }
 
-
+// MARK: Tile distribution
 func distributionSelect(dist: [Double]) -> Int {
   // Assumes distibution is ordered from smallest to largest
   
@@ -57,7 +57,7 @@ func getPoints(word: String) -> Int {
 //  return max(1, word.count - 4)
 }
 
-
+// MARK: Somewhat dynamic font sizes
 var fontByHeightDict = Dictionary<CGFloat, Double>() //   [CGFloat: Double]()
 
 func getFontFor(height: CGFloat) -> Double {
@@ -105,6 +105,9 @@ func getFontFor(height: CGFloat) -> Double {
   }
 }
 
+
+
+// MARK: Drawing rentangles with some randomness
 
 func randomPointOnRectangle(width: CGFloat, height: CGFloat) -> CGPoint {
   // To get random point on perimiter of rectangle, treat the perimiter as a straight line split into four different sections.
@@ -200,4 +203,19 @@ func randomStartRoundedUIBeizerPath(width w: CGFloat, height h: CGFloat, cornerR
   }
   path.close()
   return path
+}
+
+
+// MARK: Tile encoding
+// Way to encode tile positions in a useful way.
+// Starts at 0 and goes left to right, top to bottom.
+
+func splitTileRowCol(index: Int, tileSqrt: Int) -> (Int, Int) {
+  let qr = index.quotientAndRemainder(dividingBy: tileSqrt)
+  return (qr.remainder, qr.quotient)
+}
+
+
+func combineRowColTile(row: Int, col: Int, sqrt: Int) -> Int {
+  return row + (col * sqrt)
 }

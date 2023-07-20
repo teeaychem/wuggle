@@ -11,6 +11,8 @@ import CoreData
 
 class GameCardViewController: CardViewController {
   
+  var dictioanryDone = false
+  
   let combinedScoreViewC: CombinedScoreViewController
 
   let boardViewController: GameboardViewController
@@ -80,6 +82,7 @@ class GameCardViewController: CardViewController {
       }
       combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
       boardViewController.displayTileFoundationAll()
+      dictioanryDone = true
       
       if delegate!.currentGame()!.viable {
         // Game is viable
@@ -145,8 +148,8 @@ class GameCardViewController: CardViewController {
   
   func isAccessibleTile(fromIndex: Int, toIndex: Int) -> Bool {
     // Check to see is tile is accessible.
-    let fromTilePair = boardViewController.tileLocationSplit(combined: fromIndex, sqrt: Int(delegate!.currentSettings().tileSqrt))
-    let toTilePair = boardViewController.tileLocationSplit(combined: toIndex, sqrt: Int(delegate!.currentSettings().tileSqrt))
+    let fromTilePair = splitTileRowCol(index: fromIndex, tileSqrt: Int(delegate!.currentSettings().tileSqrt))
+    let toTilePair = splitTileRowCol(index: toIndex, tileSqrt: Int(delegate!.currentSettings().tileSqrt))
     let rowAccess = ((toTilePair.0 - 2) < fromTilePair.0) && (fromTilePair.0 < (toTilePair.0 + 2))
     let colAccess = ((toTilePair.1 - 2) < fromTilePair.1) && (fromTilePair.1 < (toTilePair.1 + 2))
     return rowAccess && colAccess
@@ -270,12 +273,15 @@ extension GameCardViewController {
           settings.currentGame!.findPossibleWords(minLength: Int(self.delegate!.currentSettings().minWordLength), sqrt: self.delegate!.currentSettings().tileSqrt)
           do {
             try privateManagedObjectContext.save()
+            self.performSelector(onMainThread: #selector(self.dictDone), with: nil, waitUntilDone: true)
           } catch {  }
         }
       }
-    
-    
-
+  }
+  
+  
+  @objc func dictDone() {
+    dictioanryDone = true
   }
   
   
@@ -284,12 +290,12 @@ extension GameCardViewController {
     if displayLinkTwoTimeElapsed < 1 {
       // Count up while animating the new game icon
       displayLinkTwoTimeElapsed += displayLinkTwo!.targetTimestamp - displayLinkTwo!.timestamp
-      
+
       playButtonsViewController.rotatePlayPauseIcon(percent: displayLinkTwoTimeElapsed)
       for tile in boardViewController.gameboardView.tiles.values {
         tile.partialDiplayTile(percent: displayLinkTwoTimeElapsed)
       }
-    } else {
+    } else if dictioanryDone {
       // Clear the timer
       displayLinkTwo?.invalidate()
       displayLinkTwoTimeElapsed = 0
@@ -397,7 +403,7 @@ extension GameCardViewController {
     // Check each state associated with a game instance
     let foundWordCount = Double(g.foundWordsList!.count)
     let pointsCollected = Double(g.pointsCount)
-    let percentFound = Double(foundWordCount) / Double(g.allWordsList!.count) * 100
+    let percentFound = Double(foundWordCount) / Double(g.wordTileUseDict!.keys.count) * 100
     
     if foundWordCount > delegate!.currentStats().topWords!.numVal {
       delegate!.currentStats().topWords!.numVal = foundWordCount
@@ -418,7 +424,7 @@ extension GameCardViewController {
     if percentFound > delegate!.currentStats().topPercent!.numVal {
       delegate!.currentStats().topPercent!.numVal = percentFound
       delegate!.currentStats().topPercent!.strVal = String(Int(percentFound))
-      delegate!.currentStats().topPercent!.extraStr = String(Int(foundWordCount)) + " out of " + String(delegate!.currentGame()!.allWordsList!.count) + " words "
+      delegate!.currentStats().topPercent!.extraStr = String(Int(foundWordCount)) + " out of " + String(g.wordTileUseDict!.keys.count) + " words "
       delegate!.currentStats().topPercent!.date = Date()
       delegate!.processUpdate()
     }
@@ -543,12 +549,11 @@ extension GameCardViewController {
       }
       if used {
         print("selecting", i)
-        let qr = i.quotientAndRemainder(dividingBy: Int(delegate!.currentSettings().tileSqrt))
-        print(qr)
+        let (row, col) = splitTileRowCol(index: i, tileSqrt: Int(delegate!.currentSettings().tileSqrt))
         // TODO: Here, I want to set the switch in coreData together with the current tile.
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let tileFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tile")
-        tileFetchRequest.predicate = NSPredicate(format: "col == %i AND row == %i", qr.remainder, qr.quotient)
+        tileFetchRequest.predicate = NSPredicate(format: "col == %i AND row == %i", row, col)
         do {
           let result = try context.fetch(tileFetchRequest)
           

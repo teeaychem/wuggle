@@ -53,7 +53,7 @@ extension Settings {
     self.currentGame = GameInstance(context: self.managedObjectContext!)
     self.currentGame!.populateBoard()
     self.currentGame!.foundWordsList = []
-    self.currentGame!.allWordsList = []
+    self.currentGame!.wordTileUseDict = Dictionary<String, [Bool]>()
   }
   
   
