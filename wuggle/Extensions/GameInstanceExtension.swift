@@ -41,16 +41,16 @@ extension GameInstance {
   }
   
   
-  func findPossibleWords(minLength mL: Int) {
+  func findPossibleWords(minLength mL: Int, sqrt: Int16) {
     guard self.settings?.currentGame != nil else { return }
     
     // TODO: Clean up
-    tileUse = Dictionary<Int16, Int16>()
-    for tile in board!.tiles! {
-      let trueForm = tile as! Tile
-      let rep = trueForm.col * 10 + trueForm.row
-      tileUse!.updateValue(0, forKey: rep)
-    }
+    tileUse = Dictionary<String, [Bool]>()
+//    for tile in board!.tiles! {
+//      let trueForm = tile as! Tile
+//      let rep = trueForm.col + (trueForm.row * sqrt)
+//      tileUse!.updateValue(Array(repeating: false, count: Int(sqrt * sqrt)), forKey: )
+//    }
     
     
     self.settings!.currentGame!.allWordsList = findAllWords(minLength: mL)?.sorted()
@@ -109,14 +109,13 @@ extension GameInstance {
       let trueWordString = wordString.replacingOccurrences(of: "!", with: "Qu")
       if trieNode.isWord && trieNode.lexiconList![Int(settings!.lexicon)] && trueWordString.count >= mL {
         if !wordSet.contains(trueWordString) {
-          for tile in usedTiles {
-            let rep = tile.row * 10 + tile.col
-            tileUse!.updateValue(tileUse![rep]! + 1, forKey: rep)
-          }
-          print(usedTiles)
+          tileUse?.updateValue(Array(repeating: false, count: availableTiles.count + usedTiles.count), forKey: trueWordString)
           wordSet.insert(trueWordString)
         }
-        
+        for tile in usedTiles {
+          let rep = tile.col + (tile.row * self.settings!.tileSqrt)
+          tileUse![trueWordString]![Int(rep)] = true
+        }
       }
       
       // Restrict tiles to search.

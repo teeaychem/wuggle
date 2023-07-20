@@ -239,7 +239,7 @@ extension GameCardViewController {
       if let result = try? privateManagedObjectContext.fetch(settingsFetchRequest) {
         let settings = result.first as! Settings
         privateManagedObjectContext.perform {
-          settings.currentGame!.findPossibleWords(minLength: Int(self.delegate!.currentSettings().minWordLength))
+          settings.currentGame!.findPossibleWords(minLength: Int(self.delegate!.currentSettings().minWordLength), sqrt: self.delegate!.currentSettings().tileSqrt)
           do {
             try privateManagedObjectContext.save()
           } catch {  }
@@ -300,7 +300,7 @@ extension GameCardViewController {
     if (delegate!.currentGame() != nil && !delegate!.currentGame()!.allWordsComplete) {
       // There a chance possible words failed to complete.
       // If so, pause the game here to fill everything in.
-      delegate!.currentGame()?.findPossibleWords(minLength: Int(delegate!.currentSettings().minWordLength))
+      delegate!.currentGame()?.findPossibleWords(minLength: Int(delegate!.currentSettings().minWordLength), sqrt: self.delegate!.currentSettings().tileSqrt)
     }
     endGameDisplay()
     // Cancel timer, pause and end game
