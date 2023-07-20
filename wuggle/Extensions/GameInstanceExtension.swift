@@ -94,8 +94,9 @@ extension GameInstance {
       wordString += tile.value!
       
       // If this is a word, update the word list.
-      if trieNode.isWord && trieNode.lexiconList![Int(settings!.lexicon)] && wordString.count >= mL {
-        wordSet.insert(wordString.replacingOccurrences(of: "!", with: "Qu"))
+      let trueWordString = wordString.replacingOccurrences(of: "!", with: "Qu")
+      if trieNode.isWord && trieNode.lexiconList![Int(settings!.lexicon)] && trueWordString.count >= mL {
+        wordSet.insert(trueWordString)
       }
       
       // Restrict tiles to search.

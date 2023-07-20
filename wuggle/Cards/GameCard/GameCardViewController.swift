@@ -165,22 +165,23 @@ class GameCardViewController: CardViewController {
     guard rootTrie != nil else { return }
     
     let endTrie = rootTrie!.traceString(word: w)
-    if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)] && w.count >= delegate!.currentSettings().minWordLength) {
+    let fixedWord = w.replacingOccurrences(of: "!", with: "Qu")
+    if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)] && fixedWord.count >= delegate!.currentSettings().minWordLength) {
       
-      let fixedWord = w.replacingOccurrences(of: "!", with: "Qu")
       
-      foundWordsViewController.update(word: w, found: true)
+      
+      foundWordsViewController.update(word: fixedWord, found: true)
       if delegate?.currentGame()?.foundWordsList == nil {
-        delegate?.currentGame()?.foundWordsList = [w]
+        delegate?.currentGame()?.foundWordsList = [fixedWord]
       } else {
-        if delegate!.currentGame()!.foundWordsList!.contains(w) {
+        if delegate!.currentGame()!.foundWordsList!.contains(fixedWord) {
           return
         } else {
-          delegate!.currentGame()?.foundWordsList!.append(w)
+          delegate!.currentGame()?.foundWordsList!.append(fixedWord)
           delegate!.currentGame()?.foundWordCount += 1
-          delegate!.currentGame()?.pointsCount += Int16(getPoints(word: w))
+          delegate!.currentGame()?.pointsCount += Int16(getPoints(word: fixedWord))
           combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
-          thinkAboutStats(word: w)
+          thinkAboutStats(word: fixedWord)
         }
       }
     }
@@ -507,7 +508,7 @@ extension GameCardViewController {
       // Check to see if current trie node is a word.
       let wordAttempt = stringFromSelectedTiles()
       if wordAttempt.contains("!") {
-        // Internally "qu" is ! and as there's no "q", this covers qu and q.
+        // Internally "qu" is ! and as there's no "q", this covers qu and q. So, also check the possible q case
         processWord(word: wordAttempt.replacingOccurrences(of: "!", with: "q"))
       }
       processWord(word: wordAttempt)

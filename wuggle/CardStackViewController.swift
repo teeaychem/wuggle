@@ -27,6 +27,14 @@ struct cardViewsStruct {
     statCardC!.removeGesturesFromStatusBar()
     gameCardC!.removeGesturesFromStatusBar()
   }
+  
+  func list() -> [CardViewController] {
+    return [
+      settCardC! as CardViewController,
+      statCardC! as CardViewController,
+      gameCardC! as CardViewController
+    ]
+  }
 }
 
 
@@ -45,8 +53,6 @@ class CardStackViewController: UIViewController {
   private var statsBarTapUIGR: UIGestureRecognizer?
   
   private var cardViews = cardViewsStruct()
-  private var cardOrigin: CGFloat = 0.0
-  private var topCardIndex: Int
   
   // As settings is initialised on SceneDelegate, this is an unowned var.
   // So, it's possible reference to settings fails.
@@ -68,8 +74,6 @@ class CardStackViewController: UIViewController {
     cardX = (UIScreen.main.bounds.width - uiData.cardSize.width) * 0.5
     statusBarH = uiData.statusBarSize.height
     
-    topCardIndex = 2
-    
     super.init(nibName: nil, bundle: nil)
     
     settings = loadOrMakeSettings()
@@ -80,6 +84,8 @@ class CardStackViewController: UIViewController {
   
   
   override func viewDidLoad() {
+    // Set a basic loading animation screen while ensuring tries are present.
+    // When checked, main UI is displayed.
     let sWidth = UIScreen.main.bounds.size.width
     let tileSize = CGSize(width: sWidth * 0.25, height: sWidth * 0.25)
     let tileView = UIView(frame: CGRect(origin: CGPoint(x: UIScreen.main.bounds.size.width * 0.5 -  tileSize.width * 0.5, y: UIScreen.main.bounds.size.height * 0.5 - tileSize.height * 0.5), size: tileSize))
@@ -143,8 +149,11 @@ class CardStackViewController: UIViewController {
     self.embed(cardViews.statCardC!, inView: self.view, origin: CGPoint(x: cardX, y: firstCardY))
     self.embed(cardViews.settCardC!, inView: self.view, origin: CGPoint(x: cardX, y: firstCardY + uiData.statusBarSize.height))
     self.embed(cardViews.gameCardC!, inView: self.view, origin: CGPoint(x: cardX, y: firstCardY + uiData.statusBarSize.height * 2))
+    
+    // Always start with gamecard.
     cardViews.gameCardC!.broughtToTop()
   }
+  
   
   func unembedAndDeleteCards() {
     self.unembed(cardViews.gameCardC!, inView: self.view)
@@ -200,6 +209,29 @@ class CardStackViewController: UIViewController {
     default:
       return
     }
+    
+//    for card in cardViews.list() {
+//      CATransaction.begin()
+//      let animation = CABasicAnimation(keyPath: "position")
+//      animation.timingFunction = CAMediaTimingFunction(controlPoints: 1.0, 1.0, 0.5, 1.0)
+//      animation.duration = 0.5
+//      animation.fromValue = [cardX + uiData.cardSize.width * 0.5, card.view.layer.position.y - card.view.frame.height * 0.5]
+//      animation.toValue = [cardX + uiData.cardSize.width * 0.5, card.view.layer.position.y]
+//      card.view.layer.add(animation, forKey: "position")
+//      CATransaction.commit()
+//    }
+//    for card in cardViews.list() {
+//      CATransaction.begin()
+//      let animation = CABasicAnimation(keyPath: "position")
+//      animation.timingFunction = CAMediaTimingFunction(controlPoints: 1.0, 1.0, 0.5, 1.0)
+//      animation.duration = 0.5
+//      animation.fromValue = [cardX + uiData.cardSize.width * 0.5, card.view.layer.position.y - card.view.frame.height * 0.5]
+//      animation.toValue = [cardX + uiData.cardSize.width * 0.5, card.view.layer.position.y]
+//      card.view.layer.add(animation, forKey: "position")
+//      CATransaction.commit()
+//    }
+    
+    cardViews.gameCardC!.broughtToTop()
   }
   
   

@@ -201,7 +201,7 @@ class PlayButtonsView: UIView {
   
   func makeNewGameIconPath(forView: UIView) -> CGPath {
     
-    let iconCornerRadius = forView.layer.cornerRadius * 0.25
+    let iconCornerRadius = forView.layer.cornerRadius * 0.4
     let iconArcIndent = iconCornerRadius
     
     let newGameIconPath = UIBezierPath()
