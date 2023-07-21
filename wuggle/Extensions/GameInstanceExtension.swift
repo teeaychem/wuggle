@@ -39,7 +39,6 @@ extension GameInstance {
   
   
   func findPossibleWords(minLength mL: Int, sqrt: Int16) {
-    print("call to find possible words. Sqrt: ", sqrt)
     guard self.settings?.currentGame != nil else { return }
 
     // Get the trie root
