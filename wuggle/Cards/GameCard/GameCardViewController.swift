@@ -158,14 +158,10 @@ class GameCardViewController: CardViewController {
     
     guard rootTrie != nil else { return }
     
-    print("Processing: ", w)
-    
     let endTrie = rootTrie!.traceString(word: w)
     let fixedWord = w.replacingOccurrences(of: "!", with: "qu")
     
-    
     if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)] && fixedWord.count >= delegate!.currentSettings().minWordLength) {
-      print("Check ok")
       foundWordsViewController.update(word: fixedWord, found: true, animated: true)
       if delegate?.currentGame()?.foundWordsList == nil {
         delegate?.currentGame()?.foundWordsList = [fixedWord]
@@ -182,11 +178,10 @@ class GameCardViewController: CardViewController {
           maybeFade(word: fixedWord)
         }
       }
-      
+
+      // TODO: Maybe make this an option?
       let percentFound = Double(delegate!.currentGame()!.foundWordsList!.count) / Double(delegate!.currentGame()!.wordTileUseDict!.keys.count) * 100
       if percentFound >= 100 { endGameMain(fresh: true) }
-      // TODO: Check the percent, maybe in states.
-      // End game if found = 100
     }
   }
   

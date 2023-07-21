@@ -151,7 +151,9 @@ class CardStackViewController: UIViewController {
     self.embed(cardViews.gameCardC!, inView: self.view, origin: CGPoint(x: cardX, y: firstCardY + uiData.statusBarSize.height * 2))
     
     // Always start with gamecard.
-    cardViews.gameCardC!.broughtToTop()
+//    cardViews.gameCardC!.broughtToTop()
+    // But, now animated!
+    cardsFirstAppearAnimate(duration: 0.25)
   }
   
   
@@ -209,29 +211,37 @@ class CardStackViewController: UIViewController {
     default:
       return
     }
-    
-//    for card in cardViews.list() {
-//      CATransaction.begin()
-//      let animation = CABasicAnimation(keyPath: "position")
-//      animation.timingFunction = CAMediaTimingFunction(controlPoints: 1.0, 1.0, 0.5, 1.0)
-//      animation.duration = 0.5
-//      animation.fromValue = [cardX + uiData.cardSize.width * 0.5, card.view.layer.position.y - card.view.frame.height * 0.5]
-//      animation.toValue = [cardX + uiData.cardSize.width * 0.5, card.view.layer.position.y]
-//      card.view.layer.add(animation, forKey: "position")
-//      CATransaction.commit()
-//    }
-//    for card in cardViews.list() {
-//      CATransaction.begin()
-//      let animation = CABasicAnimation(keyPath: "position")
-//      animation.timingFunction = CAMediaTimingFunction(controlPoints: 1.0, 1.0, 0.5, 1.0)
-//      animation.duration = 0.5
-//      animation.fromValue = [cardX + uiData.cardSize.width * 0.5, card.view.layer.position.y - card.view.frame.height * 0.5]
-//      animation.toValue = [cardX + uiData.cardSize.width * 0.5, card.view.layer.position.y]
-//      card.view.layer.add(animation, forKey: "position")
-//      CATransaction.commit()
-//    }
-    
     cardViews.gameCardC!.broughtToTop()
+  }
+  
+  
+  func cardsFirstAppearAnimate(duration: CGFloat) {
+    
+    // Shift all the cards up ready to fall.
+    for card in cardViews.list() { card.view.frame.origin.y = -uiData.cardSize.height }
+
+    // Use completion to sequence animations.
+    // This is clunky, but works.
+    UIView.animate(withDuration: duration * 3, animations: {
+    // Do nothing.
+    }) { completed in
+      UIView.animate(withDuration: duration, animations: {
+        self.cardViews.statCardC?.broughtToTop()
+        self.cardViews.statCardC!.view.frame.origin.y = self.firstCardY
+      }) { completed in
+        UIView.animate(withDuration: duration, animations: {
+          self.cardViews.settCardC?.broughtToTop()
+          self.cardViews.settCardC!.view.frame.origin.y = self.firstCardY + self.statusBarH
+        }) { completed in
+          UIView.animate(withDuration: duration, animations: {
+            self.cardViews.gameCardC?.broughtToTop()
+            self.cardViews.gameCardC!.view.frame.origin.y = self.firstCardY + (2 * self.statusBarH)
+          }) { completed in
+            
+          }
+        }
+      }
+    }
   }
   
   

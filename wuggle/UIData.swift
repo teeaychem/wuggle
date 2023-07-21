@@ -47,7 +47,6 @@ class UIData {
     impact = true
     leftSide = false
     showPercent = true
-    //TODO: Link to option on card XXX
     fadeTiles = true
     
     colourD =  UIColor.darkGray
