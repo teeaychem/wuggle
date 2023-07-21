@@ -1,8 +1,6 @@
 Woggle to do:
 
 X. Highlighting finished tiles.
-    1. Finishing things up only after dictionary complete.
-    3. Make sure values are ordered in find words.
     4. Build in highlight functions.
 
 X. Below foundwords at end, display found N out of M in T(ime).

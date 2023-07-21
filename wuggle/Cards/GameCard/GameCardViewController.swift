@@ -158,13 +158,18 @@ class GameCardViewController: CardViewController {
     
     guard rootTrie != nil else { return }
     
+    print("Processing: ", w)
+    
     let endTrie = rootTrie!.traceString(word: w)
-    let fixedWord = w.replacingOccurrences(of: "!", with: "Qu")
+    let fixedWord = w.replacingOccurrences(of: "!", with: "qu")
+    
+    
     if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)] && fixedWord.count >= delegate!.currentSettings().minWordLength) {
-      
+      print("Check ok")
       foundWordsViewController.update(word: fixedWord, found: true, animated: true)
       if delegate?.currentGame()?.foundWordsList == nil {
         delegate?.currentGame()?.foundWordsList = [fixedWord]
+        maybeFade(word: fixedWord)
       } else {
         if delegate!.currentGame()!.foundWordsList!.contains(fixedWord) {
           return
@@ -174,35 +179,45 @@ class GameCardViewController: CardViewController {
           delegate!.currentGame()?.pointsCount += Int16(getPoints(word: fixedWord))
           combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
           thinkAboutStats(word: fixedWord)
+          maybeFade(word: fixedWord)
         }
       }
       
-      if uiData.fadeTiles {
-        // First, make a copy of the tile use data.
-        var tileArray = [Bool]()
-        for cell in delegate!.currentGame()!.wordTileUseDict![fixedWord]! { tileArray.append(cell) }
-        // Cancel out tile use.
-        delegate!.currentGame()!.wordTileUseDict!.updateValue(Array(repeating: false, count: tileArray.count), forKey: fixedWord)
-        // Go through the tiles
-        for i in 0 ..< tileArray.count {
-          // If the tile was used in the word, we check if it's still in use
-          if tileArray[i] == true {
-            // Assume is no longer in use.
-            var used = true
-            for k in delegate!.currentGame()!.wordTileUseDict!.keys {
-              // If the index of the tile is true for any word, the tile still has somme use.
-              if delegate!.currentGame()!.wordTileUseDict![k]![i] == true { used = false }
-            }
-            if used { boardViewController.fadeTile(tileIndex: i, andUpdate: true) }
-          }
-        }
-      }
+      let percentFound = Double(delegate!.currentGame()!.foundWordsList!.count) / Double(delegate!.currentGame()!.wordTileUseDict!.keys.count) * 100
+      if percentFound >= 100 { endGameMain(fresh: true) }
+      // TODO: Check the percent, maybe in states.
+      // End game if found = 100
     }
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  
+  func maybeFade(word: String) {
+    if uiData.fadeTiles {
+      // First, make a copy of the tile use data.
+      var tileArray = [Bool]()
+      for cell in delegate!.currentGame()!.wordTileUseDict![word]! { tileArray.append(cell) }
+      // Cancel out tile use.
+      delegate!.currentGame()!.wordTileUseDict!.updateValue(Array(repeating: false, count: tileArray.count), forKey: word)
+      // Go through the tiles
+      for i in 0 ..< tileArray.count {
+        // If the tile was used in the word, we check if it's still in use
+        if tileArray[i] == true {
+          // Assume is no longer in use.
+          var used = true
+          for k in delegate!.currentGame()!.wordTileUseDict!.keys {
+            // If the index of the tile is true for any word, the tile still has somme use.
+            if delegate!.currentGame()!.wordTileUseDict![k]![i] == true { used = false }
+          }
+          if used { boardViewController.fadeTile(tileIndex: i, andUpdate: true) }
+        }
+      }
+    }
+  }
+  
 }
 
 
@@ -515,20 +530,15 @@ extension GameCardViewController {
     case .ended, .cancelled:
       // Check to see if current trie node is a word.
       let wordAttempt = stringFromSelectedTiles()
+      // Clean up the view by deselecting tiles.
+      for index in selectedTiles { boardViewController.deselectTile(tileIndex: index) }
+      // Clean selected tiles memory.
+      selectedTiles.removeAll()
       if wordAttempt.contains("!") {
         // Internally "qu" is ! and as there's no "q", this covers qu and q. So, also check the possible q case
         processWord(word: wordAttempt.replacingOccurrences(of: "!", with: "q"))
       }
       processWord(word: wordAttempt)
-
-      
-      // Clean up the view by deselecting tiles.
-      for index in selectedTiles {
-        boardViewController.deselectTile(tileIndex: index)
-      }
-      // Clean selected tiles memory.
-      selectedTiles.removeAll()
-            
     default:
       break
     }

@@ -102,8 +102,6 @@ extension TrieNode  {
     var currentNode: TrieNode?
     currentNode = self
     for char in word {
-      // TODO: Here, maybe.
-      //
       currentNode = currentNode?.getChild(val: String(char)) ?? nil
     }
     return currentNode

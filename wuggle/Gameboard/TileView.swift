@@ -22,8 +22,7 @@ class TileView: UIView {
   let tileSelectedColour: CGColor
   let uiData: UIData
   var inUse = true
-  let dimOpacity = Float(0.5)
-    
+
   init(position p: CGPoint, size s: CGFloat, boardSize bS: CGFloat, text t: String, uiData uiD: UIData) {
 
     size = s
@@ -120,7 +119,7 @@ class TileView: UIView {
       
       if animated {
         for lay in letterLayers {
-          animateStringLayerAppear(layer: lay, toOpacity: !inUse ? dimOpacity : 1)
+          animateStringLayerAppear(layer: lay, toOpacity: !inUse ? uiData.tileFadeOpacity : 1)
           lay.lineWidth = borderWidth
         }
       } else {
@@ -128,7 +127,7 @@ class TileView: UIView {
           lay.strokeEnd = 1
           lay.lineWidth = borderWidth
           lay.fillColor = tileFillColour
-          if !inUse { lay.opacity = dimOpacity }
+          if !inUse { lay.opacity = uiData.tileFadeOpacity }
         }
       }
   }
@@ -156,7 +155,7 @@ class TileView: UIView {
   
   func fade(andUpdate: Bool) {
     inUse = false
-    if andUpdate { for lay in letterLayers { lay.opacity = dimOpacity } }
+    if andUpdate { for lay in letterLayers { lay.opacity = uiData.tileFadeOpacity } }
   }
   
   

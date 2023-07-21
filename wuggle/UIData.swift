@@ -38,6 +38,8 @@ class UIData {
   let playPauseStopSize: CGSize
   let foundWordViewWidth: CGFloat
   
+  let tileFadeOpacity = Float(0.25)
+  
   
   init(width w: CGFloat) {
 
