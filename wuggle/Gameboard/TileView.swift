@@ -160,6 +160,12 @@ class TileView: UIView {
   }
   
   
+  func unfade(andUpdate: Bool) {
+    inUse = true
+    if andUpdate { for lay in letterLayers { lay.opacity = 1 } }
+  }
+  
+  
   func tileSelected() {
     for layer in letterLayers {
       layer.fillColor = tileSelectedColour

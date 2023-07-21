@@ -39,7 +39,7 @@ class SettingsCardViewController: CardViewController {
     statusBarView.addSubview(tileIcon)
     tileIcon.frame.origin.x = (iconPadding * 4) + (iconSize.width * 3)
     
-    let flatStatSize = CGSize(width: uiData.cardSize.width - uiData.gameBoardPadding * 2, height: uiData.statusBarSize.height)
+    let flatStatSize = CGSize(width: uiData.cardSize.width - uiData.gameBoardPadding * 2, height: uiData.statusBarSize.height * 0.9)
     
     optionViews["time"] = OptionView(
       frame: CGRect(origin: CGPoint(x: uiData.gameBoardPadding, y: uiData.statusBarSize.height * 1.25), size: flatStatSize),
@@ -92,6 +92,12 @@ class SettingsCardViewController: CardViewController {
       vertical: false,
       delegate: self
     )
+    optionViews["fade"] = OptionView(
+      frame: CGRect(origin: CGPoint(x: uiData.gameBoardPadding, y: optionViews["pfound"]!.layer.frame.minY - flatStatSize.height), size: flatStatSize),
+      optionBlob: delegate!.currentSettings().fadeOptionBlob(),
+      vertical: false,
+      delegate: self
+    )
   }
   
   override func viewDidLoad() {
@@ -118,6 +124,7 @@ class SettingsCardViewController: CardViewController {
     optionViews["side"]?.highlightChoice(internalOption: uiData.leftSide ? 1 : 0)
     optionViews["impact"]?.highlightChoice(internalOption: uiData.impact ? 1 : 0)
     optionViews["colour"]?.highlightChoice(internalOption: uiData.colourOption)
+    optionViews["fade"]?.highlightChoice(internalOption: uiData.fadeTiles ? 1 : 0)
   }
   
   

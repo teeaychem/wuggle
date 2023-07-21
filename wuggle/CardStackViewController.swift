@@ -280,7 +280,7 @@ extension CardStackViewController: CardStackDelegate {
     case "side":
       uiData.leftSide = (internalValue == 1) ?  true : false
       // Maybe. Only need to redo gameCard here, rather than everything.
-      rebuildStack()
+//      rebuildStack()
     case "colour":
       uiData.updateColour(profile: internalValue)
       rebuildStack()
@@ -289,6 +289,8 @@ extension CardStackViewController: CardStackDelegate {
       if (currentGame() != nil) {
         cardViews.gameCardC!.combinedScoreViewC.gameInstanceUpdate(instance: currentGame()!, obeySP: true)
       }
+    case "fade":
+      uiData.fadeTiles = (internalValue == 1) ? true : false
     case "time", "lexicon", "length", "tiles":
       updateNonUISetting(internalName: internalName, internalValue: internalValue)
       setIcons()
@@ -300,7 +302,7 @@ extension CardStackViewController: CardStackDelegate {
   
   
   func processUpdate() {
-    settings?.makeASave()
+    settings?.doSave()
     cardViews.statCardC!.respondToUpdate()
     cardViews.gameCardC!.respondToUpdate()
   }

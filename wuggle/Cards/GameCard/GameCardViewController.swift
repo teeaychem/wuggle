@@ -80,7 +80,7 @@ class GameCardViewController: CardViewController {
       }
       combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
       boardViewController.displayTileFoundationAll()
-      fadeAllTiles(andUpdate: false)
+      setFadeAllTiles(andUpdate: false)
       
       if delegate!.currentGame()!.viable {
         // Game is viable
@@ -261,7 +261,7 @@ extension GameCardViewController {
           settings.currentGame!.findPossibleWords(minLength: Int(self.delegate!.currentSettings().minWordLength), sqrt: self.delegate!.currentSettings().tileSqrt)
           do {
             try privateManagedObjectContext.save()
-            if self.uiData.fadeTiles { self.fadeAllTiles(andUpdate: false) }
+            self.setFadeAllTiles(andUpdate: false)
             self.performSelector(onMainThread: #selector(self.newGameWaitOver), with: nil, waitUntilDone: true)
           } catch {  }
         }
@@ -357,7 +357,9 @@ extension GameCardViewController {
   }
   
   
-  func fadeAllTiles(andUpdate aU: Bool) {
+  func setFadeAllTiles(andUpdate aU: Bool) {
+    // This could be cached.
+    
     // Do an initial check on tiles.
     // Go through each tile
     for i in 0 ..< Int(delegate!.currentSettings().tileSqrt * delegate!.currentSettings().tileSqrt) {
@@ -370,9 +372,8 @@ extension GameCardViewController {
           used = false
         }
       }
-      if used {
-        boardViewController.fadeTile(tileIndex: i, andUpdate: aU)
-      }
+      if used && uiData.fadeTiles { boardViewController.fadeTile(tileIndex: i, andUpdate: aU) }
+      else { boardViewController.unfadeTile(tileIndex: i, andUpdate: aU) }
     }
   }
 }

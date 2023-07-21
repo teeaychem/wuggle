@@ -103,7 +103,7 @@ extension Settings {
   
   
   func sideOptionBlob() -> OptionBlob {
-    return OptionBlob(internalName: "side", displayName: "Side", internalOptions: [1, 0], displayOptions: ["L", "R"])
+    return OptionBlob(internalName: "side", displayName: "Clock side", internalOptions: [1, 0], displayOptions: ["L", "R"])
   }
   
   
@@ -111,8 +111,12 @@ extension Settings {
     return OptionBlob(internalName: "colour", displayName: "Colour", internalOptions: [0, 1, 2, 3, 4, 5], displayOptions: ["๑", "๒", "๓", "๔", "๕", "๖"])
   }
   
+  func fadeOptionBlob() -> OptionBlob {
+    return OptionBlob(internalName: "fade", displayName: "Fade exhasted tiles", internalOptions: [1, 0], displayOptions: ["Yes", "No"])
+  }
   
-  func makeASave() {
+  
+  func doSave() {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     if context.hasChanges {
       do {

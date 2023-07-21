@@ -123,6 +123,11 @@ class GameboardViewController: UIViewController {
   func fadeTile(tileIndex: Int, andUpdate aU: Bool) {
     gameboardView.tiles[tileIndex]?.fade(andUpdate: aU)
   }
+  
+  
+  func unfadeTile(tileIndex: Int, andUpdate aU: Bool) {
+    gameboardView.tiles[tileIndex]?.unfade(andUpdate: aU)
+  }
 
   
   func deselectTile(tileIndex: Int) {
