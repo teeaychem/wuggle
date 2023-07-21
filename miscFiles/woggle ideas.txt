@@ -1,7 +1,7 @@
 Woggle to do:
 
-X. Highlighting finished tiles.
-    4. Build in highlight functions.
+B. Only bring to front if at the back.
+Otherwise, this wastes redrawing, etc.
 
 X. Below foundwords at end, display found N out of M in T(ime).
 

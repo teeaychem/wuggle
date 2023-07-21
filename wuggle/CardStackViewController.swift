@@ -211,7 +211,6 @@ class CardStackViewController: UIViewController {
     default:
       return
     }
-    cardViews.gameCardC!.broughtToTop()
   }
   
   

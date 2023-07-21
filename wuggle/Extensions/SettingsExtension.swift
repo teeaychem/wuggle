@@ -54,6 +54,7 @@ extension Settings {
     self.currentGame!.populateBoard()
     self.currentGame!.foundWordsList = []
     self.currentGame!.wordTileUseDict = Dictionary<String, [Bool]>()
+    self.currentGame!.tileUseCache = [] // Only filled when cache has been set.
   }
   
   

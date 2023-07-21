@@ -57,9 +57,11 @@ class GameCardViewController: CardViewController {
     // Use delegate to fix root trie.
     // This means it should be possible to init the controller before tries have been built, so long as the card is not pulled to the top.
     rootTrie = delegate!.currentSettings().getTrieRoot()
+    print("got trie root")
     
     // First set the views.
     self.embed(boardViewController, inView: self.cardView, origin: CGPoint(x: uiData.gameBoardPadding, y: uiData.cardSize.height - (uiData.gameBoardSize + uiData.gameBoardPadding)))
+    print("embedded view controller")
     
     if uiData.leftSide {
       self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: uiData.gameBoardPadding, y: uiData.gameBoardPadding + uiData.statusBarSize.height))
@@ -70,17 +72,23 @@ class GameCardViewController: CardViewController {
       self.embed(playButtonsViewController, inView: self.cardView, origin: CGPoint(x: (2 * uiData.gameBoardPadding + uiData.foundWordViewWidth), y: (uiData.gameBoardPadding + uiData.statusBarSize.height)))
       self.embed(stopwatchViewController, inView: self.cardView, origin: CGPoint(x: 3 * uiData.gameBoardPadding + uiData.foundWordViewWidth + uiData.stopWatchSize * 0.5, y: uiData.gameBoardPadding + uiData.statusBarSize.height))
     }
+    print("done other views")
 
     if delegate!.currentGame() != nil {
+      print("game")
       // There's a game.
       boardViewController.createAllTileViews(tileValues: delegate!.currentGame()!.tileValues!, tileSqrt: Int(delegate!.currentSettings().tileSqrt))
       stopwatchViewController.setHandTo(percent: delegate!.currentGame()!.timeUsedPercent)
       for word in delegate!.currentGame()!.foundWordsList! {
         foundWordsViewController.update(word: word, found: true, animated: false)
       }
+      print("done found words")
       combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
       boardViewController.displayTileFoundationAll()
+      print("setting fade")
+      print("words: ", delegate!.currentGame()?.wordTileUseDict?.keys.count)
       setFadeAllTiles(andUpdate: false)
+      print("set fade")
       
       if delegate!.currentGame()!.viable {
         // Game is viable
@@ -130,6 +138,7 @@ class GameCardViewController: CardViewController {
     } else {
       combinedScoreViewC.combinedUpdate(found: 0, score: 0, percent: 0, obeySP: true)
       stopwatchViewController.setHandTo(percent: 0)
+      boardViewController.removeAllTileViews()
     }
   }
   
@@ -165,7 +174,7 @@ class GameCardViewController: CardViewController {
       foundWordsViewController.update(word: fixedWord, found: true, animated: true)
       if delegate?.currentGame()?.foundWordsList == nil {
         delegate?.currentGame()?.foundWordsList = [fixedWord]
-        maybeFade(word: fixedWord)
+        maybeFade(word: fixedWord, update: true)
       } else {
         if delegate!.currentGame()!.foundWordsList!.contains(fixedWord) {
           return
@@ -175,7 +184,7 @@ class GameCardViewController: CardViewController {
           delegate!.currentGame()?.pointsCount += Int16(getPoints(word: fixedWord))
           combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
           thinkAboutStats(word: fixedWord)
-          maybeFade(word: fixedWord)
+          maybeFade(word: fixedWord, update: true)
         }
       }
 
@@ -190,7 +199,7 @@ class GameCardViewController: CardViewController {
   }
   
   
-  func maybeFade(word: String) {
+  func maybeFade(word: String, update: Bool) {
     if uiData.fadeTiles {
       // First, make a copy of the tile use data.
       var tileArray = [Bool]()
@@ -207,7 +216,12 @@ class GameCardViewController: CardViewController {
             // If the index of the tile is true for any word, the tile still has somme use.
             if delegate!.currentGame()!.wordTileUseDict![k]![i] == true { used = false }
           }
-          if used { boardViewController.fadeTile(tileIndex: i, andUpdate: true) }
+          if used {
+            boardViewController.fadeTile(tileIndex: i, andUpdate: update)
+            print("updating cache from ", delegate!.currentGame()!.tileUseCache!)
+            delegate!.currentGame()!.tileUseCache![i] = true
+            print("updating cache to ", delegate!.currentGame()!.tileUseCache!)
+          }
         }
       }
     }
@@ -221,6 +235,7 @@ class GameCardViewController: CardViewController {
 extension GameCardViewController {
   
   func newGameMain() {
+    print("new game main")
     if uiData.impact {
       UIImpactFeedbackGenerator(style: .heavy).impactOccurred(intensity: 0.75)
     }
@@ -263,8 +278,8 @@ extension GameCardViewController {
     settingsFetchRequest.predicate = NSPredicate(
       format: "time == %i AND lexicon == %i AND minWordLength == %i AND tileSqrt == %i",
       delegate!.currentSettings().time, delegate!.currentSettings().lexicon, delegate!.currentSettings().minWordLength, delegate!.currentSettings().tileSqrt)
-    
       settingsFetchRequest.fetchLimit = 1
+    
       if let result = try? privateManagedObjectContext.fetch(settingsFetchRequest) {
         let settings = result.first as! Settings
         privateManagedObjectContext.perform {
@@ -331,6 +346,7 @@ extension GameCardViewController {
   
   
   func endGameMain(fresh: Bool) {
+    print("end game")
     
     if (delegate!.currentGame() != nil && !delegate!.currentGame()!.allWordsComplete) {
       // There a chance possible words failed to complete.
@@ -368,22 +384,37 @@ extension GameCardViewController {
   
   
   func setFadeAllTiles(andUpdate aU: Bool) {
-    // This could be cached.
     
-    // Do an initial check on tiles.
-    // Go through each tile
-    for i in 0 ..< Int(delegate!.currentSettings().tileSqrt * delegate!.currentSettings().tileSqrt) {
-      // Assume the tile is used
-      var used = true
-      // Go through each word
-      for k in delegate!.currentGame()!.wordTileUseDict!.keys {
-        // If word and index is true, the tile is used
-        if delegate!.currentGame()!.wordTileUseDict![k]![i] {
-          used = false
+    let tileCacheLength = delegate!.currentGame()!.tileUseCache!.count
+    
+    if tileCacheLength > 0 {
+      print("loading tile use from cache")
+      for i in 0 ..< tileCacheLength {
+        if delegate!.currentGame()!.tileUseCache![i] {
+          if uiData.fadeTiles { boardViewController.fadeTile(tileIndex: i, andUpdate: aU) }
+          else { boardViewController.unfadeTile(tileIndex: i, andUpdate: aU) }
         }
       }
-      if used && uiData.fadeTiles { boardViewController.fadeTile(tileIndex: i, andUpdate: aU) }
-      else { boardViewController.unfadeTile(tileIndex: i, andUpdate: aU) }
+    } else {
+      // This could be cached.
+      let tileCount = Int(delegate!.currentSettings().tileSqrt * delegate!.currentSettings().tileSqrt)
+      
+      delegate!.currentGame()!.tileUseCache! = Array(repeating: false, count: tileCount)
+      // Do an initial check on tiles.
+      // Go through each tile
+      for i in 0 ..< tileCount {
+        print(i)
+        // Assume the tile is used
+        var used = true
+        // Go through each word
+        for k in delegate!.currentGame()!.wordTileUseDict!.keys {
+          // If word and index is true, the tile is used
+          if delegate!.currentGame()!.wordTileUseDict![k]![i] { used = false }
+        }
+        delegate!.currentGame()!.tileUseCache![i] = used
+        if used && uiData.fadeTiles { boardViewController.fadeTile(tileIndex: i, andUpdate: aU) }
+        else { boardViewController.unfadeTile(tileIndex: i, andUpdate: aU) }
+      }
     }
   }
 }

@@ -125,6 +125,7 @@ class UIData {
   func loadFromCore() {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let UISettingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UISettings")
+    UISettingsFetchRequest.fetchLimit = 1
     
     do {
       let result = try context.fetch(UISettingsFetchRequest)
@@ -147,6 +148,7 @@ class UIData {
   func saveToCore() {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let UISettingsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UISettings")
+    UISettingsFetchRequest.fetchLimit = 1
     do {
       let result = try context.fetch(UISettingsFetchRequest)
       
