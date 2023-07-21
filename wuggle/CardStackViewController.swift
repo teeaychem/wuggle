@@ -137,7 +137,7 @@ class CardStackViewController: UIViewController {
   }
   
   
-  func makeAndEmbedCards() {
+  func makeAndEmbedCards(animate: Bool) {
     cardViews.gameCardC = GameCardViewController(iName: "gameC", uiData: uiData, delegate: self)
     cardViews.settCardC = SettingsCardViewController(iName: "settC", uiData: uiData, delegate: self)
     cardViews.statCardC = StatsCardViewController(iName: "statC", uiData: uiData, delegate: self)
@@ -153,7 +153,7 @@ class CardStackViewController: UIViewController {
     // Always start with gamecard.
 //    cardViews.gameCardC!.broughtToTop()
     // But, now animated!
-    cardsFirstAppearAnimate(duration: 0.25)
+    if animate { cardsFirstAppearAnimate(duration: 0.25) }
   }
   
   
@@ -254,7 +254,7 @@ class CardStackViewController: UIViewController {
   
   func rebuildStack() {
     unembedAndDeleteCards()
-    makeAndEmbedCards()
+    makeAndEmbedCards(animate: false)
     setIcons()
     cardShuffleGesutre(enabled: true)
     reorderCardsByIndex(iName: "settC")
@@ -474,7 +474,7 @@ extension CardStackViewController {
       sv.layer.removeAllAnimations()
       sv.removeFromSuperview()
     }
-    self.makeAndEmbedCards()
+    self.makeAndEmbedCards(animate: true)
     self.setIcons()
     self.cardShuffleGesutre(enabled: true)
   }
