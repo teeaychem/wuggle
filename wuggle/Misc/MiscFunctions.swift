@@ -81,7 +81,7 @@ func getFontFor(height: CGFloat) -> Double {
     return fontByHeightDict[height]!
   } else {
     let tolerance = 0.5
-    var fontMax = 400.00
+    var fontMax = 1000.00
     var fontMin = 2.00
     
     while (fontMax - fontMin) > tolerance {
