@@ -106,7 +106,7 @@ extension GameInstance {
       wordString += tileValue
       
       // If this is a word, update the word list.
-      let trueWordString = wordString.replacingOccurrences(of: "!", with: "Qu")
+      let trueWordString = wordString.replacingOccurrences(of: "!", with: "QU")
       if trieNode.isWord && trieNode.lexiconList![Int(settings!.lexicon)] && trueWordString.count >= mL {
         if !wordTileUseDict!.keys.contains(trueWordString) {
           wordTileUseDict!.updateValue(Array(repeating: false, count: totalTiles), forKey: trueWordString)

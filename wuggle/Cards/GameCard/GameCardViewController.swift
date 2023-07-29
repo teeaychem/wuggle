@@ -160,7 +160,7 @@ class GameCardViewController: CardViewController {
     guard rootTrie != nil else { return }
     
     let endTrie = rootTrie!.traceString(word: w)
-    let fixedWord = w.replacingOccurrences(of: "!", with: "qu")
+    let fixedWord = w.replacingOccurrences(of: "!", with: "QU")
     
     if (endTrie != nil && endTrie!.isWord && endTrie!.lexiconList![Int(delegate!.currentSettings().lexicon)] && fixedWord.count >= delegate!.currentSettings().minWordLength) {
       foundWordsViewController.update(word: fixedWord, found: true, animated: true)
@@ -546,7 +546,7 @@ extension GameCardViewController {
       selectedTiles.removeAll()
       if wordAttempt.contains("!") {
         // Internally "qu" is ! and as there's no "q", this covers qu and q. So, also check the possible q case
-        processWord(word: wordAttempt.replacingOccurrences(of: "!", with: "q"))
+//        processWord(word: wordAttempt.replacingOccurrences(of: "!", with: "q"))
       }
       processWord(word: wordAttempt)
     default:

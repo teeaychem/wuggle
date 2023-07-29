@@ -1,9 +1,13 @@
+# Wuggle
+
 More-or-less a clone of boggle, written to learn some swift.
 
 Though, after adding some features I wanted, there are at least two ways to play:
 
 1. A large lexicon or many tiles and trying to find as many words as possible.
 2. A small lexicon or few tiles and trying to find every word (esp. as tiles  which don't make a new word can be faded).
+
+##### Some nice things
 
 Here are a few of the nice things:
 
@@ -23,6 +27,8 @@ Here are a few of the nice things:
 4. Support for boards of size n^2, n > 0.
     - Though 8^2 is the built in maximum, and more tiles means more work when figuring out which tiles to fade.
 
+##### Some more nice things
+
 There are also a few things to make playing games pleasant:
 
 1. Games are preserved unless ended by the timer or the user.
@@ -33,12 +39,17 @@ There are also a few things to make playing games pleasant:
 4. Enable or disable showing the percent of words found (mysterious!), and impact (along with fading tiles).
 5. Choose different colour schemes (though most were chosen to look bad).
 
+
+##### Some notable things
+
 Aside from the game mechanics, there are a few notable things:
 
 1. CoreData is used to keep track of almost everything, with a little concurrency sprinkled in at places to mask some waiting.
 2. Everything is dynamically generated according to screen size.
     - Font size is the result of a binary search (memoed to the size of it's bounding box) and icons are bézier paths (sometimes specified by hand).
 3. I managed to keep working on various UI things, even though I got very bored.
+
+##### Some things I might do
 
 A few things could easily be added:
 
