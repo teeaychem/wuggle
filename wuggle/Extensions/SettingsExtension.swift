@@ -89,7 +89,7 @@ extension Settings {
   
   
   func tilesOptionBlob() -> OptionBlob {
-    return OptionBlob(internalName: "tiles", displayName: "Tiles", internalOptions: [1, 3, 4, 5, 6, 7, 8], displayOptions: ["2²", "3²", "4²", "5²", "6²", "7²", "8²"])
+    return OptionBlob(internalName: "tiles", displayName: "Tiles", internalOptions: [2, 3, 4, 5, 6, 7, 8], displayOptions: ["2²", "3²", "4²", "5²", "6²", "7²", "8²"])
   }
   
   
