@@ -7,6 +7,10 @@ Though, after adding some features I wanted, there are at least two ways to play
 1. A large lexicon or many tiles and trying to find as many words as possible.
 2. A small lexicon or few tiles and trying to find every word (esp. as tiles  which don't make a new word can be faded).
 
+#### Images
+
+![alt text](https://github.com/teeaychem/wuggle/tree/main/01.PNG?raw=true)
+
 ##### Some nice things
 
 Here are a few of the nice things:
