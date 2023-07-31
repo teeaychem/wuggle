@@ -9,9 +9,9 @@ Though, after adding some features I wanted, there are at least two ways to play
 
 #### Images
 
-<img src="https://github.com/teeaychem/wuggle/blob/main/images/01.PNG?raw=true" alt="Game screen, partially played, some tiles faded" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/02.PNG?raw=true" alt="Different game screen, partially played, some tiles faded, word selected, different stats" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/04.PNG?raw=true" alt="Stats screen" width="200"/>
+<img src="https://github.com/teeaychem/wuggle/blob/main/images/01.PNG?raw=true" alt="Game screen, partially played, some tiles faded" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/02.PNG?raw=true" alt="Different game screen, partially played, some tiles faded, word selected, different stats" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/04.PNG?raw=true" alt="Stats screen" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/08.PNG?raw=true" alt="Settings screen" width="200"/>
 
-<img src="https://github.com/teeaychem/wuggle/blob/main/images/03.PNG?raw=true" alt="Game over screen, purple colour scheme, many tiles" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/05.PNG?raw=true" alt="Settings screen, strange colour scheme choice" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/06.PNG?raw=true" alt="Fresh game, many tiles, bright colour scheme, percent not shown" width="200"/>
+<img src="https://github.com/teeaychem/wuggle/blob/main/images/03.PNG?raw=true" alt="Game over screen, purple colour scheme, many tiles" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/05.PNG?raw=true" alt="Settings screen, strange colour scheme choice" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/06.PNG?raw=true" alt="Fresh game, many tiles, bright colour scheme, percent not shown" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/07.PNG?raw=true" alt="Fresh game, 4 tiles, awful colour scheme" width="200"/>
 
 ##### Some nice things
 
