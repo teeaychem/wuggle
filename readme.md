@@ -9,7 +9,7 @@ Though, after adding some features I wanted, there are at least two ways to play
 
 #### Images
 
-![alt text](https://github.com/teeaychem/wuggle/tree/main/01.PNG?raw=true)
+![alt text](https://github.com/teeaychem/wuggle/blob/main/01.PNG?raw=true)
 
 ##### Some nice things
 
