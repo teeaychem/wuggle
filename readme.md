@@ -14,7 +14,7 @@ Though, after adding some features I wanted, there are at least two ways to play
 ![Game over screen, purple colour scheme, many tiles](https://github.com/teeaychem/wuggle/blob/main/images/03.PNG?raw=true)
 ![Stats screen](https://github.com/teeaychem/wuggle/blob/main/images/04.PNG?raw=true)
 ![Settings screen, strange colour scheme choice](https://github.com/teeaychem/wuggle/blob/main/images/05.PNG?raw=true)
-![Fresh game, many tiles, bright colour scheme, percent not shown](https://github.com/teeaychem/wuggle/blob/main/images/05.PNG?raw=true)
+![Fresh game, many tiles, bright colour scheme, percent not shown](https://github.com/teeaychem/wuggle/blob/main/images/06.PNG?raw=true)
 
 ##### Some nice things
 
