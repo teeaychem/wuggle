@@ -9,7 +9,12 @@ Though, after adding some features I wanted, there are at least two ways to play
 
 #### Images
 
-![alt text](https://github.com/teeaychem/wuggle/blob/main/images/01.PNG?raw=true)
+![Game screen, partially played, some tiles faded](https://github.com/teeaychem/wuggle/blob/main/images/01.PNG?raw=true)
+![Different game screen, partially played, some tiles faded, word selected, different stats](https://github.com/teeaychem/wuggle/blob/main/images/02.PNG?raw=true)
+![Game over screen, purple colour scheme, many tiles](https://github.com/teeaychem/wuggle/blob/main/images/03.PNG?raw=true)
+![Stats screen](https://github.com/teeaychem/wuggle/blob/main/images/04.PNG?raw=true)
+![Settings screen, strange colour scheme choice](https://github.com/teeaychem/wuggle/blob/main/images/05.PNG?raw=true)
+![Fresh game, many tiles, bright colour scheme, percent not shown](https://github.com/teeaychem/wuggle/blob/main/images/05.PNG?raw=true)
 
 ##### Some nice things
 
