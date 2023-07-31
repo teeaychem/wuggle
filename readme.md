@@ -7,13 +7,15 @@ Though, after adding some features I wanted, there are at least two ways to play
 1. A large lexicon or many tiles and trying to find as many words as possible.
 2. A small lexicon or few tiles and trying to find every word (esp. as tiles  which don't make a new word can be faded).
 
-#### Images
+## Images
 
 <img src="https://github.com/teeaychem/wuggle/blob/main/images/01.PNG?raw=true" alt="Game screen, partially played, some tiles faded" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/02.PNG?raw=true" alt="Different game screen, partially played, some tiles faded, word selected, different stats" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/04.PNG?raw=true" alt="Stats screen" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/08.PNG?raw=true" alt="Settings screen" width="200"/>
 
 <img src="https://github.com/teeaychem/wuggle/blob/main/images/03.PNG?raw=true" alt="Game over screen, purple colour scheme, many tiles" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/05.PNG?raw=true" alt="Settings screen, strange colour scheme choice" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/06.PNG?raw=true" alt="Fresh game, many tiles, bright colour scheme, percent not shown" width="200"/><img src="https://github.com/teeaychem/wuggle/blob/main/images/07.PNG?raw=true" alt="Fresh game, 4 tiles, awful colour scheme" width="200"/>
 
-##### Some nice things
+### Notes
+
+#### Some nice things
 
 Here are a few of the nice things:
 
@@ -33,7 +35,7 @@ Here are a few of the nice things:
 4. Support for boards of size n^2, n > 0.
     - Though 8^2 is the built in maximum, and more tiles means more work when figuring out which tiles to fade.
 
-##### Some more nice things
+#### Some more nice things
 
 There are also a few things to make playing games pleasant:
 
@@ -46,7 +48,7 @@ There are also a few things to make playing games pleasant:
 5. Choose different colour schemes (though most were chosen to look bad).
 
 
-##### Some notable things
+#### Some notable things
 
 Aside from the game mechanics, there are a few notable things:
 
@@ -55,7 +57,7 @@ Aside from the game mechanics, there are a few notable things:
     - Font size is the result of a binary search (memoed to the size of it's bounding box) and icons are bézier paths (sometimes specified by hand).
 3. I managed to keep working on various UI things, even though I got very bored.
 
-##### Some things I might do
+#### Some things I might do
 
 A few things could easily be added:
 
