@@ -166,7 +166,7 @@ class GameCardViewController: CardViewController {
       foundWordsViewController.update(word: fixedWord, found: true, animated: true)
       if delegate?.currentGame()?.foundWordsList == nil {
         delegate?.currentGame()?.foundWordsList = [fixedWord]
-        maybeFade(word: fixedWord, update: true)
+        maybeFadeTile(word: fixedWord, update: true)
       } else {
         if delegate!.currentGame()!.foundWordsList!.contains(fixedWord) {
           return
@@ -176,7 +176,7 @@ class GameCardViewController: CardViewController {
           delegate!.currentGame()?.pointsCount += Int16(getPoints(word: fixedWord))
           combinedScoreViewC.gameInstanceUpdate(instance: delegate!.currentGame()!, obeySP: true)
           thinkAboutStats(word: fixedWord)
-          maybeFade(word: fixedWord, update: true)
+          maybeFadeTile(word: fixedWord, update: true)
         }
       }
 
@@ -190,8 +190,8 @@ class GameCardViewController: CardViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
-  
-  func maybeFade(word: String, update: Bool) {
+  // func to update tile use, and optionally fade tile
+  func maybeFadeTile(word: String, update: Bool) {
     if uiData.fadeTiles {
       // First, make a copy of the tile use data.
       var tileArray = [Bool]()
@@ -205,7 +205,7 @@ class GameCardViewController: CardViewController {
           // Assume is no longer in use.
           var used = true
           for k in delegate!.currentGame()!.wordTileUseDict!.keys {
-            // If the index of the tile is true for any word, the tile still has somme use.
+            // If the index of the tile is true for any word, the tile still has some use.
             if delegate!.currentGame()!.wordTileUseDict![k]![i] == true { used = false }
           }
           if used {

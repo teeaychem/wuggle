@@ -113,7 +113,7 @@ extension Settings {
   }
   
   func fadeOptionBlob() -> OptionBlob {
-    return OptionBlob(internalName: "fade", displayName: "Fade exhasted tiles", internalOptions: [1, 0], displayOptions: ["Yes", "No"])
+    return OptionBlob(internalName: "fade", displayName: "Fade exhausted tiles", internalOptions: [1, 0], displayOptions: ["Yes", "No"])
   }
   
   
@@ -123,7 +123,6 @@ extension Settings {
       do {
         try self.managedObjectContext!.save()
       } catch { }
-    } else {
-    }
+    } else { }
   }
 }
